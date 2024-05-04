@@ -9,7 +9,6 @@ Welcome to **Python Deep Dive**, a comprehensive repository designed to take you
 4. [Algorithms](#algorithms)
 5. [Design Patterns](#design-patterns)
 6. [Contributing](#contributing)
-7. [License](#license)
 
 ## Fundamentals
 In this section, you'll learn the basics of Python, including:
@@ -66,9 +65,6 @@ Contributions are welcome! If you'd like to contribute to this repository, pleas
 3. Submit a pull request with a detailed explanation of your contribution.
 
 For major changes, please open an issue first to discuss what you'd like to change.
-
-## License
-This repository is licensed under the [MIT License](LICENSE). Feel free to use and adapt the content for your own projects while adhering to the terms of the license.
 
 ---
 
