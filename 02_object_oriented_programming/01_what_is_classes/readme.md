@@ -8,7 +8,7 @@ In summary, classes define the structure and behavior of objects, while objects 
 
 ## TextBox Class Example
 Consider a TextBox class representing a graphical user interface (GUI) textbox component. Here's a graphical representation of the TextBox class with its properties and methods:
-
+<pre>
 +----------------------------------+
 |            TextBox               |
 +----------------------------------+
@@ -20,7 +20,7 @@ Consider a TextBox class representing a graphical user interface (GUI) textbox c
 |    setSize(size: int): void      |
 |    getSize(): int                |
 +----------------------------------+
-
+</pre>
 - **Properties**: 
   - `text`: Represents the text content of the textbox.
   - `size`: Represents the size of the textbox.
