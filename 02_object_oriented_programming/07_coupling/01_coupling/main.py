@@ -11,10 +11,10 @@ class Employee:
             raise ValueError("Salary cannot be 0 or less.")
         self._base_salary = base_salary
 
-    def _get_base_salary(self):
+    def __get_base_salary(self):
         return self._base_salary
 
-    def _get_hourly_rate(self):
+    def __get_hourly_rate(self):
         return self._hourly_rate
 
     def set_hourly_rate(self, hourly_rate):
