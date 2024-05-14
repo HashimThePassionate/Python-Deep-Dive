@@ -1,5 +1,3 @@
-Absolutely, here's a graphical representation of the steps you described in Python's memory management:
-
 **1. Memory Allocation and Deallocation**
 
 ```
