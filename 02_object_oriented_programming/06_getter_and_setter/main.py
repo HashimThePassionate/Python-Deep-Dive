@@ -4,7 +4,7 @@ class Employee:
         self._hourly_rate = 0
 
     def calculate_wage(self, extra_hours):
-        return self._base_salary + (self._hourly_rate* extra_hours)
+        return self._base_salary + (self._hourly_rate * extra_hours)
 
     def set_base_salary(self, base_salary):
         if base_salary <= 0:
