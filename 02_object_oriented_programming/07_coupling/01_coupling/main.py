@@ -27,8 +27,5 @@ if __name__ == "__main__":
     employee = Employee()
     employee.set_base_salary(50000)
     employee.set_hourly_rate(20)
-    print(f'Get Base Salary: {employee._get_base_salary()}')
-    employee._get_hourly_rate()
-    print(f'Get Hourly Rate: {employee._get_hourly_rate()}')
     wage = employee.calculate_wage(10)
     print(f'Calculate wages: {wage}')
