@@ -1,5 +1,3 @@
-Sure, here are the questions and answers for your `readme.md` file:
-
 ### Questions and Answers
 
 1. **What is the difference between a class and an object?**
