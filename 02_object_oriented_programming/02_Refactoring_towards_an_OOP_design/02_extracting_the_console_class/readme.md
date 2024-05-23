@@ -1,5 +1,26 @@
 This code defines a Python class called `Console` with a single static method `read_number`. Let me break down what each part of the code does:
 
+```Python
+class Console:
+    @staticmethod
+    def read_number(prompt, min_value, max_value):
+        while True:
+            try:
+                value = float(input(prompt))
+                if min_value <= value <= max_value:
+                    return value
+                else:
+                    print(f"Enter a value between {min_value} and {max_value}")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
+# Example usage:
+# console = Console()
+# number = console.read_number("Enter a number: ", 0, 100)
+# print("Entered number:", number)
+# print(Console.read_number('Enter a Number: ',0,10))
+```
+
 1. `class Console:`: This line starts the definition of a new class named `Console`.
 
 2. `@staticmethod`: This is a decorator in Python that defines a static method. Static methods belong to the class rather than any specific instance of the class.
