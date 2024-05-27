@@ -18,3 +18,4 @@ class MortgageReport:
         print("\nMORTGAGE")
         print("--------")
         print("Monthly Payments:", mortgage_formatted)
+        
