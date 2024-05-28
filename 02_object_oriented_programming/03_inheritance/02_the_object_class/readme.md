@@ -197,7 +197,7 @@ p1 = Point(1, 2)
 p2 = Point(1, 2)
 print(p1 == p2)
 ```
-**output**
+**Output**
 ```output
 True
 ```
@@ -232,7 +232,7 @@ class Person:
 person = Person("Alice", 30)
 print(person)
 ```
-**output**
+**Output**
 ```output
 Name: Alice, Age: 30
 ```
@@ -255,7 +255,7 @@ person = Person("Alice", 30)
 print(str(person))
 print(repr(person))
 ```
-**output**
+**Output**
 ```output
 Name: Alice, Age: 30
 Person(name='Alice', age=30)
@@ -274,7 +274,7 @@ class Point:
 point = Point('12b32bd')
 print(hash(point))
 ```
-**output**
+**Output**
 ```output
 8514614484448761486
 ```
@@ -294,7 +294,7 @@ class Person:
 person = Person()
 print(format(person, 'long'))
 ```
-**output**
+**Output**
 ```output
 Name: Alice, Age: 30
 ```
@@ -319,7 +319,7 @@ class Logger:
 logger = Logger()
 logger.log("An important message")
 ```
-**output**
+**Output**
 ```output
 Logging: An important message
 ```
@@ -347,7 +347,7 @@ person = Person()
 pickled_person = pickle.dumps(person)
 print(pickled_person)
 ```
-**output**
+**Output**
 ```output
 b'\x80\x04\x95\x1a\x00\x00\x00\x00\x00\x00\x00\x8c\x08__main__\x94\x8c\x06Person\x94\x93\x94)R\x94.'
 ```
