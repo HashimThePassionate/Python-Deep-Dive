@@ -28,3 +28,6 @@ class Vector:
 v1 = Vector(2, 4)
 v2 = Vector(2, 1)
 print(v1 + v2)
+print(abs(v1))
+print(v1 * 3)
+

@@ -37,8 +37,19 @@ class Vector:
     
     def __mul__(self, scalar):
         return Vector(self.x * scalar, self.y * scalar)
-```
 
+v1 = Vector(2, 4)
+v2 = Vector(2, 1)
+print(v1 + v2)
+print(abs(v1))
+print(v1 * 3)
+```
+**output**
+<pre>
+Vector(4, 5)
+4.47213595499958
+Vector(6, 12)
+</pre>
 ### Explanation of Each Special Method:
 
 1. **`__init__`**: The constructor method initializes a new instance of the `Vector` class. It sets the `x` and `y` coordinates of the vector.
