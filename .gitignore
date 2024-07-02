@@ -2,3 +2,6 @@
 .vscode/
 __pycache__/
 migrations/ 
+*.bak
+*.dat
+*.dir
