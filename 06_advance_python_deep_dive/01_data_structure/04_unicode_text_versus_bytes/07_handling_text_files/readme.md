@@ -19,7 +19,7 @@ Python 3 makes it easy to follow this approach because the `open()` built-in fun
 Consider the following code:
 
 ```python
-path = r"C:\Users\aaaa\Desktop\Python-Deep-Dive\06_advance_python_deep_dive\04_unicode_text_versus_bytes\07_handling_text_files\cafe.txt"
+path = path = r"C:\Users\aaaa\Desktop\Python-Deep-Dive\06_advance_python_deep_dive\01_data_structure\04_unicode_text_versus_bytes\07_handling_text_files\cafe.txt"
 
 # Writing to a file with UTF-8 encoding
 open(path, 'w', encoding='utf_8').write('café')
