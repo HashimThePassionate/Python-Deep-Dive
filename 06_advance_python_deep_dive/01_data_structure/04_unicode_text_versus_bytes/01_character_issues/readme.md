@@ -62,12 +62,13 @@ By using a standardized encoding like Unicode, these platforms and programs can 
 
 Here are a few examples of characters and their corresponding code points:
 <pre>
-| Character | Decimal Code Point | Hexadecimal Code Point |
-|-----------|--------------------|----------------------- |
-| A         | 65                 | U+0041                 |
-| B         | 66                 | U+0042                 |
-| €         | 8364               | U+20AC                 |
-| 🙂        | 128578             | U+1F642                |
++----------------+-------------------------+--------------------------+
+| Character      | Decimal Code Point      | Hexadecimal Code Point   |
++----------------+-------------------------+--------------------------+
+| A              | 65                      | U+0041                   |
+| B              | 66                      | U+0042                   |
+| €              | 8364                    | U+20AC                   |
++----------------+-------------------------+--------------------------+
 </pre>
 #### Examples:
 
