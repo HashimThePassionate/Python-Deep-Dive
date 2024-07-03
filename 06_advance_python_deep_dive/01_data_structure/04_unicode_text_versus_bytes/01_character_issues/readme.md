@@ -60,6 +60,15 @@ By using a standardized encoding like Unicode, these platforms and programs can 
 - The range of code points is from 0 to 1,114,111 in decimal (base 10).
 - Code points are usually written in hexadecimal (base 16) and start with “U+”.
 
+Here are a few examples of characters and their corresponding code points:
+<pre>
+| Character | Decimal Code Point | Hexadecimal Code Point |
+|-----------|--------------------|----------------------- |
+| A         | 65                 | U+0041                 |
+| B         | 66                 | U+0042                 |
+| €         | 8364               | U+20AC                 |
+| 🙂        | 128578             | U+1F642                |
+</pre>
 #### Examples:
 
 1. **Letter A**:
