@@ -267,5 +267,5 @@ For major changes, please ensure that the issue is thoroughly discussed before s
 ## License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-Thank you for exploring Python Deep Dive! If you have any questions, suggestions, or feedback, feel free to open an issue or contactr. 
-Regards: **HashimThePassionate**
+Thank you for exploring Python Deep Dive! If you have any questions, suggestions, or feedback, feel free to open an issue or contact. </br>
+Regards: **Muhammad Hashim**
