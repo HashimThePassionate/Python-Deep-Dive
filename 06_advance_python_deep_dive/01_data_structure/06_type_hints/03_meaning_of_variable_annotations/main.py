@@ -82,7 +82,7 @@ dc.a = 10
 print(dc.a)
 # Output: 10
 
-dc.b = 'oops'
+# dc.b = 'oops'
 print(dc.b)
 # Output: 'oops'
 
@@ -90,6 +90,6 @@ dc.c = 'whatever'
 print(dc.c)
 # Output: 'whatever'
 
-dc.z = 'secret stash'
-print(dc.z)
+# dc.z = 'secret stash'
+# print(dc.z)
 # Output: 'secret stash'
