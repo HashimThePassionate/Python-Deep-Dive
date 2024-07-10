@@ -1,7 +1,7 @@
 # Post-init Processing in dataclass
 
 ## Introduction
-The `@dataclass` decorator in Python simplifies the creation of classes by automatically generating special methods like `__init__`. However, the generated `__init__` method only handles simple assignment of arguments to instance attributes. For more complex initialization, you can use the `__post_init__` method. This README explains how to use `__post_init__` for additional initialization tasks, such as validation and computing field values.
+The `@dataclass` decorator in Python simplifies the creation of classes by automatically generating special methods like `__init__`. However, the generated `__init__` method only handles simple assignment of arguments to instance attributes. For more complex initialization, you can use the `__post_init__` method. This section explains how to use `__post_init__` for additional initialization tasks, such as validation and computing field values.
 
 ### Purpose of `__post_init__`
 - **Additional Initialization**: Perform tasks beyond simple attribute assignment.
