@@ -1,37 +1,35 @@
 # Data Class as a Code Smell
 
-## Introduction
+### Introduction
 Data classes are useful for organizing and managing data, but overusing them or using them improperly can indicate deeper design issues. This section discusses the concept of data classes as a "code smell"—a term used to describe patterns in code that may suggest the need for refactoring.
 
-### What is a Code Smell?
+#### What is a Code Smell?
 A code smell is a surface indication that usually corresponds to a deeper problem in the system. Martin Fowler and Kent Beck introduced the term in the context of refactoring.
 
-### Characteristics of Code Smells
+#### Characteristics of Code Smells
 1. **Quick to Spot**: Smells are easy to identify.
 2. **Indicator, Not Necessarily a Problem**: Smells suggest there might be a problem, but they are not inherently bad.
 
-### Data Class as a Code Smell
+## Data Class as a Code Smell
 Data classes are classes that primarily hold data and have little or no behavior. They often have fields and getter/setter methods but no significant methods of their own. 
 
 **Example of a Data Class Code Smell**:
 - A class with only fields and getter/setter methods.
 - Behavior is manipulated by other classes rather than the class itself.
 
-### Why Data Classes Can Be Problematic
+#### Why Data Classes Can Be Problematic
 - **Lack of Encapsulation**: Data classes often lead to behavior being scattered across multiple classes.
 - **Maintenance Challenges**: Code dealing with data class instances can become scattered and duplicated.
 
-### Solutions to Data Class Code Smell
+#### Solutions to Data Class Code Smell
 1. **Add Behavior to the Data Class**: Identify and move relevant methods into the data class.
 2. **Refactor**: Use refactoring techniques to distribute responsibilities appropriately.
 
-### When Data Classes Are Acceptable
+## When Data Classes Are Acceptable
 1. **Scaffolding**: Temporary implementation to jump-start a project or module. Eventually, the class should gain its own methods.
 2. **Intermediate Representation**: Useful for data interchange formats (e.g., JSON). Instances should be treated as immutable during this phase.
 
-### Example Scenarios
-
-#### Example: Temporary Scaffolding
+### Example: Temporary Scaffolding
 
 ```python
 from dataclasses import dataclass
@@ -54,7 +52,7 @@ class User:
         self.email = new_email
 ```
 
-#### Example: Intermediate Representation
+### Example: Intermediate Representation
 
 ```python
 from dataclasses import dataclass, asdict
@@ -76,12 +74,12 @@ imported_data = json.loads(json_data)
 data_instance = ExportData(**imported_data)
 ```
 
-### Detailed Explanation
+#### Detailed Explanation
 
 1. **Temporary Scaffolding**: Use data classes to quickly start a project. Over time, add methods to the class to encapsulate behavior.
 2. **Intermediate Representation**: Use data classes for data interchange. Treat instances as immutable during this phase to maintain data integrity.
 
-### Code Smell in Practice
+#### Code Smell in Practice
 
 **Example of a Data Class with Code Smell**:
 ```python
@@ -125,7 +123,7 @@ The `fields` function from the `dataclasses` module is used to introspect the da
          res.append(f'{indent}{f.name} = {value!r},')
      ```
 
-### Generated `__init__` Method
+#### Generated `__init__` Method
 When using `@dataclass`, Python automatically generates an `__init__` method. For the `Resource` class, the generated `__init__` method looks like this:
 
 ```python
@@ -168,5 +166,5 @@ class Resource:
      self.subjects = subjects
      ```
 
-### Conclusion
+#### Conclusion
 While data classes are powerful tools for managing data, they should be used judiciously. Over-reliance on data classes with little or no behavior can indicate design issues. By recognizing these patterns as code smells, you can refactor your code to improve encapsulation and maintainability.
