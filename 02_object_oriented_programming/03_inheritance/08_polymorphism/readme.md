@@ -17,11 +17,16 @@ Polymorphism, in the context of object-oriented programming, refers to the abili
 2. **Subclasses Override `area()` Method:**
     Both `Circle` and `Square` subclasses override the `area()` method inherited from the `Shape` class with their own implementations.
     ```python
+    import math 
     class Circle(Shape):
+        def __init__(self, radius):
+            self.radius = radius
         def area(self):
             return math.pi * self.radius**2
 
     class Square(Shape):
+        def __init__(self, side_length):
+            self.side_length = side_length
         def area(self):
             return self.side_length**2
     ```
