@@ -80,6 +80,8 @@ In this example:
 - `id(obj1)` and `id(obj2)` return different values, showing they are stored at different memory addresses.
 - `obj1 is obj2` returns `False`, indicating they are not the same object.
 
+In The Python Language Reference, **[3.1. Objects, values and types](https://docs.python.org/3/reference/datamodel.html#objects-values-and-types)**
+
 ## Conclusion
 Understanding identity, equality, and aliasing in Python is essential for writing effective code. Use the `is` operator to check identity and `==` for value equality. Use `id()` for debugging to understand object references better.
 
