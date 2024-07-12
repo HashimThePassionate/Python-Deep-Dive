@@ -11,7 +11,8 @@ Welcome to **Python Deep Dive**, a comprehensive repository designed to take you
 6. [Advanced Python Deep Dive](#advanced-python-deep-dive)
 7. [Compiling CPython](#compiling-cpython)
 8. [Contributing](#contributing)
-9. [License](#license)
+9. [Credit](#Credits)
+10. [License](#license)
 
 ## Fundamentals
 In this section, you'll learn the basics of Python, including:
@@ -263,6 +264,16 @@ Contributions are welcome! If you'd like to contribute to this repository, pleas
 4. After the discussion, submit a pull request with a detailed explanation of your contribution.
 
 For major changes, please ensure that the issue is thoroughly discussed before starting the implementation.
+
+## Credits
+Some examples and inspiration in this repository are taken from the book *Fluent Python* by Luciano Ramalho.
+
+- **Book Title**: Fluent Python
+- **Author**: Luciano Ramalho
+- **Copyright**: © 2022 Luciano Ramalho. All rights reserved.
+- **Publisher**: O’Reilly Media, Inc.
+For more information, you can visit the [O'Reilly website](http://oreilly.com).
+
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
