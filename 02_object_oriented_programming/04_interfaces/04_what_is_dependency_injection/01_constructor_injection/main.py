@@ -13,7 +13,7 @@ class TaxCalculator24(TaxCalculator):
         return self.__taxable_income * 0.3
 
 class TaxReport:
-    def __init__(self, calculator: TaxCalculator):
+    def __init__(self, calculator: TaxCalculator24):
         self.__calculator = calculator
 
     def show(self):
