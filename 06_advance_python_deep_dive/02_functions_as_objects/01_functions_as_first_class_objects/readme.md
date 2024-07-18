@@ -1,0 +1,14 @@
+#   **Functions as First-Class Objects**
+   - Treating a Function Like an Object
+   - Higher-Order Functions
+   - Modern Replacements for `map`, `filter`, and `reduce`
+   - Anonymous Functions
+   - The Nine Flavors of Callable Objects
+   - User-Defined Callable Types
+   - From Positional to Keyword-Only Parameters
+   - Positional-Only Parameters
+   - Packages for Functional Programming
+   - The `operator` Module
+   - Freezing Arguments with `functools.partial`
+   - Section Summary
+   - Further Reading
