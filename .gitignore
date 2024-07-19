@@ -5,3 +5,4 @@ migrations/
 *.bak
 *.dat
 *.dir
+.mypy_cache/
