@@ -1,76 +1,127 @@
-# Custom Exceptions
+# Understanding and Handling Custom Exceptions in Python
 
-We create a custom exception class named `InsufficientFundsException` to handle the scenario where a withdrawal operation is attempted with insufficient funds in the account. 
-### Code Explanation
+## What is a Custom Exception?
 
-#### Custom Exception Class
+A custom exception in Python is a user-defined error type that extends the base `Exception` class. Creating custom exceptions allows you to handle specific error conditions in a way that is meaningful for your application, providing more descriptive error messages and making your code more robust and readable.
 
-```python
-class InsufficientFundsException(Exception):
-    def __init__(self):
-        super().__init__("Insufficient funds in your account.")
-```
+### How to Create and Use Custom Exceptions?
 
-- We define a custom exception class `InsufficientFundsException` that inherits from the built-in `Exception` class.
-- In the `__init__` method, we call the `__init__` method of the parent class (`Exception`) using `super().__init__()` to initialize the exception with a default error message.
+To create a custom exception, define a new class that inherits from the `Exception` class. You can customize the initialization method to accept additional arguments and provide a more descriptive error message. 
 
-#### Account Class
+### Code Explanation: Custom Exceptions and Handling in Python
 
-```python
-class Account:
-    def __init__(self):
-        self.balance = 0
+This code demonstrates how to create and handle custom exceptions for a simple bank account management system.
 
-    def deposit(self, value):
-        if value <= 0:
-            raise ValueError("Deposit value must be greater than zero.")
-
-    def withdraw(self, value):
-        if value > self.balance:
-            raise InsufficientFundsException()
-```
-
-- The `Account` class represents a basic account with a balance.
-- The `deposit` method allows depositing money into the account. It raises a `ValueError` if the deposited amount is less than or equal to zero.
-- The `withdraw` method attempts to withdraw money from the account. It raises an `InsufficientFundsException` if the withdrawal amount exceeds the current balance.
-
-#### ExceptionsDemo Class
-
-```python
-class ExceptionsDemo:
-    @staticmethod
-    def show():
-        account = Account()
-        try:
-            account.withdraw(10)
-        except InsufficientFundsException as e:
-            print(e)
-```
-
-- The `ExceptionsDemo` class contains a static method `show` to demonstrate how to handle the `InsufficientFundsException`.
-- Inside the `try` block, we create an `Account` object and attempt to withdraw an amount (10 in this case).
-- If an `InsufficientFundsException` is caught in the `except` block, we print the exception message.
-
-#### Calling the Method
-
-```python
-ExceptionsDemo.show()
-```
-
-- Finally, we call the `show` method of the `ExceptionsDemo` class to demonstrate the handling of the `InsufficientFundsException`.
-
-### How Custom Exceptions Are Created and Used
+#### Classes and Methods
 
 1. **Custom Exception Class:**
-   - We define a custom exception class `InsufficientFundsException` by inheriting from the base `Exception` class.
-   - We can provide additional functionality, such as initializing the exception with a custom error message.
+    - `InsufficientFunds`: Raised when a withdrawal amount exceeds the current balance.
 
-2. **Raising the Custom Exception:**
-   - In the `withdraw` method of the `Account` class, we raise an instance of `InsufficientFundsException` when a withdrawal is attempted with insufficient funds.
+2. **Account Class:**
+    - `__init__`: Initializes the account with a given balance.
+    - `withdraw`: Withdraws a specified amount from the account, raising `InsufficientFunds` if the balance is insufficient.
+    - `deposit`: Deposits a specified amount into the account, raising a `ValueError` if the amount is non-positive.
+    - `__str__`: Returns a string representation of the account balance.
 
-3. **Handling the Custom Exception:**
-   - In the `ExceptionsDemo` class, we catch the `InsufficientFundsException` in the `except` block and print the exception message.
+```python
+class InsufficientFunds(Exception):
+    def __init__(self, balance, amount):
+        super().__init__(f'Insufficient funds: You have {balance} in your account and you are trying to withdraw {amount}')
 
-### Summary
+class Account:
+    def __init__(self, balance):
+        self.balance = balance
 
-Custom exceptions allow us to create specialized error classes tailored to specific scenarios in our application. By defining custom exception classes, we can provide more descriptive error messages and handle exceptional conditions more effectively. In this example, the `InsufficientFundsException` class is created to handle cases where a withdrawal operation is attempted with insufficient funds, providing better clarity and control over error handling in the program.
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise InsufficientFunds(self.balance, amount)
+        self.balance -= amount
+        return self.balance
+    
+    def deposit(self, amount):
+        if amount <= 0:
+            raise ValueError('Amount must be greater than 0')
+        self.balance += amount
+        return self.balance
+    
+    def __str__(self):
+        return f'Account balance: {self.balance}'
+
+# Example Usage:
+
+try:
+    account = Account(100)
+    account.withdraw(200)
+except InsufficientFunds as e:
+    print(e)
+
+try:
+    account = Account(100)
+    account.deposit(-10)
+except ValueError as e:
+    print(e)
+
+try:
+    account = Account(100)
+    account.withdraw(50)
+    account.deposit(30)
+    print(account)
+except InsufficientFunds as e:
+    print(e)
+```
+
+#### Detailed Breakdown
+
+1. **Custom Exception Class:**
+    - `InsufficientFunds`: Inherits from `Exception`. The initialization method takes `balance` and `amount` as arguments and constructs an error message indicating the insufficient funds.
+
+2. **Account Class:**
+    - `__init__(self, balance)`: Initializes the account with a given balance.
+    - `withdraw(self, amount)`: 
+      - Checks if the withdrawal amount is greater than the current balance.
+      - Raises `InsufficientFunds` if true.
+      - Deducts the amount from the balance and returns the new balance.
+    - `deposit(self, amount)`:
+      - Checks if the deposit amount is less than or equal to zero.
+      - Raises `ValueError` if true.
+      - Adds the amount to the balance and returns the new balance.
+    - `__str__(self)`: Returns the account balance as a string.
+
+#### Examples:
+
+1. **Handling InsufficientFunds Exception:**
+    ```python
+    try:
+        account = Account(100)
+        account.withdraw(200)
+    except InsufficientFunds as e:
+        print(e)
+    ```
+    - This will raise `InsufficientFunds` because the withdrawal amount exceeds the balance.
+    - **Output**: `Insufficient funds: You have 100 in your account and you are trying to withdraw 200`
+
+2. **Handling ValueError Exception:**
+    ```python
+    try:
+        account = Account(100)
+        account.deposit(-10)
+    except ValueError as e:
+        print(e)
+    ```
+    - This will raise `ValueError` because the deposit amount is non-positive.
+    - **Output**: `Amount must be greater than 0`
+
+3. **Successful Withdrawal and Deposit:**
+    ```python
+    try:
+        account = Account(100)
+        account.withdraw(50)
+        account.deposit(30)
+        print(account)
+    except InsufficientFunds as e:
+        print(e)
+    ```
+    - This will successfully withdraw 50 and deposit 30 into the account.
+    - **Output**: `Account balance: 80`
+
+This demonstrates how custom exceptions can be created and handled in Python to manage specific error conditions in an application.
