@@ -1,18 +1,26 @@
 
 ```python
-def create_employee(base_salary, hourly_rate):
-    return {
-        "base_salary": base_salary,
-        "hourly_rate": hourly_rate
-    }
+def create_employee(**kwargs):
+    return kwargs
 
 def calculate_wage(employee, extra_hours):
-    return employee["base_salary"] + (employee["hourly_rate"] * extra_hours)
+    return employee["salary"] + (employee["hourly"] * extra_hours)
 
-
-employee = create_employee(50000, 20)
+salary = int(input("Please Enter Salary of Employee"))
+hourly = int(input("Please Enter Hourly Rate of Employee"))
+employee1 = {
+    'salary':salary,
+    'hourly':hourly
+}
+employee = create_employee(**employee1)
+print(employee)
 wage = calculate_wage(employee, 20)
-print(wage)
+print(f'Calculated Wage is = {wage}')
+# Unpack the returned dictionary into variables
+s = employee['salary']
+r = employee['hourly']
+print(f'Base Salary is = {s}')
+print(f'Hourly Rate is = {r}')
 ```
 
 
