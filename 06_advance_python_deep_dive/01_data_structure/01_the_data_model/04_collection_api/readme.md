@@ -1,6 +1,6 @@
 # Collection API
 
-This document provides an overview of Python's fundamental collection interfaces as represented by Abstract Base Classes (ABCs). These interfaces define the essential methods that collection types should implement.
+This Section provides an overview of Python's fundamental collection interfaces as represented by Abstract Base Classes (ABCs). These interfaces define the essential methods that collection types should implement.
 </br>
 
 <img src='./Collection.PNG' width='80%' alt='Collection interface'>
