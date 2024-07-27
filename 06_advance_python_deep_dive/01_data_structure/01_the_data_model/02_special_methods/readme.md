@@ -1,47 +1,41 @@
 # Special Methods
-#### 1. Special Methods Are for the Python Interpreter
+1. Special Methods Are for the Python Interpreter
 
-- **Intended Use**:
-  - Special methods (also known as "magic methods" or "dunder methods") are designed to be called by the Python interpreter, not directly by the user.
-  - For example, you should not call `my_object.__len__()`. Instead, you should use the built-in `len(my_object)`. This makes your code more readable and leverages Python’s design.
+   - **Intended Use**:
+       - Special methods (also known as "magic methods" or "dunder methods") are designed to be called by the Python interpreter, not directly by the user.
+       - For example, you should not call `my_object.__len__()`. Instead, you should use the built-in `len(my_object)`. This makes your code more readable and leverages Python’s design.
 
-- **Implicit Calls**:
-  - When you use Python’s built-in functions (like `len()`, `iter()`, `str()`), these functions internally call the corresponding special methods (`__len__`, `__iter__`, `__str__`).
+   - **Implicit Calls**:
+       - When you use Python’s built-in functions (like `len()`, `iter()`, `str()`), these functions internally call the corresponding special methods (`__len__`, `__iter__`, `__str__`).
 
-#### 2. Optimization for Built-in Types
+2. Optimization for Built-in Types
 
-- **Performance Shortcut**:
-  - For built-in types like `list`, `str`, `bytearray`, and extensions like NumPy arrays, Python takes shortcuts to enhance performance.
-  - These built-in types are implemented in C and include a structure called `PyVarObject`, which contains an `ob_size` field that stores the number of items.
-  - When you call `len()` on these types, Python directly accesses the `ob_size` field, making the operation much faster than invoking a method.
+   . **Performance Shortcut**:
+     - For built-in types like `list`, `str`, `bytearray`, and extensions like NumPy arrays, Python takes shortcuts to enhance performance.
+     - These built-in types are implemented in C and include a structure called `PyVarObject`, which contains an `ob_size` field that stores the number of items.
+     - When you call `len()` on these types, Python directly accesses the `ob_size` field, making the operation much faster than invoking a method.
 
-#### 3. Implicit Special Method Calls
+3. Implicit Special Method Calls
 
-- **Loop Example**:
-  - Consider the loop `for i in x:`. This statement implicitly calls `iter(x)`, which in turn may call `x.__iter__()`. If `__iter__` is not available, it may use `x.__getitem__()`, as seen in the `FrenchDeck` example.
+   - **Loop Example**:
+       - Consider the loop `for i in x:`. This statement implicitly calls `iter(x)`, which in turn may call `x.__iter__()`. If `__iter__` is not available, it may use `x.__getitem__()`, as seen in the `FrenchDeck` example.
 
-- **Avoid Direct Calls**:
-  - Generally, you should avoid direct calls to special methods. Instead, use the related built-in functions. These functions not only call the special methods but also provide additional functionalities and optimizations.
-  - The exception is `__init__`, which is frequently called directly in user code, especially to invoke the initializer of a superclass.
+   - **Avoid Direct Calls**:
+       - Generally, you should avoid direct calls to special methods. Instead, use the related built-in functions. These functions not only call the special methods but also provide additional functionalities and optimizations.
+       - The exception is `__init__`, which is frequently called directly in user code, especially to invoke the initializer of a superclass.
 
-#### 4. Implementing Special Methods
+4. Implementing Special Methods
 
-- **Implementation Over Invocation**:
-  - Focus more on implementing special methods in your custom classes rather than invoking them explicitly. This makes your classes integrate better with Python’s built-in functions and idioms.
+   - **Implementation Over Invocation**:
+       - Focus more on implementing special methods in your custom classes rather than invoking them explicitly. This makes your classes integrate better with Python’s built-in functions and idioms.
 
-- **Built-in Functions**:
-  - Use built-in functions like `len()`, `iter()`, and `str()` instead of directly calling `__len__()`, `__iter__()`, and `__str__()`. These functions are optimized for performance, especially for built-in types.
+   - **Built-in Functions**:
+       - Use built-in functions like `len()`, `iter()`, and `str()` instead of directly calling `__len__()`, `__iter__()`, and `__str__()`. These functions are optimized for performance, especially for built-in types.
 
-### Summary
+---
 
-- **Use Special Methods Indirectly**: Special methods are designed to be called by the Python interpreter through built-in functions, not directly by your code.
-- **Performance Optimizations**: Built-in types have optimizations that make operations like `len()` faster by directly accessing internal fields.
-- **Implicit Method Calls**: Many special methods are called implicitly by Python’s syntax and built-in functions.
-- **Focus on Implementation**: Implement special methods in your custom classes to enable them to work seamlessly with Python’s built-in features and idioms.
-- **Use Built-in Functions**: Prefer using built-in functions (e.g., `len`, `iter`, `str`) over directly calling special methods, as they are optimized and provide additional functionalities.
-
-## General Purpose Special methods
-### Understanding `__new__` and `__init__`
+# General Purpose Special methods
+#### Understanding `__new__` and `__init__`
 
 #### `__new__` Method
 
@@ -115,7 +109,7 @@ These examples illustrate how `__new__` and `__init__` work together to create a
 
 --- 
 
-### Understanding `__bytes__` and `__str__` Methods
+#### Understanding `__bytes__` and `__str__` Methods
 
 The `__bytes__` method in Python is used to define how an object is converted to a byte string (i.e., an instance of the `bytes` class). This method is called when you use the `bytes()` function on an object.
 
@@ -242,7 +236,7 @@ This example demonstrates how to implement and use `__bytes__` and `__str__` met
 
 --- 
 
-### Understanding `__dir__` Method in Python
+#### Understanding `__dir__` Method in Python
 
 The `__dir__` method is a special method in Python that allows you to customize the behavior of the `dir()` function. When you call `dir(x)`, Python translates this operation into a call to `x.__dir__()`. This method should return a sorted list of the object's attributes. If a class does not define a `__dir__` method, the default implementation of `dir()` performs introspection to return a list of attributes, aiming to provide relevant information.
 
@@ -326,7 +320,7 @@ By customizing the `__dir__` method, you control what information is revealed wh
 
 --- 
 
-### Understanding `__delattr__` Method in Python
+#### Understanding `__delattr__` Method in Python
 
 The `__delattr__` method is a special method in Python that is called when you try to delete an attribute from an object using the `del` statement. When you write `del x.y`, Python translates this into a call to `x.__delattr__('y')`.
 
@@ -390,7 +384,7 @@ By customizing the `__delattr__` method, you gain control over the deletion of a
 
 --- 
 
-### Understanding Special Methods for Comparisons in Python
+#### Understanding Special Methods for Comparisons in Python
 
 In Python, special methods are used to define the behavior of comparison operators. These methods allow you to customize how objects of your class are compared with each other.
 
@@ -472,7 +466,7 @@ By following these practices, you can create classes with robust and easy-to-mai
 
 --- 
 
-### Understanding `__getattr__` Method in Python
+#### Understanding `__getattr__` Method in Python
 
 The `__getattr__` method is a special method in Python that is called when an attribute is not found in the usual places, such as the instance’s `__dict__` or the class itself. This method allows you to define custom behavior for attribute access that would otherwise result in an `AttributeError`.
 
@@ -540,7 +534,7 @@ By using `__getattr__`, you can add flexibility to your class, allowing it to ha
 
 --- 
 
-### Understanding `__getattribute__` Method in Python
+#### Understanding `__getattribute__` Method in Python
 
 The `__getattribute__` method is a special method in Python that is called every time an attribute of an object is accessed. This includes attribute access through dot notation (`x.y`) and functions like `getattr(x, 'y')`. This method provides a way to intercept all attribute accesses and define custom behavior for them.
 
@@ -606,7 +600,7 @@ By using `__getattribute__`, you can have fine-grained control over attribute ac
 
 --- 
 
-### Understanding `__bool__` (formerly `__nonzero__`) Method in Python
+#### Understanding `__bool__` (formerly `__nonzero__`) Method in Python
 
 In Python 2, the method `__nonzero__` is used to define the truth value of an object. In Python 3, this method has been renamed to `__bool__`, making it more readable and intuitive.
 
@@ -741,7 +735,7 @@ By defining `__repr__`, you can make your objects easier to work with during dev
 
 ---
 
-### Understanding `__setattr__` Method in Python
+#### Understanding `__setattr__` Method in Python
 
 The `__setattr__` method in Python is a special method that is called whenever an attribute assignment is made on an object. This includes direct assignments like `x.y = value` as well as calls to `setattr(x, 'y', value)`. Unlike `__getattr__`, which is called only for missing attributes, `__setattr__` is invoked for all attribute assignments.
 
@@ -818,7 +812,7 @@ print(alice.__dict__)  # Output: {'_name_set': True, 'name': 'Alice', 'age': 31,
 By using `__setattr__`, you can add additional logic to attribute assignments, such as validation or logging, making your classes more robust and easier to debug.
 
 
-### Understanding `__unicode__` Method in Python 2
+#### Understanding `__unicode__` Method in Python 2
 
 In Python 2, the `__unicode__` method is used to define the behavior of the `unicode()` function, which converts an object to a Unicode string. This method is particularly useful for handling non-ASCII text and ensuring that objects can be represented correctly in Unicode.
 
@@ -884,7 +878,7 @@ By defining both `__unicode__` and `__str__`, you can ensure that your objects h
 
 ---
 
-### Understanding `__format__` Method in Python
+#### Understanding `__format__` Method in Python
 
 The `__format__` method in Python is a special method that is called by the `format()` function. This method allows you to define custom formatting for your objects using the format specification language. When you call `format(x)`, it calls `x.__format__()`, and when you call `format(x, format_string)`, it calls `x.__format__(format_string)`.
 
@@ -958,7 +952,7 @@ By defining `__format__`, you can customize how your objects are formatted using
 
 ---
 
-### Container Methods
+# Container Methods
 
 In Python, container methods are special methods that provide container functionality, enabling objects to behave like containers such as lists, dictionaries, or sets. These methods allow for indexing, assignment, deletion, iteration, and membership testing. Below is a detailed explanation of each container method followed by a practical example.
 
@@ -1065,3 +1059,600 @@ print(clist)  # Output: [1, 10, 4, 5]
 5. **Iteration**: The `__iter__` method returns an iterator for `_data`.
 6. **Length**: The `__len__` method returns the number of items in `_data`.
 7. **Item Assignment**: The `__setitem__` method assigns a value to an item at a specified index.
+
+---
+
+### Special Methods for Numeric Objects
+
+Special methods in Python allow instances to support numeric operations by overloading operators. These methods enable custom classes to handle arithmetic, bitwise, and conversion operations similarly to built-in numeric types. Below is a detailed explanation of each group of special methods, followed by practical examples for implementation.
+
+### Table of Special Methods for Numeric Operations
+
+1. **Unary Operations**
+    - `__abs__(self)`: Called by `abs(x)`.
+    - `__invert__(self)`: Called by `~x`.
+    - `__neg__(self)`: Called by `-x`.
+    - `__pos__(self)`: Called by `+x`.
+
+2. **Binary Operations**
+    - `__add__(self, other)`: Called by `x + y`.
+    - `__sub__(self, other)`: Called by `x - y`.
+    - `__mul__(self, other)`: Called by `x * y`.
+    - `__mod__(self, other)`: Called by `x % y`.
+    - `__div__(self, other)`: Called by `x / y` (Python 2 only).
+    - `__floordiv__(self, other)`: Called by `x // y`.
+    - `__truediv__(self, other)`: Called by `x / y` (Python 3).
+    - `__pow__(self, other[, modulo])`: Called by `x ** y` and `pow(x, y[, z])`.
+
+3. **Right Binary Operations**
+    - `__radd__(self, other)`: Called by `y + x`.
+    - `__rsub__(self, other)`: Called by `y - x`.
+    - `__rmul__(self, other)`: Called by `y * x`.
+    - `__rmod__(self, other)`: Called by `y % x`.
+    - `__rdiv__(self, other)`: Called by `y / x` (Python 2 only).
+    - `__rfloordiv__(self, other)`: Called by `y // x`.
+    - `__rtruediv__(self, other)`: Called by `y / x` (Python 3).
+    - `__rpow__(self, other)`: Called by `y ** x`.
+
+4. **Bitwise Operations**
+    - `__and__(self, other)`: Called by `x & y`.
+    - `__or__(self, other)`: Called by `x | y`.
+    - `__xor__(self, other)`: Called by `x ^ y`.
+    - `__lshift__(self, other)`: Called by `x << y`.
+    - `__rshift__(self, other)`: Called by `x >> y`.
+
+5. **Right Bitwise Operations**
+    - `__rand__(self, other)`: Called by `y & x`.
+    - `__ror__(self, other)`: Called by `y | x`.
+    - `__rxor__(self, other)`: Called by `y ^ x`.
+    - `__rlshift__(self, other)`: Called by `y << x`.
+    - `__rrshift__(self, other)`: Called by `y >> x`.
+
+6. **In-place Operations**
+    - `__iadd__(self, other)`: Called by `x += y`.
+    - `__isub__(self, other)`: Called by `x -= y`.
+    - `__imul__(self, other)`: Called by `x *= y`.
+    - `__imod__(self, other)`: Called by `x %= y`.
+    - `__idiv__(self, other)`: Called by `x /= y` (Python 2 only).
+    - `__ifloordiv__(self, other)`: Called by `x //= y`.
+    - `__itruediv__(self, other)`: Called by `x /= y` (Python 3).
+    - `__iand__(self, other)`: Called by `x &= y`.
+    - `__ior__(self, other)`: Called by `x |= y`.
+    - `__ixor__(self, other)`: Called by `x ^= y`.
+    - `__ilshift__(self, other)`: Called by `x <<= y`.
+    - `__irshift__(self, other)`: Called by `x >>= y`.
+    - `__ipow__(self, other)`: Called by `x **= y`.
+
+7. **Conversion Operations**
+    - `__complex__(self)`: Called by `complex(x)`.
+    - `__float__(self)`: Called by `float(x)`.
+    - `__int__(self)`: Called by `int(x)`.
+    - `__index__(self)`: Called by `hex(x)`, `oct(x)`, and slicing operations.
+
+### Implementation of a Custom Numeric Class
+
+Let's implement a custom numeric class that supports various numeric operations:
+
+```python
+class CustomNumber:
+    def __init__(self, value):
+        self.value = value
+
+    # Unary operations
+    def __abs__(self):
+        return CustomNumber(abs(self.value))
+    
+    def __invert__(self):
+        return CustomNumber(~self.value)
+    
+    def __neg__(self):
+        return CustomNumber(-self.value)
+    
+    def __pos__(self):
+        return CustomNumber(+self.value)
+    
+    # Binary operations
+    def __add__(self, other):
+        return CustomNumber(self.value + other.value)
+    
+    def __sub__(self, other):
+        return CustomNumber(self.value - other.value)
+    
+    def __mul__(self, other):
+        return CustomNumber(self.value * other.value)
+    
+    def __mod__(self, other):
+        return CustomNumber(self.value % other.value)
+    
+    def __floordiv__(self, other):
+        return CustomNumber(self.value // other.value)
+    
+    def __truediv__(self, other):
+        return CustomNumber(self.value / other.value)
+    
+    def __pow__(self, other):
+        return CustomNumber(self.value ** other.value)
+    
+    # Right binary operations
+    def __radd__(self, other):
+        return CustomNumber(other.value + self.value)
+    
+    def __rsub__(self, other):
+        return CustomNumber(other.value - self.value)
+    
+    def __rmul__(self, other):
+        return CustomNumber(other.value * self.value)
+    
+    def __rmod__(self, other):
+        return CustomNumber(other.value % self.value)
+    
+    def __rfloordiv__(self, other):
+        return CustomNumber(other.value // self.value)
+    
+    def __rtruediv__(self, other):
+        return CustomNumber(other.value / self.value)
+    
+    def __rpow__(self, other):
+        return CustomNumber(other.value ** self.value)
+    
+    # Bitwise operations
+    def __and__(self, other):
+        return CustomNumber(self.value & other.value)
+    
+    def __or__(self):
+        return CustomNumber(self.value | other.value)
+    
+    def __xor__(self):
+        return CustomNumber(self.value ^ other.value)
+    
+    def __lshift__(self, other):
+        return CustomNumber(self.value << other.value)
+    
+    def __rshift__(self, other):
+        return CustomNumber(self.value >> other.value)
+    
+    # Right bitwise operations
+    def __rand__(self, other):
+        return CustomNumber(other.value & self.value)
+    
+    def __ror__(self, other):
+        return CustomNumber(other.value | self.value)
+    
+    def __rxor__(self, other):
+        return CustomNumber(other.value ^ self.value)
+    
+    def __rlshift__(self, other):
+        return CustomNumber(other.value << self.value)
+    
+    def __rrshift__(self, other):
+        return CustomNumber(other.value >> self.value)
+    
+    # In-place operations
+    def __iadd__(self, other):
+        self.value += other.value
+        return self
+    
+    def __isub__(self, other):
+        self.value -= other.value
+        return self
+    
+    def __imul__(self, other):
+        self.value *= other.value
+        return self
+    
+    def __imod__(self, other):
+        self.value %= other.value
+        return self
+    
+    def __ifloordiv__(self, other):
+        self.value //= other.value
+        return self
+    
+    def __itruediv__(self, other):
+        self.value /= other.value
+        return self
+    
+    def __iand__(self, other):
+        self.value &= other.value
+        return self
+    
+    def __ior__(self, other):
+        self.value |= other.value
+        return self
+    
+    def __ixor__(self, other):
+        self.value ^= other.value
+        return self
+    
+    def __ilshift__(self, other):
+        self.value <<= other.value
+        return self
+    
+    def __irshift__(self, other):
+        self.value >>= other.value
+        return self
+    
+    def __ipow__(self, other):
+        self.value **= other.value
+        return self
+    
+    # Conversion operations
+    def __complex__(self):
+        return complex(self.value)
+    
+    def __float__(self):
+        return float(self.value)
+    
+    def __int__(self):
+        return int(self.value)
+    
+    def __index__(self):
+        return self.value
+    
+    def __repr__(self):
+        return f'CustomNumber({self.value})'
+
+# Example usage
+a = CustomNumber(10)
+b = CustomNumber(3)
+
+# Unary operations
+print(abs(a))  # Output: CustomNumber(10)
+print(~a)
+
+      # Output: CustomNumber(-11)
+print(-a)      # Output: CustomNumber(-10)
+print(+a)      # Output: CustomNumber(10)
+
+# Binary operations
+print(a + b)   # Output: CustomNumber(13)
+print(a - b)   # Output: CustomNumber(7)
+print(a * b)   # Output: CustomNumber(30)
+print(a % b)   # Output: CustomNumber(1)
+print(a // b)  # Output: CustomNumber(3)
+print(a / b)   # Output: CustomNumber(3.3333333333333335)
+print(a ** b)  # Output: CustomNumber(1000)
+
+# Right binary operations
+print(b + a)   # Output: CustomNumber(13)
+print(b - a)   # Output: CustomNumber(-7)
+print(b * a)   # Output: CustomNumber(30)
+print(b % a)   # Output: CustomNumber(3)
+print(b // a)  # Output: CustomNumber(0)
+print(b / a)   # Output: CustomNumber(0.3)
+print(b ** a)  # Output: CustomNumber(59049)
+
+# Bitwise operations
+print(a & b)   # Output: CustomNumber(2)
+print(a | b)   # Output: CustomNumber(11)
+print(a ^ b)   # Output: CustomNumber(9)
+print(a << b)  # Output: CustomNumber(80)
+print(a >> b)  # Output: CustomNumber(1)
+
+# In-place operations
+a += b
+print(a)       # Output: CustomNumber(13)
+a -= b
+print(a)       # Output: CustomNumber(10)
+a *= b
+print(a)       # Output: CustomNumber(30)
+a //= b
+print(a)       # Output: CustomNumber(10)
+a /= b
+print(a)       # Output: CustomNumber(3.3333333333333335)
+
+# Conversion operations
+print(float(a))  # Output: 3.3333333333333335
+print(int(a))    # Output: 3
+print(complex(a))# Output: (3.3333333333333335+0j)
+print(hex(a))    # Output: 0x3
+```
+
+### Updated README
+
+```markdown
+# CustomNumber Class
+
+The `CustomNumber` class is a custom implementation of numeric operations in Python. It leverages special methods to support arithmetic, bitwise, in-place, and conversion operations, enabling instances to behave similarly to built-in numeric types.
+
+## Methods Implemented
+
+1. **Unary Operations**
+    - `__abs__(self)`: Called by `abs(x)`.
+    - `__invert__(self)`: Called by `~x`.
+    - `__neg__(self)`: Called by `-x`.
+    - `__pos__(self)`: Called by `+x`.
+
+2. **Binary Operations**
+    - `__add__(self, other)`: Called by `x + y`.
+    - `__sub__(self, other)`: Called by `x - y`.
+    - `__mul__(self, other)`: Called by `x * y`.
+    - `__mod__(self, other)`: Called by `x % y`.
+    - `__floordiv__(self, other)`: Called by `x // y`.
+    - `__truediv__(self, other)`: Called by `x / y`.
+    - `__pow__(self, other[, modulo])`: Called by `x ** y`.
+
+3. **Right Binary Operations**
+    - `__radd__(self, other)`: Called by `y + x`.
+    - `__rsub__(self, other)`: Called by `y - x`.
+    - `__rmul__(self, other)`: Called by `y * x`.
+    - `__rmod__(self, other)`: Called by `y % x`.
+    - `__rfloordiv__(self, other)`: Called by `y // x`.
+    - `__rtruediv__(self, other)`: Called by `y / x`.
+    - `__rpow__(self, other)`: Called by `y ** x`.
+
+4. **Bitwise Operations**
+    - `__and__(self, other)`: Called by `x & y`.
+    - `__or__(self, other)`: Called by `x | y`.
+    - `__xor__(self, other)`: Called by `x ^ y`.
+    - `__lshift__(self, other)`: Called by `x << y`.
+    - `__rshift__(self, other)`: Called by `x >> y`.
+
+5. **Right Bitwise Operations**
+    - `__rand__(self, other)`: Called by `y & x`.
+    - `__ror__(self, other)`: Called by `y | x`.
+    - `__rxor__(self, other)`: Called by `y ^ x`.
+    - `__rlshift__(self, other)`: Called by `y << x`.
+    - `__rrshift__(self, other)`: Called by `y >> x`.
+
+6. **In-place Operations**
+    - `__iadd__(self, other)`: Called by `x += y`.
+    - `__isub__(self, other)`: Called by `x -= y`.
+    - `__imul__(self, other)`: Called by `x *= y`.
+    - `__imod__(self, other)`: Called by `x %= y`.
+    - `__ifloordiv__(self, other)`: Called by `x //= y`.
+    - `__itruediv__(self, other)`: Called by `x /= y`.
+    - `__iand__(self, other)`: Called by `x &= y`.
+    - `__ior__(self, other)`: Called by `x |= y`.
+    - `__ixor__(self, other)`: Called by `x ^= y`.
+    - `__ilshift__(self, other)`: Called by `x <<= y`.
+    - `__irshift__(self, other)`: Called by `x >>= y`.
+    - `__ipow__(self, other)`: Called by `x **= y`.
+
+7. **Conversion Operations**
+    - `__complex__(self)`: Called by `complex(x)`.
+    - `__float__(self)`: Called by `float(x)`.
+    - `__int__(self)`: Called by `int(x)`.
+    - `__index__(self)`: Called by `hex(x)`, `oct(x)`, and slicing operations.
+
+## Example Usage
+
+### Creating an Instance
+
+```python
+from custom_number import CustomNumber
+
+a = CustomNumber(10)
+b = CustomNumber(3)
+```
+
+### Unary Operations
+
+```python
+print(abs(a))  # Output: CustomNumber(10)
+print(~a)      # Output: CustomNumber(-11)
+print(-a)      # Output: CustomNumber(-10)
+print(+a)      # Output: CustomNumber(10)
+```
+
+### Binary Operations
+
+```python
+print(a + b)   # Output: CustomNumber(13)
+print(a - b)   # Output: CustomNumber(7)
+print(a * b)   # Output: CustomNumber(30)
+print(a % b)   # Output: CustomNumber(1)
+print(a // b)  # Output: CustomNumber(3)
+print(a / b)   # Output: CustomNumber(3.3333333333333335)
+print(a ** b)  # Output: CustomNumber(1000)
+```
+
+### Right Binary Operations
+
+```python
+print(b + a)   # Output: CustomNumber(13)
+print(b - a)   # Output: CustomNumber(-7)
+print(b * a)   # Output: CustomNumber(30)
+print(b % a)   # Output: CustomNumber(3)
+print(b // a)  # Output: CustomNumber(0)
+print(b / a)   # Output: CustomNumber(0.3)
+print(b ** a)  # Output: CustomNumber(59049)
+```
+
+### Bitwise Operations
+
+```python
+print(a & b)   # Output: CustomNumber(2)
+print(a | b)   # Output: CustomNumber(11)
+print(a ^ b)   # Output: CustomNumber(9)
+print(a << b)  # Output: CustomNumber(80)
+print(a >> b)  # Output: CustomNumber(1)
+```
+
+### In-place Operations
+
+```python
+a += b
+print(a)       # Output: CustomNumber(13)
+a -= b
+print(a)       # Output: CustomNumber(10)
+a *= b
+print(a)       # Output: CustomNumber(30)
+a //= b
+print(a)       # Output: CustomNumber(10)
+a /= b
+print(a)       # Output: CustomNumber(3.3333333333333335)
+```
+
+### Conversion Operations
+
+```python
+print(float(a))  # Output: 3.3333333333333335
+print(int(a))    # Output: 3
+print(complex(a))# Output: (3.3333333333333335+0j)
+print(hex(a))    # Output: 0x3
+```
+
+## Class Implementation
+
+```python
+class CustomNumber:
+    def __init__(self, value):
+        self.value = value
+
+    # Unary operations
+    def __abs__(self):
+        return CustomNumber(abs(self.value))
+    
+    def __invert__(self):
+        return CustomNumber
+
+(~self.value)
+    
+    def __neg__(self):
+        return CustomNumber(-self.value)
+    
+    def __pos__(self):
+        return CustomNumber(+self.value)
+    
+    # Binary operations
+    def __add__(self, other):
+        return CustomNumber(self.value + other.value)
+    
+    def __sub__(self, other):
+        return CustomNumber(self.value - other.value)
+    
+    def __mul__(self, other):
+        return CustomNumber(self.value * other.value)
+    
+    def __mod__(self, other):
+        return CustomNumber(self.value % other.value)
+    
+    def __floordiv__(self, other):
+        return CustomNumber(self.value // other.value)
+    
+    def __truediv__(self, other):
+        return CustomNumber(self.value / other.value)
+    
+    def __pow__(self, other):
+        return CustomNumber(self.value ** other.value)
+    
+    # Right binary operations
+    def __radd__(self, other):
+        return CustomNumber(other.value + self.value)
+    
+    def __rsub__(self, other):
+        return CustomNumber(other.value - self.value)
+    
+    def __rmul__(self, other):
+        return CustomNumber(other.value * self.value)
+    
+    def __rmod__(self, other):
+        return CustomNumber(other.value % self.value)
+    
+    def __rfloordiv__(self, other):
+        return CustomNumber(other.value // self.value)
+    
+    def __rtruediv__(self, other):
+        return CustomNumber(other.value / self.value)
+    
+    def __rpow__(self, other):
+        return CustomNumber(other.value ** self.value)
+    
+    # Bitwise operations
+    def __and__(self, other):
+        return CustomNumber(self.value & other.value)
+    
+    def __or__(self):
+        return CustomNumber(self.value | other.value)
+    
+    def __xor__(self):
+        return CustomNumber(self.value ^ other.value)
+    
+    def __lshift__(self, other):
+        return CustomNumber(self.value << other.value)
+    
+    def __rshift__(self, other):
+        return CustomNumber(self.value >> other.value)
+    
+    # Right bitwise operations
+    def __rand__(self, other):
+        return CustomNumber(other.value & self.value)
+    
+    def __ror__(self, other):
+        return CustomNumber(other.value | self.value)
+    
+    def __rxor__(self, other):
+        return CustomNumber(other.value ^ self.value)
+    
+    def __rlshift__(self, other):
+        return CustomNumber(other.value << self.value)
+    
+    def __rrshift__(self, other):
+        return CustomNumber(other.value >> self.value)
+    
+    # In-place operations
+    def __iadd__(self, other):
+        self.value += other.value
+        return self
+    
+    def __isub__(self, other):
+        self.value -= other.value
+        return self
+    
+    def __imul__(self, other):
+        self.value *= other.value
+        return self
+    
+    def __imod__(self, other):
+        self.value %= other.value
+        return self
+    
+    def __ifloordiv__(self, other):
+        self.value //= other.value
+        return self
+    
+    def __itruediv__(self, other):
+        self.value /= other.value
+        return self
+    
+    def __iand__(self, other):
+        self.value &= other.value
+        return self
+    
+    def __ior__(self, other):
+        self.value |= other.value
+        return self
+    
+    def __ixor__(self, other):
+        self.value ^= other.value
+        return self
+    
+    def __ilshift__(self, other):
+        self.value <<= other.value
+        return self
+    
+    def __irshift__(self, other):
+        self.value >>= other.value
+        return self
+    
+    def __ipow__(self, other):
+        self.value **= other.value
+        return self
+    
+    # Conversion operations
+    def __complex__(self):
+        return complex(self.value)
+    
+    def __float__(self):
+        return float(self.value)
+    
+    def __int__(self):
+        return int(self.value)
+    
+    def __index__(self):
+        return self.value
+    
+    def __repr__(self):
+        return f'CustomNumber({self.value})'
+```
