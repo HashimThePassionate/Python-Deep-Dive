@@ -739,6 +739,7 @@ alice  # Output: Person(name='Alice', age=30, occupation='Engineer')
 
 By defining `__repr__`, you can make your objects easier to work with during development and debugging, providing clear and informative representations of their state.
 
+---
 
 ### Understanding `__setattr__` Method in Python
 
