@@ -56,18 +56,17 @@ class Employee:
         self.hourly_rate = hourly_rate
 
 
-if __name__ == "__main__":
-    # Creating employee objects
-    employee1 = Employee(10000)
-    employee2 = Employee(50000, 20)
-    
-    # Calculating wages for each employee
-    wage1 = employee1.calculate_wage()
-    wage2 = employee2.calculate_wage()
-    
-    # Printing wages
-    print(wage1)
-    print(wage2)
-    
-    # Printing the total number of employees
-    Employee.print_number_of_employees()
+# Creating employee objects
+employee1 = Employee(10000)
+employee2 = Employee(50000, 20)
+
+# Calculating wages for each employee
+wage1 = employee1.calculate_wage()
+wage2 = employee2.calculate_wage()
+
+# Printing wages
+print(wage1)
+print(wage2)
+
+# Printing the total number of employees
+Employee.print_number_of_employees()
