@@ -68,7 +68,6 @@ print(wage2)
 
 4. **Main Block**:
     ```python
-    if __name__ == "__main__":
         employee1 = Employee(10000)
         employee2 = Employee(50000, 20)
         wage1 = employee1.calculate_wage()
