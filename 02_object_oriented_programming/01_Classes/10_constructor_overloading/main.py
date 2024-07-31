@@ -26,10 +26,10 @@ class Employee:
         self.hourly_rate = hourly_rate
 
 
-if __name__ == "__main__":
-    employee1 = Employee(10000)
-    employee2 = Employee(50000, 20)
-    wage1 = employee1.calculate_wage()
-    wage2 = employee2.calculate_wage()
-    print(wage1)
-    print(wage2)
+
+employee1 = Employee(10000)
+employee2 = Employee(50000, 20)
+wage1 = employee1.calculate_wage()
+wage2 = employee2.calculate_wage()
+print(wage1)
+print(wage2)
