@@ -11,17 +11,21 @@ class Browser:
         print(html)
 
     def __send_http_request(self, ip):
-        return "<html></html>"
+        if ip is not None:
+            return "<html></html>"
+        else:
+            return "No IP address or domain found"
 
     def __find_ip_address(self, address):
         if address:
             return address
         else:
-            return '127.0.0.1'
+            # return '127.0.0.1'
+            return None
 
-if __name__ == "__main__":
-    browser = Browser()
-    browser.navigate('127.0.0.0')
+browser = Browser()
+browser.navigate('127.0.0.0')
+browser.navigate(None)
 ```
 
 ### How It Reduces Coupling:
