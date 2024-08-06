@@ -9,7 +9,7 @@ Polymorphism, in the context of object-oriented programming, refers to the abili
     ```python
     class Shape:
         def area(self):
-            raise NotImplementedError("Subclasses must implement area method")
+            ...
     ```
     - The `Shape` class defines a common interface for all shapes by providing a method `area()`.
     - This method raises a `NotImplementedError`, indicating that subclasses must override it with their own implementations.
