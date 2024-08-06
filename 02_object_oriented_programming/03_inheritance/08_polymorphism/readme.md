@@ -3,6 +3,42 @@
 
 Polymorphism, in the context of object-oriented programming, refers to the ability of different classes to be treated as instances of a common superclass. In Python, polymorphism is achieved through inheritance and method overriding. Let's see how polymorphism is demonstrated in the provided code:
 
+### Complete Code:
+```python
+from math import pi
+
+class Shape:
+    def area(self):
+        ...
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.radius = r
+    def area(self):
+        return f"Area of Circle = {pi * self.radius ** 2}"
+
+
+class Rectangle(Shape):
+    def __init__(self, w, h):
+        self.width = w
+        self.height = h
+    def area(self):
+        return f"Area of Rectangle = {self.width * self.height}"
+
+class Triangle(Shape):
+    def __init__(self, b, h):
+        self.base = b
+        self.height = h
+    def area(self):
+        return f"Area of Triangle = {0.5 * self.base * self.height}"
+
+shapes = [Circle(2), Rectangle(2, 3), Triangle(4, 5)]
+
+for s in shapes:
+    print(s.area())
+```
+
+
 ### Polymorphism in Action:
 
 1. **Common Interface (`Shape` Class):**
