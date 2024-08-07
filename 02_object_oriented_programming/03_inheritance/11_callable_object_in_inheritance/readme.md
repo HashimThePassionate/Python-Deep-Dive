@@ -7,7 +7,8 @@ class Shape(ABC):
         self.name = name
 
     @abstractmethod
-    def area(self):)
+    def area(self):
+        pass
 
 
 class Circle(Shape):
