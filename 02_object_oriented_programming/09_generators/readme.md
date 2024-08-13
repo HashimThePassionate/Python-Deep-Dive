@@ -98,7 +98,30 @@ lines = parse_lines(lines)
 for parsed_line in lines:
     print(parsed_line)
 ```
+## Without Generator
+```python
+try:
+    huge_list = [0] * (10**10)  # This creates a list with 10 billion elements
+    print("Memory allocated successfully")
+    print("Memory used:", huge_list)
+except MemoryError as e:
+    print("MemoryError occurred:", e)
+```
+### With Generator
+```python
+def huge_generator(n):
+    for _ in range(n):
+        yield 0
 
+# Using the generator
+try:
+    # Instead of creating a large list, we iterate over the generator
+    for value in huge_generator(10**10):  # This would simulate a large list
+        value  # Just iterating through the values without storing them
+except MemoryError as e:
+    print("MemoryError occurred:", e)
+
+print("Finished without MemoryError!")
+```
 ### Summary
-
 Generators in Python are a powerful tool for creating iterators. They provide significant benefits in terms of memory efficiency and performance due to their lazy evaluation nature. By yielding values one at a time, they allow for processing of large or infinite data streams without the need for loading everything into memory, making them ideal for working with large datasets or streams of data.
