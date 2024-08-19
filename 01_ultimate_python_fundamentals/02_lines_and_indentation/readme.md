@@ -92,9 +92,6 @@ else:
 def greet(name):
     print(f"Hello, {name}!")  # Correct: 4 spaces for indentation
 
-# Incorrect: Mixing tabs and spaces
-def greet(name):
-    print(f"Hello, {name}!")  # This could cause issues
 ```
 
 ---
