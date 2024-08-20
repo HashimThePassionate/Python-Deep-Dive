@@ -63,8 +63,24 @@ if        import     in        is        lambda   None
 nonlocal  not        or        pass      raise    return
 True      try        while     with      yield
 ```
+## Common Keywords and Their Uses 📋
+
+| **Keyword**    | **Description**                                                   | **Code Example**                                                                                          |
+|----------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `False`, `True`| Data values from the data type Boolean                             | `False == (1 > 2)`<br>`True == (2 > 1)`                                                                    |
+| `and`, `or`, `not`| Logical operators:<br>- `(x and y)` → both x and y must be True<br>- `(x or y)` → either x or y must be True<br>- `(not x)` → x must be false | `x, y = True, False`<br>`(x or y) == True  # True`<br>`(x and y) == False  # True`<br>`(not y) == True  # True`|
+| `break`        | Ends loop prematurely                                             | `while(True):`<br>`   break  # no infinite loop`<br>`print("hello world")`                                 |
+| `continue`     | Finishes current loop iteration                                   | `while(True):`<br>`   continue`<br>`   print("43")  # dead code`                                           |
+| `class`, `def` | `class` defines a new class.<br>`def` defines a new function or method.| `class Beer:`<br>`   def __init__(self):`<br>`       self.content = 1.0`<br>`   def drink(self):`<br>`       self.content = 0.0`<br>`becks = Beer()`<br>`becks.drink()`<br>`# empty beer bottle`|
+| `if`, `elif`, `else` | Conditional program execution: program starts with `if`, tries `elif`, and ends with `else`.| `x = int(input("your val: "))`<br>`if x > 3:`<br>`   print("Big")`<br>`elif x == 3:`<br>`   print("Medium")`<br>`else:`<br>`   print("Small")`|
+| `for`, `while` | Looping constructs: `for` loop iterates over a sequence, `while` continues as long as the condition is true. | `for i in [0, 1, 2]:`<br>`   print(i)`<br>`j = 0`<br>`while j < 3:`<br>`   print(j)`<br>`   j += 1`         |
+| `in`           | Checks whether an element is in a sequence                        | `42 in [2, 39, 42]  # True`                                                                                |
+| `is`           | Checks whether two references point to the same object            | `y = x = 3`<br>`x is y  # True`<br>`[3] is [3]  # False`                                                   |
+| `None`         | Represents a null value or absence of value                       | `def f():`<br>`   x = 2`<br>`f() is None  # True`                                                          |
+| `lambda`       | Defines a small anonymous function                                | `(lambda x: x + 3)(3)  # returns 6`                                                                        |
+| `return`       | Ends the execution of a function and optionally returns a value   | `def incrementor(x):`<br>`   return x + 1`<br>`incrementor(4)  # returns 5`                                |
 
 ---
 
-This section provided an overview of **keywords** in Python, highlighting their importance and differences between Python v2 and v3. We also covered the addition of `async` and `await` in Python v3, which are crucial for asynchronous programming. Understanding keywords is crucial for writing syntactically correct and functional Python code. 🧠
+This section provided an overview of **keywords** in Python and their specific uses. Keywords are fundamental building blocks of Python syntax, and knowing them is key to mastering the language. 🚀
 
