@@ -182,6 +182,38 @@ result_not = not a  # 🚫 False
 print(result_and, result_or, result_not)
 ```
 
+Table for AND, OR, and NOT operator:
+
+### 1. AND Operator (`&&`)
+The AND operator returns `True` only if both operands are `True`.
+
+| A     | B     | A AND B |
+|-------|-------|---------|
+| False | False | False   |
+| False | True  | False   |
+| True  | False | False   |
+| True  | True  | True    |
+
+### 2. OR Operator (`||`)
+The OR operator returns `True` if at least one operand is `True`.
+
+| A     | B     | A OR B |
+|-------|-------|--------|
+| False | False | False  |
+| False | True  | True   |
+| True  | False | True   |
+| True  | True  | True   |
+
+### 3. NOT Operator (`!`)
+The NOT operator inverts the truth value of the operand.
+
+| A     | NOT A |
+|-------|-------|
+| False | True  |
+| True  | False |
+
+These tables summarize the behavior of the logical operators AND, OR, and NOT, showing how they respond to different truth values.
+
 ---
 
 ### 🔢 5. Bitwise Operators
