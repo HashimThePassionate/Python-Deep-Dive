@@ -320,19 +320,45 @@ print(identity_check, identity_check_same, identity_check_not)
 Operator precedence determines the order in which operations are evaluated.
 
 **Order of Precedence (Highest to Lowest):**
-1. **`**`** 🌟 (Exponent)
-2. **`~ + -`** ➕➖ (Unary operators)
-3. **`* / % //`** ✖️➗ (Multiplication, Division, Modulus, Floor Division)
-4. **`+ -`** ➕➖ (Addition, Subtraction)
-5. **`>> <<`** ➡️⬅️ (Right and Left Shifts)
-6. **`&`** 🔗 (Bitwise AND)
-7. **`^ |`** ⚡🚪 (Bitwise XOR, OR)
-8. **`<= < > >=`** 📏 (Comparisons)
-9. **`== !=`** ✅❌ (Equality)
-10. **`= += -= *= /= %= **= //=`** 📝 (Assignments)
-11. **`is is not`** 🆔 (Identity)
-12. **`in not in`** 🔍 (Membership)
-13. **`not or and`** 🚫🚪🤝 (Logical operations)
+1. **`( )`** 🟢 (Parentheses)
+2. **`**`** 🌟 (Exponent)
+3. **`~ + -`** ➕➖ (Unary operators)
+4. **`* / % //`** ✖️➗ (Multiplication, Division, Modulus, Floor Division)
+5. **`+ -`** ➕➖ (Addition, Subtraction)
+6. **`>> <<`** ➡️⬅️ (Right and Left Shifts)
+7. **`&`** 🔗 (Bitwise AND)
+8. **`^ |`** ⚡🚪 (Bitwise XOR, OR)
+9. **`<= < > >=`** 📏 (Comparisons)
+10. **`== !=`** ✅❌ (Equality)
+11. **`= += -= *= /= %= **= //=`** 📝 (Assignments)
+12. **`is is not`** 🆔 (Identity)
+13. **`in not in`** 🔍 (Membership)
+14. **`not or and`** 🚫🚪🤝 (Logical operations)
+
+
+Here's a comprehensive table listing all operators in Python according to their precedence, arranged from highest to lowest:
+
+### 📊 Operator Precedence Table
+
+| **Precedence Level** | **Operator**                  | **Description**                                             | **Example**                                                                                   |
+|-----------------------|-------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| 1                     | `()`                          | Parentheses                                                 | `(3 + 2) * 4` ➡️ Parentheses ensure addition first                                          |
+| 2                     | `**`                          | Exponentiation                                              | `2 ** 3` 🌟 Exponentiation (2 raised to 3)                                                   |
+| 3                     | `+x`, `-x`, `~x`              | Unary plus, minus, bitwise NOT                              | `-3` ➕ Unary minus; `~5` 🚫 Bitwise NOT                                                       |
+| 4                     | `*`, `/`, `%`, `//`           | Multiplication, Division, Modulus, Floor Division           | `10 * 2 / 5` ✖️ Multiplication first, then Division                                          |
+| 5                     | `+`, `-`                      | Addition, Subtraction                                       | `5 + 2 - 3` ➕ Addition, then Subtraction                                                     |
+| 6                     | `<<`, `>>`                    | Bitwise Left Shift, Right Shift                             | `8 >> 2` ➡️ Right shift by 2 (binary shifting)                                               |
+| 7                     | `&`                           | Bitwise AND                                                 | `5 & 3` 🔗 Bitwise AND                                                                       |
+| 8                     | `^`, `|`                      | Bitwise XOR, Bitwise OR                                     | `5 | 3` 🚪 Bitwise OR                                                                        |
+| 9                     | `<`, `<=`, `>`, `>=`          | Comparisons                                                 | `5 > 3` 📏 Greater than                                                                      |
+| 10                    | `==`, `!=`                    | Equality Operators                                          | `5 == 5` ✅ Equality check                                                                   |
+| 11                    | `is`, `is not`                | Identity Operators                                          | `a is b` 🆔 Checks if both references point to the same object                                |
+| 12                    | `in`, `not in`                | Membership Operators                                        | `'a' in 'apple'` 🔍 Membership check                                                        |
+| 13                    | `not`                         | Logical NOT                                                 | `not True` 🚫 Reverses truth value                                                           |
+| 14                    | `and`                         | Logical AND                                                 | `True and False` 🤝 Both must be True                                                        |
+| 15                    | `or`                          | Logical OR                                                  | `True or False` 🚪 At least one must be True                                                 |
+| 16                    | `=`, `+=`, `-=`, `*=`, `/=`, `%=` | Assignment Operators                                       | `a = 5`, `a += 3` 📝 Assignment and combined assignment                                     |
+
 
 **Detailed Example:**
 
