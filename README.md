@@ -26,7 +26,7 @@ This repository is organized into several sections, each focusing on different a
    - Understand the most popular design patterns used in Python to write efficient and reusable code.
    - Stay tuned for more updates as this section is currently being developed.
 
-### 6. [**06_python_projects_for_beginners** 🛠️](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/06_python_projects_for_beginners)
+### 6. [**06_python_projects_for_beginners** 🛠️ (In Progress)](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/06_python_projects_for_beginners)
    - Get hands-on with Python by building beginner-friendly projects.
    - This section includes fun and educational projects to help you apply your Python knowledge.
 
@@ -34,7 +34,7 @@ This repository is organized into several sections, each focusing on different a
    - Learn about the internals of CPython, the reference implementation of Python.
    - This section will be expanded further to cover more advanced topics about the Python interpreter.
 
-### 8. [**The-Zen-Of-Python** 🧘 (In Progress)](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/07_cpython)
+### 8. [**The-Zen-Of-Python** 🧘](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/07_cpython)
    - An insight into "The Zen of Python" by Tim Peters. Understand the philosophy behind Python programming.
    - Contains valuable principles that guide Python development.
 
