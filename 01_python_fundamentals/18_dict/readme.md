@@ -205,6 +205,15 @@ user_info = {'name': 'Alice', 'age': 30}
 
 # Unpacking the dictionary into the function call
 greet_user(**user_info)
+
+
+# Another Example
+def greet_user(**user_info):
+    return user_info
+
+user_info = {'name': 'Alice', 'age': 30}
+a = greet_user(**user_info)
+print(f'Unpacked dictionary: {a}')
 ```
 
 **Output:**
