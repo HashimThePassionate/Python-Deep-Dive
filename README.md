@@ -30,11 +30,11 @@ This repository is organized into several sections, each focusing on different a
    - Get hands-on with Python by building beginner-friendly projects.
    - This section includes fun and educational projects to help you apply your Python knowledge.
 
-### 7. [**07_cpython** 🔬 (In Progress)](Python-Deep-Dive/tree/main/07_cpython)
+### 7. [**07_cpython** 🔬 (In Progress)](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/07_cpython)
    - Learn about the internals of CPython, the reference implementation of Python.
    - This section will be expanded further to cover more advanced topics about the Python interpreter.
 
-### 8. [**The-Zen-Of-Python** 🧘](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/07_cpython)
+### 8. [**The-Zen-Of-Python** 🧘](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/The-Zen-Of-Python)
    - An insight into "The Zen of Python" by Tim Peters. Understand the philosophy behind Python programming.
    - Contains valuable principles that guide Python development.
 
