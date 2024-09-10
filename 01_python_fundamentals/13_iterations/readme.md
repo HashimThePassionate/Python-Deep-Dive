@@ -147,6 +147,128 @@ while x <= 5:
     print(x)  # No increment, so this loop runs forever
 ```
 
+### 🌟 Example: Nested Loop with User Input Control
+
+This program allows the user to print a series of multiplication tables. After each table, the user is asked if they want to continue. If they choose "yes," they can print another table; otherwise, the program will exit. Let's make it interactive and fun! 🎉
+
+```python
+print("🔢 Welcome to the Multiplication Table Generator! 🔢")
+
+while True:
+    # 🎯 Ask the user for which multiplication table they want
+    try:
+        number = int(input("\nEnter a number to print its multiplication table (e.g., 5): "))
+    except ValueError:
+        print("❌ Please enter a valid number!")
+        continue
+
+    print(f"\n📊 Multiplication Table for {number} 📊")
+    
+    # 🚀 Print the multiplication table for the given number
+    for i in range(1, 11):
+        print(f"{number} x {i} = {number * i}")
+    
+    # 🌟 Ask if the user wants to print another table
+    continue_choice = input("\n✨ Do you want to print another multiplication table? (yes/no): ").strip().lower()
+    
+    # 🚪 If the user types 'no', break the loop
+    if continue_choice != 'yes':
+        print("👋 Exiting the program. Thank you for using the Multiplication Table Generator! Goodbye! 😊")
+        break
+    else:
+        print("👍 Let's print another table! 🎉")
+```
+
+### 💡 Explanation:
+
+1. **Introduction Message**: A welcoming message with emojis sets a friendly tone for the user.
+2. **Input Validation**: The `try-except` block ensures that the user enters a valid number. If not, it shows an error message and prompts again without crashing the program.
+3. **Table Display with Emojis**: The multiplication table is presented with a heading and separators to make it more visually appealing.
+4. **User Interaction**: Clear and interactive prompts (`yes/no`) allow the user to control the flow. Additional messages guide the user and provide feedback, making the program feel more conversational.
+5. **Conclusion Message**: A friendly goodbye message wraps up the experience when the user chooses to exit.
+
+### 📝 Output Example:
+
+```plaintext
+🔢 Welcome to the Multiplication Table Generator! 🔢
+
+Enter a number to print its multiplication table (e.g., 5): 5
+
+📊 Multiplication Table for 5 📊
+5 x 1 = 5
+5 x 2 = 10
+...
+5 x 10 = 50
+
+✨ Do you want to print another multiplication table? (yes/no): yes
+👍 Let's print another table! 🎉
+```
+
+### 🌟 Example: Pyramid Pattern with User Input Control
+
+This program allows the user to print a pyramid pattern of a specified height. After printing, the user can choose to create another pyramid with a different height. Let's build some pyramids! 🏔️
+
+```python
+print("🏔️ Welcome to the Pyramid Pattern Generator! 🏔️")
+
+while True:
+    # 🎯 Ask the user for the height of the pyramid
+    try:
+        height = int(input("\nEnter the height of the pyramid (e.g., 5): "))
+    except ValueError:
+        print("❌ Please enter a valid number!")
+        continue
+
+    print(f"\n🎨 Here is your pyramid of height {height} 🎨\n")
+    
+    # 🏗️ Print the pyramid pattern
+    for i in range(1, height + 1):
+        # Print spaces for alignment
+        print(' ' * (height - i), end='')  
+        # Print stars to form the pyramid
+        print('⭐' * (2 * i - 1))
+
+    # 🌟 Ask if the user wants to print another pyramid
+    continue_choice = input("\n✨ Do you want to create another pyramid? (yes/no): ").strip().lower()
+    
+    # 🚪 If the user types 'no', break the loop
+    if continue_choice != 'yes':
+        print("👋 Exiting the program. Thank you for using the Pyramid Pattern Generator! Goodbye! 😊")
+        break
+    else:
+        print("👍 Let's build another pyramid! 🎉")
+```
+
+### 💡 Explanation:
+
+1. **Introduction Message**: A welcoming message with emojis introduces the Pyramid Pattern Generator.
+2. **Input Validation**: The `try-except` block ensures that the user enters a valid integer for the pyramid height. If not, it shows an error message and prompts the user again.
+3. **Pyramid Pattern Printing**:
+   - The outer `for` loop iterates from `1` to the specified height.
+   - Spaces (`' ' * (height - i)`) are printed to center-align the stars, creating a pyramid shape.
+   - Stars (`'⭐' * (2 * i - 1)`) are printed to form each row of the pyramid, with the number of stars increasing in each iteration.
+4. **User Interaction**: After printing the pyramid, the user is asked if they want to create another one. Depending on the user's choice, the loop continues or exits.
+5. **Conclusion Message**: A friendly goodbye message wraps up the program when the user decides to exit.
+
+### 📝 Output Example:
+
+```plaintext
+🏔️ Welcome to the Pyramid Pattern Generator! 🏔️
+
+Enter the height of the pyramid (e.g., 5): 5
+
+🎨 Here is your pyramid of height 5 🎨
+
+    ⭐
+   ⭐⭐⭐
+  ⭐⭐⭐⭐⭐
+ ⭐⭐⭐⭐⭐⭐⭐
+⭐⭐⭐⭐⭐⭐⭐⭐⭐
+
+✨ Do you want to create another pyramid? (yes/no): yes
+👍 Let's build another pyramid! 🎉
+```
+
 ## 📊 Conclusion
 
 Both `for` and `while` loops are essential tools in a Python programmer's toolkit. They help automate repetitive tasks, make the code cleaner, and handle dynamic data more efficiently. Understanding these concepts will enhance your ability to write more effective and efficient Python programs!
