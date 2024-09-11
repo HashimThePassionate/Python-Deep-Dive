@@ -182,3 +182,128 @@ else:
 7. **Vertical Tab (`\v`)** ↕️: Moves the cursor vertically to the next tab stop. Rarely used in modern text processing.
 
 ---
+
+## Problem 2.3 🚩
+
+### Match One of Many Characters 
+
+We need to create **regular expressions** (regex) that solve the following problems:
+
+1. **Match all common misspellings of the word "calendar."** 🗓️  
+   Allow either "a" or "e" in each vowel position. This helps us catch different variations of spelling without worrying about exact correctness.
+   
+2. **Match a single hexadecimal character.** 🔢  
+   This is a character that is part of the set 0-9 or A-F (case-insensitive).
+   
+3. **Match a single character that is not a hexadecimal character.** 🚫  
+   This is any character that is not in the set 0-9 or A-F.
+
+These problems introduce us to a powerful regex feature called **character classes**. Let's break it down step-by-step! 🚀
+
+### Solution 🛠️
+
+#### 1. Matching Common Misspellings of "Calendar" 🗓️
+
+To match different misspellings of the word "calendar," we can use this regex pattern:
+
+```python
+import re
+
+# Regex to match common misspellings of 'calendar'
+calendar_regex = r'c[ae]l[ae]nd[ae]r'
+
+# Example usage
+text = "calender, calandar, celendar, celandar"
+matches = re.findall(calendar_regex, text)
+print(matches)  # Output: ['calender', 'calandar', 'celendar', 'celandar']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `c[ae]l[ae]nd[ae]r`:
+    - `c` matches the letter "c." ✅
+    - `[ae]` matches either "a" or "e." 🅰️🅴
+    - `l` matches the letter "l." ✅
+    - `[ae]` again matches either "a" or "e." 🅰️🅴
+    - `nd` matches the sequence "nd." ✅
+    - `[ae]` matches either "a" or "e." 🅰️🅴
+    - `r` matches the letter "r." ✅
+- **Result**: This regex will match all variations of the word "calendar" where each vowel can be either "a" or "e."
+
+#### 2. Matching a Single Hexadecimal Character 🔢
+
+A hexadecimal character is any digit from 0 to 9 or any letter from A to F (case-insensitive). Here’s how you can match a single hexadecimal character:
+
+```python
+# Regex to match a single hexadecimal character
+hex_char_regex = r'[a-fA-F0-9]'
+
+# Example usage
+text = "1, A, g, 3F, Z"
+matches = re.findall(hex_char_regex, text)
+print(matches)  # Output: ['1', 'A', '3', 'F']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `[a-fA-F0-9]`:
+    - Matches any lowercase letter from "a" to "f." 🔤
+    - Matches any uppercase letter from "A" to "F." 🔠
+    - Matches any digit from "0" to "9." 🔟
+- **Result**: This regex will match any valid hexadecimal character (e.g., "1", "A", "3F").
+
+#### 3. Matching a Single Non-Hexadecimal Character 🚫
+
+To match a single character that is **not** a hexadecimal character, we use the `^` symbol to negate the class:
+
+```python
+# Regex to match a single non-hexadecimal character
+non_hex_char_regex = r'[^a-fA-F0-9]'
+
+# Example usage
+text = "1, A, g, 3F, Z, !"
+matches = re.findall(non_hex_char_regex, text)
+print(matches)  # Output: [',', ' ', ',', ' ', 'g', ',', ' ', ',', ' ', 'Z', ',', ' ', '!']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `[^a-fA-F0-9]`:
+    - `^` placed at the beginning **negates** the character class. 🚫
+    - Matches any character that is **not** a lowercase letter from "a" to "f," an uppercase letter from "A" to "F," or a digit from "0" to "9." ❌
+- **Result**: This regex will match any character that is not a hexadecimal character.
+
+### Explanation 🌟
+
+A **character class** is a group of characters you put inside square brackets `[]`. It matches **one single character** from the list inside the brackets. They are very useful when you want to allow multiple possible characters to match a single position.
+
+#### Key Points on Character Classes 📚
+
+- **Metacharacters** in character classes:
+  - `\` (Escape), `^` (Negation), `-` (Range), `]` (Closing Bracket). ⚠️
+- **Shorthand Classes**:
+  - `\d`: Matches any digit (`[0-9]`). 🔢
+  - `\D`: Matches any non-digit (`[^0-9]`). 🚫
+  - `\w`: Matches any word character (`[a-zA-Z0-9_]`). 🅰️🔤
+  - `\W`: Matches any non-word character (`[^a-zA-Z0-9_]`). 🚫
+  - `\s`: Matches any whitespace character (spaces, tabs, newlines). 🟦
+  - `\S`: Matches any non-whitespace character. 🚫🟦
+
+#### Case Insensitivity with Character Classes 🔠
+
+You can make a regex **case-insensitive** using the `(?i)` flag:
+
+```python
+# Case insensitive match for hexadecimal characters
+case_insensitive_hex_regex = r'(?i)[a-f0-9]'
+
+# Example usage
+text = "A, b, C, d, 3, F"
+matches = re.findall(case_insensitive_hex_regex, text)
+print(matches)  # Output: ['A', 'b', 'C', 'd', '3', 'F']
+```
+
+- **Explanation**: `(?i)` makes the regex case-insensitive. This means it will match both lowercase and uppercase characters without needing to specify both!
