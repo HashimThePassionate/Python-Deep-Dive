@@ -1,6 +1,6 @@
 # Matching Literal Text with Regular Expressions ✨
 
-## Problem 2.1 🚩
+## Problem 1.1 🚩
 
 We want to create a **regular expression** that matches the following sentence **exactly**:
 
@@ -105,7 +105,7 @@ This code will let you know if the provided text matches the exact pattern! 🎉
 
 ---
 
-## Problem 2.2 🚩
+## Problem 1.2 🚩
 ### Matching Nonprintable Characters with Regular Expressions ✨
 
 We want to create a **regular expression** to match a string containing these nonprintable ASCII control characters: 
@@ -183,7 +183,7 @@ else:
 
 ---
 
-## Problem 2.3 🚩
+## Problem 1.3 🚩
 
 ### Match One of Many Characters 
 
@@ -310,7 +310,7 @@ print(matches)  # Output: ['A', 'b', 'C', 'd', '3', 'F']
 
 ---
 
-## Problem Statement 2.4 🚩
+## Problem Statement 1.4 🚩
 ### Match Any Character
 
 We need to create **regular expressions** (regex) that solve the following problems:
@@ -409,7 +409,7 @@ The **dot `.` metacharacter** in regex is one of the most commonly used patterns
 
 ---
 
-## Problem 2.5 🚩
+## Problem 1.5 🚩
 ### Match Something at the Start and/or the End of a Line
 
 We need to create **regular expressions** (regex) to solve the following problems:
@@ -546,7 +546,7 @@ print(matche2)  # Output: no match
 
 ---
 
-## Problem 2.6 🚩
+## Problem 1.6 🚩
 ### Match Whole Words
 
 We need to create **regular expressions** (regex) that solve the following problems:
@@ -614,5 +614,166 @@ print(matches)  # Output: ['cat', 'cat']
 
 - **`\B` (Non-Word Boundary)**: Matches the position **not** at a word boundary, i.e., between two word characters or two non-word characters. It helps in matching **substrings within words**.
   - Example: `\Bcat\B` matches "cat" in "staccato" or "bobcat," but not in "My cat is brown."
+
+---
+
+## Problem 1.7 🚩
+
+### Unicode Code Points, Categories, Blocks, and Scripts 📝
+
+We need to use **regular expressions** (regex) to solve the following problems related to Unicode:
+
+1. **Find the trademark sign (™) by specifying its Unicode code point** rather than copying and pasting it.  
+2. **Match any character that belongs to the "Currency Symbol" Unicode category**.  
+3. **Match any character in the "Greek Extended" Unicode block**.  
+4. **Match any character that is part of the "Greek" script according to Unicode**.  
+5. **Match a grapheme (a base character with all its combining marks)**.  
+
+These tasks require an understanding of **Unicode properties** in regex, such as code points, categories, blocks, and scripts.
+
+### Explanation of `\p{}` in Regex 🌍
+
+The `\p{}` notation in regular expressions is used to match **Unicode properties**. It allows us to match characters based on their properties defined in the Unicode standard, such as **letters**, **numbers**, **symbols**, **scripts**, and **blocks**.
+
+- **Syntax**: `\p{Property}` where `Property` can be a **Unicode Category**, **Script**, or **Block**.
+- **Negated Version**: `\P{Property}` matches any character **not** in the specified property.
+
+Common Unicode properties include:
+- `\p{L}`: Matches any **letter** character.
+- `\p{N}`: Matches any **numeric** character.
+- `\p{Sc}`: Matches any **currency symbol**.
+- `\p{Greek}`: Matches any character in the **Greek script**.
+
+The `\p{}` syntax is supported in regex flavors that handle Unicode, such as Perl, PCRE, and Python (with the `regex` module).
+
+### Installing the `regex` Module 📥
+
+Python's built-in `re` module does not support the `\p{}` syntax for Unicode properties. To use Unicode properties like `\p{Sc}` (currency symbol) in Python, you need to install the `regex` module, which is an enhanced alternative to the `re` module.
+
+1. **Install the `regex` module**:
+   Use pip to install the `regex` module:
+   ```bash
+   pip install regex
+   ```
+
+2. **Update your code** to use `regex` instead of `re`.
+
+### Solution Table 🛠️
+
+| **Category**                        | **Description**                                                        | **Regex Pattern**              | **Python Example**                                                                                                                                   |
+|-------------------------------------|------------------------------------------------------------------------|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Unicode Code Point**              | Matches a specific Unicode character by its code point.                | `\u2122`                      | `r'\u2122'` for ™ (trademark)                                                                                                                       |
+| **Currency Symbol Category**        | Matches any currency symbol like $, €, ¥, etc.                         | `\p{Sc}`                      | `r'\p{Sc}'` (requires `regex` module)                                                                                                               |
+| **Greek Extended Block**            | Matches any character in the Greek Extended Unicode block.             | `[\u1F00-\u1FFF]`             | `r'[\u1F00-\u1FFF]'`                                                                                                                                |
+| **Greek Script**                    | Matches any character in the Greek script.                             | `[\u0370-\u03FF]`             | `r'[\u0370-\u03FF]'`                                                                                                                                |
+| **Grapheme (Base + Combining Marks)**| Matches a grapheme (base character and its combining marks).            | `(\P{M}\p{M}*)`               | `r'(\P{M}\p{M}*)'`                                                                                                                                  |
+
+### Detailed Examples and Explanations 🌟
+
+#### 1. Find the Trademark Sign (™) by Unicode Code Point ™
+
+To match the trademark sign using its **Unicode code point**, we use `\u2122` in regex.
+
+```python
+import re
+
+# Regex to find the trademark sign (™)
+regex_trademark = r'\u2122'
+
+text = "This is a trademark symbol ™ and here is another one: ™."
+matches = re.findall(regex_trademark, text)
+print(matches)  # Output: ['™', '™']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `\u2122`: Matches the trademark symbol using its Unicode code point `U+2122`. 🄂
+- **Result**: The regex finds all occurrences of the trademark symbol.
+
+#### 2. Match Any Character in the "Currency Symbol" Unicode Category 💲
+
+To match **any character in the "Currency Symbol" category**, we use `\p{Sc}` in regex with the `regex` module.
+
+```python
+import regex as re  # Use 'regex' module instead of 're'
+
+# Regex to match any currency symbol
+regex_currency = r'\p{Sc}'
+
+text = "The price is $100 or €85 or ¥1000."
+matches = re.findall(regex_currency, text)
+print(matches)  # Output: ['$', '€', '¥']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `\p{Sc}`: Matches any character in the "Currency Symbol" category. 💰
+- **Result**: The regex finds all currency symbols like `$`, `€`, and `¥`.
+
+#### 3. Match Any Character in the "Greek Extended" Unicode Block 🇬🇷
+
+To match **any character in the "Greek Extended" Unicode block**, we use `[\u1F00-\u1FFF]`.
+
+```python
+import re
+
+# Regex to match any character in the "Greek Extended" block
+regex_greek_extended = r'[\u1F00-\u1FFF]'
+
+text = "Greek letters: ἀ ἁ ἂ ἃ."
+matches = re.findall(regex_greek_extended, text)
+print(matches)  # Output: ['ἀ', 'ἁ', 'ἂ', 'ἃ']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `[\u1F00-\u1FFF]`: Matches any character in the "Greek Extended" block, which ranges from `U+1F00` to `U+1FFF`. 🏺
+- **Result**: The regex matches all characters in the "Greek Extended" block.
+
+#### 4. Match Any Character in the "Greek" Script 🇬🇷
+
+To match **any character in the "Greek" script**, we use `[\u0370-\u03FF]` in regex.
+
+```python
+import re
+
+# Regex to match any character in the "Greek" script
+regex_greek_script = r'[\u0370-\u03FF]'
+
+text = "Greek letters: Α, Β, Γ, Δ, ε, ζ."
+matches = re.findall(regex_greek_script, text)
+print(matches)  # Output: ['Α', 'Β', 'Γ', 'Δ', 'ε', 'ζ']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `[\u0370-\u03FF]`: Matches any character in the "Greek" script, covering code points from `U+0370` to `U+03FF`. 🏺
+- **Result**: The regex matches all characters that are part of the "Greek" script.
+
+#### 5. Match a Grapheme (Base Character with All Its Combining Marks) ✍️
+
+To match a **grapheme**, which is a base character along with all its combining marks, we can use `(\P{M}\p{M}*)`. This regex will match each grapheme cluster, but it will also match standalone characters (such as letters or spaces) individually.
+
+```python
+import regex as re  # Use 'regex' module
+
+# Regex to match a grapheme (base character + combining marks)
+regex_grapheme = r'(\P{M}\p{M}*)'
+
+text = "à is a grapheme."
+matches = re.findall(regex_grapheme, text)
+print(matches)  # Output: ['à', ' ', 'i', 's', ' ', 'a', ' ', 'g', 'r', 'a', 'p', 'h', 'e', 'm', 'e', '.']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `\P{M}`: Matches any character that is **not** a combining mark (e.g., base characters like 'a'). 🚫
+  - `\p{M}*`: Matches zero or more combining marks that follow. 🌟
+- **Result**: The regex matches graphemes (base character with its marks), but it also matches individual characters (spaces, punctuation, etc.) separately if they are not part of a grapheme.
 
 ---
