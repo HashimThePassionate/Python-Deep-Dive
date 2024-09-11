@@ -1648,5 +1648,110 @@ Matches without lookbehind: ['cat']
 - **`<b>(\w+)`**: Captures the word after `<b>`.
 - **`(?=</b>)`**: Ensures `</b>` is present after the word, but doesn't include it in the match.
 
+---
+
+## Problem 2.17 🚩
+### Match One of Two Alternatives Based on a Condition 🛠️
+
+Create a regular expression to match a **comma-delimited list** containing the words `one`, `two`, and `three`. Each word can appear any number of times and in any order, but **each word must appear at least once**.
+
+### Solution 🛠️
+
+To solve this, we use a combination of **capturing groups** and **conditional statements** in regex. This allows us to check if each word appears at least once.
+
+### Regex Pattern
+
+```regex
+\b(?:(?:(one)|(two)|(three))(?:,|\b)){3,}(?(1)|(?!))(?(2)|(?!))(?(3)|(?!))
+```
+
+#### Explanation:
+
+1. **`\b`**: Word boundary to ensure we match whole words.
+   
+2. **`(?:(one)|(two)|(three))`**: Matches **one**, **two**, or **three** and captures them in separate capturing groups:
+   - **`(one)`**: Capturing group 1.
+   - **`(two)`**: Capturing group 2.
+   - **`(three)`**: Capturing group 3.
+
+3. **`(?:,|\b)`**: Matches either a comma `,` or a word boundary `\b` to separate the words.
+
+4. **`{3,}`**: Ensures the group matches **at least 3 times** because there are three words that must each appear at least once.
+
+5. **`(?(1)|(?!))`**: Conditional statement to check if **capturing group 1** (i.e., `one`) has matched. If not, the regex fails with `(?!)` (a negative lookahead that always fails).
+
+6. **`(?(2)|(?!))`** and **`(?(3)|(?!))`**: Similar checks for **capturing group 2** (`two`) and **capturing group 3** (`three`), respectively.
+
+### Python Code Example 🐍
+
+Here’s how to implement it in Python:
+
+```python
+import re
+
+# Sample list of comma-separated words
+text = "one,two,three,one,two"
+
+# Regex pattern with conditionals to ensure each word appears at least once
+regex_pattern = r'\b(?:(?:(one)|(two)|(three))(?:,|\b)){3,}(?(1)|(?!))(?(2)|(?!))(?(3)|(?!))'
+
+# Test for matches
+match = re.match(regex_pattern, text)
+
+# Check if the pattern matched the text
+if match:
+    print("Valid match: All three words are present at least once.")
+else:
+    print("Invalid match: Not all three words are present.")
+```
+
+**Expected Output 📤**
+
+```plaintext
+Valid match: All three words are present at least once.
+```
+
+### Explanation 🌟
+
+1. **Word Matching with Alternation:** The regex uses `one|two|three` inside a non-capturing group `(?:...)` to match any of the three words.
+2. **Counting Matches with `{3,}`:** We use `{3,}` to ensure that the three words appear at least three times combined, but in any order.
+3. **Conditionals to Check Each Word Appears:** The conditionals `(?(1)|(?!))`, `(?(2)|(?!))`, and `(?(3)|(?!))` ensure each capturing group (corresponding to `one`, `two`, and `three`) has matched at least once.
+
+### Simpler Alternative for Languages Without Conditional Support 🔄
+
+If you're using a language like JavaScript or Ruby that doesn’t support conditionals in regex, you can use a simpler regex and write some extra code to check if all words are present:
+
+```regex
+\b(?:(one|two|three)(?:,|\b)){3,}
+```
+
+#### Python Code Example:
+
+```python
+import re
+
+# Sample list of comma-separated words
+text = "one,two,three,one,two"
+
+# Regex pattern without conditionals
+regex_pattern_simple = r'\b(?:(one|two|three)(?:,|\b)){3,}'
+
+# Test for matches
+matches = re.findall(regex_pattern_simple, text)
+
+# Check if all three words are present
+if set(matches) == {'one', 'two', 'three'}:
+    print("Valid match: All three words are present at least once.")
+else:
+    print("Invalid match: Not all three words are present.")
+```
+
+**Expected Output 📤**
+
+```plaintext
+Valid match: All three words are present at least once.
+```
+
+
 
 
