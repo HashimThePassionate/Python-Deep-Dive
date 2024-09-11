@@ -1463,8 +1463,91 @@ Lazy Matches: ['123', '456']
 - **Lazy Quantifiers** match as little as possible.
 - **Possessive Quantifiers** (which avoid all backtracking) are not supported in Python.
 
-### Conclusion 🌟
+---
 
-In Python, we can't completely avoid backtracking like in some other regex flavors. The best approach is to keep your regex patterns clear, simple, and specific to reduce the chances of unnecessary backtracking.
+## Problem 2.5 🚩
+### Prevent Runaway Repetition 🚫
+Sometimes, when using regex patterns that repeat (like `.*?`), the regex engine might take a very long time to match, or even crash, if the pattern can't be fully matched. This happens when it tries **all possible ways** to match the pattern, a situation known as **catastrophic backtracking**.
 
-Does this explanation help clarify things for you? 😊
+### Example of the Problem:
+
+Imagine we have this regex to match HTML content:
+
+```regex
+<.*?></html>
+```
+
+- This pattern matches anything until it finds `</html>`.
+- If the `</html>` tag is **missing** in the text, the `.*?` part keeps expanding, trying every possible match, which can cause serious performance problems.
+
+### Solution: Use Atomic Grouping to Prevent Backtracking 🛠️
+
+To avoid this problem, we can use **atomic grouping** to "lock" matches so that the regex engine doesn’t go back to try other possibilities if it fails later.
+
+#### What is Atomic Grouping?
+
+An **atomic group** `(? >...)` is like a “don’t look back” rule. Once the regex engine matches something inside an atomic group, it won't reconsider it even if it fails to match later parts.
+
+### How to Apply Atomic Grouping
+
+Instead of this problematic regex:
+
+```regex
+<.*?></html>
+```
+
+We use:
+
+```regex
+(?>.*?</body>)</html>
+```
+
+- Here, `(?>.*?</body>)` is an **atomic group**. It matches everything up to `</body>` and **won't backtrack** if the `</html>` is missing.
+
+### Python Code Example 🐍
+
+Let’s see how this works in Python:
+
+```python
+import re
+
+# Sample HTML text where the </html> tag is missing
+text = """
+<html>
+  <body>
+    Some content here.
+  </body>
+  <div>
+    More content without closing the HTML tag.
+"""
+
+# Regex with atomic grouping to prevent runaway repetition
+regex_atomic = r'(?>.*?</body>)</html>'
+
+# Try to find matches
+matches_atomic = re.findall(regex_atomic, text, re.DOTALL)
+print("Matches with Atomic Grouping:", matches_atomic)
+```
+
+**Expected Output 📤**
+
+```plaintext
+Matches with Atomic Grouping: []
+```
+
+### Explanation 🌟
+
+- **`(?>.*?</body>)`**: Matches everything up to `</body>`. If `</html>` isn’t found, it **doesn’t** go back to retry matching `.*?`. This prevents unnecessary backtracking.
+- **`</html>`**: This part tries to match `</html>` after `</body>`. If it isn’t there, the regex fails right away, avoiding performance issues.
+
+### Why Use Atomic Grouping?
+
+1. **Prevents Catastrophic Backtracking**: Stops the regex engine from wasting time trying all possible matches.
+2. **Improves Performance**: Makes the regex run faster and more efficiently.
+
+### Key Takeaway 🌟
+
+When you have repeating patterns that can cause excessive backtracking, use **atomic grouping** `(?>...)` to make your regex more efficient and safe from performance issues.
+
+---
+
