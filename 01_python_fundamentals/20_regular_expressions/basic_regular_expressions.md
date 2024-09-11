@@ -1383,3 +1383,88 @@ Matched Paragraphs: ['<p>\nThe very <em>first</em> task is to find the beginning
 
 
 ---
+
+## Problem 2.4 🚩
+### Eliminate Needless Backtracking 
+
+When writing regular expressions (regex), the pattern sometimes performs **unnecessary backtracking**, which can slow down matching. We want to make a regex more efficient by eliminating this backtracking.
+
+For example, consider these two regex patterns:
+
+1. **Greedy Quantifier:** `\b\d+\b`
+2. **Lazy Quantifier:** `\b\d+?\b`
+
+Both patterns are used to match integers (whole numbers). Given the same text, they both find the exact same matches, but both can backtrack unnecessarily, making the matching process slower.
+
+### Explanation 🌟
+
+#### What is Backtracking?
+
+When a regex engine tries to match a pattern, it sometimes tries many possibilities to find a match. If it doesn't find a match, it "backtracks" (goes back) to try different possibilities. This process is called **backtracking**.
+
+Backtracking can make a regex slow, especially if the pattern is complex or has overlapping options. We want to avoid unnecessary backtracking to make our regex faster and more efficient.
+
+#### Types of Quantifiers in Regex
+
+1. **Greedy Quantifiers (`+`, `*`, `{n,m}`):** Try to match as much text as possible.
+2. **Lazy Quantifiers (`+?`, `*?`, `{n,m}?`):** Try to match as little text as possible.
+3. **Possessive Quantifiers (`++`, `*+`, `{n,m}+`):** Match as much as possible **without** backtracking. These are not supported in Python.
+
+### How to Optimize Regex in Python
+
+Python does not support **possessive quantifiers** (which prevent backtracking completely). However, we can still optimize regex by:
+
+1. **Using Simple and Specific Patterns:** Make your regex as straightforward as possible.
+2. **Avoiding Overlapping Patterns:** Overlapping patterns force the regex engine to try many combinations, leading to more backtracking.
+
+### Example: Matching Integers Efficiently 📝
+
+Let’s look at matching integers (whole numbers) surrounded by word boundaries using different quantifiers:
+
+1. **Greedy Pattern (`\b\d+\b`):** Matches as many digits as possible.
+2. **Lazy Pattern (`\b\d+?\b`):** Matches as few digits as possible, then expands if needed.
+
+Both patterns work, but both can still backtrack in Python.
+
+#### Python Code Example
+
+```python
+import re
+
+# Example text with numbers and letters
+text = "123abc 456"
+
+# Greedy quantifier example
+regex_greedy = r'\b\d+\b'
+matches_greedy = re.findall(regex_greedy, text)
+print("Greedy Matches:", matches_greedy)
+
+# Lazy quantifier example
+regex_lazy = r'\b\d+?\b'
+matches_lazy = re.findall(regex_lazy, text)
+print("Lazy Matches:", matches_lazy)
+```
+
+**Expected Output 📤**
+
+```plaintext
+Greedy Matches: ['123', '456']
+Lazy Matches: ['123', '456']
+```
+
+#### Explanation of Output
+
+- **Greedy Pattern (`\b\d+\b`):** Matches '123' and '456' by trying to match as many digits as possible and stops at word boundaries (`\b`).
+- **Lazy Pattern (`\b\d+?\b`):** Also matches '123' and '456', but it starts by matching the smallest possible number of digits and expands as needed.
+
+### Key Takeaways
+
+- **Greedy Quantifiers** match as much as possible.
+- **Lazy Quantifiers** match as little as possible.
+- **Possessive Quantifiers** (which avoid all backtracking) are not supported in Python.
+
+### Conclusion 🌟
+
+In Python, we can't completely avoid backtracking like in some other regex flavors. The best approach is to keep your regex patterns clear, simple, and specific to reduce the chances of unnecessary backtracking.
+
+Does this explanation help clarify things for you? 😊
