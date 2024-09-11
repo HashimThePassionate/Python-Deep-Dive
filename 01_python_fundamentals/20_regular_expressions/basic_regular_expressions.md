@@ -1754,7 +1754,7 @@ Valid match: All three words are present at least once.
 ---
 
 
-## Problem 2.8🚩
+## Problem 2.8 🚩
 ### Add Comments to a Regular Expression 📝
 
 We have a regular expression `\d{4}-\d{2}-\d{2}` that matches a date in `yyyy-mm-dd` format. We want to add comments to this regex to explain what each part does.
@@ -1836,3 +1836,72 @@ print("Matches with inline comments:", matches)
 ```plaintext
 Matches with inline comments: ['2024-08-19']
 ```
+---
+
+## Problem 2.9 🚩
+
+### Insert Literal Text into the Replacement Text ✍️
+
+Perform a search-and-replace where any regex match is replaced **literally** with the text `$%\*$1\1`.
+
+### Solution 🛠️
+
+To achieve this in Python, we need to understand how **special characters** work in replacement text. In Python, special characters like `$` and `\` are used for backreferences and need to be **escaped** properly to treat them as **literal characters**.
+
+### Correct Replacement Text for Python
+
+In Python, to replace a regex match with the literal text `$%\*$1\1`, the replacement string should be:
+
+```python
+replacement_text = r"$%\*$1\\1"
+```
+
+Here's the breakdown:
+- **`$%`**: `$` and `%` are literal characters.
+- **`\*`**: The backslash `\` is used to escape the `*`, making it literal.
+- **`$1`**: A **backreference** to the first captured group in regex.
+- **`\\1`**: The backslash `\` needs to be escaped to remain literal, and `\1` is another backreference to the first captured group.
+
+### Python Code Example 🐍
+
+Below is the Python code to perform the search-and-replace:
+
+```python
+import re
+
+# Sample text to perform search-and-replace
+text = "This is a test: 123-456."
+
+# Regex pattern to match any three-digit number
+regex_pattern = r"\d{3}"
+
+# Replacement text: insert literal text including backreferences
+replacement_text = r"$%\*$1\\1"
+
+# Perform search-and-replace
+# `re.sub` is used to substitute matches with replacement text
+result = re.sub(regex_pattern, replacement_text, text)
+
+print("Result after replacement:", result)
+```
+
+### Expected Output 📤
+
+```plaintext
+Result after replacement: This is a test: $%*$1\1123-$%*$1\1456.
+```
+
+### Explanation 🌟
+
+1. **Regex Pattern (`\d{3}`):** Matches any three-digit number.
+2. **Replacement Text (`$%\*$1\\1`):** Replaces the matched text with the literal characters:
+   - **`$%`**: Just as they are.
+   - **`\*`**: An asterisk `*` after escaping the backslash.
+   - **`$1`**: Inserts the matched text (first capturing group) back into the result.
+   - **`\\1`**: Adds a literal backslash followed by the matched text (first capturing group).
+
+### Key Points
+
+- **Backslashes (`\`) need to be escaped** with another backslash in the replacement string if they are meant to be literal.
+- **Dollar signs (`$`) have no special meaning in Python replacement strings** but need escaping in other languages (e.g., Java).
+
