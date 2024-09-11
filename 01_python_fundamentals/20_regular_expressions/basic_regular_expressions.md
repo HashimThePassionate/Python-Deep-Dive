@@ -999,7 +999,7 @@ This way, we can use powerful grouping and capturing techniques to enhance our r
 
 --- 
 
-## Problem 2.0🚩
+## Problem 2.0 🚩
 ### Match Previously Matched Text Again
 
 We want to create a regular expression that matches **"magical" dates** in the format `yyyy-mm-dd`. A date is considered **magical** if the last two digits of the year (the year minus the century), the month, and the day are all the same numbers. For example, **2008-08-08** is a magical date because **08** is the same for the year, month, and day. Assume all dates are valid; we only need to identify these magical dates.
@@ -1065,3 +1065,93 @@ Magical Dates: ['08', '11']
    - **Result**: This is a magical date! ✅
 
 ---
+
+## Problem 2.1 🚩
+### Capture and Name Parts of the Match
+
+1. **Match any date** in the `yyyy-mm-dd` format and capture the year, month, and day with **descriptive names**. This helps us easily work with these separate values in code.
+
+2. **Match "magical" dates** in the `yyyy-mm-dd` format. A date is "magical" if the year minus the century, the month, and the day of the month are all the same numbers. For example, `2008-08-08` is a magical date. Capture the magical number (e.g., `08`) and label it as `"magic"`.
+
+#### Explanation of `(?P<name>...)` and `(?P=name)` in Regular Expressions 🌟
+
+The `(?P<name>...)` syntax in Python regular expressions allows you to create **named capturing groups**. Named capturing groups are similar to regular capturing groups, but they are easier to reference and make the code more readable and maintainable.
+
+#### Syntax Details:
+
+1. **Named Capturing Group: `(?P<name>...)`**  
+   - This syntax creates a **named group** and captures the text matched by the regex inside the parentheses `(...)`.
+   - `?P<name>` specifies the **name** of the group.
+   - `name` must be a valid Python identifier (letters, digits, and underscores but no spaces).
+   - The `...` part is the regex pattern that the group will match.
+   - **Example**: `(?P<year>\d{4})` captures a four-digit number as a "year."
+
+2. **Named Backreference: `(?P=name)`**  
+   - This syntax allows you to **reference a previously captured named group** within the same regex.
+   - It ensures that the text matches exactly what was previously captured by the named group `name`.
+   - **Example**: `(?P=magic)` references the previously captured text named `"magic"` to ensure it matches again later in the pattern.
+
+### Solution 🛠️
+
+We can use **named capturing groups** in Python to make our regular expressions more readable and easier to maintain.
+
+### 1. Named Capture for Dates 📅
+
+```python
+import re
+
+# Regex to match dates and capture year, month, and day
+regex_named_date = r'\b(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})\b'
+
+# Example text containing dates
+text_dates = "Here are some dates: 2024-09-12, 1999-12-25, 2008-08-08."
+
+# Find all matches and extract named groups
+matches_dates = re.finditer(regex_named_date, text_dates)
+for match in matches_dates:
+    print(f"Year: {match.group('year')}, Month: {match.group('month')}, Day: {match.group('day')}")
+```
+### Output 📤
+Running the code will output:
+```plaintext
+Year: 2024, Month: 09, Day: 12
+Year: 1999, Month: 12, Day: 25
+Year: 2008, Month: 08, Day: 08
+```
+
+### 2. Named Capture for Magical Dates ✨
+
+```python
+# Regex to match "magical" dates and capture the magical number
+regex_magical_named = r'\b\d{2}(?P<magic>\d{2})-(?P=magic)-(?P=magic)\b'
+
+# Example text containing dates
+text_magical_dates = "Some magical dates are: 2008-08-08, 2024-09-12, and 2011-11-11."
+
+# Find all matches and extract the "magic" number
+matches_magical = re.finditer(regex_magical_named, text_magical_dates)
+for match in matches_magical:
+    print(f"Magical Number: {match.group('magic')}")
+```
+### Output 📤
+Running the code will output:
+```plaintext
+Magical Number: 08
+Magical Number: 11
+```
+### Explanation 🌟
+
+1. **Named Capture for Dates**:
+   - **Pattern**: `r'\b(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})\b'`
+     - `(?P<year>\d{4})` captures the **year** with the name `"year"`.
+     - `(?P<month>\d{2})` captures the **month** with the name `"month"`.
+     - `(?P<day>\d{2})` captures the **day** with the name `"day"`.
+   - **Usage**: Named groups make it easy to access parts of the match using descriptive names (`match.group('year')`, `match.group('month')`, etc.).
+
+2. **Named Capture for Magical Dates**:
+   - **Pattern**: `r'\b\d{2}(?P<magic>\d{2})-(?P=magic)-(?P=magic)\b'`
+     - `(?P<magic>\d{2})` captures the **magical number** with the name `"magic"`.
+     - `(?P=magic)` is a **named backreference** that ensures the **month** and **day** match the `"magic"` number.
+
+--- 
+
