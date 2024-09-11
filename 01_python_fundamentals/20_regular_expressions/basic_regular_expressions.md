@@ -999,3 +999,69 @@ This way, we can use powerful grouping and capturing techniques to enhance our r
 
 --- 
 
+## Problem 2.0🚩
+### Match Previously Matched Text Again
+
+We want to create a regular expression that matches **"magical" dates** in the format `yyyy-mm-dd`. A date is considered **magical** if the last two digits of the year (the year minus the century), the month, and the day are all the same numbers. For example, **2008-08-08** is a magical date because **08** is the same for the year, month, and day. Assume all dates are valid; we only need to identify these magical dates.
+
+### Solution 🛠️
+
+To solve this problem, we use the concept of **capturing groups** and **backreferences** in regular expressions.
+
+```python
+import re
+
+# Regex to match "magical" dates in yyyy-mm-dd format
+regex_magical_date = r'\b\d\d(\d\d)-\1-\1\b'
+
+# Example text containing dates
+text_dates = "Here are some dates: 2008-08-08, 1999-12-12, 2024-09-12, and 2011-11-11."
+
+# Find all magical dates
+matches_magical_dates = re.findall(regex_magical_date, text_dates)
+print("Magical Dates:", matches_magical_dates)
+```
+
+### Explanation 🌟
+
+- **Regex Pattern**: `\b\d\d(\d\d)-\1-\1\b`
+  - `\b` matches a **word boundary** to ensure the date stands alone.
+  - `\d\d` matches any two digits. This represents the first two digits of the year (e.g., **20** in **2008**).
+  - `(\d\d)` is a **capturing group** that matches the last two digits of the year (e.g., **08** in **2008**). The `()` makes it a capturing group.
+  - `\1` is a **backreference** that matches the same text as previously matched by the **first capturing group** `(\d\d)`. This ensures the **month** matches the last two digits of the year.
+  - Another `\1` ensures that the **day** also matches the last two digits of the year.
+  - `\b` again matches a **word boundary**.
+
+### Output 📤
+
+When you run the code, it will output:
+
+```plaintext
+Magical Dates: ['08', '11']
+```
+
+### How It Works 🧙‍♂️
+
+1. **2008-08-08**:
+   - **Year**: `2008` ➔ Capturing group captures `08`.
+   - **Month**: `08` ➔ Matches backreference `\1` (`08`).
+   - **Day**: `08` ➔ Matches backreference `\1` (`08`).
+   - **Result**: This is a magical date! ✅
+
+2. **1999-12-12**:
+   - **Year**: `1999` ➔ Capturing group captures `99`.
+   - **Month**: `12` ➔ Does not match `99`.
+   - **Result**: Not a magical date. ❌
+
+3. **2024-09-12**:
+   - **Year**: `2024` ➔ Capturing group captures `24`.
+   - **Month**: `09` ➔ Does not match `24`.
+   - **Result**: Not a magical date. ❌
+
+4. **2011-11-11**:
+   - **Year**: `2011` ➔ Capturing group captures `11`.
+   - **Month**: `11` ➔ Matches backreference `\1` (`11`).
+   - **Day**: `11` ➔ Matches backreference `\1` (`11`).
+   - **Result**: This is a magical date! ✅
+
+---
