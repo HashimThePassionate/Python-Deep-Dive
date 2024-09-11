@@ -850,4 +850,152 @@ print(matches)  # Output: ['Muhammad', 'Hashim', 'Ali', 'Muhammad']
 
 ---
 
+Here's the complete example with all sections combined in the README format, explaining regex grouping, capturing, non-capturing groups, and everything needed to understand the concepts:
+
+---
+
+## Problem 2.9 🚩
+### Group and Capture Parts of the Match
+
+We need to create **regular expressions** (regex) that solve the following problems:
+
+1. Improve the regex for matching "Muhammad," "Hashim," or "Ali" by ensuring that the match is a **whole word**. Use grouping to apply **one pair** of word boundaries for the whole regex, instead of a pair for each alternative.
+   
+2. Create a regex to match any date in the format `yyyy-mm-dd` and separately capture the **year**, **month**, and **day** for easy processing.
+
+These problems help us understand how to **group** and **capture** specific parts of the match using regex in Python. Let's explore each solution in detail with examples! 🚀
+
+### Solution 🛠️
+
+#### 1. Matching Whole Words with Grouping 📝
+
+To match whole words like "Muhammad," "Hashim," or "Ali," we use **grouping** with parentheses `()` to apply a **single pair** of word boundaries around the entire group:
+
+```python
+import re
+
+# Regex to match whole words "Muhammad", "Hashim", or "Ali" using grouping
+regex_names = r'\b(Muhammad|Hashim|Ali)\b'
+
+# Example text
+text = "Muhammad, Hashim, and Ali went to Muhammad's house."
+
+# Find all matches
+matches = re.findall(regex_names, text)
+print(matches)  # Output: ['Muhammad', 'Hashim', 'Ali', 'Muhammad']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `\b`: Word boundary to ensure the match starts at the beginning of a word.
+  - `(Muhammad|Hashim|Ali)`: **Grouping** using parentheses `()` to match "Muhammad," "Hashim," or "Ali."
+  - `\b`: Word boundary to ensure the match ends at the end of a word.
+- **Result**: This regex finds all whole word matches of "Muhammad," "Hashim," or "Ali" in the text.
+
+This regex solution finds matches at the word boundaries, ensuring we only capture whole words and not partial matches within other words or text.
+
+#### 2. Capturing Groups for Dates in `yyyy-mm-dd` Format 📅
+
+To match a date in the `yyyy-mm-dd` format and capture the **year**, **month**, and **day** separately, we use **capturing groups** with parentheses `()`:
+
+```python
+import re
+
+# Regex to match and capture date parts in yyyy-mm-dd format
+regex_date = r'\b(\d{4})-(\d{2})-(\d{2})\b'
+
+# Example text with today's date
+text = "The event is scheduled for 2024-09-12."
+
+# Find all matches with captured groups
+matches = re.findall(regex_date, text)
+print(matches)  # Output: [('2024', '09', '12')]
+
+# Extracting year, month, and day from the first match
+if matches:
+    year, month, day = matches[0]
+    print(f"Year: {year}, Month: {month}, Day: {day}")
+    # Output: Year: 2024, Month: 09, Day: 12
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `\b`: Word boundary to ensure the match starts at the beginning of a word.
+  - `(\d{4})`: **Capturing group** for **year**, matches exactly 4 digits.
+  - `-`: Matches the hyphen `-` separating year, month, and day.
+  - `(\d{2})`: **Capturing group** for **month**, matches exactly 2 digits.
+  - `-`: Matches the hyphen `-`.
+  - `(\d{2})`: **Capturing group** for **day**, matches exactly 2 digits.
+  - `\b`: Word boundary to ensure the match ends at the end of a word.
+- **Result**: This regex captures the **year**, **month**, and **day** separately when a date in `yyyy-mm-dd` format is found.
+
+#### Complete Example 🧩
+
+Combining both regex examples into a complete program:
+
+```python
+import re
+
+# Example 1: Matching Whole Words "Muhammad", "Hashim", or "Ali"
+regex_names = r'\b(Muhammad|Hashim|Ali)\b'
+text_names = "Muhammad, Hashim, and Ali went to Muhammad's house."
+
+# Find all matches
+matches_names = re.findall(regex_names, text_names)
+print("Matching Names:", matches_names)  # Output: ['Muhammad', 'Hashim', 'Ali', 'Muhammad']
+
+# Example 2: Matching and Capturing Dates in yyyy-mm-dd Format
+regex_date = r'\b(\d{4})-(\d{2})-(\d{2})\b'
+text_date = "The event is scheduled for 2024-09-12."
+
+# Find all matches with captured groups
+matches_date = re.findall(regex_date, text_date)
+print("Matching Dates:", matches_date)  # Output: [('2024', '09', '12')]
+
+# Extracting year, month, and day from the first match
+if matches_date:
+    year, month, day = matches_date[0]
+    print(f"Year: {year}, Month: {month}, Day: {day}")
+    # Output: Year: 2024, Month: 09, Day: 12
+```
+
+### Explanation 🌟
+
+#### Key Points About Grouping and Capturing 📚
+
+- **Grouping** `()`:
+  - Parentheses `()` are used for **grouping** in regex. They allow you to apply an operator to the group or capture matched text.
+  - Grouping can also **reduce redundancy** by applying a common condition to multiple options (e.g., word boundaries around multiple names).
+  
+- **Capturing Groups**:
+  - When you use parentheses `()` in regex, they also **capture** the matched text. This is helpful for extracting specific parts of a match, such as dates in different formats.
+  - Capturing groups are **numbered** from left to right based on the order of the opening parentheses.
+
+#### Non-Capturing Groups `(?:...)` 🔍
+
+- **Non-Capturing Groups**:
+  - If you only want to **group** but not **capture**, you can use `(?:...)`. This prevents unnecessary captures and helps maintain the correct numbering of capturing groups.
+
+```python
+# Example of non-capturing group for matching "Muhammad", "Hashim", or "Ali"
+regex_names_non_capture = r'\b(?:Muhammad|Hashim|Ali)\b'
+regex_date = r'\b(\d{4})-(\d{2})-(\d{2})\b'
+regex_date_without_capture = r'\b(?:\d{4})-(?:\d{2})-(?:\d{2})\b'
+# Example text with today's date
+text = "The event is scheduled for 2024-09-12."
+
+# Find all matches with captured groups
+matches = re.findall(regex_date, text)
+print(matches)  # Output: [('2024', '09', '12')]
+matches = re.findall(regex_date_without_capture, text)
+print(matches)  # Output: ['2024-09-12']
+```
+
+- The use of `?:` inside the parentheses creates a **non-capturing group**, which groups the alternatives without capturing them.
+
+This way, we can use powerful grouping and capturing techniques to enhance our regex patterns for more flexible and precise text matching in Python.
+
+--- 
 
