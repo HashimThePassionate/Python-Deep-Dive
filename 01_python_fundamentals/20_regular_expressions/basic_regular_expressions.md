@@ -1905,3 +1905,64 @@ Result after replacement: This is a test: $%*$1\1123-$%*$1\1456.
 - **Backslashes (`\`) need to be escaped** with another backslash in the replacement string if they are meant to be literal.
 - **Dollar signs (`$`) have no special meaning in Python replacement strings** but need escaping in other languages (e.g., Java).
 
+---
+
+
+## Problem 2.9 🚩
+### Insert the Whole Regex Match into Replacement Text ✍️
+
+Insert the entire match of a regex back into the replacement text to modify or wrap it with additional text. For example, if a regex matches some text, you might want to wrap it with an HTML `<a>` tag.
+
+### Solution for Python 🛠️
+
+In Python, to insert the **entire regex match** back into the replacement text, you use the **zeroth capturing group**: `\g<0>`. This group represents the entire match.
+
+### Python Replacement Example
+
+Suppose you want to wrap any matched text with an `<a>` HTML tag. Here is how you can achieve it:
+
+#### Regex Replacement Syntax for Python
+
+```python
+import re
+
+# Sample text where we want to wrap matches in <a> tags
+text = "Visit example.com for more info."
+
+# Regex pattern to match words (simple example)
+regex_pattern = r"\b\w+\b"
+
+# Replacement text: wrap the entire match (group 0) with an <a> tag
+replacement_text = r'<a href="\g<0>">\g<0></a>'
+
+# Perform search-and-replace
+result = re.sub(regex_pattern, replacement_text, text)
+
+print("Result after replacement:", result)
+```
+
+### Explanation 🌟
+
+1. **Regex Pattern (`\b\w+\b`)**:
+   - Matches any word (sequence of word characters) in the text.
+
+2. **Replacement Text (`<a href="\g<0>">\g<0></a>`)**:
+   - **`\g<0>`**: Inserts the entire matched text. Python uses the syntax `\g<0>` to refer to the entire match.
+   - The replacement text wraps the matched text in an `<a>` tag with the match as both the `href` attribute and the link text.
+
+### Expected Output 📤
+
+```plaintext
+Result after replacement: <a href="Visit">Visit</a> <a href="example">example</a>.<a href="com">com</a> <a href="for">for</a> <a href="more">more</a> <a href="info">info</a>.
+```
+
+### Discussion
+
+- **Python Replacement Syntax (`\g<0>`)**: Python uses named capturing syntax `\g<0>` to reference the entire match because it doesn’t support `\0` directly.
+- **Other Languages**:
+  - In **PHP** and **Ruby**, different escape rules apply, like `\0` or `\&` for the entire match.
+  - In **Perl**, `$&` is used, but it has performance penalties.
+
+### Key Takeaway 🌟
+
+- Using `\g<0>` in Python replacement text allows you to insert the entire regex match, making it easy to wrap or modify matches without additional capturing groups.
