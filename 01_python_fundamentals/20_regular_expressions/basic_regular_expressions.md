@@ -1650,7 +1650,7 @@ Matches without lookbehind: ['cat']
 
 ---
 
-## Problem 2.17 🚩
+## Problem 2.7 🚩
 ### Match One of Two Alternatives Based on a Condition 🛠️
 
 Create a regular expression to match a **comma-delimited list** containing the words `one`, `two`, and `three`. Each word can appear any number of times and in any order, but **each word must appear at least once**.
@@ -1751,7 +1751,88 @@ else:
 ```plaintext
 Valid match: All three words are present at least once.
 ```
+---
 
 
+## Problem 2.8🚩
+### Add Comments to a Regular Expression 📝
 
+We have a regular expression `\d{4}-\d{2}-\d{2}` that matches a date in `yyyy-mm-dd` format. We want to add comments to this regex to explain what each part does.
 
+### Solution 🛠️
+
+To make the regex more understandable, we can add comments directly inside the regex using **free-spacing mode**. This mode allows us to ignore whitespace and add comments for better readability.
+
+### Free-Spacing Mode in Python
+
+In Python, you can enable **free-spacing mode** using `re.VERBOSE`. This allows you to add whitespace and comments inside the regex for clarity.
+
+### Commented Regular Expression
+
+Here’s the regular expression with comments:
+
+```python
+import re
+
+# Regular expression with comments using free-spacing mode
+regex_pattern = r'''
+    \d{4}  # Year (four digits)
+    -      # Separator (hyphen)
+    \d{2}  # Month (two digits)
+    -      # Separator (hyphen)
+    \d{2}  # Day (two digits)
+'''
+
+# Sample text
+text = "The date is 2024-08-19."
+
+# Finding matches with re.VERBOSE to allow comments and spaces
+matches = re.findall(regex_pattern, text, re.VERBOSE)
+print("Matches:", matches)
+```
+
+### Explanation 🌟
+
+1. **`\d{4}`**: Matches **four digits** representing the year.
+2. **`-`**: Matches the **hyphen** separator.
+3. **`\d{2}`**: Matches **two digits** representing the month.
+4. **`-`**: Matches another **hyphen** separator.
+5. **`\d{2}`**: Matches **two digits** representing the day.
+
+### Expected Output 📤
+
+```plaintext
+Matches: ['2024-08-19']
+```
+
+### Discussion on Free-Spacing Mode
+
+- **Free-spacing mode** allows you to use spaces and comments for better readability.
+- **Comments** start with a `#` and run to the end of the line.
+- **Whitespace** (spaces, tabs, and line breaks) outside character classes is ignored.
+
+### Alternative: Using Inline Comments `(?#...)`
+
+If you cannot or prefer not to use free-spacing mode, you can use **inline comments** with the syntax `(?#...)`:
+
+#### Example with Inline Comments
+
+```python
+import re
+
+# Regular expression with inline comments
+regex_pattern = r'(?#Year)\d{4}-(?#Separator)\d{2}-(?#Day)\d{2}'
+
+# Sample text
+text = "The date is 2024-08-19."
+
+# Finding matches without re.VERBOSE
+matches = re.findall(regex_pattern, text)
+print("Matches with inline comments:", matches)
+```
+
+### Expected Output 📤
+
+```plaintext
+Matches with inline comments: ['2024-08-19']
+```
