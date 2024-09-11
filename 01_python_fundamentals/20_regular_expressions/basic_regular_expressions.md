@@ -1156,7 +1156,7 @@ Magical Number: 11
 --- 
 
 
-## Problem 2.12 🚩
+## Problem 2.2 🚩
 ### Repeating Parts of a Regex a Certain Number of Times 🔄
 
 Create regular expressions in Python to match these types of numbers:
@@ -1314,5 +1314,72 @@ Floating-Point Matches: ['0.5', '1.23e10', '.75']
 2. **Hexadecimal Number**: Matches 1 to 8 digits in hexadecimal format.
 3. **Hexadecimal Number with 'h' Suffix**: Same as above but may end with 'h'.
 4. **Floating-Point Number**: Matches numbers with decimals and optional exponents.
+
+---
+
+## Problem 2.3 🚩
+### Choose Minimal or Maximal Repetition 🔄
+
+Match a pair of `<p>` and `</p>` XHTML tags and the text between them. The text between the tags may contain other XHTML tags.
+
+### Explanation 🌟
+
+Regular expressions can be **greedy** or **lazy** when matching patterns. 
+
+- **Greedy Quantifiers** (like `*`, `+`, `{n,m}`) try to match as much as possible.
+- **Lazy Quantifiers** (like `*?`, `+?`, `{n,m}?`) match as little as possible.
+
+To correctly match a pair of `<p>` and `</p>` tags with everything between them (including other tags), we need a **lazy** quantifier to ensure it stops at the first `</p>` after `<p>`.
+
+### Solution 🛠️
+
+#### Correct Regex to Match Text Between `<p>` and `</p>` Tags 📝
+
+**Regex Pattern**: `<p>.*?</p>`
+
+- **`<p>`**: Matches the opening `<p>` tag.
+- **`.*?`**: Matches any character (including newlines) **as few times as possible**.
+- **`</p>`**: Matches the closing `</p>` tag.
+
+The `.*?` is a **lazy quantifier**; it matches the least amount of text needed to satisfy the pattern. This prevents it from matching everything from the first `<p>` to the last `</p>`.
+
+#### Python Code Example
+
+```python
+import re
+
+# Correct regex to match text between <p> and </p> tags
+regex_lazy = r'<p>.*?</p>'
+
+text = """
+<p>
+The very <em>first</em> task is to find the beginning of a paragraph.
+</p>
+<p>
+Then you have to find the end of the paragraph
+</p>
+"""
+
+# Find all matches for text between <p> and </p> tags
+matches = re.findall(regex_lazy, text, re.DOTALL)
+print("Matched Paragraphs:", matches)
+```
+
+**Output 📤**
+
+```plaintext
+Matched Paragraphs: ['<p>\nThe very <em>first</em> task is to find the beginning of a paragraph.\n</p>', '<p>\nThen you have to find the end of the paragraph\n</p>']
+```
+
+### Explanation 🌟
+
+- **`.*?`**: This lazy quantifier makes sure we match **only up to the nearest `</p>`**, rather than greedily matching everything up to the last `</p>`.
+
+### Summary 🌟
+
+- **Lazy Quantifiers (`*?`, `+?`)** are used when you want to match **as little as possible**.
+- **Greedy Quantifiers (`*`, `+`)** match **as much as possible**.
+- Use **`.*?`** to match text between tags like `<p>` and `</p>` without over-matching.
+
 
 ---
