@@ -307,3 +307,102 @@ print(matches)  # Output: ['A', 'b', 'C', 'd', '3', 'F']
 ```
 
 - **Explanation**: `(?i)` makes the regex case-insensitive. This means it will match both lowercase and uppercase characters without needing to specify both!
+
+---
+
+## Problem Statement 2.4 🚩
+### Match Any Character
+
+We need to create **regular expressions** (regex) that solve the following problems:
+
+1. **Match any single character except a line break.** 📝  
+   This will match any character except for newline characters (like `\n`).
+
+2. **Match any single character including line breaks.** 📝  
+   This will match all characters, even newline characters.
+
+The solution requires understanding the dot `.` metacharacter in regex. Let's explore how it works! 🚀
+
+### Solution 🛠️
+
+#### 1. Match Any Character Except Line Breaks 📝
+
+To match **any single character** except for line breaks (like `\n`), we use the dot `.` metacharacter in regex.
+
+```python
+import re
+
+regex_any_char_except_linebreaks = r'.'
+
+text = "Hello! How are \nyou?"
+
+matches = re.findall(regex_any_char_except_linebreaks, text)
+
+print(matches)  # Output: ['H', 'e', 'l', 'l', 'o', '!', ' ', 'H', 'o', 'w', ' ', 'a', 'r', 'e', ' ', 'y', 'o', 'u', '?']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `.`: The dot metacharacter matches **any single character** except for line break characters (`\n`, `\r`). ✅
+- **Result**: The regex matches every character in the string except line breaks.
+
+#### 2. Match Any Character Including Line Breaks 📝
+
+To match **any character including line breaks**, we have a few options:
+
+1. **Enable Dot to Match Line Breaks**: Some programming languages have a special option to allow the dot to match line breaks.
+2. **Use a Character Class Combination**: A character class like `[\s\S]` matches both whitespace (`\s`) and non-whitespace (`\S`) characters, effectively matching any character.
+
+Let's see the Python implementation using the second option:
+
+```python
+# Regex to match any character, including line breaks
+regex_any_char_including_linebreaks = r'[\s\S]'
+
+# Example usage
+text = "Hello!\nHow are you?"
+matches = re.findall(regex_any_char_including_linebreaks, text)
+print(matches)  # Output: ['H', 'e', 'l', 'l', 'o', '!', '\n', 'H', 'o', 'w', ' ', 'a', 'r', 'e', ' ', 'y', 'o', 'u', '?']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `[\s\S]`:
+    - `\s` matches any whitespace character (like spaces, tabs, or line breaks). 🟦
+    - `\S` matches any non-whitespace character. 🔤
+    - Combined, `[\s\S]` matches **any character**, including line breaks. ✅
+- **Result**: The regex matches every character, including line breaks.
+
+#### Alternative Method with Mode Modifier 🛠️
+
+We can also enable the "dot matches line breaks" mode using a **mode modifier** in regex:
+
+```python
+# Regex with mode modifier to match any character, including line breaks
+regex_with_mode_modifier = r'(?s).'
+
+# Example usage
+text = "Hello!\nHow are you?"
+matches = re.findall(regex_with_mode_modifier, text)
+print(matches)  # Output: ['H', 'e', 'l', 'l', 'o', '!', '\n', 'H', 'o', 'w', ' ', 'a', 'r', 'e', ' ', 'y', 'o', 'u', '?']
+```
+
+- **Explanation**:
+  - `(?s).` enables "dot matches line breaks" mode with `(?s)` and then matches any character with `.`.
+  - This is another way to match any character, including line breaks.
+
+### Explanation 🌟
+
+The **dot `.` metacharacter** in regex is one of the most commonly used patterns to match **any character**, but by default, it does not match newline characters (`\n`). Here’s what you need to know:
+
+- **Dot (`.`) Matches Any Character Except Line Breaks**: It matches letters, digits, symbols, etc., but not line breaks. 📝
+- **Dot with "Dot Matches Line Breaks" Mode**: Enables the dot to match line breaks as well. 🔄
+- **Combining `[\s\S]` to Match Any Character**: Combines whitespace (`\s`) and non-whitespace (`\S`) classes to match all characters. 🔄
+
+#### Tips for Using Dot `.` Metacharacter ⚠️
+
+- Use `.` when you want to match any character except line breaks.
+- Use `[\s\S]` or `(?s).` when you want to match any character, **including** line breaks.
+- Avoid "dot abuse" by using it only when you genuinely want to match any character. Use specific character classes when needed!🛡️
