@@ -547,7 +547,7 @@ print(matche2)  # Output: no match
 ---
 
 ## Problem 1.6 🚩
-### Match Whole Words
+### Match Whole Words 
 
 We need to create **regular expressions** (regex) that solve the following problems:
 
@@ -658,7 +658,7 @@ Python's built-in `re` module does not support the `\p{}` syntax for Unicode pro
 
 2. **Update your code** to use `regex` instead of `re`.
 
-### Solution Table 🛠️
+### Solution Table [fun with unicode](https://checkserp.com/encode/unicode/) 🛠️
 
 | **Category**                        | **Description**                                                        | **Regex Pattern**              | **Python Example**                                                                                                                                   |
 |-------------------------------------|------------------------------------------------------------------------|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -777,3 +777,77 @@ print(matches)  # Output: ['à', ' ', 'i', 's', ' ', 'a', ' ', 'g', 'r', 'a', '
 - **Result**: The regex matches graphemes (base character with its marks), but it also matches individual characters (spaces, punctuation, etc.) separately if they are not part of a grapheme.
 
 ---
+
+Got it! Let's update the regex example to match the names "Muhammad," "Hashim," or "Ali."
+
+## Problem 2.8: 🚩
+### Match One of Several Alternatives
+
+We need to create a **regular expression** (regex) that matches one of several alternatives. Specifically, we want a regex that matches any of the names "Muhammad," "Hashim," or "Ali" in the following text:
+
+```
+Muhammad, Hashim, and Ali went to Muhammad's house.
+```
+
+The regex should be applied repeatedly to find each name in the text until no more matches are found. Let’s break down the solution using Python. 🚀
+
+### Solution 🛠️
+
+To match any of the names "Muhammad," "Hashim," or "Ali," we can use the **pipe symbol** (`|`) to create an **alternation** in regex:
+
+```python
+import re
+
+# Regex to match "Muhammad", "Hashim", or "Ali"
+regex_names = r'Muhammad|Hashim|Ali'
+
+# Example text
+text = "Muhammad, Hashim, and Ali went to Muhammad's house."
+
+# Find all matches
+matches = re.findall(regex_names, text)
+print(matches)  # Output: ['Muhammad', 'Hashim', 'Ali', 'Muhammad']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `Muhammad|Hashim|Ali`: This regex uses the **pipe symbol (`|`)** to specify an **alternation**. It matches **either** "Muhammad," **or** "Hashim," **or** "Ali."  
+- **Result**: The regex finds all occurrences of the names "Muhammad," "Hashim," and "Ali" in the text. The `re.findall()` function returns all matches as a list.
+
+### Explanation 🌟
+
+#### Key Points About Alternation (`|`) 📚
+
+- The **pipe symbol** (`|`) is used to specify **alternatives** in regex. It allows matching any one of several alternatives. For example, `cat|dog` matches either "cat" or "dog".
+- The regex engine scans the text **from left to right** and tries all alternatives at each character position.
+- **Order matters** only when two alternatives can match at the same position. For example, `Ali|Alias` would match "Ali" in "His name is Alias" because "Ali" comes first.
+- **Tip**: To avoid this problem, put the **longer alternative first** or use **word boundaries** (`\b`). For example, `Alias|Ali` or `\bAli\b|\bAlias\b`.
+
+### Example with Word Boundaries 📝
+
+If you want to make sure that only **whole words** are matched, you can use **word boundaries** (`\b`):
+
+```python
+import re
+
+# Regex to match whole words "Muhammad", "Hashim", or "Ali"
+regex_names_whole = r'\bMuhammad\b|\bHashim\b|\bAli\b'
+
+# Example text
+text = "Muhammad, Hashim, and Ali went to Muhammad's house."
+
+# Find all matches
+matches = re.findall(regex_names_whole, text)
+print(matches)  # Output: ['Muhammad', 'Hashim', 'Ali', 'Muhammad']
+```
+
+🧐 **Explanation**:
+
+- **Pattern Breakdown**:
+  - `\bMuhammad\b|\bHashim\b|\bAli\b`: This regex uses **word boundaries** (`\b`) to ensure that only **whole words** "Muhammad," "Hashim," or "Ali" are matched.
+- **Result**: The regex works the same way but prevents partial matches in other contexts.
+
+---
+
+
