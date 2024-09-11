@@ -543,3 +543,76 @@ print(matche2)  # Output: no match
 - `$`: Matches the **end** of the text or line. 📍
 - `\A`: Matches the **start** of the entire text (not affected by options). 📍
 - `\Z`: Matches the **end** of the entire text, including before a trailing newline (not affected by options). 📍
+
+---
+
+## Problem 2.6 🚩
+### Match Whole Words
+
+We need to create **regular expressions** (regex) that solve the following problems:
+
+1. **Match the word "cat" only if it appears as a whole word** in a sentence like "My cat is brown," but **not** in words like "category" or "bobcat."
+   
+2. **Match the word "cat" only if it is part of another word**, such as in "staccato," but **not** as a standalone word like in "My cat is brown."
+
+These solutions introduce the concept of **word boundaries** in regex. Let’s break it down! 🚀
+
+### Solution 🛠️
+
+#### 1. Match the Word "cat" Only as a Whole Word 🐱
+
+To match **"cat"** as a **whole word** and not as part of another word, we use the `\b` (word boundary) metacharacter in regex.
+
+```python
+import re
+
+# Regex to match "cat" as a whole word
+regex_whole_word_cat = r'\bcat\b'
+
+# Example usage
+text = "My cat is brown. A category is different from a cat."
+matches = re.findall(regex_whole_word_cat, text)
+print(matches)  # Output: ['cat', 'cat']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `\b`: Matches a **word boundary** (the position between a word character and a non-word character). 🛑
+  - `cat`: Matches the literal string "cat". 🐱
+  - `\b`: Matches another **word boundary**. 🛑
+- **Result**: This regex will match "cat" only if it appears as a separate word.
+
+#### 2. Match the Word "cat" Only If It Is Part of Another Word 🐱
+
+To match **"cat"** only when it is **inside** another word (e.g., "staccato"), we use the `\B` (non-word boundary) metacharacter in regex.
+
+```python
+# Regex to match "cat" only if it is part of another word
+regex_non_whole_word_cat = r'\Bcat\B'
+
+# Example usage
+text = "My cat is brown. staccato is a word, and so is bobcat."
+matches = re.findall(regex_non_whole_word_cat, text)
+print(matches)  # Output: ['cat', 'cat']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `\B`: Matches a **non-word boundary** (a position between two word characters or two non-word characters). 🛑
+  - `cat`: Matches the literal string "cat". 🐱
+  - `\B`: Matches another **non-word boundary**. 🛑
+- **Result**: This regex will match "cat" only when it is part of another word.
+
+### Explanation 🌟
+
+#### Word Boundaries (`\b`) and Non-Word Boundaries (`\B`) in Regex 📚
+
+- **`\b` (Word Boundary)**: Matches the position where a word character (`[a-zA-Z0-9_]`) is next to a non-word character (like spaces, punctuation, or start/end of the text). It helps in matching **whole words only**.
+  - Example: `\bcat\b` matches "cat" in "My cat is brown," but not in "bobcat" or "category".
+
+- **`\B` (Non-Word Boundary)**: Matches the position **not** at a word boundary, i.e., between two word characters or two non-word characters. It helps in matching **substrings within words**.
+  - Example: `\Bcat\B` matches "cat" in "staccato" or "bobcat," but not in "My cat is brown."
+
+---
