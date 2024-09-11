@@ -406,3 +406,140 @@ The **dot `.` metacharacter** in regex is one of the most commonly used patterns
 - Use `.` when you want to match any character except line breaks.
 - Use `[\s\S]` or `(?s).` when you want to match any character, **including** line breaks.
 - Avoid "dot abuse" by using it only when you genuinely want to match any character. Use specific character classes when needed!🛡️
+
+---
+
+## Problem 2.5 🚩
+### Match Something at the Start and/or the End of a Line
+
+We need to create **regular expressions** (regex) to solve the following problems:
+
+1. **Match the word "alpha" only at the start of the entire text.** 📝  
+2. **Match the word "omega" only at the end of the entire text.** 📝  
+3. **Match the word "begin" only at the start of a line.** 📝  
+4. **Match the word "end" only at the end of a line.** 📝  
+
+These solutions will introduce the concept of **anchors** in regex, which are used to specify positions in text rather than matching characters. Let’s break it down! 🚀
+
+### Solution 🛠️
+
+#### 1. Match the Word "alpha" Only at the Start of the Text 📝
+
+To match the word **"alpha"** at the very **start of the text**, we use the `^` anchor or `\A` anchor.
+
+```python
+import re
+
+# Regex to match "alpha" at the start of the text
+regex_start_alpha = r'^\balpha\b'
+
+# Example usage
+text1 = "alpha is at the beginning. Not in between."
+text2 = "Is alpha at the beginning. Not in between."
+matche1 = re.findall(regex_start_alpha, text1)
+matche2 = re.findall(regex_start_alpha, text2)
+print(matche1)  # Output: ['alpha']
+print(matche2)  # Output: No match
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `^`: Matches the **start** of the text. 📍
+  - `\balpha\b`: Matches the word "alpha" as a **whole word**. 💬
+- **Result**: The regex matches "alpha" only if it appears at the start of the text.
+
+Alternatively, you can use `\A`:
+
+```python
+regex_start_alpha = r'\Aalpha'
+```
+
+- `\A` also matches the **start** of the text but is more precise and not affected by options.
+
+#### 2. Match the Word "omega" Only at the End of the Text 📝
+
+To match the word **"omega"** at the very **end of the text**, we use the `$` anchor or `\Z` anchor.
+
+```python
+# Regex to match "omega" at the end of the text
+regex_end_omega = r'\bomega\b$'
+# Example usage
+text1 = "Not in between, but omega is at the end."
+text2 = "Not in between, but  is at the end omega"
+matche1 = re.findall(regex_end_omega, text1)
+matche2 = re.findall(regex_end_omega, text2)
+print(matche1)  # Output: no  match
+print(matche2)  # Output: no  ['omega']
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `\bomega\b`: Matches the word "omega" as a **whole word**. 💬
+  - `$`: Matches the **end** of the text. 📍
+- **Result**: The regex matches "omega" only if it appears at the end of the text.
+
+Alternatively, you can use `\Z`:
+
+```python
+regex_end_omega = r'omega\Z'
+```
+
+- `\Z` also matches the **end** of the text, with more specific behavior regarding trailing line breaks.
+
+#### 3. Match the Word "begin" Only at the Start of a Line 📝
+
+To match the word **"begin"** at the **start of a line**, we use the `^` anchor in **multiline mode**.
+
+```python
+# Regex to match "begin" at the start of a line
+regex_line_start_begin = r'^begin'
+# Example usage
+text1 = "Not in between.\nbegin is at the start of a line."
+text2 = "Not in between.\n begin is at the start of a line."
+matche1 = re.findall(regex_line_start_begin, text1, re.MULTILINE)
+matche2 = re.findall(regex_line_start_begin, text2, re.MULTILINE)
+print(matche1)  # Output: ['begin']
+print(matche2)  # Output: no match
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `^`: Matches the **start** of each line when in **multiline mode**. 📍
+  - `begin`: Matches the word "begin". 💬
+- **Result**: The regex matches "begin" only if it appears at the start of a line.
+
+#### 4. Match the Word "end" Only at the End of a Line 📝
+
+To match the word **"end"** at the **end of a line**, we use the `$` anchor in **multiline mode**.
+
+```python
+# Regex to match "end" at the end of a line
+regex_line_end_end = r'end$'
+
+# Example usage
+text1 = "Not in between.\nBut this line ends with end"
+text2 = "Not in between.\nBut this line ends end with"
+matche1 = re.findall(regex_line_end_end, text1, re.MULTILINE)
+matche2 = re.findall(regex_line_end_end, text2, re.MULTILINE)
+print(matche1)  # Output: ['end']
+print(matche2)  # Output: no match
+```
+
+🧐 **Explanation:**
+
+- **Pattern Breakdown**:
+  - `end`: Matches the word "end". 💬
+  - `$`: Matches the **end** of each line when in **multiline mode**. 📍
+- **Result**: The regex matches "end" only if it appears at the end of a line.
+
+### Explanation 🌟
+
+**Anchors** are special regex tokens that match positions in the text rather than actual characters:
+
+- `^`: Matches the **start** of the text or line. 📍
+- `$`: Matches the **end** of the text or line. 📍
+- `\A`: Matches the **start** of the entire text (not affected by options). 📍
+- `\Z`: Matches the **end** of the entire text, including before a trailing newline (not affected by options). 📍
