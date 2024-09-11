@@ -1551,3 +1551,102 @@ When you have repeating patterns that can cause excessive backtracking, use **at
 
 ---
 
+## Problem 2.6 🚩
+### Test for a Match Without Including It in the Overall Match 🎯
+
+
+We want to find any word that appears between a pair of HTML bold tags (`<b>` and `</b>`) **without including the tags** in the match result. For example, in the string `"My <b>cat</b> is furry"`, the match should only be `"cat"`.
+
+### Solution 🛠️
+
+We can use **lookaround assertions** (specifically, lookbehind and lookahead) to solve this problem. Lookaround assertions allow us to check for text **before** or **after** our match without including it in the result.
+
+#### Regex Pattern:
+
+```regex
+(?<=<b>)\w+(?=</b>)
+```
+
+- **`(?<=<b>)`**: Positive **lookbehind**. This checks that `<b>` appears **before** the word we want to match.
+- **`\w+`**: Matches **one or more word characters** (letters, digits, and underscores).
+- **`(?=</b>)`**: Positive **lookahead**. This checks that `</b>` appears **after** the word we want to match.
+
+### Python Code Example 🐍
+
+Let's implement this in Python:
+
+```python
+import re
+
+# Sample text with bold tags
+text = "My <b>cat</b> is furry"
+
+# Regex pattern with lookbehind and lookahead
+regex_pattern = r"(?<=<b>)\w+(?=</b>)"
+
+# Find matches
+matches = re.findall(regex_pattern, text)
+print("Matches:", matches)
+```
+
+**Expected Output 📤**
+
+```plaintext
+Matches: ['cat']
+```
+
+### Explanation 🌟
+
+1. **`(?<=<b>)`**: This part checks that `<b>` is immediately before the word but doesn't include it in the match.
+2. **`\w+`**: Matches the word itself (like "cat").
+3. **`(?=</b>)`**: This part checks that `</b>` is immediately after the word but doesn't include it in the match.
+
+### Additional Information: Lookaround Assertions
+
+- **Lookbehind (`(?<=...)`)**: Checks if a certain pattern is **behind** the current position.
+- **Lookahead (`(?=...)`)**: Checks if a certain pattern is **ahead** of the current position.
+- Both lookahead and lookbehind **do not consume characters** in the match; they just "assert" conditions.
+
+### Alternative Solution Without Lookbehind 🔄
+
+If you're using a regex flavor that doesn't support lookbehind (like JavaScript), you can use **capturing groups**:
+
+#### Regex Pattern:
+
+```regex
+<b>(\w+)(?=</b>)
+```
+
+- **`<b>`**: Matches the opening tag.
+- **`(\w+)`**: Captures the word in a group.
+- **`(?=</b>)`**: Lookahead to ensure `</b>` follows.
+
+#### Python Code Example:
+
+```python
+import re
+
+# Sample text with bold tags
+text = "My <b>cat</b> is furry"
+
+# Regex pattern with capturing group
+regex_pattern = r"<b>(\w+)(?=</b>)"
+
+# Find matches
+matches = re.findall(regex_pattern, text)
+print("Matches without lookbehind:", matches)
+```
+
+**Expected Output 📤**
+
+```plaintext
+Matches without lookbehind: ['cat']
+```
+
+### Explanation 🌟
+
+- **`<b>(\w+)`**: Captures the word after `<b>`.
+- **`(?=</b>)`**: Ensures `</b>` is present after the word, but doesn't include it in the match.
+
+
+
