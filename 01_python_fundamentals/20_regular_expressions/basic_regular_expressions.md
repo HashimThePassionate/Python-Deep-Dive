@@ -1908,7 +1908,7 @@ Result after replacement: This is a test: $%*$1\1123-$%*$1\1456.
 ---
 
 
-## Problem 2.9 🚩
+## Problem 3.0 🚩
 ### Insert the Whole Regex Match into Replacement Text ✍️
 
 Insert the entire match of a regex back into the replacement text to modify or wrap it with additional text. For example, if a regex matches some text, you might want to wrap it with an HTML `<a>` tag.
@@ -1966,3 +1966,124 @@ Result after replacement: <a href="Visit">Visit</a> <a href="example">example</a
 ### Key Takeaway 🌟
 
 - Using `\g<0>` in Python replacement text allows you to insert the entire regex match, making it easy to wrap or modify matches without additional capturing groups.
+
+---
+
+## Problem 3.1 🚩
+### Insert Part of the Regex Match into the Replacement Text 🔄
+
+Match any contiguous sequence of 10 digits (like `1234567890`) and convert it into a nicely formatted phone number like `(123) 456-7890`.
+
+### Solution 🛠️
+
+To achieve this, we can use **capturing groups** in our regular expression to match specific parts of the 10-digit number. Then, we use those groups in the replacement text to format the number.
+
+### Regular Expression and Replacement Text for Python
+
+#### Regular Expression:
+
+```regex
+\b(\d{3})(\d{3})(\d{4})\b
+```
+
+- **`\b`**: Word boundary to ensure whole words are matched.
+- **`(\d{3})`**: Matches the **first three digits** and captures them in **Group 1**.
+- **`(\d{3})`**: Matches the **next three digits** and captures them in **Group 2**.
+- **`(\d{4})`**: Matches the **last four digits** and captures them in **Group 3**.
+- **`\b`**: Word boundary to end the match.
+
+#### Replacement Text for Python:
+
+```text
+(\1) \2-\3
+```
+
+- **`\1`**: Refers to the **first capturing group** (the area code).
+- **`\2`**: Refers to the **second capturing group** (the first part of the number).
+- **`\3`**: Refers to the **third capturing group** (the last part of the number).
+
+### Python Code Example 🐍
+
+```python
+import re
+
+# Sample text containing a 10-digit number
+text = "My number is 1234567890, please call me!"
+
+# Regex pattern to match a 10-digit phone number
+regex_pattern = r"\b(\d{3})(\d{3})(\d{4})\b"
+
+# Replacement pattern to format the matched phone number
+replacement_text = r"(\1) \2-\3"
+
+# Perform search-and-replace using re.sub()
+formatted_text = re.sub(regex_pattern, replacement_text, text)
+
+print("Formatted text:", formatted_text)
+```
+
+### Expected Output 📤
+
+```plaintext
+Formatted text: My number is (123) 456-7890, please call me!
+```
+
+### Explanation 🌟
+
+1. **Regex Pattern (`\b(\d{3})(\d{3})(\d{4})\b`)**:
+   - Matches any 10-digit number by breaking it down into three groups of three, three, and four digits.
+
+2. **Replacement Text (`(\1) \2-\3`)**:
+   - Uses backreferences (`\1`, `\2`, `\3`) to refer to the matched groups and formats them as `(123) 456-7890`.
+
+### Named Capturing Groups in Python 🐍
+
+Python also supports **named capturing groups** in regex. This allows you to reference the matched text by name instead of a number.
+
+#### Regex with Named Groups:
+
+```regex
+\b(?P<area>\d{3})(?P<exchange>\d{3})(?P<number>\d{4})\b
+```
+
+- **`(?P<area>\d{3})`**: Captures the first three digits as the **area**.
+- **`(?P<exchange>\d{3})`**: Captures the next three digits as the **exchange**.
+- **`(?P<number>\d{4})`**: Captures the last four digits as the **number**.
+
+#### Replacement Text with Named Groups:
+
+```text
+(\g<area>) \g<exchange>-\g<number>
+```
+
+- **`\g<area>`**: References the **named capturing group** `area`.
+- **`\g<exchange>`**: References the **named capturing group** `exchange`.
+- **`\g<number>`**: References the **named capturing group** `number`.
+
+### Python Code Example with Named Groups 🐍
+
+```python
+import re
+
+# Sample text containing a 10-digit number
+text = "My number is 1234567890, please call me!"
+
+# Regex pattern with named capturing groups
+regex_pattern = r"\b(?P<area>\d{3})(?P<exchange>\d{3})(?P<number>\d{4})\b"
+
+# Replacement pattern using named groups
+replacement_text = r"(\g<area>) \g<exchange>-\g<number>"
+
+# Perform search-and-replace using re.sub()
+formatted_text = re.sub(regex_pattern, replacement_text, text)
+
+print("Formatted text with named groups:", formatted_text)
+```
+
+### Expected Output 📤
+
+```plaintext
+Formatted text with named groups: My number is (123) 456-7890, please call me!
+```
+
+---
