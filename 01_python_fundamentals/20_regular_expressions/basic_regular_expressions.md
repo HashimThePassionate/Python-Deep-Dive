@@ -1155,3 +1155,164 @@ Magical Number: 11
 
 --- 
 
+
+## Problem 2.12 🚩
+### Repeating Parts of a Regex a Certain Number of Times 🔄
+
+Create regular expressions in Python to match these types of numbers:
+
+1. **Googol**: A number with exactly 100 digits.
+2. **32-bit Hexadecimal Number**: A number with 1 to 8 hexadecimal digits.
+3. **32-bit Hexadecimal Number with Optional 'h' Suffix**: Same as above, but may end with an 'h'.
+4. **Floating-Point Number**: A number that has a decimal point, with optional integer and exponent parts.
+
+### Explanation 🌟
+
+To match these patterns, we need to understand how to repeat parts of a regex pattern using **quantifiers**. Here’s a quick rundown:
+
+- **`{n}`**: Matches the preceding token exactly `n` times.
+- **`{n,m}`**: Matches the preceding token at least `n` times and at most `m` times.
+- **`?`**: Matches the preceding token zero or one time (makes it optional).
+- **`*`**: Matches the preceding token zero or more times.
+
+Now, let's apply these concepts to each problem:
+
+### Solution 🛠️
+
+#### 1. Match a Googol (100-digit Number) 📏
+
+A **googol** is a number with exactly 100 digits. In regex, `\d` represents a digit (0-9). To repeat this 100 times, we use `\d{100}`.
+
+**Regex Pattern**: `\b\d{100}\b`
+
+- **`\b`**: Word boundary, ensures the number is isolated (not part of another number).
+- **`\d{100}`**: Matches exactly 100 digits.
+
+**Python Code Example**:
+
+```python
+import re
+
+# Match a googol (100-digit number)
+regex_googol = r'\b\d{100}\b'
+
+text = "Number: 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890."
+
+matches = re.findall(regex_googol, text)
+print("Googol Matches:", matches)
+```
+
+**Output**:
+
+```plaintext
+Googol Matches: ['12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890']
+```
+
+#### Explanation 🌟
+
+- **`\d{100}`**: This is the core part of the regex. It says, "find exactly 100 digits." 
+- **`\b`**: The `\b` at the beginning and end ensures the number stands alone and isn’t part of a larger string of digits.
+
+#### 2. Match a 32-bit Hexadecimal Number 🔢
+
+A **32-bit hexadecimal number** contains digits from `0-9` and letters from `a-f`, and it can have 1 to 8 characters. 
+
+**Regex Pattern**: `\b[a-f0-9]{1,8}\b` (Case insensitive)
+
+- **`[a-f0-9]`**: Matches any digit from `0-9` or any letter from `a-f`.
+- **`{1,8}`**: Matches between 1 and 8 of the previous character class.
+- **`re.IGNORECASE`**: Makes the regex case insensitive, so it matches both uppercase and lowercase letters.
+
+**Python Code Example**:
+
+```python
+# Match a 32-bit hexadecimal number
+regex_hex = r'\b[a-f0-9]{1,8}\b'
+
+text = "Hex numbers: 1a2b, deadbeef, 01234567."
+
+matches = re.findall(regex_hex, text, re.IGNORECASE)
+print("Hexadecimal Matches:", matches)
+```
+
+**Output**:
+
+```plaintext
+Hexadecimal Matches: ['1a2b', 'deadbeef', '01234567']
+```
+
+#### Explanation 🌟
+
+- **`[a-f0-9]`**: This part defines the range of characters that can appear in a hexadecimal number.
+- **`{1,8}`**: Limits the number of allowed characters to between 1 and 8.
+
+#### 3. Match a 32-bit Hexadecimal Number with Optional 'h' Suffix 🆎
+
+This is similar to the previous regex but allows an optional `'h'` at the end using `h?`.
+
+**Regex Pattern**: `\b[a-f0-9]{1,8}h?\b` (Case insensitive)
+
+- **`h?`**: Matches an `'h'` zero or one time (optional).
+
+**Python Code Example**:
+
+```python
+# Match a 32-bit hexadecimal number with optional 'h'
+regex_hex_suffix = r'\b[a-f0-9]{1,8}h?\b'
+
+text = "Hex numbers: 1a2bh, deadbeef, 01234567h."
+
+matches = re.findall(regex_hex_suffix, text, re.IGNORECASE)
+print("Hexadecimal Matches with 'h' suffix:", matches)
+```
+
+**Output**:
+
+```plaintext
+Hexadecimal Matches with 'h' suffix: ['1a2bh', 'deadbeef', '01234567h']
+```
+
+#### Explanation 🌟
+
+- **`h?`**: Makes the 'h' suffix optional. If 'h' is present, it matches; if not, it still matches.
+
+#### 4. Match a Floating-Point Number 🌊
+
+A **floating-point number** has a mandatory decimal part and an optional exponent.
+
+**Regex Pattern**: `\d*\.\d+(e\d+)?`
+
+- **`\d*`**: Matches zero or more digits (optional integer part).
+- **`\.\d+`**: Matches a mandatory decimal point followed by one or more digits (fractional part).
+- **`(e\d+)?`**: Matches an optional exponent part (like `e10`).
+
+**Python Code Example**:
+
+```python
+# Match a floating-point number
+regex_float = r'\d*\.\d+(?:e\d+)?'
+
+text = "Floating-point numbers: 0.5, 1.23e10, .75."
+
+matches = re.findall(regex_float, text)
+```
+
+**Output**:
+
+```plaintext
+Floating-Point Matches: ['0.5', '1.23e10', '.75']
+```
+
+#### Explanation 🌟
+
+- **`\d*\.\d+`**: Ensures the number has a decimal point and some digits after it.
+- **`(?:e\d+)?`**: The exponent part (like `e10`) is optional. If it’s there, it matches; if not, it still matches.
+
+### Summary 🌟
+
+1. **Googol**: Matches exactly 100 digits.
+2. **Hexadecimal Number**: Matches 1 to 8 digits in hexadecimal format.
+3. **Hexadecimal Number with 'h' Suffix**: Same as above but may end with 'h'.
+4. **Floating-Point Number**: Matches numbers with decimals and optional exponents.
+
+---
