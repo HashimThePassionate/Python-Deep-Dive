@@ -2087,3 +2087,72 @@ Formatted text with named groups: My number is (123) 456-7890, please call me!
 ```
 
 ---
+
+## Problem 3.2 🚩
+### Insert Match Context into the Replacement Text 🔄
+
+Create replacement text that replaces a regex match with the text **before** the match, followed by the **whole subject text**, and then the text **after** the match.
+
+For example, if the word "Match" is found in the string "BeforeMatchAfter," the replacement should result in "BeforeBeforeMatchAfterAfter," producing "BeforeBeforeBeforeMatchAfterAfterAfter."
+
+### Solution for Python 🛠️
+
+Unlike .NET or Perl, Python does not have built-in tokens like `$`, `$'`, and `$_` to directly insert the left context, right context, or whole subject text into the replacement text. However, we can achieve this by using Python’s powerful **regular expression** and **string manipulation** capabilities.
+
+### Approach
+
+1. **Use capturing groups** in the regex to capture the **left context**, **matched text**, and **right context**.
+2. **Recompose** the desired replacement using the captured groups.
+
+### Python Code Example 🐍
+
+Below is the Python code to accomplish the task:
+
+```python
+import re
+
+# Sample text where "Match" is the regex match
+text = "BeforeMatchAfter"
+
+# Regex pattern to capture the left context, the match, and the right context
+regex_pattern = r"(.*?)(Match)(.*)"
+
+# Replacement function to construct the desired replacement text
+def replacement_function(match):
+    # Group 1: Left context (text before the match)
+    left_context = match.group(1)
+    # Group 2: The regex match (the word "Match")
+    matched_text = match.group(2)
+    # Group 3: Right context (text after the match)
+    right_context = match.group(3)
+    
+    # Construct the replacement text: Left + Whole + Right
+    return f"{left_context}{left_context}{matched_text}{right_context}{right_context}"
+
+# Perform the search-and-replace using re.sub()
+result = re.sub(regex_pattern, replacement_function, text)
+
+print("Result after replacement:", result)
+```
+
+### Expected Output 📤
+
+```plaintext
+Result after replacement: BeforeBeforeBeforeMatchAfterAfterAfter
+```
+
+### Explanation 🌟
+
+1. **Regex Pattern (`(.*?)(Match)(.*)`)**:
+   - **`(.*?)`**: Captures any text before the match (`Match`). This is the **left context**.
+   - **`(Match)`**: Captures the exact word "Match." This is the **matched text**.
+   - **`(.*)`**: Captures any text after the match (`Match`). This is the **right context**.
+
+2. **Replacement Function (`replacement_function`)**:
+   - Takes the match object and extracts **left context**, **matched text**, and **right context**.
+   - Reconstructs the desired text by concatenating the left context twice, the whole subject, and the right context twice.
+
+3. **`re.sub()` with a Function**:
+   - The `re.sub()` function in Python allows us to use a function to generate the replacement text dynamically.
+
+---
