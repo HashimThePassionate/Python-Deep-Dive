@@ -1,7 +1,8 @@
 # Table of Contents 📚
+
 ### 1. [Matching Literal Text with Regular Expressions ✨](#matching-literal-text-with-regular-expressions-✨)
 
-   - [Problem 1.1: Matching Literal Text with Special Characters 🚩](#problem-11-🚩)
+   - [Problem 1.1: Matching Literal Text with Special Characters 🚩](#problem-11-matching-literal-text-with-special-characters-🚩)
    - [Problem 1.2: Matching Nonprintable Characters with Regular Expressions ✨](#problem-12-matching-nonprintable-characters-with-regular-expressions-✨)
    - [Problem 1.3: Match One of Many Characters 🚩](#problem-13-match-one-of-many-characters-🚩)
    - [Problem 1.4: Match Any Character 🚩](#problem-14-match-any-character-🚩)
@@ -27,7 +28,6 @@
    - [Problem 3.0: Insert the Whole Regex Match into Replacement Text ✍️](#problem-30-insert-the-whole-regex-match-into-replacement-text-✍️)
    - [Problem 3.1: Insert Part of the Regex Match into the Replacement Text 🔄](#problem-31-insert-part-of-the-regex-match-into-the-replacement-text-🔄)
    - [Problem 3.2: Insert Match Context into the Replacement Text 🔄](#problem-32-insert-match-context-into-the-replacement-text-🔄)
-
 
 ---
 # Matching Literal Text with Regular Expressions ✨
