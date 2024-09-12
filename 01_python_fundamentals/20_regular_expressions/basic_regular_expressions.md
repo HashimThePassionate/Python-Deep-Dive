@@ -1,7 +1,7 @@
 # Table of Contents 📚
 ### 1. [Matching Literal Text with Regular Expressions ✨](#Matching-Literal-Text-With-Regular-Expressions)
 
-   - [Problem 1.1: Matching Literal Text with Special Characters 🚩](#problem-11-🚩)
+   - [Problem 1.1: Matching Literal Text with Special Characters 🚩](#Problem-11-🚩)
    - [Problem 1.2: Matching Nonprintable Characters with Regular Expressions ✨](#problem-12-🚩)
    - [Problem 1.3: Match One of Many Characters 🚩](#problem-13-🚩)
    - [Problem 1.4: Match Any Character 🚩](#problem-14-🚩)
