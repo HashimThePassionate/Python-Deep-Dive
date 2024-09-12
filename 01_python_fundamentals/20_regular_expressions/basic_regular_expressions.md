@@ -2,7 +2,7 @@
 
 ### 1. [Matching Literal Text with Regular Expressions ✨](#Matching-Literal-Text-with-Regular-Expressions-✨)
 
-   - [Problem 1.1: Matching Literal Text with Special Characters 🚩](#problem-11-matching-literal-text-with-special-characters-🚩)
+   - [Problem 1.1 🚩](#Problem-1.1-🚩)
    - [Problem 1.2: Matching Nonprintable Characters with Regular Expressions ✨](#problem-12-matching-nonprintable-characters-with-regular-expressions-✨)
    - [Problem 1.3: Match One of Many Characters 🚩](#problem-13-match-one-of-many-characters-🚩)
    - [Problem 1.4: Match Any Character 🚩](#problem-14-match-any-character-🚩)
@@ -30,9 +30,9 @@
    - [Problem 3.2: Insert Match Context into the Replacement Text 🔄](#problem-32-insert-match-context-into-the-replacement-text-🔄)
 
 ---
-# Matching Literal Text with Regular Expressions ✨
-## Problem 1.1 🚩
 
+## Problem 1.1 🚩
+# Matching Literal Text with Regular Expressions ✨
 We want to create a **regular expression** that matches the following sentence **exactly**:
 
 📝 **Sentence to Match:**
