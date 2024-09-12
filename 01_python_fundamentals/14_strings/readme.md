@@ -158,33 +158,148 @@ Escape sequences allow you to include special characters in strings, such as new
 
 #### 🛠️ **Common Escape Sequences:**
 
-- `\n`: Newline
-- `\t`: Tab
-- `\\`: Backslash
-- `\'`: Single Quote
-- `\"`: Double Quote
-
-#### 📝 **Examples:**
-
-```python
-# Newline and tab
-print("Hello\nWorld")  # Output: Hello
-                       #         World
-print("Hello\tWorld")  # Output: Hello   World
-
-# Escaping quotes
-print('They said, "What\'s going on?"')  # Output: They said, "What's going on?"
-```
+| **Escape Sequence** | **Description**                                              | **Example Code**                           | **Output/Effect**                       |
+|---------------------|--------------------------------------------------------------|---------------------------------------------|------------------------------------------|
+| `\n`                | Newline                                                      | `print("Hello\nWorld")`                    | Hello <br> World                        |
+| `\t`                | Horizontal Tab                                               | `print("Hello\tWorld")`                    | Hello   World                           |
+| `\\`                | Backslash                                                    | `print("This is a backslash: \\")`         | This is a backslash: \                  |
+| `\'`                | Single Quote                                                 | `print('It\'s a sunny day!')`              | It's a sunny day!                       |
+| `\"`                | Double Quote                                                 | `print("She said, \"Hello!\"")`            | She said, "Hello!"                      |
+| `\r`                | Carriage Return                                              | `print("Hello\rWorld")`                    | World                                   |
+| `\b`                | Backspace                                                    | `print("Hello\bWorld")`                    | HellWorld                               |
+| `\f`                | Form Feed                                                    | `print("Hello\fWorld")`                    | Hello (new page effect) World           |
+| `\a`                | Bell (Alert)                                                 | `print("Hello\aWorld")`                    | Beep sound (if supported)               |
+| `\v`                | Vertical Tab                                                 | `print("Hello\vWorld")`                    | Hello (vertical space) World            |
+| `\0`                | Null Character                                               | `print("Hello\0World")`                    | HelloWorld (null is invisible)          |
+| `\N{name}`          | Unicode Character by Name                                    | `print("\N{Greek Capital Letter Omega}")`  | Ω                                       |
+| `\uXXXX`            | Unicode Character with 16-bit hex value                      | `print("\u03A9")`                          | Ω (Greek Omega)                         |
+| `\UXXXXXXXX`        | Unicode Character with 32-bit hex value                      | `print("\U0001F600")`                      | 😀 (Smiling Face Emoji)                 |
+| `\xXX`              | Character with the given hexadecimal value                   | `print("\x48\x65\x6c\x6c\x6f")`            | Hello                                   |
 
 ---
 
+### 🌟 **Escape Sequences in Strings**
+Escape sequences allow you to include special characters in strings, such as newline (`\n`), tab (`\t`), or backslash (`\\`). They are used with a backslash (`\`) followed by a character to represent special characters.
+
+#### 🛠️ **Common Escape Sequences Examples:**
+
+1. **`\n` - Newline**  
+   Moves the text following it to a new line.
+
+   ```python
+   print("Hello\nWorld")  # Output:
+   # Hello
+   # World
+   ```
+
+2. **`\t` - Tab**  
+   Adds a horizontal tab space.
+
+   ```python
+   print("Hello\tWorld")  # Output: Hello   World
+   ```
+
+3. **`\\` - Backslash**  
+   Represents a literal backslash character.
+
+   ```python
+   print("This is a backslash: \\")  # Output: This is a backslash: \
+   ```
+
+4. **`\'` - Single Quote**  
+   Allows you to include a single quote inside a single-quoted string.
+
+   ```python
+   print('It\'s a sunny day!')  # Output: It's a sunny day!
+   ```
+
+5. **`\"` - Double Quote**  
+   Allows you to include a double quote inside a double-quoted string.
+
+   ```python
+   print("She said, \"Hello!\"")  # Output: She said, "Hello!"
+   ```
+
+6. **`\r` - Carriage Return**  
+   Moves the cursor to the beginning of the line. If any characters follow, they will overwrite the beginning characters.
+
+   ```python
+   print("Hello\rWorld")  # Output: World
+   ```
+
+7. **`\b` - Backspace**  
+   Deletes the character before it (one step back).
+
+   ```python
+   print("Hello\bWorld")  # Output: HellWorld
+   ```
+
+8. **`\f` - Form Feed**  
+   Moves the cursor to the next page (used mainly in printing).
+
+   ```python
+   print("Hello\fWorld")  # Output: Hello (moves vertically to World on printers)
+   ```
+
+9. **`\a` - Bell (Alert)**  
+   Produces a beep sound in some systems.
+
+   ```python
+   print("Hello\aWorld")  # Produces a beep sound (if the system supports it)
+   ```
+
+10. **`\v` - Vertical Tab**  
+    Moves the text to the next vertical tab position.
+
+   ```python
+   print("Hello\vWorld")  # Output: Hello (vertical space) World
+   ```
+
+11. **`\0` - Null Character**  
+    Represents a null character in strings.
+
+   ```python
+   print("Hello\0World")  # Output: Hello World (null is invisible)
+   ```
+
+12. **`\N{name}` - Unicode Character by Name**  
+    Inserts a character by its Unicode name.
+
+   ```python
+   print("\N{Greek Capital Letter Omega}")  # Output: Ω
+   ```
+
+13. **`\uXXXX` - Unicode (16-bit) Character**  
+    Inserts a Unicode character with a 16-bit hex value.
+
+   ```python
+   print("\u03A9")  # Output: Ω (Greek Omega)
+   ```
+
+14. **`\UXXXXXXXX` - Unicode (32-bit) Character**  
+    Inserts a Unicode character with a 32-bit hex value.
+
+   ```python
+   print("\U0001F600")  # Output: 😀 (Smiling Face Emoji)
+   ```
+
+15. **`\xXX` - Hexadecimal Character**  
+    Inserts a character with the given hexadecimal value.
+
+   ```python
+   print("\x48\x65\x6c\x6c\x6f")  # Output: Hello
+   ```
+
 ### 🌟 **Raw Strings**
 
-Raw strings treat backslashes as literal characters, making them useful for regular expressions and file paths.
+Raw strings treat backslashes as literal characters, making them useful for regular expressions and file paths. You define a raw string by adding an `r` or `R` before the string.
 
 #### 📝 **Example:**
 
 ```python
 print(r"C:\Users\Hashim\Python")  # Output: C:\Users\Hashim\Python
 ```
+In this example, the `r` prefix before the string tells Python to treat backslashes as literal characters instead of escape sequences.
+
+
 
