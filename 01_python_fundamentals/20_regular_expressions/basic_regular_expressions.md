@@ -1,5 +1,35 @@
-# Matching Literal Text with Regular Expressions ✨
+# Table of Contents 📚
+### 1. [Matching Literal Text with Regular Expressions ✨](#Matching-Literal-Text-With-Regular-Expressions)
 
+   - [Problem 1.1: Matching Literal Text with Special Characters 🚩](#problem-11-🚩)
+   - [Problem 1.2: Matching Nonprintable Characters with Regular Expressions ✨](#problem-12-🚩)
+   - [Problem 1.3: Match One of Many Characters 🚩](#problem-13-🚩)
+   - [Problem 1.4: Match Any Character 🚩](#problem-14-🚩)
+   - [Problem 1.5: Match Something at the Start and/or the End of a Line 🚩](#problem-15-🚩)
+   - [Problem 1.6: Match Whole Words 🚩](#problem-16-🚩)
+   - [Problem 1.7: Unicode Code Points, Categories, Blocks, and Scripts 📝](#problem-17-🚩)
+
+### 2. [Grouping and Capturing Parts of the Match 🕵️‍♂️](#grouping-and-capturing-parts-of-the-match-)
+
+   - [Problem 2.0: Match Previously Matched Text Again 🚩](#problem-20-🚩)
+   - [Problem 2.1: Capture and Name Parts of the Match 🚩](#problem-21-🚩)
+   - [Problem 2.2: Repeating Parts of a Regex a Certain Number of Times 🔄](#problem-22-🚩)
+   - [Problem 2.3: Choose Minimal or Maximal Repetition 🔄](#problem-23-🚩)
+   - [Problem 2.4: Eliminate Needless Backtracking 🚫](#problem-24-🚩)
+   - [Problem 2.5: Prevent Runaway Repetition 🚫](#problem-25-🚩)
+   - [Problem 2.6: Test for a Match Without Including It in the Overall Match 🎯](#problem-26-🚩)
+   - [Problem 2.7: Match One of Two Alternatives Based on a Condition 🛠️](#problem-27-🚩)
+   - [Problem 2.8: Match One of Several Alternatives 🚩](#problem-28-🚩)
+   - [Problem 2.9: Add Comments to a Regular Expression 📝](#problem-29-🚩)
+
+### 3. [Search-and-Replace Techniques and Modifications ✍️](#search-and-replace-techniques-and-modifications-)
+
+   - [Problem 3.0: Insert the Whole Regex Match into Replacement Text ✍️](#problem-30-🚩)
+   - [Problem 3.1: Insert Part of the Regex Match into the Replacement Text 🔄](#problem-31-🚩)
+   - [Problem 3.2: Insert Match Context into the Replacement Text 🔄](#problem-32-🚩)
+
+---
+# Matching Literal Text with Regular Expressions ✨
 ## Problem 1.1 🚩
 
 We want to create a **regular expression** that matches the following sentence **exactly**:
