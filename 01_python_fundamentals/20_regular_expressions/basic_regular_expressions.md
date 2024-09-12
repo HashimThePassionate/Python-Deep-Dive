@@ -1,36 +1,4 @@
-# Table of Contents 📚
-
-### 1. [Matching Literal Text with Regular Expressions ✨](#Matching-Literal-Text-with-Regular-Expressions-✨)
-
-   - [Problem 1.1 🚩](#Problem-1.1-🚩)
-   - [Problem 1.2: Matching Nonprintable Characters with Regular Expressions ✨](#problem-12-matching-nonprintable-characters-with-regular-expressions-✨)
-   - [Problem 1.3: Match One of Many Characters 🚩](#problem-13-match-one-of-many-characters-🚩)
-   - [Problem 1.4: Match Any Character 🚩](#problem-14-match-any-character-🚩)
-   - [Problem 1.5: Match Something at the Start and/or the End of a Line 🚩](#problem-15-match-something-at-the-start-andor-the-end-of-a-line-🚩)
-   - [Problem 1.6: Match Whole Words 🚩](#problem-16-match-whole-words-🚩)
-   - [Problem 1.7: Unicode Code Points, Categories, Blocks, and Scripts 📝](#problem-17-unicode-code-points-categories-blocks-and-scripts-📝)
-
-### 2. [Grouping and Capturing Parts of the Match 🕵️‍♂️](#grouping-and-capturing-parts-of-the-match-🕵️‍♂️)
-
-   - [Problem 2.0: Match Previously Matched Text Again 🚩](#problem-20-match-previously-matched-text-again-🚩)
-   - [Problem 2.1: Capture and Name Parts of the Match 🚩](#problem-21-capture-and-name-parts-of-the-match-🚩)
-   - [Problem 2.2: Repeating Parts of a Regex a Certain Number of Times 🔄](#problem-22-repeating-parts-of-a-regex-a-certain-number-of-times-🔄)
-   - [Problem 2.3: Choose Minimal or Maximal Repetition 🔄](#problem-23-choose-minimal-or-maximal-repetition-🔄)
-   - [Problem 2.4: Eliminate Needless Backtracking 🚫](#problem-24-eliminate-needless-backtracking-🚫)
-   - [Problem 2.5: Prevent Runaway Repetition 🚫](#problem-25-prevent-runaway-repetition-🚫)
-   - [Problem 2.6: Test for a Match Without Including It in the Overall Match 🎯](#problem-26-test-for-a-match-without-including-it-in-the-overall-match-🎯)
-   - [Problem 2.7: Match One of Two Alternatives Based on a Condition 🛠️](#problem-27-match-one-of-two-alternatives-based-on-a-condition-🛠️)
-   - [Problem 2.8: Match One of Several Alternatives 🚩](#problem-28-match-one-of-several-alternatives-🚩)
-   - [Problem 2.9: Add Comments to a Regular Expression 📝](#problem-29-add-comments-to-a-regular-expression-📝)
-
-### 3. [Search-and-Replace Techniques and Modifications ✍️](#search-and-replace-techniques-and-modifications-✍️)
-
-   - [Problem 3.0: Insert the Whole Regex Match into Replacement Text ✍️](#problem-30-insert-the-whole-regex-match-into-replacement-text-✍️)
-   - [Problem 3.1: Insert Part of the Regex Match into the Replacement Text 🔄](#problem-31-insert-part-of-the-regex-match-into-the-replacement-text-🔄)
-   - [Problem 3.2: Insert Match Context into the Replacement Text 🔄](#problem-32-insert-match-context-into-the-replacement-text-🔄)
-
----
-
+# Basic Regular Expressions
 ## Problem 1.1 🚩
 # Matching Literal Text with Regular Expressions ✨
 We want to create a **regular expression** that matches the following sentence **exactly**:
