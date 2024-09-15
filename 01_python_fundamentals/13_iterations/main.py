@@ -1,0 +1,10 @@
+no = int(input("Please Enter Table no: "))
+i = 1
+print(f'{no} x {i} = {no * i}')
+i += 1
+print(f'{no} x {i} = {no * i}
+i += 1
+print(f'{no} x {i} = {no * i}
+i += 1
+print(f'{no} x {i} = {no * i}
+i += 1
