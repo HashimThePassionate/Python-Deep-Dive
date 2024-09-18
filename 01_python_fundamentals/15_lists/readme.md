@@ -1,5 +1,33 @@
 # 📚 Python Lists
 
+### 📜 Table of Contents
+1. [Introduction to Lists](#introduction-to-lists)
+   - [What is a List?](#what-is-a-list)
+   - [Key Points](#key-points)
+2. [🛠️ Common List Methods](#-common-list-methods)
+   - [📌 `append(x)` Method](#-appendx-method)
+   - [📌 `clear()` Method](#-clear-method)
+   - [📌 `copy()` Method](#-copy-method)
+   - [📌 `count(x)` Method](#-countx-method)
+   - [📌 `extend(iterable)` Method](#-extenditerable-method)
+   - [📌 `index(x, start=0, end=len(list))` Method](#-indexx-start0-endlenlist-method)
+   - [📌 `insert(i, x)` Method](#-inserti-x-method)
+   - [📌 `pop(i=-1)` Method](#-popi-1-method)
+   - [📌 `remove(x)` Method](#-removex-method)
+   - [📌 `reverse()` Method](#-reverse-method)
+   - [📌 `sort(key=None, reverse=False)` Method](#-sortkeynone-reversefalse-method)
+3. [🔄 Checking List Equality](#-checking-list-equality)
+4. [📊 List Indexing and Slicing](#-list-indexing-and-slicing)
+5. [➕ Concatenation and Modification](#-concatenation-and-modification)
+6. [🧩 Nested Lists](#-nested-lists)
+7. [✏️ Modifying List Values](#-modifying-list-values)
+8. [➕ Python List Operations](#-python-list-operations)
+9. [🔄 Iterating Through a List](#-iterating-through-a-list)
+10. [➕ Adding Elements to a List](#-adding-elements-to-a-list)
+11. [❌ Removing Elements from a List](#-removing-elements-from-a-list)
+12. [⚙️ Modifying and Deleting List Items](#-modifying-and-deleting-list-items)
+13. [🔀 Sorting a List](#-sorting-a-list)
+
 ## Introduction to Lists
 
 A list in Python is a versatile and mutable data structure used to store a sequence of various types of data. Lists allow for dynamic and flexible manipulation of data, making them one of the most commonly used data types in Python.
