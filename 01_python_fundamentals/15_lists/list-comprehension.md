@@ -1,3 +1,18 @@
+# 📜 Table of Contents
+1. [📚 What is List Comprehension?](#-what-is-list-comprehension)
+   - [🔍 List Comprehension Syntax](#-list-comprehension-syntax)
+2. [🔄 Examples with and without List Comprehensions](#-examples-with-and-without-list-comprehensions)
+   - [1. **Creating a List of Squares** 📐](#1-creating-a-list-of-squares-)
+   - [2. **Filtering Even Numbers** 🔢](#2-filtering-even-numbers-)
+   - [3. **Converting Strings to Uppercase** 🔠](#3-converting-strings-to-uppercase-)
+   - [4. **Flattening a List of Lists** 📚](#4-flattening-a-list-of-lists-)
+   - [5. **Creating a List of Tuples** 🎲](#5-creating-a-list-of-tuples-)
+   - [6. **Applying a Function to Elements** 🧠](#6-applying-a-function-to-elements-)
+   - [7. **Creating a Dictionary from Two Lists** 📖](#7-creating-a-dictionary-from-two-lists-)
+   - [8. **Filtering Words Longer Than 3 Characters** 🔤](#8-filtering-words-longer-than-3-characters-)
+   - [9. **Replacing Vowels in a String** 🅰️🅾️](#9-replacing-vowels-in-a-string-)
+   - [10. **Generating a List of Factorials** 🔢](#10-generating-a-list-of-factorials-)
+---
 # 📚 What is List Comprehension?
 
 List comprehension is a powerful and concise way to create lists in Python. It allows you to generate a new list by applying an expression to each item in an existing iterable (like a list, tuple, or string). List comprehensions make your code more readable and often reduce the need for traditional loops.
