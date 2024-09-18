@@ -1,5 +1,31 @@
 # 📚 Python Unpacking Sequences List and Slicing
 
+## 📜 Table of Contents
+1. [🧩 Unpacking Sequences](#-unpacking-sequences)
+   - [🔍 Basic Unpacking Example](#-basic-unpacking-example)
+   - [🛠️ Unpacking Simplified](#️-unpacking-simplified)
+2. [📌 Advanced Unpacking with the `*` Operator](#-advanced-unpacking-with-the--operator)
+   - [🔍 Example 1: Capturing the Rest of the Items](#-example-1-capturing-the-rest-of-the-items)
+   - [🔍 Example 2: Fewer Excess Items](#-example-2-fewer-excess-items)
+   - [🔍 Example 3: No Excess Items](#-example-3-no-excess-items)
+3. [🔄 Capturing Sections of a Sequence](#-capturing-sections-of-a-sequence)
+   - [🔍 Example 4: Capturing the Middle Section](#-example-4-capturing-the-middle-section)
+   - [🔍 Example 5: Capturing the Beginning Section](#-example-5-capturing-the-beginning-section)
+4. [✂️ Slicing Sequences](#️-slicing-sequences)
+   - [🔍 Basic Slicing Example](#-basic-slicing-example)
+   - [🔍 String Slicing Examples](#-string-slicing-examples)
+5. [🧾 Simple Slicing Example: Extracting Parts of a Sentence](#-simple-slicing-example-extracting-parts-of-a-sentence)
+6. [🧾 Real-World Slicing Example: Parsing an Invoice](#-real-world-slicing-example-parsing-an-invoice)
+   - [🔍 Invoice Example](#-invoice-example)
+   - [📄 Explanation](#-explanation)
+     - [📝 Step 1: The Invoice Text](#-step-1-the-invoice-text)
+     - [📝 Step 2: Defining Slices](#-step-2-defining-slices)
+     - [📝 Step 3: Splitting the Invoice into Lines](#-step-3-splitting-the-invoice-into-lines)
+     - [📝 Step 4: Looping Through the Lines and Extracting Data](#-step-4-looping-through-the-lines-and-extracting-data)
+     - [📝 Final Output](#-final-output)
+     - [🔍 Detailed Breakdown of Each Line](#-detailed-breakdown-of-each-line)
+   - [🎯 Conclusion](#-conclusion)
+---
 ## 🧩 Unpacking Sequences
 
 Unpacking in Python is a technique that allows you to assign elements from a sequence (like lists or tuples) or any iterable (like sets, dictionaries) directly to variables in a single statement. This approach eliminates the need for indexing, which can be error-prone and cumbersome, especially when dealing with complex data structures.
