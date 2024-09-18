@@ -2,10 +2,10 @@
 ## 📜 Table of Contents
 
 ### 📝 Basic List Operations
-1. [🔢 Create a list of the first 10 natural numbers and print it.](#create-a-list-of-the-first-10-natural-numbers-and-print-it)
-2. [📥 Access and print the first, last, and middle elements of the list.](#2-📥-access-and-print-the-first-last-and-middle-elements-of-the-list-1020304050)
-3. [➕ Append the number `60` to the list and print the updated list.](#3-➕-append-the-number-60-to-the-list-1020304050-and-print-the-updated-list)
-4. [📌 Insert the number `25` at the 3rd position in the list and print the updated list.](#4-📌-insert-the-number-25-at-the-3rd-position-in-the-list-1020304050-and-print-the-updated-list)
+1. [🔢 Create a list of the first 10 natural numbers and print it.](#1-create-a-list-of-the-first-10-natural-numbers-and-print-it)
+2. [📥 Access and print the first, last, and middle elements of the list.](#2-access-and-print-the-first-last-and-middle-elements-of-the-list)
+3. [➕ Append the number 60 to the list and print the updated list.](#3-append-the-number-60-to-the-list-and-print-the-updated-list)
+4. [📌 Insert the number 25 at the 3rd position in the list and print the updated list.](#4-insert-the-number-25-at-the-3rd-position-in-the-list-and-print-the-updated-list)
 5. [🗑️ Remove the number `30` from the list and print the updated list.](#5-🗑️-remove-the-number-30-from-the-list-1020304050-and-print-the-updated-list)
 6. [🚮 Pop the last element from the list and print the updated list.](#6-🚮-pop-the-last-element-from-the-list-1020304050-and-print-the-updated-list)
 7. [🔍 Count the occurrences of the number `2` in the list.](#7-🔍-count-the-occurrences-of-the-number-2-in-the-list-2352738)
