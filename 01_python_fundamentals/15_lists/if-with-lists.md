@@ -1,6 +1,24 @@
 # 📘 Python: If Statements with Lists - Exercises and Solutions
-
 In Python, combining lists and `if` statements allows for more sophisticated decision-making processes. This section explores various scenarios where lists are used with conditional statements, demonstrating how to handle special cases, check for empty lists, and manage multiple lists.
+Here is the Table of Contents (TOC) for the "Python: If Statements with Lists - Exercises and Solutions" section. The TOC is formatted correctly to work in most Markdown environments, including GitHub.
+
+## 📜 Table of Contents
+### 📝 Exercises
+
+1. [**Checking for Special Items**](#checking-for-special-items)
+2. [**Checking That a List Is Not Empty**](#checking-that-a-list-is-not-empty)
+3. [**Using Multiple Lists**](#using-multiple-lists)
+4. [**Hello Admin**](#hello-admin)
+5. [**No Users**](#no-users)
+6. [**Checking Usernames**](#checking-usernames)
+7. [**Ordinal Numbers**](#ordinal-numbers)
+8. [**Styling Your If Statements**](#styling-your-if-statements)
+
+### 📝 More Exercises
+
+9. [**Styling If Statements**](#styling-if-statements)
+10. [**Your Ideas**](#your-ideas)
+---
 
 ## 📝 Exercises
 
