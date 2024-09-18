@@ -1,34 +1,4 @@
 # 🌟 Python List Practice Solutions
-### Table of Contents
-
-#### Basic List Operations
-
-1. [Create a list of the first 10 natural numbers and print it.](#create-a-list-of-the-first-10-natural-numbers-and-print-it)
-2. [Access and print the first, last, and middle elements of the list `[10, 20, 30, 40, 50]`.](#access-and-print-the-first-last-and-middle-elements-of-the-list-10-20-30-40-50)
-3. [Append the number `60` to the list `[10, 20, 30, 40, 50]` and print the updated list.](#append-the-number-60-to-the-list-10-20-30-40-50-and-print-the-updated-list)
-4. [Insert the number `25` at the 3rd position in the list `[10, 20, 30, 40, 50]` and print the updated list.](#insert-the-number-25-at-the-3rd-position-in-the-list-10-20-30-40-50-and-print-the-updated-list)
-5. [Remove the number `30` from the list `[10, 20, 30, 40, 50]` and print the updated list.](#remove-the-number-30-from-the-list-10-20-30-40-50-and-print-the-updated-list)
-6. [Pop the last element from the list `[10, 20, 30, 40, 50]` and print the updated list.](#pop-the-last-element-from-the-list-10-20-30-40-50-and-print-the-updated-list)
-7. [Count the occurrences of the number `2` in the list `[2, 3, 2, 5, 2, 7, 8]`.](#count-the-occurrences-of-the-number-2-in-the-list-2-3-2-5-2-7-8)
-8. [Find the index of the number `40` in the list `[10, 20, 30, 40, 50]`.](#find-the-index-of-the-number-40-in-the-list-10-20-30-40-50)
-9. [Sort the list `[5, 3, 8, 6, 7, 2]` in ascending order and print the result.](#sort-the-list-5-3-8-6-7-2-in-ascending-order-and-print-the-result)
-10. [Reverse the list `[10, 20, 30, 40, 50]` and print the result.](#reverse-the-list-10-20-30-40-50-and-print-the-result)
-
-#### Intermediate List Operations
-
-11. [Create a list comprehension that generates a list of the squares of numbers from 1 to 10.](#create-a-list-comprehension-that-generates-a-list-of-the-squares-of-numbers-from-1-to-10)
-12. [Filter the even numbers from the list `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]` using list comprehension.](#filter-the-even-numbers-from-the-list-1-2-3-4-5-6-7-8-9-10-using-list-comprehension)
-13. [Create a list comprehension that generates a list of tuples where each tuple contains a number and its square.](#create-a-list-comprehension-that-generates-a-list-of-tuples-where-each-tuple-contains-a-number-and-its-square)
-14. [Flatten a list of lists `[[1, 2], [3, 4], [5, 6]]` using list comprehension.](#flatten-a-list-of-lists-1-2-3-4-5-6-using-list-comprehension)
-15. [Create a list comprehension that extracts the vowels from the string `"hello world"`.](#create-a-list-comprehension-that-extracts-the-vowels-from-the-string-hello-world)
-
-*(Continue this pattern for the rest of the exercises)*
-
-### Action Needed:
-1. **Update the TOC** in your Markdown file using the above structure.
-2. **Ensure all headers** in your content exactly match the TOC text without additional bold, emojis, or formatting. This should allow GitHub to generate the proper anchor links automatically. 
-
-If you need further adjustments, let me know!
 1. **🔢 Create a list of the first 10 natural numbers and print it.**
 
    ```python
