@@ -725,3 +725,152 @@ actions[2]()  # Output: 2
 - **Explanation**: By setting `i=i` in the lambda, each function captures its own value of `i`.
 
 ---
+
+## 📝 **The `nonlocal` Statement in Python 3.x**
+
+In Python, the `nonlocal` keyword is an advanced tool that allows a **nested function** to modify variables in its **enclosing function**'s scope. This feature, available only in Python 3.x, provides greater flexibility when dealing with **nested functions** by allowing them to **read and write** to variables in the surrounding function.
+
+Unlike `global`, which affects the **module-level** scope, `nonlocal` restricts its operation to **enclosing function scopes**, enabling more controlled state management without using **global variables**.
+
+### 📋 **1. What is `nonlocal`?**
+
+The `nonlocal` statement enables a function defined within another function (a **nested function**) to access and modify variables from the outer function's scope. Without `nonlocal`, these variables are **read-only** by default; attempting to modify them would cause an **error**.
+
+- **`nonlocal` Statement Syntax**
+  ```python
+  def outer():
+      x = 10  # Enclosing scope
+
+      def inner():
+          nonlocal x  # Declare 'x' as nonlocal
+          x += 1
+
+      inner()
+      print(x)  # Output: 11
+  outer()
+  ```
+
+- **Explanation**: 
+  - The inner function can **both read and modify** `x` from `outer()` because of `nonlocal`. Without `nonlocal`, Python would treat `x` as **local** to `inner()`, leading to an error.
+
+### 📋 **2. Why Use `nonlocal`?**
+
+The `nonlocal` keyword is especially useful for **state retention** within nested functions, enabling functions to carry out tasks like **counters**, **trackers**, and other tasks requiring **persistent state** between function calls.
+
+### ✅ **Example: Counter Using `nonlocal` (With Muhammad Hashim's Scenario)**
+
+```python
+def create_counter(start=25):
+    age = start  # Enclosing variable
+
+    def increment():
+        nonlocal age  # Declaring 'age' as nonlocal
+        age += 1  # Modify the enclosing 'age' variable
+        print(f"Muhammad Hashim's age is now: {age}")
+
+    return increment
+
+counter = create_counter()  # Starting age at 25
+counter()  # Output: Muhammad Hashim's age is now: 26
+counter()  # Output: Muhammad Hashim's age is now: 27
+```
+
+- **Explanation**:
+  - **`create_counter()`** initializes `age` to **25**.
+  - The **nested `increment`** function can modify `age` because it is marked `nonlocal`.
+  - Each call to `counter()` increments the `age`.
+
+### 📋 **3. Comparison: `nonlocal` vs `global`**
+
+| **Feature**    | **`nonlocal`**                                     | **`global`**                                   |
+|----------------|----------------------------------------------------|------------------------------------------------|
+| Scope          | Enclosing function                                | Module-level (global)                         |
+| Can Modify?    | Yes (only in enclosing functions)                 | Yes (affects global variables)                |
+| Must Exist?    | Yes (must be pre-defined in the enclosing scope)  | No (can be created dynamically)               |
+| Usage Context  | Better for retaining state within nested functions | Suitable for values shared across modules    |
+
+#### 🚫 **Incorrect Usage: Without `nonlocal`**
+```python
+def counter():
+    count = 0  # Enclosing variable
+
+    def increment():
+        count += 1  # Error: 'count' is treated as local here
+        print(count)
+
+    increment()  # Raises UnboundLocalError
+
+counter()
+```
+- **Error Explanation**: Since `count` is modified, Python treats it as **local** inside `increment()`. This results in an **UnboundLocalError** because it is not defined as a local variable.
+
+### 📋 **4. Advanced Example: Stateful Factory Function**
+
+Factory functions can create **closures**—nested functions that "remember" variables from the enclosing scope. Here’s how `nonlocal` can be used to manage **persistent state**.
+
+#### ✅ **Example: Tracking Progress (With Muhammad Hashim's Example)**
+```python
+def progress_tracker(initial_steps=0):
+    steps = initial_steps  # Enclosing variable
+
+    def track():
+        nonlocal steps  # Allow modifying 'steps' from the enclosing scope
+        steps += 10
+        print(f"Muhammad Hashim has completed {steps} steps!")
+
+    return track
+
+tracker = progress_tracker()  # Initialize with 0 steps
+tracker()  # Output: Muhammad Hashim has completed 10 steps!
+tracker()  # Output: Muhammad Hashim has completed 20 steps!
+
+another_tracker = progress_tracker(100)  # Start from 100 steps
+another_tracker()  # Output: Muhammad Hashim has completed 110 steps!
+```
+
+- **Explanation**:
+  - `progress_tracker` initializes `steps`.
+  - Each call to `tracker()` modifies `steps` because it is declared as `nonlocal`, ensuring the state is **persistent**.
+  - Multiple counters (`tracker`, `another_tracker`) maintain **independent** states.
+
+### 📋 **5. How `nonlocal` Works Internally**
+
+1. **Declaration**: When you declare a variable as `nonlocal`, Python skips the **local scope** and starts searching for the variable in the **enclosing scope**.
+2. **Modification**: This allows modification of the variable instead of treating it as read-only.
+3. **Error Handling**: The variable must **already exist** in the enclosing function; otherwise, Python will raise a **SyntaxError**.
+
+#### 🚫 **Incorrect Example: `nonlocal` Must Reference an Existing Variable**
+```python
+def outer_function():
+    def inner_function():
+        nonlocal value  # Error: 'value' does not exist in the enclosing scope
+        value = 10
+
+    inner_function()
+
+outer_function()  # Raises SyntaxError
+```
+- **Error Explanation**: Since `value` is not defined in `outer_function`, `nonlocal` cannot reference it. **`nonlocal` does not create new variables**.
+
+### 📋 **6. Alternative State Retention Methods**
+
+Before `nonlocal` was introduced, programmers often relied on **classes**, **globals**, and **function attributes** for state management.
+
+#### ✅ **Using Function Attributes**
+```python
+def create_stateful():
+    def inner():
+        inner.counter += 1
+        print(f"Counter: {inner.counter}")
+
+    inner.counter = 0  # Initialize attribute
+    return inner
+
+counter_function = create_stateful()
+counter_function()  # Output: Counter: 1
+counter_function()  # Output: Counter: 2
+```
+
+- **Explanation**: The `inner` function is **modified directly** using `inner.counter`, allowing state management without `nonlocal`.
+
+---
