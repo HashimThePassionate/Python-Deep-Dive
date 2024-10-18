@@ -274,3 +274,112 @@ print(result)  # Output: 100
      - **`Z`** is assigned locally and can only be accessed **within** `func()`.
 
 --- 
+
+## 📝 **Understanding Built-in Scope and Redefining Names in Python**
+
+In Python, there are several built-in functions, constants, and modules that you can use without importing anything. These are available because they reside in the **built-in scope**. Let's discuss how Python handles the built-in scope, what it means to redefine these built-ins, and some best practices to avoid common pitfalls.
+
+---
+
+### 📋 **What is Built-in Scope?**
+The **built-in scope** in Python consists of names that are predefined and always available. This includes:
+- Functions like `print()`, `len()`, `open()`
+- Constants like `True`, `False`, `None`
+- Exceptions like `ValueError`, `TypeError`
+
+Python will check the **built-in scope** last when it tries to resolve a variable name, following the **LEGB rule**:
+1. **Local**: Inside the current function.
+2. **Enclosing**: In the local scope of any enclosing function.
+3. **Global**: At the module level.
+4. **Built-in**: Predefined names.
+
+### 📋 **How to View All Built-in Names**
+To get a list of all built-in names in Python, you can use the **`dir()`** function on the `builtins` module:
+```python
+import builtins
+print(dir(builtins))
+```
+
+#### **Example Output**:
+```
+['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException',
+ 'bool', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', ... ]
+```
+This will print a list of all available **functions**, **exceptions**, and **constants** in the built-in scope.
+
+---
+
+### 🔄 **Redefining Built-in Names: Be Careful!**
+Python allows you to **redefine built-in names**, but doing so can lead to unexpected behavior. Here’s why:
+- If you create a variable named `open`, you **hide** the built-in `open()` function.
+- Once overridden, you can't use the original `open()` function unless you specifically reference it from the `builtins` module.
+
+#### 📂 **Example: Redefining a Built-in Name**
+```python
+# Redefine the built-in open function
+open = "This is not a function anymore!"  # Overrides the built-in open
+print(open)  # Output: This is not a function anymore!
+
+# Now, try to use open() to open a file:
+try:
+    open("example.txt", "r")
+except TypeError as e:
+    print(f"Error: {e}")
+```
+
+#### **Output**:
+```
+This is not a function anymore!
+Error: 'str' object is not callable
+```
+
+#### **Explanation**:
+1. **`open`** is redefined as a **string**. This hides the built-in **`open()`** function within the local or global scope.
+2. Trying to use **`open()`** after redefinition causes a **TypeError** because `open` is no longer a function; it's a string.
+
+### 📋 **How to Safely Access Built-ins After Overriding**
+If you accidentally override a built-in name, you can still access the original function using the **`builtins`** module:
+```python
+import builtins
+
+# Safely using built-ins after overriding
+open = "Overridden Open"  # Overrides the built-in open
+print(open)  # Prints the string
+
+# Access the original built-in open
+with builtins.open("example.txt", "w") as file:
+    file.write("This is safe!")
+```
+- **Explanation**: The `builtins.open` lets you safely access the original `open` function even after it’s been redefined locally.
+
+### 📋 **Best Practices to Avoid Overriding Built-ins**
+1. **Choose unique variable names** that do not clash with built-ins.
+2. **Avoid using built-in names** such as `list`, `str`, `sum`, etc., for your variables.
+3. **Restore built-in functionality** if overridden by using `del`:
+   ```python
+   list = [1, 2, 3]  # Overrides built-in list function
+   print(list)  # Output: [1, 2, 3]
+   del list  # Remove override
+   print(list("123"))  # Built-in list function works again
+   ```
+
+### 📝 **Example: Safely Overriding and Using Built-in Functions**
+```python
+# Safely using built-ins after overriding
+import builtins
+
+def process_data():
+    len = "Overridden Length"  # Override the built-in len function
+    print(len)  # Prints the string
+    print(builtins.len([1, 2, 3, 4]))  # Safely use the original len function
+
+process_data()
+```
+
+#### **Output**:
+```
+Overridden Length
+4
+```
+
+--- 
