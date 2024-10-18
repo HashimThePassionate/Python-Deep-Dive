@@ -602,3 +602,126 @@ After Update: {'name': 'Muhammad Hashim', 'profession': 'Software Engineer', 'pr
 
 
 ---
+
+### 📋 **The Concept of Nested Functions and Enclosing Scope**
+
+A **nested function** is a function defined inside another function. This creates an **enclosing scope**—the outer function's local variables can be accessed by the inner function.
+
+#### ✅ **Example: Nested Function Accessing Enclosing Scope**
+```python
+def greet():
+    message = "Hello, Muhammad Hashim!"  # Enclosing scope
+
+    def print_message():
+        print(message)  # Accessing 'message' from enclosing scope
+
+    print_message()
+
+greet()  # Output: Hello, Muhammad Hashim!
+```
+- **Explanation**: The inner function `print_message` can access `message`, even though `message` is not defined within it. This is due to the **Enclosing scope** created by `greet()`.
+
+### 📋 **The `global` Keyword: Access and Modify Global Variables**
+
+The **`global`** keyword allows you to modify a global variable from within a function. Without declaring it as `global`, Python treats it as a local variable.
+
+#### 🚫 **Example: Without `global` (Incorrect Usage)**
+```python
+counter = 0
+
+def increment():
+    counter += 1  # Error: Python treats 'counter' as local, which is not yet assigned
+
+increment()  # Raises UnboundLocalError
+```
+
+#### ✅ **Correct Usage with `global`**
+```python
+counter = 0  # Global variable
+
+def increment():
+    global counter  # Declaring 'counter' as global
+    counter += 1
+
+increment()
+print(counter)  # Output: 1
+```
+- **Explanation**: Using `global` tells Python that the `counter` inside `increment()` refers to the global `counter`.
+
+### 📋 **The `nonlocal` Keyword: Modify Variables in Enclosing Scopes (Python 3.x)**
+
+The **`nonlocal`** keyword is used to modify variables in the nearest **enclosing scope**. This allows inner functions to change variables defined in their enclosing function.
+
+#### ✅ **Example: Using `nonlocal`**
+```python
+def outer():
+    age = 25  # Enclosing scope
+
+    def inner():
+        nonlocal age  # Declaring 'age' as nonlocal
+        age = 30  # Modify the enclosing 'age'
+    
+    inner()
+    print(f"Muhammad Hashim's updated age: {age}")
+
+outer()  # Output: Muhammad Hashim's updated age: 30
+```
+- **Explanation**: By declaring `age` as `nonlocal`, the inner function can modify `age` in `outer()`.
+
+### 📋 **Factory Functions and Closures**
+
+**Closures** are nested functions that "remember" values from their enclosing scopes even after the outer function has completed execution. This can be a useful way to create functions with customized behavior.
+
+#### ✅ **Example: Creating a Closure**
+```python
+def multiplier(factor):
+    def multiply(number):
+        return number * factor  # 'factor' is remembered from enclosing scope
+    
+    return multiply
+
+double = multiplier(2)
+print(double(5))  # Output: 10
+
+triple = multiplier(3)
+print(triple(5))  # Output: 15
+```
+- **Explanation**: 
+  - `double` and `triple` are closures created by `multiplier(2)` and `multiplier(3)`, respectively. 
+  - Each closure "remembers" its own `factor`, allowing you to reuse `multiplier` flexibly.
+
+### 📋 **Loop Variables and the Default Argument Trap**
+
+If you create functions within a loop, be cautious—loop variables may not behave as you expect. To avoid unexpected behavior, use **default arguments**.
+
+#### 🚫 **Incorrect Example: Loop Variables in Closures**
+```python
+def create_actions():
+    actions = []
+    for i in range(3):
+        actions.append(lambda: print(i))  # Each lambda will reference the same 'i'
+    return actions
+
+actions = create_actions()
+actions[0]()  # Output: 2
+actions[1]()  # Output: 2
+actions[2]()  # Output: 2
+```
+- **Problem**: Each lambda references `i` as it was when the loop ended, which is `2`.
+
+#### ✅ **Correct Usage: Preserve Loop Variable with Default Arguments**
+```python
+def create_actions():
+    actions = []
+    for i in range(3):
+        actions.append(lambda i=i: print(i))  # Capture 'i' at each iteration
+    return actions
+
+actions = create_actions()
+actions[0]()  # Output: 0
+actions[1]()  # Output: 1
+actions[2]()  # Output: 2
+```
+- **Explanation**: By setting `i=i` in the lambda, each function captures its own value of `i`.
+
+---
