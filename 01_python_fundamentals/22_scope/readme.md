@@ -383,3 +383,222 @@ Overridden Length
 ```
 
 --- 
+
+## 📝 **Understanding Global Variables and Best Practices in Python**
+
+When programming in Python, it’s crucial to manage how your functions handle variables to avoid common pitfalls. While global variables can be useful, overreliance on them may lead to bugs and difficult-to-maintain code. Let’s explore the concept of global variables, why we should minimize their use, and the preferred way of passing data using function arguments and return values. We'll also see practical examples featuring Muhammad Hashim.
+
+### 📋 **What Are Global Variables?**
+- **Global variables** are defined at the top level of a script or module, making them accessible throughout the entire file.
+- These variables can be read or modified by any function within the same module, leading to potential issues when multiple functions modify them.
+
+#### 📂 **Example of a Global Variable**
+```python
+age = 25  # Global variable
+
+def print_age():
+    print(f"Muhammad Hashim is {age} years old.")  # Accessing global variable inside a function
+
+print_age()  # Output: Muhammad Hashim is 25 years old.
+```
+
+- **Explanation**: The variable `age` is defined globally, making it accessible to `print_age()`. However, if `age` were to be modified elsewhere, it could cause unintended side effects.
+
+### 📋 **The `global` Statement**
+To modify a global variable inside a function, you need to use the **`global`** statement. Without it, Python treats the variable as local.
+
+#### 📂 **Example of Modifying a Global Variable**
+```python
+experience = 3  # Global variable representing years of experience
+
+def update_experience():
+    global experience  # Declare as global
+    experience = 5  # Modify the global variable
+
+print("Before:", experience)  # Output: 3
+update_experience()
+print("After:", experience)  # Output: 5
+```
+
+- **Explanation**: The `global` statement allows `update_experience()` to modify the global variable `experience`. However, overusing global variables can lead to harder-to-debug code.
+
+### 📋 **Why Minimize Global Variables?**
+Global variables can cause several issues:
+1. **Hard to Debug**: Changes in one part of the program can affect other parts unexpectedly.
+2. **Difficult to Reuse Code**: Functions relying on global variables are harder to reuse because they depend on data defined outside their scope.
+3. **Unintended Overwrites**: Accidentally modifying a global variable can lead to unexpected behavior.
+
+#### **Best Practice**: Use **function arguments** and **return values** instead of global variables. This leads to cleaner and more maintainable code.
+
+### 📋 **Preferred Approach: Use Function Arguments & Return Values**
+Instead of relying on global variables, a better approach is to use **function arguments** to pass data into functions and **return values** to get data out of functions. This ensures that each function is self-contained and predictable.
+
+#### ✅ **Better Practice: Passing Arguments & Using Return Values**
+```python
+# Recommended
+def calculate_age(birth_year):
+    current_year = 2024
+    return current_year - birth_year
+
+muhammad_age = calculate_age(1999)
+print(f"Muhammad Hashim is {muhammad_age} years old.")  # Output: Muhammad Hashim is 25 years old.
+```
+
+- **Explanation**: Here, `birth_year` is passed as an argument to `calculate_age`, making the function self-contained and flexible. The function doesn’t rely on any external data, and its behavior is predictable.
+
+### 📋 **Combining Concepts: Managing State Without Globals**
+Suppose you want to calculate Muhammad Hashim's yearly savings based on income and expenses. Instead of using global variables, let’s see how you can write clean and modular code using function arguments.
+
+#### 🚫 **Avoid Using Globals:**
+```python
+# Not recommended
+monthly_income = 5000
+monthly_expenses = 3000
+
+def calculate_monthly_savings():
+    return monthly_income - monthly_expenses
+
+def predict_yearly_savings():
+    return calculate_monthly_savings() * 12
+
+print(f"Predicted Yearly Savings: {predict_yearly_savings()}")  # Output: 24000
+```
+
+- **Explanation**: The functions depend on global variables, making them harder to reuse or test with different inputs.
+
+#### ✅ **Better Practice: Pass as Arguments & Return Values**
+```python
+# Recommended
+def calculate_monthly_savings(income, expenses):
+    return income - expenses
+
+def predict_yearly_savings(income, expenses):
+    monthly_savings = calculate_monthly_savings(income, expenses)
+    return monthly_savings * 12
+
+income = 5000
+expenses = 3000
+yearly_savings = predict_yearly_savings(income, expenses)
+
+print(f"Predicted Yearly Savings: {yearly_savings}")  # Output: 24000
+```
+
+- **Explanation**: By passing `income` and `expenses` as arguments, the functions are now independent of any external data. They can be reused or tested with different inputs without any changes to the global state.
+
+### 📝 **Understanding Global Variables and Best Practices in Python (Using Muhammad Hashim)**
+
+Global variables can be powerful but should be used carefully to maintain clean, efficient, and error-free code. Let’s explore how they work, their best practices, and how to use them effectively in Python with examples featuring Muhammad Hashim.
+
+---
+
+### 📋 **What Are Global Variables?**
+- **Global variables** are defined at the top level of a module or script, making them accessible throughout the entire file. They allow data to be shared across different functions.
+- Python’s **LEGB (Local, Enclosing, Global, Built-in)** rule determines how variables are searched for. Global variables fall under the **Global (G)** scope.
+
+#### 📂 **Example of a Global Variable**
+```python
+age = 25  # Global variable
+
+def print_age():
+    print(f"Muhammad Hashim is {age} years old.")  # Accessing global variable inside a function
+```
+
+### 📋 **Global Variables Across Multiple Files**
+You can access global variables from other modules, but this should be done cautiously.
+
+#### 📂 **Example of Accessing Globals from Another File**
+- **File 1: `muhammad.py`**
+    ```python
+    city = "Lahore"  # Global variable in muhammad.py
+    ```
+
+- **File 2: `details.py`**
+    ```python
+    import muhammad
+
+    print(f"Muhammad Hashim lives in {muhammad.city}.")  # Access global variable from muhammad.py
+    muhammad.city = "Islamabad"  # Modify global variable from muhammad.py
+    ```
+
+- **Explanation**: When `details.py` imports `muhammad`, it can access and modify `city`. This can lead to **cross-file dependencies**, which may make the code difficult to manage.
+
+### 📋 **Better Practice: Use Accessor Functions**
+Instead of directly modifying global variables, it's better to manage changes through functions. This makes the code clearer and easier to maintain.
+
+#### 📂 **Example with Accessor Functions**
+- **File 1: `muhammad.py`**
+    ```python
+    skill_level = "Intermediate"
+
+    def set_skill_level(level):
+        global skill_level
+        skill_level = level  # Modify global variable explicitly
+
+    def get_skill_level():
+        return skill_level
+    ```
+
+- **File 2: `details.py`**
+    ```python
+    import muhammad
+
+    print(f"Muhammad Hashim's skill level: {muhammad.get_skill_level()}.")  # Output: Intermediate
+    muhammad.set_skill_level("Expert")  # Modify using accessor function
+    print(f"Updated skill level: {muhammad.get_skill_level()}.")  # Output: Expert
+    ```
+
+- **Explanation**: Using `set_skill_level()` and `get_skill_level()` makes it explicit that any changes happen through controlled functions.
+
+### 📋 **Global Variables in Multithreading**
+Global variables can be used as **shared memory** between threads. When multiple threads access and modify the same global variable, it may lead to **race conditions**. Always use **thread synchronization** (e.g., `threading.Lock`) when working with threads and global variables.
+
+### 📋 **Alternative Approach: Using `sys.modules` to Access Globals**
+Another way to manage global variables is to access them as module attributes. Here’s an example that demonstrates this:
+
+#### 📂 **Example: Using `sys.modules`**
+- **File: `hashim.py`**
+    ```python
+    import sys
+
+    projects_completed = 15  # Global variable
+
+    def increment_projects():
+        sys.modules[__name__].projects_completed += 1  # Access and modify global variable
+    ```
+
+- **Explanation**: Using `sys.modules` lets you access the module itself, which allows for modifying global variables explicitly.
+
+### 📋 **Detailed Example: Managing Global Configuration with Proper Techniques**
+```python
+# File: config.py
+settings = {
+    "name": "Muhammad Hashim",
+    "profession": "Software Engineer",
+    "projects": 10
+}
+
+def update_settings(key, value):
+    global settings
+    if key in settings:
+        settings[key] = value
+    else:
+        raise KeyError("Key does not exist in settings")
+
+# File: app.py
+from config import settings, update_settings
+
+print("Before Update:", settings)
+update_settings("projects", 12)
+print("After Update:", settings)
+```
+
+#### **Output**:
+```
+Before Update: {'name': 'Muhammad Hashim', 'profession': 'Software Engineer', 'projects': 10}
+After Update: {'name': 'Muhammad Hashim', 'profession': 'Software Engineer', 'projects': 12}
+```
+
+- **Explanation**: This approach of managing settings through functions allows clear, controlled updates and avoids accidental modifications.
+
+
+---
