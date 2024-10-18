@@ -156,3 +156,121 @@ Outside all: Global X
 
 --- 
 
+## 🔄 **The LEGB Rule**
+Python follows the **LEGB rule** to resolve variable names:
+1. **Local (L)**: Variables defined **inside the current function**.
+2. **Enclosing (E)**: Variables in the **outer function** (if the current function is nested).
+3. **Global (G)**: Variables defined at the **module level**.
+4. **Built-in (B)**: Predefined Python functions and constants.
+
+### 📂 **Example: LEGB Rule in Action**
+
+```python
+# Global Scope
+name = "Muhammad Hashim"  # Global variable
+
+def outer():
+    name = "Hashim"  # Enclosing (Nonlocal) variable
+
+    def inner():
+        name = "Local Hashim"  # Local variable
+        print(f"Inside inner: {name}")
+
+    inner()
+    print(f"Inside outer: {name}")
+
+outer()
+print(f"Global scope: {name}")
+```
+
+#### **Output**:
+```
+Inside inner: Local Hashim
+Inside outer: Hashim
+Global scope: Muhammad Hashim
+```
+
+#### **Explanation**:
+1. **`inner()`** function prints **`"Local Hashim"`** because **`name`** is a **local variable** inside `inner`.
+2. **`outer()`** function prints **`"Hashim"`** because **`name`** refers to the **enclosing nonlocal variable** in `outer`.
+3. **Global scope** prints **`"Muhammad Hashim"`**, the **global variable**.
+
+### 📋 **Detailed Rules and Use Cases**:
+
+1. **Assignments Create Local Variables**:
+   - When you **assign** a variable inside a function, Python treats it as **local** unless explicitly declared otherwise.
+   - **Example**:
+     ```python
+     def test():
+         x = 10  # Local variable
+         print(x)
+
+     test()
+     print(x)  # Error: x is not defined (outside local scope)
+     ```
+
+2. **Using `global`**:
+   - The **`global`** keyword tells Python to **use** a **global variable** instead of creating a new **local variable**.
+   - **Example**:
+     ```python
+     count = 0  # Global variable
+
+     def increment():
+         global count
+         count += 1
+
+     increment()
+     print(count)  # Output: 1
+     ```
+   - **Explanation**: The `global` keyword allows `increment` to modify the `count` variable globally.
+
+3. **Using `nonlocal`**:
+   - The **`nonlocal`** keyword is used to refer to **enclosing variables** from the outer function.
+   - **Example**:
+     ```python
+     def outer():
+         count = 0
+
+         def inner():
+             nonlocal count
+             count += 1
+             print(f"Inner count: {count}")
+
+         inner()
+         print(f"Outer count: {count}")
+
+     outer()
+     # Output:
+     # Inner count: 1
+     # Outer count: 1
+     ```
+   - **Explanation**: The `nonlocal` keyword allows `inner` to modify `count` in `outer`, so the change is visible in both scopes.
+
+### 📂 **Advanced Example Demonstrating Scope**:
+
+```python
+# Global Scope
+X = 99  # Global variable
+
+def func(Y):  # Y is a local variable
+    # Local Scope
+    Z = X + Y  # X is global, Y and Z are local
+    return Z
+
+result = func(1)  # func is called with Y=1
+print(result)  # Output: 100
+```
+
+#### **Explanation**:
+1. **Global Scope**:
+   - **`X`** is **global** because it's defined at the **module level**.
+   - **`func`** is also global, available throughout the module.
+2. **Local Scope**:
+   - **`Y`** and **`Z`** are **local** to **`func()`**, created and used only when **`func()`** runs.
+3. **Variable References**:
+   - When **`Z = X + Y`** is executed, Python uses the **LEGB** rule:
+     - **`X`** is found in the **global scope**.
+     - **`Y`** is found in the **local scope**.
+     - **`Z`** is assigned locally and can only be accessed **within** `func()`.
+
+--- 
