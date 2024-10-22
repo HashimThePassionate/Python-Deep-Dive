@@ -49,7 +49,7 @@ greet()  # Output: Hello, Muhammad Hashim
 print(name)  # Output: Muhammad Hashim
 ```
 
-###**Explanation**:
+### **Explanation**:
 - The **`name`** variable is defined **outside** any function, so it is **global**.
 - Both the `greet()` function and the **main program** can access it.
 
@@ -67,13 +67,13 @@ greet()  # Output: Hello, Hashim
 print(name)  # Output: Muhammad Hashim
 ```
 
-###**Explanation**:
+### **Explanation**:
 - The **`name`** inside `greet()` is **local** to the function and **different** from the **global `name`**.
 - When **`greet()`** is called, it prints **"Hashim"** (the local `name`). Outside of `greet()`, it prints **"Muhammad Hashim"** (the global `name`).
 
 ## 📂 **Understanding Nonlocal Scope with Nested Functions**
 
-###**4. Nonlocal Variables: Variables in an Enclosing Function**
+### **4. Nonlocal Variables: Variables in an Enclosing Function**
 If you have **nested functions**, a variable defined in the **enclosing function** is **nonlocal** to the nested function.
 
 ```python
@@ -91,13 +91,13 @@ def outer():
 outer()
 ```
 
-###**Output**:
+### **Output**:
 ```
 Inside inner: Muhammad Hashim
 Inside outer: Muhammad Hashim
 ```
 
-###**Explanation**:
+### **Explanation**:
 - The `name` defined inside `outer()` is **nonlocal** because it is **enclosing** for `inner()`.
 - By using **`nonlocal`**, the `inner()` function can **modify** the **`name`** variable from `outer()`. Without **`nonlocal`**, a new **local variable** would have been created inside `inner()`.
 
@@ -126,14 +126,14 @@ outer()
 print(f"Outside all: {X}")
 ```
 
-###**Output**:
+### **Output**:
 ```
 Inside inner: Inner X
 Inside outer: Inner X
 Outside all: Global X
 ```
 
-###**Explanation**:
+### **Explanation**:
 - **Global X** is defined at the **module level**.
 - **`X = "Outer X"`** is **nonlocal** because it's inside the `outer()` function, and it **can be accessed** by `inner()` if **`nonlocal`** is used.
 - **`inner()`** modifies **nonlocal X** because **`nonlocal`** allows it to change the variable defined in `outer()`.
