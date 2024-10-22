@@ -20,7 +20,7 @@ In Python, **scope** refers to the part of the program where a **variable** can 
 
 ## 📂 **Examples of Different Scopes**
 
-###**1. Local Scope: Variables Inside a Function**
+### **1. Local Scope: Variables Inside a Function**
 Variables defined within a function are **local** to that function.
 
 ```python
@@ -32,11 +32,11 @@ greet()  # Output: Hello, Muhammad Hashim
 print(name)  # Error: name is not defined
 ```
 
-###**Explanation**:
+### **Explanation**:
 - **`name`** is a **local variable** defined inside the `greet()` function.
 - It is only accessible within the `greet()` function. Trying to access it **outside** the function will result in an **error** because **`name` does not exist** in the global scope.
 
-###**2. Global Scope: Variables Defined Outside Functions**
+### **2. Global Scope: Variables Defined Outside Functions**
 Variables defined **outside** of all functions are **global** and can be accessed anywhere.
 
 ```python
@@ -49,11 +49,11 @@ greet()  # Output: Hello, Muhammad Hashim
 print(name)  # Output: Muhammad Hashim
 ```
 
-### **Explanation**:
+###  **Explanation**:
 - The **`name`** variable is defined **outside** any function, so it is **global**.
 - Both the `greet()` function and the **main program** can access it.
 
-###**3. Local and Global Variables with the Same Name**
+### **3. Local and Global Variables with the Same Name**
 Even if a local and global variable have the **same name**, they are treated as **different variables**.
 
 ```python
@@ -67,13 +67,13 @@ greet()  # Output: Hello, Hashim
 print(name)  # Output: Muhammad Hashim
 ```
 
-### **Explanation**:
+###  **Explanation**:
 - The **`name`** inside `greet()` is **local** to the function and **different** from the **global `name`**.
 - When **`greet()`** is called, it prints **"Hashim"** (the local `name`). Outside of `greet()`, it prints **"Muhammad Hashim"** (the global `name`).
 
 ## 📂 **Understanding Nonlocal Scope with Nested Functions**
 
-### **4. Nonlocal Variables: Variables in an Enclosing Function**
+###  **4. Nonlocal Variables: Variables in an Enclosing Function**
 If you have **nested functions**, a variable defined in the **enclosing function** is **nonlocal** to the nested function.
 
 ```python
@@ -91,13 +91,13 @@ def outer():
 outer()
 ```
 
-### **Output**:
+###  **Output**:
 ```
 Inside inner: Muhammad Hashim
 Inside outer: Muhammad Hashim
 ```
 
-### **Explanation**:
+###  **Explanation**:
 - The `name` defined inside `outer()` is **nonlocal** because it is **enclosing** for `inner()`.
 - By using **`nonlocal`**, the `inner()` function can **modify** the **`name`** variable from `outer()`. Without **`nonlocal`**, a new **local variable** would have been created inside `inner()`.
 
@@ -126,14 +126,14 @@ outer()
 print(f"Outside all: {X}")
 ```
 
-### **Output**:
+###  **Output**:
 ```
 Inside inner: Inner X
 Inside outer: Inner X
 Outside all: Global X
 ```
 
-### **Explanation**:
+###  **Explanation**:
 - **Global X** is defined at the **module level**.
 - **`X = "Outer X"`** is **nonlocal** because it's inside the `outer()` function, and it **can be accessed** by `inner()` if **`nonlocal`** is used.
 - **`inner()`** modifies **nonlocal X** because **`nonlocal`** allows it to change the variable defined in `outer()`.
@@ -163,7 +163,7 @@ Python follows the **LEGB rule** to resolve variable names:
 3. **Global (G)**: Variables defined at the **module level**.
 4. **Built-in (B)**: Predefined Python functions and constants.
 
-### 📂 **Example: LEGB Rule in Action**
+###  📂 **Example: LEGB Rule in Action**
 
 ```python
 # Global Scope
@@ -183,19 +183,19 @@ outer()
 print(f"Global scope: {name}")
 ```
 
-#### **Output**:
+### # **Output**:
 ```
 Inside inner: Local Hashim
 Inside outer: Hashim
 Global scope: Muhammad Hashim
 ```
 
-#### **Explanation**:
+### # **Explanation**:
 1. **`inner()`** function prints **`"Local Hashim"`** because **`name`** is a **local variable** inside `inner`.
 2. **`outer()`** function prints **`"Hashim"`** because **`name`** refers to the **enclosing nonlocal variable** in `outer`.
 3. **Global scope** prints **`"Muhammad Hashim"`**, the **global variable**.
 
-### 📋 **Detailed Rules and Use Cases**:
+###  📋 **Detailed Rules and Use Cases**:
 
 1. **Assignments Create Local Variables**:
    - When you **assign** a variable inside a function, Python treats it as **local** unless explicitly declared otherwise.
@@ -246,7 +246,7 @@ Global scope: Muhammad Hashim
      ```
    - **Explanation**: The `nonlocal` keyword allows `inner` to modify `count` in `outer`, so the change is visible in both scopes.
 
-### 📂 **Advanced Example Demonstrating Scope**:
+###  📂 **Advanced Example Demonstrating Scope**:
 
 ```python
 # Global Scope
@@ -261,7 +261,7 @@ result = func(1)  # func is called with Y=1
 print(result)  # Output: 100
 ```
 
-#### **Explanation**:
+### # **Explanation**:
 1. **Global Scope**:
    - **`X`** is **global** because it's defined at the **module level**.
    - **`func`** is also global, available throughout the module.
@@ -281,7 +281,7 @@ In Python, there are several built-in functions, constants, and modules that you
 
 ---
 
-### 📋 **What is Built-in Scope?**
+###  📋 **What is Built-in Scope?**
 The **built-in scope** in Python consists of names that are predefined and always available. This includes:
 - Functions like `print()`, `len()`, `open()`
 - Constants like `True`, `False`, `None`
@@ -293,14 +293,14 @@ Python will check the **built-in scope** last when it tries to resolve a variabl
 3. **Global**: At the module level.
 4. **Built-in**: Predefined names.
 
-### 📋 **How to View All Built-in Names**
+###  📋 **How to View All Built-in Names**
 To get a list of all built-in names in Python, you can use the **`dir()`** function on the `builtins` module:
 ```python
 import builtins
 print(dir(builtins))
 ```
 
-#### **Example Output**:
+### # **Example Output**:
 ```
 ['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException',
  'bool', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', ... ]
@@ -309,12 +309,12 @@ This will print a list of all available **functions**, **exceptions**, and **con
 
 ---
 
-### 🔄 **Redefining Built-in Names: Be Careful!**
+###  🔄 **Redefining Built-in Names: Be Careful!**
 Python allows you to **redefine built-in names**, but doing so can lead to unexpected behavior. Here’s why:
 - If you create a variable named `open`, you **hide** the built-in `open()` function.
 - Once overridden, you can't use the original `open()` function unless you specifically reference it from the `builtins` module.
 
-#### 📂 **Example: Redefining a Built-in Name**
+### # 📂 **Example: Redefining a Built-in Name**
 ```python
 # Redefine the built-in open function
 open = "This is not a function anymore!"  # Overrides the built-in open
@@ -327,17 +327,17 @@ except TypeError as e:
     print(f"Error: {e}")
 ```
 
-#### **Output**:
+### # **Output**:
 ```
 This is not a function anymore!
 Error: 'str' object is not callable
 ```
 
-#### **Explanation**:
+### # **Explanation**:
 1. **`open`** is redefined as a **string**. This hides the built-in **`open()`** function within the local or global scope.
 2. Trying to use **`open()`** after redefinition causes a **TypeError** because `open` is no longer a function; it's a string.
 
-### 📋 **How to Safely Access Built-ins After Overriding**
+###  📋 **How to Safely Access Built-ins After Overriding**
 If you accidentally override a built-in name, you can still access the original function using the **`builtins`** module:
 ```python
 import builtins
@@ -352,7 +352,7 @@ with builtins.open("example.txt", "w") as file:
 ```
 - **Explanation**: The `builtins.open` lets you safely access the original `open` function even after it’s been redefined locally.
 
-### 📋 **Best Practices to Avoid Overriding Built-ins**
+###  📋 **Best Practices to Avoid Overriding Built-ins**
 1. **Choose unique variable names** that do not clash with built-ins.
 2. **Avoid using built-in names** such as `list`, `str`, `sum`, etc., for your variables.
 3. **Restore built-in functionality** if overridden by using `del`:
@@ -363,7 +363,7 @@ with builtins.open("example.txt", "w") as file:
    print(list("123"))  # Built-in list function works again
    ```
 
-### 📝 **Example: Safely Overriding and Using Built-in Functions**
+###  📝 **Example: Safely Overriding and Using Built-in Functions**
 ```python
 # Safely using built-ins after overriding
 import builtins
@@ -376,7 +376,7 @@ def process_data():
 process_data()
 ```
 
-#### **Output**:
+### # **Output**:
 ```
 Overridden Length
 4
@@ -388,11 +388,11 @@ Overridden Length
 
 When programming in Python, it’s crucial to manage how your functions handle variables to avoid common pitfalls. While global variables can be useful, overreliance on them may lead to bugs and difficult-to-maintain code. Let’s explore the concept of global variables, why we should minimize their use, and the preferred way of passing data using function arguments and return values. We'll also see practical examples featuring Muhammad Hashim.
 
-### 📋 **What Are Global Variables?**
+###  📋 **What Are Global Variables?**
 - **Global variables** are defined at the top level of a script or module, making them accessible throughout the entire file.
 - These variables can be read or modified by any function within the same module, leading to potential issues when multiple functions modify them.
 
-#### 📂 **Example of a Global Variable**
+### # 📂 **Example of a Global Variable**
 ```python
 age = 25  # Global variable
 
@@ -404,10 +404,10 @@ print_age()  # Output: Muhammad Hashim is 25 years old.
 
 - **Explanation**: The variable `age` is defined globally, making it accessible to `print_age()`. However, if `age` were to be modified elsewhere, it could cause unintended side effects.
 
-### 📋 **The `global` Statement**
+###  📋 **The `global` Statement**
 To modify a global variable inside a function, you need to use the **`global`** statement. Without it, Python treats the variable as local.
 
-#### 📂 **Example of Modifying a Global Variable**
+### # 📂 **Example of Modifying a Global Variable**
 ```python
 experience = 3  # Global variable representing years of experience
 
@@ -422,18 +422,18 @@ print("After:", experience)  # Output: 5
 
 - **Explanation**: The `global` statement allows `update_experience()` to modify the global variable `experience`. However, overusing global variables can lead to harder-to-debug code.
 
-### 📋 **Why Minimize Global Variables?**
+###  📋 **Why Minimize Global Variables?**
 Global variables can cause several issues:
 1. **Hard to Debug**: Changes in one part of the program can affect other parts unexpectedly.
 2. **Difficult to Reuse Code**: Functions relying on global variables are harder to reuse because they depend on data defined outside their scope.
 3. **Unintended Overwrites**: Accidentally modifying a global variable can lead to unexpected behavior.
 
-#### **Best Practice**: Use **function arguments** and **return values** instead of global variables. This leads to cleaner and more maintainable code.
+### # **Best Practice**: Use **function arguments** and **return values** instead of global variables. This leads to cleaner and more maintainable code.
 
-### 📋 **Preferred Approach: Use Function Arguments & Return Values**
+###  📋 **Preferred Approach: Use Function Arguments & Return Values**
 Instead of relying on global variables, a better approach is to use **function arguments** to pass data into functions and **return values** to get data out of functions. This ensures that each function is self-contained and predictable.
 
-#### ✅ **Better Practice: Passing Arguments & Using Return Values**
+### # ✅ **Better Practice: Passing Arguments & Using Return Values**
 ```python
 # Recommended
 def calculate_age(birth_year):
@@ -446,10 +446,10 @@ print(f"Muhammad Hashim is {muhammad_age} years old.")  # Output: Muhammad Hashi
 
 - **Explanation**: Here, `birth_year` is passed as an argument to `calculate_age`, making the function self-contained and flexible. The function doesn’t rely on any external data, and its behavior is predictable.
 
-### 📋 **Combining Concepts: Managing State Without Globals**
+###  📋 **Combining Concepts: Managing State Without Globals**
 Suppose you want to calculate Muhammad Hashim's yearly savings based on income and expenses. Instead of using global variables, let’s see how you can write clean and modular code using function arguments.
 
-#### 🚫 **Avoid Using Globals:**
+### # 🚫 **Avoid Using Globals:**
 ```python
 # Not recommended
 monthly_income = 5000
@@ -466,7 +466,7 @@ print(f"Predicted Yearly Savings: {predict_yearly_savings()}")  # Output: 24000
 
 - **Explanation**: The functions depend on global variables, making them harder to reuse or test with different inputs.
 
-#### ✅ **Better Practice: Pass as Arguments & Return Values**
+### # ✅ **Better Practice: Pass as Arguments & Return Values**
 ```python
 # Recommended
 def calculate_monthly_savings(income, expenses):
@@ -485,17 +485,17 @@ print(f"Predicted Yearly Savings: {yearly_savings}")  # Output: 24000
 
 - **Explanation**: By passing `income` and `expenses` as arguments, the functions are now independent of any external data. They can be reused or tested with different inputs without any changes to the global state.
 
-### 📝 **Understanding Global Variables and Best Practices in Python (Using Muhammad Hashim)**
+###  📝 **Understanding Global Variables and Best Practices in Python (Using Muhammad Hashim)**
 
 Global variables can be powerful but should be used carefully to maintain clean, efficient, and error-free code. Let’s explore how they work, their best practices, and how to use them effectively in Python with examples featuring Muhammad Hashim.
 
 ---
 
-### 📋 **What Are Global Variables?**
+###  📋 **What Are Global Variables?**
 - **Global variables** are defined at the top level of a module or script, making them accessible throughout the entire file. They allow data to be shared across different functions.
 - Python’s **LEGB (Local, Enclosing, Global, Built-in)** rule determines how variables are searched for. Global variables fall under the **Global (G)** scope.
 
-#### 📂 **Example of a Global Variable**
+### # 📂 **Example of a Global Variable**
 ```python
 age = 25  # Global variable
 
@@ -503,10 +503,10 @@ def print_age():
     print(f"Muhammad Hashim is {age} years old.")  # Accessing global variable inside a function
 ```
 
-### 📋 **Global Variables Across Multiple Files**
+###  📋 **Global Variables Across Multiple Files**
 You can access global variables from other modules, but this should be done cautiously.
 
-#### 📂 **Example of Accessing Globals from Another File**
+### # 📂 **Example of Accessing Globals from Another File**
 - **File 1: `muhammad.py`**
     ```python
     city = "Lahore"  # Global variable in muhammad.py
@@ -522,10 +522,10 @@ You can access global variables from other modules, but this should be done caut
 
 - **Explanation**: When `details.py` imports `muhammad`, it can access and modify `city`. This can lead to **cross-file dependencies**, which may make the code difficult to manage.
 
-### 📋 **Better Practice: Use Accessor Functions**
+###  📋 **Better Practice: Use Accessor Functions**
 Instead of directly modifying global variables, it's better to manage changes through functions. This makes the code clearer and easier to maintain.
 
-#### 📂 **Example with Accessor Functions**
+### # 📂 **Example with Accessor Functions**
 - **File 1: `muhammad.py`**
     ```python
     skill_level = "Intermediate"
@@ -549,13 +549,13 @@ Instead of directly modifying global variables, it's better to manage changes th
 
 - **Explanation**: Using `set_skill_level()` and `get_skill_level()` makes it explicit that any changes happen through controlled functions.
 
-### 📋 **Global Variables in Multithreading**
+###  📋 **Global Variables in Multithreading**
 Global variables can be used as **shared memory** between threads. When multiple threads access and modify the same global variable, it may lead to **race conditions**. Always use **thread synchronization** (e.g., `threading.Lock`) when working with threads and global variables.
 
-### 📋 **Alternative Approach: Using `sys.modules` to Access Globals**
+###  📋 **Alternative Approach: Using `sys.modules` to Access Globals**
 Another way to manage global variables is to access them as module attributes. Here’s an example that demonstrates this:
 
-#### 📂 **Example: Using `sys.modules`**
+### # 📂 **Example: Using `sys.modules`**
 - **File: `hashim.py`**
     ```python
     import sys
@@ -568,7 +568,7 @@ Another way to manage global variables is to access them as module attributes. H
 
 - **Explanation**: Using `sys.modules` lets you access the module itself, which allows for modifying global variables explicitly.
 
-### 📋 **Detailed Example: Managing Global Configuration with Proper Techniques**
+###  📋 **Detailed Example: Managing Global Configuration with Proper Techniques**
 ```python
 # File: config.py
 settings = {
@@ -592,7 +592,7 @@ update_settings("projects", 12)
 print("After Update:", settings)
 ```
 
-#### **Output**:
+### # **Output**:
 ```
 Before Update: {'name': 'Muhammad Hashim', 'profession': 'Software Engineer', 'projects': 10}
 After Update: {'name': 'Muhammad Hashim', 'profession': 'Software Engineer', 'projects': 12}
@@ -603,11 +603,11 @@ After Update: {'name': 'Muhammad Hashim', 'profession': 'Software Engineer', 'pr
 
 ---
 
-### 📋 **The Concept of Nested Functions and Enclosing Scope**
+###  📋 **The Concept of Nested Functions and Enclosing Scope**
 
 A **nested function** is a function defined inside another function. This creates an **enclosing scope**—the outer function's local variables can be accessed by the inner function.
 
-#### ✅ **Example: Nested Function Accessing Enclosing Scope**
+### # ✅ **Example: Nested Function Accessing Enclosing Scope**
 ```python
 def greet():
     message = "Hello, Muhammad Hashim!"  # Enclosing scope
@@ -621,11 +621,11 @@ greet()  # Output: Hello, Muhammad Hashim!
 ```
 - **Explanation**: The inner function `print_message` can access `message`, even though `message` is not defined within it. This is due to the **Enclosing scope** created by `greet()`.
 
-### 📋 **The `global` Keyword: Access and Modify Global Variables**
+###  📋 **The `global` Keyword: Access and Modify Global Variables**
 
 The **`global`** keyword allows you to modify a global variable from within a function. Without declaring it as `global`, Python treats it as a local variable.
 
-#### 🚫 **Example: Without `global` (Incorrect Usage)**
+### # 🚫 **Example: Without `global` (Incorrect Usage)**
 ```python
 counter = 0
 
@@ -635,7 +635,7 @@ def increment():
 increment()  # Raises UnboundLocalError
 ```
 
-#### ✅ **Correct Usage with `global`**
+### # ✅ **Correct Usage with `global`**
 ```python
 counter = 0  # Global variable
 
@@ -648,11 +648,11 @@ print(counter)  # Output: 1
 ```
 - **Explanation**: Using `global` tells Python that the `counter` inside `increment()` refers to the global `counter`.
 
-### 📋 **The `nonlocal` Keyword: Modify Variables in Enclosing Scopes (Python 3.x)**
+###  📋 **The `nonlocal` Keyword: Modify Variables in Enclosing Scopes (Python 3.x)**
 
 The **`nonlocal`** keyword is used to modify variables in the nearest **enclosing scope**. This allows inner functions to change variables defined in their enclosing function.
 
-#### ✅ **Example: Using `nonlocal`**
+### # ✅ **Example: Using `nonlocal`**
 ```python
 def outer():
     age = 25  # Enclosing scope
@@ -668,11 +668,11 @@ outer()  # Output: Muhammad Hashim's updated age: 30
 ```
 - **Explanation**: By declaring `age` as `nonlocal`, the inner function can modify `age` in `outer()`.
 
-### 📋 **Factory Functions and Closures**
+###  📋 **Factory Functions and Closures**
 
 **Closures** are nested functions that "remember" values from their enclosing scopes even after the outer function has completed execution. This can be a useful way to create functions with customized behavior.
 
-#### ✅ **Example: Creating a Closure**
+### # ✅ **Example: Creating a Closure**
 ```python
 def multiplier(factor):
     def multiply(number):
@@ -690,11 +690,11 @@ print(triple(5))  # Output: 15
   - `double` and `triple` are closures created by `multiplier(2)` and `multiplier(3)`, respectively. 
   - Each closure "remembers" its own `factor`, allowing you to reuse `multiplier` flexibly.
 
-### 📋 **Loop Variables and the Default Argument Trap**
+###  📋 **Loop Variables and the Default Argument Trap**
 
 If you create functions within a loop, be cautious—loop variables may not behave as you expect. To avoid unexpected behavior, use **default arguments**.
 
-#### 🚫 **Incorrect Example: Loop Variables in Closures**
+### # 🚫 **Incorrect Example: Loop Variables in Closures**
 ```python
 def create_actions():
     actions = []
@@ -709,7 +709,7 @@ actions[2]()  # Output: 2
 ```
 - **Problem**: Each lambda references `i` as it was when the loop ended, which is `2`.
 
-#### ✅ **Correct Usage: Preserve Loop Variable with Default Arguments**
+### # ✅ **Correct Usage: Preserve Loop Variable with Default Arguments**
 ```python
 def create_actions():
     actions = []
@@ -732,7 +732,7 @@ In Python, the `nonlocal` keyword is an advanced tool that allows a **nested fun
 
 Unlike `global`, which affects the **module-level** scope, `nonlocal` restricts its operation to **enclosing function scopes**, enabling more controlled state management without using **global variables**.
 
-### 📋 **1. What is `nonlocal`?**
+###  📋 **1. What is `nonlocal`?**
 
 The `nonlocal` statement enables a function defined within another function (a **nested function**) to access and modify variables from the outer function's scope. Without `nonlocal`, these variables are **read-only** by default; attempting to modify them would cause an **error**.
 
@@ -753,11 +753,11 @@ The `nonlocal` statement enables a function defined within another function (a *
 - **Explanation**: 
   - The inner function can **both read and modify** `x` from `outer()` because of `nonlocal`. Without `nonlocal`, Python would treat `x` as **local** to `inner()`, leading to an error.
 
-### 📋 **2. Why Use `nonlocal`?**
+###  📋 **2. Why Use `nonlocal`?**
 
 The `nonlocal` keyword is especially useful for **state retention** within nested functions, enabling functions to carry out tasks like **counters**, **trackers**, and other tasks requiring **persistent state** between function calls.
 
-### ✅ **Example: Counter Using `nonlocal` (With Muhammad Hashim's Scenario)**
+###  ✅ **Example: Counter Using `nonlocal` (With Muhammad Hashim's Scenario)**
 
 ```python
 def create_counter(start=25):
@@ -780,7 +780,7 @@ counter()  # Output: Muhammad Hashim's age is now: 27
   - The **nested `increment`** function can modify `age` because it is marked `nonlocal`.
   - Each call to `counter()` increments the `age`.
 
-### 📋 **3. Comparison: `nonlocal` vs `global`**
+###  📋 **3. Comparison: `nonlocal` vs `global`**
 
 | **Feature**    | **`nonlocal`**                                     | **`global`**                                   |
 |----------------|----------------------------------------------------|------------------------------------------------|
@@ -789,7 +789,7 @@ counter()  # Output: Muhammad Hashim's age is now: 27
 | Must Exist?    | Yes (must be pre-defined in the enclosing scope)  | No (can be created dynamically)               |
 | Usage Context  | Better for retaining state within nested functions | Suitable for values shared across modules    |
 
-#### 🚫 **Incorrect Usage: Without `nonlocal`**
+### # 🚫 **Incorrect Usage: Without `nonlocal`**
 ```python
 def counter():
     count = 0  # Enclosing variable
@@ -804,11 +804,11 @@ counter()
 ```
 - **Error Explanation**: Since `count` is modified, Python treats it as **local** inside `increment()`. This results in an **UnboundLocalError** because it is not defined as a local variable.
 
-### 📋 **4. Advanced Example: Stateful Factory Function**
+###  📋 **4. Advanced Example: Stateful Factory Function**
 
 Factory functions can create **closures**—nested functions that "remember" variables from the enclosing scope. Here’s how `nonlocal` can be used to manage **persistent state**.
 
-#### ✅ **Example: Tracking Progress (With Muhammad Hashim's Example)**
+### # ✅ **Example: Tracking Progress (With Muhammad Hashim's Example)**
 ```python
 def progress_tracker(initial_steps=0):
     steps = initial_steps  # Enclosing variable
@@ -833,13 +833,13 @@ another_tracker()  # Output: Muhammad Hashim has completed 110 steps!
   - Each call to `tracker()` modifies `steps` because it is declared as `nonlocal`, ensuring the state is **persistent**.
   - Multiple counters (`tracker`, `another_tracker`) maintain **independent** states.
 
-### 📋 **5. How `nonlocal` Works Internally**
+###  📋 **5. How `nonlocal` Works Internally**
 
 1. **Declaration**: When you declare a variable as `nonlocal`, Python skips the **local scope** and starts searching for the variable in the **enclosing scope**.
 2. **Modification**: This allows modification of the variable instead of treating it as read-only.
 3. **Error Handling**: The variable must **already exist** in the enclosing function; otherwise, Python will raise a **SyntaxError**.
 
-#### 🚫 **Incorrect Example: `nonlocal` Must Reference an Existing Variable**
+### # 🚫 **Incorrect Example: `nonlocal` Must Reference an Existing Variable**
 ```python
 def outer_function():
     def inner_function():
@@ -852,11 +852,11 @@ outer_function()  # Raises SyntaxError
 ```
 - **Error Explanation**: Since `value` is not defined in `outer_function`, `nonlocal` cannot reference it. **`nonlocal` does not create new variables**.
 
-### 📋 **6. Alternative State Retention Methods**
+###  📋 **6. Alternative State Retention Methods**
 
 Before `nonlocal` was introduced, programmers often relied on **classes**, **globals**, and **function attributes** for state management.
 
-#### ✅ **Using Function Attributes**
+### # ✅ **Using Function Attributes**
 ```python
 def create_stateful():
     def inner():
