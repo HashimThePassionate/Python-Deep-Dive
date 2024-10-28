@@ -1,71 +1,121 @@
-# Inheritance
+# 📚 Single Inheritance in Python
+
+This guide explains **single inheritance** in Python using an example with `UIControl` as a base class and `TextBox` as a derived class. Single inheritance allows a child class to inherit methods and properties from a single parent class, promoting code reuse and modularity.
+
+---
+
+## 📑 Table of Contents
+
+1. [🔍 What is Single Inheritance?](#-what-is-single-inheritance)
+2. [⚙️ Code Example](#-code-example)
+3. [📝 Explanation](#-explanation)
+   - [UIControl Class](#uicontrol-class)
+   - [TextBox Class](#textbox-class)
+4. [💡 Usage Example](#-usage-example)
+5. [📜 Summary](#-summary)
+
+---
+
+### 🔍 What is Single Inheritance?
+
+In **single inheritance**, a class inherits from one and only one parent class. This means the child class can access methods and properties of the parent class, enabling **code reuse** and **logical structuring** of functionality.
+
+In our example:
+- The `UIControl` class serves as a base class, offering functionality to enable and disable a control.
+- The `TextBox` class inherits from `UIControl`, gaining the enabling/disabling functionality while adding text-related methods.
+
+---
+
+### ⚙️ Code Example
+
 ```python
 # Define a class named UIControl
 class UIControl:
-    # Initialize the class with a constructor
     def __init__(self):
-        # Set the initial state of _is_enabled to True
         self._is_enabled = True
 
-    # Define a method to enable the control
     def enable(self):
-        # Set _is_enabled to True
         self._is_enabled = True
 
-    # Define a method to disable the control
     def disable(self):
-        # Set _is_enabled to False
         self._is_enabled = False
 
-    # Define a method to check if the control is enabled
     def is_enabled(self):
-        # Return the current state of _is_enabled
         return self._is_enabled
 
 # Define a class named TextBox that inherits from UIControl
 class TextBox(UIControl):
-    # Initialize the class with a constructor
     def __init__(self):
-        # Call the constructor of the parent class (UIControl)
         super().__init__()
-        # Set the initial state of _text to an empty string
         self._text = ""
 
-    # Define a method to set the text of the TextBox
     def set_text(self, text):
-        # Set _text to the provided text
         self._text = text
 
-    # Define a method to clear the text of the TextBox
     def clear(self):
-        # Set _text to an empty string
         self._text = ""
 
 # Create an instance of the TextBox class
 control = TextBox()
-# Call the disable method on the control object
 control.disable()
-# Print the result of the is_enabled method, which checks if the control is enabled
-print(control.is_enabled())
+print(control.is_enabled())  # Output: False
 ```
 
-### Explanation:
+---
 
-1. **Class Definition**: The code defines two classes, `UIControl` and `TextBox`. The `TextBox` class inherits from `UIControl`.
-   
-2. **`UIControl` Class**:
-    - **`__init__` Method**: The constructor initializes an instance variable `_is_enabled` and sets it to `True`.
-    - **`enable` Method**: This method sets `_is_enabled` to `True`.
-    - **`disable` Method**: This method sets `_is_enabled` to `False`.
-    - **`is_enabled` Method**: This method returns the value of `_is_enabled`.
+### 📝 Explanation
 
-3. **`TextBox` Class**:
-    - **Inheritance**: The `TextBox` class inherits from `UIControl`, meaning it has all the methods and properties of `UIControl`.
-    - **`__init__` Method**: The constructor calls the parent class's constructor using `super()` and initializes an instance variable `_text` to an empty string.
-    - **`set_text` Method**: This method sets the `_text` variable to the provided `text`.
-    - **`clear` Method**: This method sets the `_text` variable to an empty string.
+This code demonstrates single inheritance with `UIControl` as the parent class and `TextBox` as the child class. 
 
-4. **Creating an Instance**:
-    - An instance of `TextBox` is created and assigned to the variable `control`.
-    - The `disable` method is called on `control`, setting `_is_enabled` to `False`.
-    - The result of the `is_enabled` method (which is `False`) is printed to the console.
+#### 🖥️ UIControl Class
+
+The `UIControl` class provides basic enabling and disabling functionality. It defines the following:
+
+- **`__init__` Method**: Initializes `_is_enabled` to `True`.
+- **`enable` Method**: Sets `_is_enabled` to `True`, enabling the control.
+- **`disable` Method**: Sets `_is_enabled` to `False`, disabling the control.
+- **`is_enabled` Method**: Returns the current state of `_is_enabled`.
+
+#### 📝 TextBox Class
+
+The `TextBox` class inherits from `UIControl`, extending it with text-specific methods:
+
+- **Inheritance**: `TextBox` inherits all methods from `UIControl`.
+- **`__init__` Method**: Calls the parent `__init__` using `super()` to initialize `_is_enabled` and then initializes `_text` as an empty string.
+- **`set_text` Method**: Sets `_text` to the provided text.
+- **`clear` Method**: Clears `_text`, setting it to an empty string.
+
+---
+
+### 💡 Usage Example
+
+```python
+# Instantiate a TextBox object
+control = TextBox()
+
+# Use inherited disable method
+control.disable()
+
+# Check if the control is enabled (expected: False)
+print(control.is_enabled())  # Output: False
+
+# Use TextBox-specific methods
+control.set_text("Hello World")
+print(control._text)  # Output: Hello World
+control.clear()
+print(control._text)  # Output: (empty string)
+```
+
+In this example:
+1. `TextBox` inherits `enable`, `disable`, and `is_enabled` from `UIControl`.
+2. We create a `TextBox` instance, disable it, and confirm it’s disabled.
+3. We set text to "Hello World" and then clear it.
+
+---
+
+### 📜 Summary
+
+- **Single Inheritance**: A class inherits from one parent class, allowing it to reuse the parent’s methods and properties.
+- **Example**: `UIControl` serves as a base class, providing enable/disable functionality, while `TextBox` inherits from it and adds text-related features.
+- **Benefits**: Promotes code reuse, logical organization, and modularity.
+
