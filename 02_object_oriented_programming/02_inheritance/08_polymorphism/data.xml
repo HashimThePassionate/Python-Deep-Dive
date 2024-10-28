@@ -1,0 +1,35 @@
+<data>
+    <person>
+        <name>Muhammad Hashim</name>
+        <age>24</age>
+        <city>Islamabad</city>
+        <hobbies>
+            <hobby>Coffee</hobby>
+            <hobby>Mountain trips</hobby>
+        </hobbies>
+        <passion>Software Engineering</passion>
+        <career>Python Instructor</career>
+    </person>
+    <person>
+        <name>Ibrahim</name>
+        <age>23</age>
+        <city>Islamabad</city>
+        <hobbies>
+            <hobby>Reading</hobby>
+            <hobby>Fitness</hobby>
+        </hobbies>
+        <passion>Finance</passion>
+        <career>Financial Analyst</career>
+    </person>
+    <person>
+        <name>Hafiz</name>
+        <age>23</age>
+        <city>Lahore</city>
+        <hobbies>
+            <hobby>Gaming</hobby>
+            <hobby>Travel</hobby>
+        </hobbies>
+        <passion>Mechanical Engineering</passion>
+        <career>Engineer</career>
+    </person>
+</data>

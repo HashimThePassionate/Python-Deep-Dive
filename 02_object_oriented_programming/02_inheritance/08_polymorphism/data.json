@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Muhammad Hashim",
+        "age": 24,
+        "city": "Islamabad",
+        "hobbies": ["Coffee", "Mountain trips"],
+        "passion": "Software Engineering",
+        "career": "Python Instructor"
+    },
+    {
+        "name": "Ibrahim",
+        "age": 23,
+        "city": "Islamabad",
+        "hobbies": ["Reading", "Fitness"],
+        "passion": "Finance",
+        "career": "Financial Analyst"
+    },
+    {
+        "name": "Hafiz",
+        "age": 23,
+        "city": "Lahore",
+        "hobbies": ["Gaming", "Travel"],
+        "passion": "Mechanical Engineering",
+        "career": "Engineer"
+    }
+]
