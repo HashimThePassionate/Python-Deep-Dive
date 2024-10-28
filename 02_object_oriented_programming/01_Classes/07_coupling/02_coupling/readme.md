@@ -1,8 +1,21 @@
-### How Mangling Convention Reduces Coupling:
+# 🔐 Reducing Coupling with Mangling Convention in Python
 
-The mangling convention in Python, denoted by prefixing attribute or method names with double underscores (`__`), is primarily used to create class-private members. These members are not accessible from outside the class, except through name mangling. While it's not a direct tool for reducing coupling, it can contribute to it indirectly. Let's examine how it affects the `Browser` class provided:
+In Python, **name mangling** (using `__` before method names) makes members private to a class. This convention doesn’t directly reduce coupling but supports **encapsulation** and **information hiding**, which help lower dependencies between classes.
 
-### Original Code:
+---
+
+## 📑 Table of Contents
+
+- [🔐 Reducing Coupling with Mangling Convention in Python](#-reducing-coupling-with-mangling-convention-in-python)
+  - [📑 Table of Contents](#-table-of-contents)
+    - [⚙️ Original Code](#️-original-code)
+    - [🔍 How Mangling Reduces Coupling](#-how-mangling-reduces-coupling)
+    - [📜 Summary](#-summary)
+
+---
+
+### ⚙️ Original Code
+
 ```python
 class Browser:
     def navigate(self, address):
@@ -11,31 +24,28 @@ class Browser:
         print(html)
 
     def __send_http_request(self, ip):
-        if ip is not None:
-            return "<html></html>"
-        else:
-            return "No IP address or domain found"
+        return "<html></html>" if ip else "No IP address or domain found"
 
     def __find_ip_address(self, address):
-        if address:
-            return address
-        else:
-            # return '127.0.0.1'
-            return None
+        return address or None
 
 browser = Browser()
 browser.navigate('127.0.0.0')
 browser.navigate(None)
 ```
 
-### How It Reduces Coupling:
+---
 
-1. **Encapsulation**: By using the mangling convention (`__method_name`), the `__send_http_request` and `__find_ip_address` methods are effectively made private to the `Browser` class. They cannot be accessed directly from outside the class. This encapsulation hides the internal implementation details from external code, reducing the coupling between the `Browser` class and its clients.
+### 🔍 How Mangling Reduces Coupling
 
-2. **Preventing External Access**: The methods prefixed with double underscores are name-mangled, which means their names are modified to include the class name. This prevents accidental overriding or direct access from subclasses or external code, further isolating the internal workings of the `Browser` class and reducing coupling.
+1. **Encapsulation**: Methods `__send_http_request` and `__find_ip_address` are hidden, keeping internal logic private and reducing dependencies on the class’s internal details.
 
-3. **Promoting Information Hiding**: By making these methods private, the `Browser` class enforces information hiding, a key principle of object-oriented design. This ensures that only the necessary interfaces are exposed to external code, reducing the likelihood of unintended dependencies and potential coupling issues.
+2. **Preventing External Access**: Name mangling prevents external access and unintended overrides, ensuring `Browser` only exposes necessary methods.
 
-4. **Flexibility in Maintenance**: Since the internal implementation details are hidden behind the mangling convention, the `Browser` class can be modified or refactored without affecting the external code that uses it. This improves the maintainability of the codebase by reducing the ripple effects of changes, thus indirectly reducing coupling.
+3. **Information Hiding**: Mangling limits what external code sees, enforcing interaction solely through `navigate` and lowering coupling.
 
-In summary, while mangling convention in Python isn't a direct tool for reducing coupling, its usage in creating private members helps in encapsulation, preventing external access, promoting information hiding, and improving flexibility in maintenance, all of which contribute to reducing coupling between classes.
+---
+
+### 📜 Summary
+
+Name mangling in Python supports encapsulation and information hiding, indirectly reducing coupling by keeping internals private, preventing interference, and promoting flexible, maintainable code.
