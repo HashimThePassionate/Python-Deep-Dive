@@ -1,6 +1,32 @@
-In Python, constructor overloading isn't directly supported as it is in some other languages like Java or C++. However, you can achieve similar behavior by using default parameter values and conditional logic within the constructor. Let's break down how the code achieves this:
+# 👔 Constructor Overloading
 
-## Complete Code
+This example demonstrates how to achieve **constructor overloading** in Python using **default parameters** and **conditional logic**. The `Employee` class allows flexible initialization by making the `hourly_rate` parameter optional, ensuring both simplicity and functionality.
+
+---
+
+## 📑 Table of Contents
+
+- [👔 Constructor Overloading](#-constructor-overloading)
+  - [📑 Table of Contents](#-table-of-contents)
+    - [🔍 Overview](#-overview)
+  - [⚙️ Complete Code](#️-complete-code)
+    - [📝 Key Components Explained](#-key-components-explained)
+      - [🏗️ Constructor with Default Parameters](#️-constructor-with-default-parameters)
+      - [🔧 Handling Default Values](#-handling-default-values)
+      - [🔒 Encapsulation with Getters and Setters](#-encapsulation-with-getters-and-setters)
+    - [💡 Example Usage](#-example-usage)
+    - [📜 Summary](#-summary)
+
+---
+
+### 🔍 Overview
+
+The `Employee` class models an employee with attributes for **base salary** and **hourly rate**. By making `hourly_rate` optional, we can create instances with just a base salary, or both a base salary and hourly rate. This is a convenient way to handle cases where hourly rate information may not always be provided.
+
+---
+
+## ⚙️ Complete Code
+
 ```python
 class Employee:
     def __init__(self, base_salary, hourly_rate=None):
@@ -18,65 +44,80 @@ class Employee:
             raise ValueError("Salary cannot be less than 0.")
         self.base_salary = base_salary
 
-    def __get_base_salary(self):
-        return self.base_salary
-
-    def __get_hourly_rate(self):
-        return self.hourly_rate
-
     def __set_hourly_rate(self, hourly_rate):
         if hourly_rate < 0:
             raise ValueError("Hourly rate cannot be negative.")
         self.hourly_rate = hourly_rate
-
-
-employee1 = Employee(10000)
-employee2 = Employee(50000, 20)
-wage1 = employee1.calculate_wage()
-wage2 = employee2.calculate_wage()
-print(wage1)
-print(wage2)
 ```
-1. **Constructor with Default Parameters**:
-    ```python
-    def __init__(self, base_salary, hourly_rate=None):
-    ```
-    - The constructor accepts two parameters: `base_salary` (mandatory) and `hourly_rate` (optional). 
-    - The `hourly_rate` parameter is set to `None` by default.
 
-2. **Handling Default Values**:
-    ```python
-    self.__set_base_salary(base_salary)
-    if hourly_rate is None:
-        self.hourly_rate = 0
-    else:
-        self.__set_hourly_rate(hourly_rate)
-    ```
-    - Inside the constructor, the `base_salary` is always set using the `__set_base_salary()` method.
-    - If no `hourly_rate` is provided (i.e., it's `None`), it defaults to 0.
-    - If a `hourly_rate` is provided, it's set using the `__set_hourly_rate()` method.
+---
 
-3. **Getter and Setter Methods**:
-    ```python
-    def __set_base_salary(self, base_salary):
-    def __get_base_salary(self):
-    def __get_hourly_rate(self):
-    def __set_hourly_rate(self, hourly_rate):
-    ```
-    - These methods provide encapsulation for `base_salary` and `hourly_rate`, similar to the previous example.
-    - They use double underscores (`__`) to make them "private", meaning they can only be accessed from within the class.
+### 📝 Key Components Explained
 
-4. **Main Block**:
-    ```python
-        employee1 = Employee(10000)
-        employee2 = Employee(50000, 20)
-        wage1 = employee1.calculate_wage()
-        wage2 = employee2.calculate_wage()
-        print(wage1)
-        print(wage2)
-    ```
-    - This block demonstrates the usage of the `Employee` class.
-    - It creates two instances of the `Employee` class, one with only the `base_salary` provided and another with both `base_salary` and `hourly_rate`.
-    - It calculates and prints the wages for both employees using the `calculate_wage()` method.
+#### 🏗️ Constructor with Default Parameters
 
-So, by using default parameter values and conditional logic, you can achieve constructor overloading-like behavior in Python.
+```python
+def __init__(self, base_salary, hourly_rate=None):
+```
+
+- **Parameters**: `base_salary` (required) and `hourly_rate` (optional, defaults to `None`).
+- **Purpose**: Allows flexible instance creation by enabling initialization with just `base_salary` or both `base_salary` and `hourly_rate`.
+
+#### 🔧 Handling Default Values
+
+```python
+if hourly_rate is None:
+    self.hourly_rate = 0
+else:
+    self.__set_hourly_rate(hourly_rate)
+```
+
+- **Default Behavior**: When `hourly_rate` is not provided, it defaults to `0`.
+- **Data Validation**: Both `base_salary` and `hourly_rate` are assigned through private methods to ensure valid input values.
+
+#### 🔒 Encapsulation with Getters and Setters
+
+```python
+def __set_base_salary(self, base_salary):
+    if base_salary < 0:
+        raise ValueError("Salary cannot be less than 0.")
+    self.base_salary = base_salary
+
+def __set_hourly_rate(self, hourly_rate):
+    if hourly_rate < 0:
+        raise ValueError("Hourly rate cannot be negative.")
+    self.hourly_rate = hourly_rate
+```
+
+- **Purpose**: Enforces data integrity for `base_salary` and `hourly_rate` by validating values before assignment.
+- **Encapsulation**: These attributes are made private, ensuring they are modified only through controlled methods within the class.
+
+---
+
+### 💡 Example Usage
+
+```python
+# Creating an Employee instance with only base_salary
+employee1 = Employee(10000)
+# Creating an Employee instance with both base_salary and hourly_rate
+employee2 = Employee(50000, 20)
+
+# Calculating wages
+wage1 = employee1.calculate_wage()      # Wage with default extra hours (0)
+wage2 = employee2.calculate_wage(10)    # Wage with 10 extra hours
+
+# Printing results
+print(wage1)   # Output: 10000
+print(wage2)   # Output: 52000
+```
+
+---
+
+### 📜 Summary
+
+This `Employee` class demonstrates a way to **simulate constructor overloading** in Python by using default parameters and conditional logic:
+
+- **Optional Parameters**: Allows creating instances with either only `base_salary` or both `base_salary` and `hourly_rate`.
+- **Encapsulation**: Uses private methods to validate and control access to key attributes.
+- **Default Handling**: Sets `hourly_rate` to `0` by default, making the class adaptable to various requirements.
+
