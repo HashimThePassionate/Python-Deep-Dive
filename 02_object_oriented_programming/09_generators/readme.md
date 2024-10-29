@@ -255,9 +255,7 @@ Generators and generator expressions are versatile, efficient tools that can sim
 ## 📚 References 📚
 
 - [Python Documentation - Generators](https://docs.python.org/3/howto/functional.html#generators)
-- [PEP 255 - Simple Generators](https://
-
-www.python.org/dev/peps/pep-0255/)
+- [PEP 255 - Simple Generators](https://www.python.org/dev/peps/pep-0255/)
 - [PEP 380 - Syntax for Delegating to a Subgenerator](https://www.python.org/dev/peps/pep-0380/)
 - [Real Python - Introduction to Python Generators](https://realpython.com/introduction-to-python-generators/)
 - [AsyncIO Documentation](https://docs.python.org/3/library/asyncio.html)
