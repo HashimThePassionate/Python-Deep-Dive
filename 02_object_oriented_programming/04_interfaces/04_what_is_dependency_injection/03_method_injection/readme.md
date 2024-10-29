@@ -1,7 +1,66 @@
-# Method injection
-Method injection involves passing a method (or function) as a parameter to another method, allowing the receiving method to call the passed method to perform certain operations. In the provided code, we implement method injection in the `TaxReport` class by passing the `calculate_tax` method of a `TaxCalculator` object as a parameter to the `show` method. Here's how it works:
+# 🎯 Method Injection 🚀
 
-### Implementation of Method Injection:
+**Method Injection** is a pattern in which a method (or function) is passed as a parameter to another method, enabling dynamic behavior and flexibility. This pattern is particularly useful in creating loosely coupled, easily testable code by allowing the receiving method to invoke a method that performs specific operations. Let's explore method injection through a **Tax Report** example! 📊
+
+## 📖 Table of Contents
+
+- [🎯 Method Injection 🚀](#-method-injection-)
+  - [📖 Table of Contents](#-table-of-contents)
+  - [🔍 What is Method Injection?](#-what-is-method-injection)
+  - [💼 Why Use Method Injection?](#-why-use-method-injection)
+  - [🛠️ Implementation of Method Injection](#️-implementation-of-method-injection)
+    - [Step 1: Define the `TaxCalculator` Abstract Base Class](#step-1-define-the-taxcalculator-abstract-base-class)
+    - [Step 2: Implement a Concrete `TaxCalculator24` Class](#step-2-implement-a-concrete-taxcalculator24-class)
+    - [Step 3: Define the `TaxReport` Class Using Method Injection](#step-3-define-the-taxreport-class-using-method-injection)
+  - [🚀 Example Usage](#-example-usage)
+  - [🎯 Key Points](#-key-points)
+
+## 🔍 What is Method Injection?
+
+In **Method Injection**, instead of creating dependencies internally or setting them through constructors or setters, a class receives methods as parameters. This approach allows methods to be passed in at runtime, enabling more flexible and dynamic code behavior. In our example, we’ll pass the `calculate_tax` method from various tax calculators to a `TaxReport` class to dynamically calculate tax based on the method provided. 🧩
+
+## 💼 Why Use Method Injection?
+
+1. **🧩 Dynamic Behavior**:
+   - Method injection allows for flexible behavior. The logic in the `TaxReport` class can change based on the `calculate_tax` method passed in, making it adaptable to different scenarios.
+
+2. **🔗 Loose Coupling**:
+   - By injecting methods rather than hard-coding dependencies, we reduce the dependency of `TaxReport` on specific tax calculators, promoting modularity.
+
+3. **🧪 Enhanced Testability**:
+   - Allows for easy injection of mock or stub methods for unit testing, enabling isolated testing of `TaxReport`.
+
+## 🛠️ Implementation of Method Injection
+
+Let's implement method injection in a `TaxReport` class, where the `show` method accepts a tax calculation method as a parameter.
+
+### Step 1: Define the `TaxCalculator` Abstract Base Class
+
+```python
+from abc import ABC, abstractmethod
+
+class TaxCalculator(ABC):
+    @abstractmethod
+    def calculate_tax(self) -> float:
+        pass
+```
+
+- **Abstract Base Class**: `TaxCalculator` defines a `calculate_tax` method that concrete tax calculator classes must implement.
+
+### Step 2: Implement a Concrete `TaxCalculator24` Class
+
+```python
+class TaxCalculator24(TaxCalculator):
+    def __init__(self, taxable_income: float):
+        self.__taxable_income = taxable_income
+
+    def calculate_tax(self) -> float:
+        return self.__taxable_income * 0.3  # 30% tax rate
+```
+
+- **Concrete Implementation**: `TaxCalculator24` calculates tax at a rate of 30%.
+
+### Step 3: Define the `TaxReport` Class Using Method Injection
 
 ```python
 class TaxReport:
@@ -10,29 +69,44 @@ class TaxReport:
 
     def show(self, calculator: TaxCalculator):
         tax = calculator.calculate_tax()
-        print(tax)
+        print(f"Calculated Tax: {tax}")
 ```
 
-- The `TaxReport` class has an instance variable `__calculator` to store a `TaxCalculator` object.
-- The `show` method of `TaxReport` takes a `calculator` parameter of type `TaxCalculator`. Instead of storing the calculator instance directly, it calls the `calculate_tax` method of the passed `calculator` parameter to calculate and display the tax.
+- **Method Injection**: The `show` method takes a `calculator` parameter, calls its `calculate_tax` method, and prints the result.
+- **Loose Coupling**: `TaxReport` doesn’t store the calculator permanently; it uses the passed-in calculator only within `show`.
 
-### Example Usage:
+## 🚀 Example Usage
+
+Here's how to use the `TaxReport` class with different tax calculators.
 
 ```python
-calculator = TaxCalculator24(100000)
-report = TaxReport()
-report.show(calculator)
+if __name__ == "__main__":
+    # Creating a TaxCalculator24 instance with a taxable income
+    calculator = TaxCalculator24(100000)
+    
+    # Creating a TaxReport instance
+    report = TaxReport()
+    
+    # Displaying the tax using the TaxCalculator24 instance
+    report.show(calculator)  # Output: Calculated Tax: 30000.0
 
-report.show(TaxCalculator23())
+    # Hypothetically switching to a different tax calculator
+    class TaxCalculator23(TaxCalculator):
+        def calculate_tax(self) -> float:
+            return 0.0  # Assuming 0% tax
+
+    # Using the new calculator
+    report.show(TaxCalculator23())  # Output: Calculated Tax: 0.0
 ```
 
-- We create instances of `TaxCalculator24` and `TaxCalculator23`.
-- We create an instance of `TaxReport`.
-- We call the `show` method of `TaxReport`, passing a `TaxCalculator` instance as a parameter. This instance's `calculate_tax` method is called internally by `show` to calculate and print the tax.
-- We call the `show` method again, this time passing a different `TaxCalculator` instance (`TaxCalculator23`). Again, the `calculate_tax` method of this instance is called to calculate and print the tax.
+- **🎛️ Dynamic Method Injection**: By passing different calculators to `show`, `TaxReport` adapts to varying tax calculation logic.
+- **📊 Real-Time Adaptability**: `TaxReport` changes behavior based on the calculator passed in, without requiring permanent dependency on any specific calculator.
 
-### Key Points:
+## 🎯 Key Points
 
-- **Dynamic Behavior**: Method injection allows for dynamic behavior because the behavior of the method being injected can vary based on the method passed as a parameter.
-- **Loose Coupling**: By injecting the method as a parameter, the `TaxReport` class remains loosely coupled with the `TaxCalculator` implementations. It doesn't depend directly on concrete implementations but relies on the behavior defined by the method passed to it.
-- **Testability**: Method injection facilitates testing because you can pass mock or stub methods for testing purposes, allowing you to isolate the behavior being tested.
+- **🧩 Flexible Dependency Management**: Method injection provides flexibility by enabling methods to be injected dynamically at runtime.
+- **🔗 Loose Coupling**: Promotes loose coupling by not binding `TaxReport` directly to any particular `TaxCalculator` implementation.
+- **🧪 Enhanced Testability**: Allows for easy testing by injecting mock or stub methods.
+- **💡 Ideal for Variable Logic**: Method injection is especially useful when the logic might vary frequently or depend on runtime conditions.
+
+Method injection provides an elegant way to handle dynamic dependencies in Python. By injecting only the required method, you gain flexibility, maintainability, and simplicity in designing classes like `TaxReport`. 🎉
