@@ -8,7 +8,7 @@ Welcome to this in-depth guide on **`TypedDict`** in Python! 🎉 This guide cov
   - [📚 Table of Contents](#-table-of-contents)
   - [📖 Introduction](#-introduction)
   - [🛠️ Understanding `TypedDict`](#️-understanding-typeddict)
-  - [🔍 Real-World Example: User Profile Management System 👤](#-real-world-example-user-profile-management-system-)
+  - [🔍 User Profile Management System 👤](#-user-profile-management-system-)
     - [🤔 The Problem Statement](#-the-problem-statement)
     - [🛠️ Implementing `TypedDict`](#️-implementing-typeddict)
     - [Enhanced Type Safety with Optional Fields 🌟](#enhanced-type-safety-with-optional-fields-)
@@ -48,7 +48,7 @@ class Person(TypedDict):
 
 This allows any dictionary annotated with `Person` to be statically checked, ensuring it matches the defined types and structure, improving type safety.
 
-## 🔍 Real-World Example: User Profile Management System 👤
+## 🔍 User Profile Management System 👤
 
 Let’s look at a **User Profile Management System** to see how `TypedDict` can ensure consistency in handling user data. Here, we’ll use `TypedDict` to define a structured schema for user profiles and updates, making sure that data adheres to the specified types across different functions.
 
