@@ -100,29 +100,65 @@ print(repr(p))   # Output: Point(1, 2)
 ##### Example
 
 ```python
-class Person:
-    def __init__(self, name):
-        self.name = name
+class Cart:
+    def __init__(self):
+        # Cart ke items aur unki quantities store karte hain
+        self.items = {}
 
-    def __getattr__(self, attr):
-        return f"{attr} not found"
+    def __getattr__(self, item):
+        # Agar item `items` dictionary mein nahi hai to default response
+        if item in self.items:
+            return self.items[item]
+        return f"'{item}' not found in cart."
 
-    def __getattribute__(self, attr):
-        print(f"Accessing {attr}")
-        return super().__getattribute__(attr)
+    def __getattribute__(self, item):
+        # Har item access pe log karna, lekin 'items' attribute ko exclude karna
+        if item != 'items' and item in self.items:
+            print(f"Accessing item '{item}' in cart.")
+        return super().__getattribute__(item)  # Use direct object access to avoid recursion
 
-    def __setattr__(self, attr, value):
-        print(f"Setting {attr} to {value}")
-        super().__setattr__(attr, value)
+    def __setattr__(self, key, value):
+        # Quantity validation jab item add ya update ho
+        if key == "items":
+            super().__setattr__(key, value)
+        elif key in self.items:
+            if value < 0:
+                raise ValueError("Quantity cannot be negative!")
+            if value > 10:
+                raise ValueError("Quantity exceeds allowed limit of 10!")
+            self.items[key] = value
+        else:
+            # Naya item add karte hain
+            self.items[key] = value
+            print(f"Added '{key}' to cart with quantity: {value}")
 
-    def __delattr__(self, attr):
-        print(f"Deleting {attr}")
-        super().__delattr__(attr)
+    def __delattr__(self, item):
+        # Specific item ko delete hone se rokna
+        if item == "gift_card":
+            raise AttributeError("Cannot delete 'gift_card' from cart!")
+        if item in self.items:
+            del self.items[item]
+            print(f"'{item}' removed from cart.")
+        else:
+            print(f"'{item}' not found in cart.")
 
-p = Person("Alice")
-print(p.name)        # Output: Accessing name
-print(p.age)         # Output: Accessing age -> age not found
-del p.name           # Output: Deleting name
+# Usage of Cart class
+cart = Cart()
+
+# Adding items to the cart
+cart.apple = 3          # Output: Added 'apple' to cart with quantity: 3
+cart.banana = 2         # Output: Added 'banana' to cart with quantity: 2
+cart.gift_card = 1      # Output: Added 'gift_card' to cart with quantity: 1
+
+# Accessing items in the cart
+print(cart.apple)       # Output: Accessing item 'apple' in cart. -> 3
+print(cart.banana)      # Output: 'orange' not found in cart.
+
+# Updating items with validation
+cart.apple = 5          # Updates quantity of 'apple' to 5
+
+# Deleting items with restrictions
+del cart.banana         # Output: 'banana' removed from cart.
 ```
 
 ---
