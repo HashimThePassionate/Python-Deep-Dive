@@ -103,7 +103,7 @@ print(repr(p))   # Output: Point(1, 2)
 class Cart:
     def __init__(self):
         # Directly initializing items dictionary without calling __setattr__
-        object.__setattr__(self, 'items', {})
+        super().__setattr__('items', {})
 
     def __getattr__(self, item):
         if item in self.items:
