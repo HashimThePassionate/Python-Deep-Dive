@@ -102,26 +102,22 @@ print(repr(p))   # Output: Point(1, 2)
 ```python
 class Cart:
     def __init__(self):
-        # Cart ke items aur unki quantities store karte hain
-        self.items = {}
+        # Directly initializing items dictionary without calling __setattr__
+        object.__setattr__(self, 'items', {})
 
     def __getattr__(self, item):
-        # Agar item `items` dictionary mein nahi hai to default response
         if item in self.items:
             return self.items[item]
         return f"'{item}' not found in cart."
 
     def __getattribute__(self, item):
-        # Har item access pe log karna, lekin 'items' attribute ko exclude karna
         if item != 'items' and item in self.items:
             print(f"Accessing item '{item}' in cart.")
-        return super().__getattribute__(item)  # Use direct object access to avoid recursion
+        return super().__getattribute__(item)
 
     def __setattr__(self, key, value):
         # Quantity validation jab item add ya update ho
-        if key == "items":
-            super().__setattr__(key, value)
-        elif key in self.items:
+        if key in self.items:
             if value < 0:
                 raise ValueError("Quantity cannot be negative!")
             if value > 10:
@@ -133,7 +129,6 @@ class Cart:
             print(f"Added '{key}' to cart with quantity: {value}")
 
     def __delattr__(self, item):
-        # Specific item ko delete hone se rokna
         if item == "gift_card":
             raise AttributeError("Cannot delete 'gift_card' from cart!")
         if item in self.items:
