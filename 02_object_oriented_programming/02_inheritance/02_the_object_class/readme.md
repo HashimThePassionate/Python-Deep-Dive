@@ -308,19 +308,34 @@ Context managers allow resource management:
 ##### Example
 
 ```python
-class ManagedFile:
+class ManageFile:
     def __init__(self, filename):
         self.filename = filename
+        self.file = None  # Initialize file attribute
 
     def __enter__(self):
-        self.file = open(self.filename, 'w')
-        return self.file
+        # Open the file and store it in self.file
+        self.file = open(self.filename, 'r')
+        return self.file  # Return the file object to the `with` statement
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        self.file.close()
+        # Close the file if it was successfully opened
+        if self.file:
+            self.file.close()
+# Create an instance of ManageFile
+file_manager = ManageFile("test.txt")
 
-with ManagedFile("test.txt") as f:
-    f.write("Hello, World!")
+# Manually enter the context by calling __enter__
+f = file_manager.__enter__()
+
+try:
+    # Perform the file operation
+    content = f.read()
+    print(content)
+finally:
+    # Ensure the file is closed by manually calling __exit__
+    file_manager.__exit__(None, None, None)
+
 ```
 
 ---
