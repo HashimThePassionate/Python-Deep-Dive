@@ -357,9 +357,7 @@ class Sample:
 
     def __reduce__(self):
         # The __reduce__ method returns a tuple containing:
-        # - The class (self.__class
-
-__) to recreate the object.
+        # - The class (self.__class__) to recreate the object.
         # - The arguments (self.value) to pass to the constructor.
         return (self.__class__, (self.value,))
 
