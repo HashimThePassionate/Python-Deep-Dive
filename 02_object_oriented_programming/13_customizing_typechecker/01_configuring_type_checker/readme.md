@@ -92,12 +92,12 @@ Mypy offers **three primary methods** to configure its behavior, depending on yo
 #### **Example Usage:**
 
 ```bash
-mypy --disallow-any-expr myscript.py
+mypy --disallow-any-expr main.py
 ```
 
 **Explanation:**
 - `--disallow-any-expr`: Flags any expression that has an `Any` type.
-- `myscript.py`: The Python script you want to type check.
+- `main.py`: The Python script you want to type check.
 
 **Pros & Cons:** ✅❌
 - **Quick & Easy:** Perfect for one-time runs or testing options.
@@ -111,7 +111,7 @@ mypy --disallow-any-expr myscript.py
 
 #### **Example Usage:** 
 
-Add this at the **top** of your file (`myscript.py`):
+Add this at the **top** of your file (`main.py`):
 
 ```python
 # mypy: disallow-any-generics
@@ -137,7 +137,7 @@ A **configuration file** is the best way to centrally manage Mypy settings for t
 
     ```ini
     [mypy]
-    python_version = 3.9
+    python_version = 3.12
     warn_return_any = True
 
     [mypy-mycode.foo.*]
@@ -172,7 +172,7 @@ Once you’ve picked a configuration method, it’s time to explore **global and
 
     ```ini
     [mypy]
-    python_version = 3.9
+    python_version = 3.12
     ```
 
 2. **`warn_return_any` ⚠️**
@@ -212,7 +212,7 @@ Once you’ve picked a configuration method, it’s time to explore **global and
 
 ```ini
 [mypy]
-python_version = 3.9
+python_version = 3.12
 warn_return_any = True
 
 [mypy-mycode.foo.*]
