@@ -186,6 +186,52 @@ print(r1 == r2)   # Output: True
 print(r1 < r3)    # Output: True
 ```
 
+
+To simplify implementing comparison methods, Python provides the `functools.total_ordering` decorator. By defining just `__eq__` and one of the ordering methods (e.g., `__lt__`), `total_ordering` will automatically implement the remaining comparison methods (`__gt__`, `__ge__`, and `__le__`).
+
+##### Example: Using `total_ordering` with a Rectangle Class
+
+In this example, we create a `Rectangle` class that uses `total_ordering`. We define two methods: `__eq__` to check for equality based on width and height, and `__lt__` to compare rectangles by area. Python then provides the other comparison methods automatically.
+
+```python
+from functools import total_ordering
+
+@total_ordering
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+    
+    def area(self):
+        return self.width * self.height
+    
+    # Define only `__eq__` and `__lt__` methods
+    def __eq__(self, other):
+        return self.width == other.width and self.height == other.height
+    
+    def __lt__(self, other):
+        return self.area() < other.area()
+    
+# Example usage
+obj1 = Rectangle(10, 2)
+obj2 = Rectangle(6, 3)
+
+print(obj1 == obj2)  # Output: False, as width and height are not identical
+print(obj1 > obj2)   # Output: True, as obj1's area (20) is greater than obj2's area (18)
+print(obj1 < obj2)   # Output: False
+print(obj1 >= obj2)  # Output: True
+print(obj1 <= obj2)  # Output: False
+print(obj1 != obj2)  # Output: True
+```
+
+In this example:
+
+- **`__eq__`**: Defines equality based on the dimensions (width and height) of the rectangles.
+- **`__lt__`**: Allows comparison of rectangles based on area.
+- **`@total_ordering`**: Fills in the missing comparison methods (`__gt__`, `__ge__`, and `__le__`) based on `__eq__` and `__lt__`.
+
+Using `total_ordering` simplifies the code, ensuring that the comparison methods are comprehensive with minimal implementation effort. This approach is efficient and makes your `Rectangle` objects behave as expected in comparisons.
+
 ---
 
 #### ➕ Arithmetic Operators (Operator Overloading)
