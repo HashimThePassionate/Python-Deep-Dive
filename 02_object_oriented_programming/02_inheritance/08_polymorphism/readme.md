@@ -212,6 +212,7 @@ Muhammad Hashim,24,Islamabad,"Coffee, Mountain trips","Software Engineering","Py
 import csv
 import json
 import xml.etree.ElementTree as ET
+import os
 
 class FileParser:
     def parse(self, filepath):
@@ -235,11 +236,22 @@ class XMLParser(FileParser):
         return [{"name": person.find('name').text} for person in root.findall('person')]
 
 def process_file(parser, filepath):
-    data = parser.parse(filepath)
-    print(f"Processed data from {filepath}:")
-    for item in data:
-        print(item)
-    print('-' * 40)
+    try:
+        if not os.path.exists(filepath):
+            raise FileNotFoundError(f"The file '{filepath}' does not exist.")
+        
+        data = parser.parse(filepath)
+        print(f"Processed data from {filepath}:")
+        for item in data:
+            print(item)
+        print('-' * 40)
+        
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred while processing {filepath}: {e}")
+    finally:
+        print("File processing attempt completed.\n")
 
 # Usage
 parsers = [CSVParser(), JSONParser(), XMLParser()]
