@@ -1,7 +1,6 @@
 # 🛠️ **Inheritance in Python** 🐍✨
 
-Inheritance is a cornerstone of **Object-Oriented Programming (OOP)**, enabling developers to create new classes based on existing ones. This promotes **code reuse**, **hierarchical relationships**, and **extensibility**. In this comprehensive guide, we'll explore inheritance in Python thoroughly, using a **Restaurant Management Application** as our primary example. We'll cover key concepts, provide complete code examples, discuss best practices, and delve into potential pitfalls to ensure you have a solid understanding of how to effectively implement inheritance in your projects.
-
+Inheritance is a cornerstone of **Object-Oriented Programming (OOP)**, enabling developers to create new classes based on existing ones. This promotes **code reuse**, **hierarchical relationships**, and **extensibility**. In this comprehensive guide, we'll explore inheritance in Python thoroughly, using a **Zoo Management System** as our primary example. We'll cover key concepts, provide simple code examples, discuss best practices, and delve into potential pitfalls to ensure you have a solid understanding of how to effectively implement inheritance in your projects.
 
 ## 📚 **Table of Contents**
 
@@ -13,11 +12,11 @@ Inheritance is a cornerstone of **Object-Oriented Programming (OOP)**, enabling 
   - [🔑 Key Concepts in Inheritance](#-key-concepts-in-inheritance)
     - [👨‍👩‍👧 Parent and Child Classes](#-parent-and-child-classes)
     - [🪶 Is-a Relationship](#-is-a-relationship)
-  - [🍽️ Practical Example: Restaurant Management App](#️-practical-example-restaurant-management-app)
-    - [🏢 Defining the Base Class: `Restaurant`](#-defining-the-base-class-restaurant)
-    - [🚚 Creating Derived Classes: `FoodTruck` and `PopUpStall`](#-creating-derived-classes-foodtruck-and-popupstall)
-      - [Defining `FoodTruck`](#defining-foodtruck)
-      - [Defining `PopUpStall`](#defining-popupstall)
+  - [🐾 Practical Example: Zoo Management System](#-practical-example-zoo-management-system)
+    - [🏢 Defining the Base Class: `Animal`](#-defining-the-base-class-animal)
+    - [🚀 Creating Derived Classes: `Mammal` and `Bird`](#-creating-derived-classes-mammal-and-bird)
+      - [Defining `Mammal`](#defining-mammal)
+      - [Defining `Bird`](#defining-bird)
   - [🔄 Method Overriding and `super()`](#-method-overriding-and-super)
     - [🔄 Method Overriding](#-method-overriding)
     - [🌟 Using `super()`](#-using-super)
@@ -47,17 +46,6 @@ Inheritance is a cornerstone of **Object-Oriented Programming (OOP)**, enabling 
     - [🌟 **Key Takeaways:**](#-key-takeaways)
     - [🎯 **Final Thoughts:**](#-final-thoughts)
   - [🌐 Additional Resources](#-additional-resources)
-  - [🛠️ **Detailed Code Examples**](#️-detailed-code-examples)
-    - [1. `restaurant/__init__.py`](#1-restaurant__init__py)
-    - [2. `restaurant/geo.py`](#2-restaurantgeopy)
-    - [3. `restaurant/operations.py`](#3-restaurantoperationspy)
-    - [4. `restaurant/restaurant.py`](#4-restaurantrestaurantpy)
-    - [5. `restaurant/food_truck.py`](#5-restaurantfood_truckpy)
-    - [6. `restaurant/popup_stall.py`](#6-restaurantpopup_stallpy)
-    - [7. `restaurant/inventory_management.py`](#7-restaurantinventory_managementpy)
-    - [8. `restaurant/rectangle.py`](#8-restaurantrectanglepy)
-    - [9. `main.py`](#9-mainpy)
-  - [📝 Final Notes](#-final-notes)
 
 
 ## 🌟 Overview
@@ -70,26 +58,20 @@ Inheritance is a mechanism in OOP that allows a new class (known as the **child*
 - **🚀 Extensibility:** Easily extend existing functionalities without modifying them.
 - **🛠️ Maintainability:** Simplifies maintenance by centralizing common behaviors.
 
-
 ## 📂 Project Structure
 
 Here's an overview of the project structure:
 
 ```
-restaurant_management/
-├── restaurant/
+zoo_management/
+├── zoo/
 │   ├── __init__.py
-│   ├── geo.py
-│   ├── operations.py
-│   ├── restaurant.py
-│   ├── food_truck.py
-│   ├── popup_stall.py
-│   ├── inventory_management.py
-│   └── rectangle.py
+│   ├── animal.py
+│   ├── mammal.py
+│   ├── bird.py
 ├── main.py
 └── README.md
 ```
-
 
 ## 🔑 Key Concepts in Inheritance
 
@@ -100,241 +82,106 @@ restaurant_management/
 
 ### 🪶 Is-a Relationship
 
-Inheritance models an **is-a** relationship. For example, if `FoodTruck` inherits from `Restaurant`, then a `FoodTruck` **is a** `Restaurant`. This means that any instance of `FoodTruck` can be treated as an instance of `Restaurant`.
+Inheritance models an **is-a** relationship. For example, if `Mammal` inherits from `Animal`, then a `Mammal` **is an** `Animal`. This means that any instance of `Mammal` can be treated as an instance of `Animal`.
 
 
-## 🍽️ Practical Example: Restaurant Management App
+## 🐾 Practical Example: Zoo Management System
 
-Let's design an application to help restaurant owners manage their operations, such as tracking finances, customizing menus, and managing inventory.
+Let's design a simple application to help manage animals in a zoo. We'll track basic information about animals and categorize them into different types like mammals and birds.
 
-### 🏢 Defining the Base Class: `Restaurant`
+### 🏢 Defining the Base Class: `Animal`
 
-First, we'll define a base class `Restaurant` that encapsulates the common attributes and behaviors of a restaurant.
+First, we'll define a base class `Animal` that encapsulates the common attributes and behaviors of all animals in the zoo.
 
 ```python
-# restaurant/restaurant.py
+# zoo/animal.py
 
-from typing import List
 from dataclasses import dataclass
-from restaurant import geo
-from restaurant import operations as ops
 
 @dataclass
-class Restaurant:
+class Animal:
     name: str
-    location: geo.Coordinates
-    employees: List[ops.Employee]
-    inventory: List[ops.Ingredient]
-    menu: ops.Menu
-    finances: ops.Finances
+    age: int
 
-    def transfer_employees(self, employees: List[ops.Employee], restaurant: 'Restaurant'):
-        """
-        Transfers a list of employees from this restaurant to another.
-        """
-        for employee in employees:
-            if employee in self.employees:
-                self.employees.remove(employee)
-                restaurant.employees.append(employee)
-                print(f"Transferred {employee.name} to {restaurant.name}.")
-            else:
-                raise ValueError(f"Employee {employee.name} not found in {self.name}.")
+    def make_sound(self):
+        raise NotImplementedError("Subclasses must implement this method.")
 
-    def order_dish(self, dish: ops.Dish):
-        """
-        Processes the ordering of a dish by removing the necessary ingredients from inventory
-        and updating finances.
-        """
-        print(f"Ordering dish: {dish.name}")
-        for ingredient in dish.ingredients:
-            if ingredient in self.inventory:
-                self.inventory.remove(ingredient)
-                self.finances.increase_funds(dish.price)
-                print(f"Removed {ingredient.name} from inventory.")
-            else:
-                raise ValueError(f"Ingredient {ingredient.name} is depleted.")
-        self.menu.remove_dish(dish)
-        print(f"Dish {dish.name} ordered successfully.")
-
-    def add_inventory(self, ingredients: List[ops.Ingredient], cost_in_cents: float):
-        """
-        Adds new ingredients to the inventory and decreases funds accordingly.
-        """
-        self.inventory.extend(ingredients)
-        self.finances.decrease_funds(cost_in_cents)
-        print(f"Added {len(ingredients)} ingredients to inventory.")
-
-    def register_hours_employee_worked(self, employee: ops.Employee, minutes_worked: int):
-        """
-        Registers the hours an employee has worked and updates finances based on salary.
-        """
-        employee.record_hours(minutes_worked)
-        cost = employee.calculate_pay(minutes_worked)
-        self.finances.decrease_funds(cost)
-        print(f"Registered {minutes_worked} minutes worked for {employee.name}.")
-
-    def get_restaurant_data(self) -> ops.RestaurantData:
-        """
-        Retrieves all relevant data about the restaurant.
-        """
-        print(f"Retrieving data for {self.name}.")
-        return ops.RestaurantData(
-            name=self.name,
-            location=self.location,
-            employees=self.employees,
-            inventory=self.inventory,
-            menu=self.menu,
-            finances=self.finances
-        )
-
-    def change_menu(self, menu: ops.Menu):
-        """
-        Updates the restaurant's menu.
-        """
-        self.menu = menu
-        print(f"Menu updated for {self.name}.")
-
-    def move_location(self, new_location: geo.Coordinates):
-        """
-        Updates the restaurant's location.
-        """
-        self.location = new_location
-        print(f"{self.name} moved to new location: {new_location}.")
+    def move(self):
+        print(f"{self.name} is moving.")
 ```
 
 **📌 Explanation:**
 
 - **Attributes:**
-  - `name`: Name of the restaurant.
-  - `location`: Geographical coordinates representing the restaurant's location.
-  - `employees`: List of employees working at the restaurant.
-  - `inventory`: List of ingredients available in the restaurant.
-  - `menu`: The restaurant's menu.
-  - `finances`: Financial records of the restaurant.
+  - `name`: Name of the animal.
+  - `age`: Age of the animal.
 
 - **Methods:**
-  - `transfer_employees`: Transfers employees to another restaurant.
-  - `order_dish`: Processes a dish order by updating inventory and finances.
-  - `add_inventory`: Adds ingredients to inventory and adjusts finances.
-  - `register_hours_employee_worked`: Logs employee work hours and updates finances.
-  - `get_restaurant_data`: Retrieves comprehensive data about the restaurant.
-  - `change_menu`: Updates the menu.
-  - `move_location`: Changes the restaurant's location.
+  - `make_sound`: Abstract method to be implemented by subclasses.
+  - `move`: Common behavior for all animals.
 
-### 🚚 Creating Derived Classes: `FoodTruck` and `PopUpStall`
+### 🚀 Creating Derived Classes: `Mammal` and `Bird`
 
-Now, we'll create two specialized types of restaurants: `FoodTruck` and `PopUpStall`. Both inherit from `Restaurant`, meaning they possess all attributes and methods of a `Restaurant` but can have additional behaviors or overridden methods.
+Now, we'll create two specialized types of animals: `Mammal` and `Bird`. Both inherit from `Animal`, meaning they possess all attributes and methods of an `Animal` but can have additional behaviors or overridden methods.
 
-#### Defining `FoodTruck`
+#### Defining `Mammal`
 
 ```python
-# restaurant/food_truck.py
+# zoo/mammal.py
 
 from typing import List
-from restaurant import geo
-from restaurant import operations as ops
-from restaurant.restaurant import Restaurant
+from zoo.animal import Animal
 
-class FoodTruck(Restaurant):
-    def __init__(self, name: str, location: geo.Coordinates, employees: List[ops.Employee],
-                 inventory: List[ops.Ingredient], menu: ops.Menu, finances: ops.Finances):
-        super().__init__(name, location, employees, inventory, menu, finances)
-        self.__gps = self.initialize_gps()
-        print(f"Initialized FoodTruck: {self.name} at {self.location}.")
+class Mammal(Animal):
+    def __init__(self, name: str, age: int, fur_color: str):
+        super().__init__(name, age)
+        self.fur_color = fur_color
+        print(f"Initialized Mammal: {self.name}, Age: {self.age}, Fur Color: {self.fur_color}")
 
-    def initialize_gps(self) -> ops.GPS:
-        """
-        Initializes the GPS system for the food truck.
-        """
-        gps = ops.GPS()
-        gps.update_coordinates(self.location)
-        print(f"GPS initialized for {self.name}.")
-        return gps
-
-    def move_location(self, new_location: geo.Coordinates):
-        """
-        Overrides the move_location method to include automatic driving.
-        """
-        self.schedule_auto_driving_task(new_location)
-        super().move_location(new_location)
-        self.__gps.update_coordinates(new_location)
-        print(f"{self.name} has moved to new location: {new_location}.")
-
-    def schedule_auto_driving_task(self, new_location: geo.Coordinates):
-        """
-        Schedules a task to drive the food truck to the new location.
-        """
-        # Implementation details for scheduling the drive
-        print(f"Scheduling drive to {new_location} for {self.name}.")
-
-    def get_current_location(self) -> geo.Coordinates:
-        """
-        Retrieves the current location from the GPS system.
-        """
-        current_location = self.__gps.get_coordinates()
-        print(f"Current location of {self.name}: {current_location}.")
-        return current_location
-```
-
-**📌 Explanation:**
-
-- **Initialization (`__init__`):** Calls the base class constructor using `super().__init__` to initialize common attributes. Additionally, initializes a GPS system specific to the `FoodTruck`.
-  
-- **Overridden Method (`move_location`):** Enhances the base class method by adding functionality to automatically drive to the new location before updating the location.
-  
-- **Additional Methods:**
-  - `initialize_gps`: Sets up the GPS system for the food truck.
-  - `schedule_auto_driving_task`: Schedules the food truck to move to a new location.
-  - `get_current_location`: Retrieves the current location from the GPS system.
-
-#### Defining `PopUpStall`
-
-```python
-# restaurant/popup_stall.py
-
-from typing import List
-from dataclasses import dataclass
-from restaurant import geo
-from restaurant import operations as ops
-from restaurant.restaurant import Restaurant
-
-@dataclass
-class PopUpStall(Restaurant):
-    event_date: str
-
-    def __init__(self, name: str, location: geo.Coordinates, employees: List[ops.Employee],
-                 inventory: List[ops.Ingredient], menu: ops.Menu, finances: ops.Finances,
-                 event_date: str):
-        super().__init__(name, location, employees, inventory, menu, finances)
-        self.event_date = event_date
-        print(f"Initialized PopUpStall: {self.name} for event on {self.event_date} at {self.location}.")
-
-    def setup_for_event(self):
-        """
-        Prepares the pop-up stall for the event.
-        """
-        # Implementation details for setting up the stall
-        print(f"Setting up {self.name} for event on {self.event_date}.")
-
-    def teardown_after_event(self):
-        """
-        Cleans up the pop-up stall after the event.
-        """
-        # Implementation details for tearing down the stall
-        print(f"Tearing down {self.name} after event on {self.event_date}.")
+    def make_sound(self):
+        print(f"{self.name} says: Roar!")
+    
+    def nurse(self):
+        print(f"{self.name} is nursing its young.")
 ```
 
 **📌 Explanation:**
 
 - **Attributes:**
-  - `event_date`: Date of the event the pop-up stall is attending.
+  - `fur_color`: Color of the mammal's fur.
 
-- **Initialization (`__init__`):** Inherits all attributes from `Restaurant` and adds an `event_date` attribute specific to the `PopUpStall`.
+- **Methods:**
+  - `make_sound`: Implements the abstract method from `Animal`.
+  - `nurse`: Additional behavior specific to mammals.
 
-- **Additional Methods:**
-  - `setup_for_event`: Prepares the stall for a specific event.
-  - `teardown_after_event`: Cleans up after the event concludes.
+#### Defining `Bird`
 
+```python
+# zoo/bird.py
+
+from zoo.animal import Animal
+
+class Bird(Animal):
+    def __init__(self, name: str, age: int, wing_span: float):
+        super().__init__(name, age)
+        self.wing_span = wing_span
+        print(f"Initialized Bird: {self.name}, Age: {self.age}, Wing Span: {self.wing_span}m")
+
+    def make_sound(self):
+        print(f"{self.name} says: Chirp!")
+    
+    def fly(self):
+        print(f"{self.name} is flying with a wingspan of {self.wing_span} meters.")
+```
+
+**📌 Explanation:**
+
+- **Attributes:**
+  - `wing_span`: Wingspan of the bird in meters.
+
+- **Methods:**
+  - `make_sound`: Implements the abstract method from `Animal`.
+  - `fly`: Additional behavior specific to birds.
 
 ## 🔄 Method Overriding and `super()`
 
@@ -344,15 +191,11 @@ class PopUpStall(Restaurant):
 
 **Example:**
 
-In the `FoodTruck` class, we override the `move_location` method to include automatic driving:
+In the `Mammal` class, we override the `make_sound` method to provide a specific sound.
 
 ```python
-def move_location(self, new_location: geo.Coordinates):
-    """
-    Overrides the move_location method to include automatic driving.
-    """
-    self.schedule_auto_driving_task(new_location)
-    super().move_location(new_location)
+def make_sound(self):
+    print(f"{self.name} says: Roar!")
 ```
 
 ### 🌟 Using `super()`
@@ -361,14 +204,16 @@ The `super()` function returns a temporary object of the superclass, allowing yo
 
 **Example:**
 
-In the overridden `move_location` method above, after scheduling the auto-driving task, we call the base class's `move_location` to ensure the location attribute is updated:
+In the overridden `__init__` method of `Mammal`, after initializing the base class attributes, we add additional initialization.
 
 ```python
-super().move_location(new_location)
+def __init__(self, name: str, age: int, fur_color: str):
+    super().__init__(name, age)
+    self.fur_color = fur_color
+    print(f"Initialized Mammal: {self.name}, Age: {self.age}, Fur Color: {self.fur_color}")
 ```
 
-This ensures that the `FoodTruck` not only handles its specific behavior (auto-driving) but also maintains the core functionality provided by the `Restaurant` class.
-
+This ensures that the `Mammal` not only handles its specific attributes (`fur_color`) but also maintains the core functionality provided by the `Animal` class.
 
 ## 🔄 Substitutability and the Liskov Substitution Principle
 
@@ -396,7 +241,7 @@ If class `S` is a subtype of class `T`, then objects of type `T` may be replaced
 Consider the following classes:
 
 ```python
-# restaurant/rectangle.py
+# zoo/rectangle.py
 
 from dataclasses import dataclass
 
@@ -470,7 +315,6 @@ This violates the **Liskov Substitution Principle** because `Square` cannot be s
 3. **Use Composition Instead:**
    - Instead of `Square` being a subclass of `Rectangle`, have `Square` contain a `Rectangle` instance.
 
-
 ## 🔀 Multiple Inheritance
 
 ### What is Multiple Inheritance?
@@ -507,21 +351,28 @@ In this example, `Server` inherits from both `TCPServer` and `ThreadingMixIn`, e
 **Example:**
 
 ```python
-from socketserver import TCPServer, ThreadingMixIn
+from zoo.animal import Animal
 
-class ThreadingTCPServer(ThreadingMixIn, TCPServer):
-    """A TCP server that handles each request in a new thread."""
-    pass
+class Runnable:
+    def run(self):
+        print(f"{self.name} is running.")
+
+class Swimmable:
+    def swim(self):
+        print(f"{self.name} is swimming.")
+
+class Duck(Animal, Runnable, Swimmable):
+    def make_sound(self):
+        print(f"{self.name} says: Quack!")
 ```
 
-Here, `ThreadingMixIn` adds threading capabilities to `TCPServer`. Since `ThreadingMixIn` does not maintain state or enforce invariants, it serves as a good mixin.
+Here, `Runnable` and `Swimmable` are mixins that add running and swimming capabilities to the `Duck` class. Since mixins do not maintain state or enforce invariants, they serve as good extensions to other classes.
 
 **✅ Best Practices with Mixins:**
 
 - **🎯 Single Responsibility:** Each mixin should provide a single piece of functionality.
 - **🔄 Avoid State:** Mixins should not have their own state or require specific initialization.
 - **📜 Order Matters:** Be mindful of the order in which mixins are inherited to ensure correct MRO.
-
 
 ## 🔗 Composition vs. Inheritance
 
@@ -540,57 +391,52 @@ While inheritance establishes an **is-a** relationship, **composition** establis
 
 ### 🧩 Example of Composition
 
-Let's revisit the `Restaurant` class and illustrate composition.
+Let's revisit the `Animal` class and illustrate composition by adding an `Owner` to the animal.
 
 ```python
-# restaurant/inventory_management.py
+# zoo/owner.py
 
-from typing import List
 from dataclasses import dataclass
-from restaurant import operations as ops
+from typing import List
 
 @dataclass
-class Inventory:
-    ingredients: List[ops.Ingredient]
+class Owner:
+    name: str
+    contact_number: str
 
-    def add_ingredients(self, new_ingredients: List[ops.Ingredient]):
-        self.ingredients.extend(new_ingredients)
-        print(f"Added {len(new_ingredients)} ingredients to inventory.")
-
-    def remove_ingredient(self, ingredient: ops.Ingredient):
-        if ingredient in self.ingredients:
-            self.ingredients.remove(ingredient)
-            print(f"Removed {ingredient.name} from inventory.")
-        else:
-            raise ValueError(f"Ingredient {ingredient.name} not found in inventory.")
+    def add_pet(self, pet: 'Animal'):
+        print(f"{self.name} now owns {pet.name}.")
 ```
 
 ```python
-# restaurant/restaurant.py
+# zoo/animal.py
 
-from typing import List
 from dataclasses import dataclass
-from restaurant import geo
-from restaurant import operations as ops
-from restaurant.inventory_management import Inventory
+from typing import Optional
+from zoo.owner import Owner
 
 @dataclass
-class Restaurant:
+class Animal:
     name: str
-    location: geo.Coordinates
-    employees: List[ops.Employee]
-    inventory: Inventory
-    menu: ops.Menu
-    finances: ops.Finances
+    age: int
+    owner: Optional[Owner] = None
 
-    # Methods remain the same, utilizing the composed Inventory class
+    def make_sound(self):
+        raise NotImplementedError("Subclasses must implement this method.")
+
+    def move(self):
+        print(f"{self.name} is moving.")
+    
+    def assign_owner(self, owner: Owner):
+        self.owner = owner
+        owner.add_pet(self)
+        print(f"{self.name} is now owned by {owner.name}.")
 ```
 
 **📌 Explanation:**
 
-- **Inventory Management:** The `Inventory` class encapsulates all inventory-related functionalities.
-- **Restaurant Composition:** The `Restaurant` class now **has an** `Inventory` instance, promoting separation of concerns and reducing coupling.
-
+- **Owner Management:** The `Owner` class manages ownership of animals.
+- **Animal Composition:** The `Animal` class has an optional `Owner` instance, promoting separation of concerns and reducing coupling.
 
 ## ✅ Best Practices for Using Inheritance
 
@@ -620,7 +466,6 @@ class Restaurant:
 4. **🚫 Avoid Overriding Methods Unnecessarily:**
    - Only override methods when you need to change or extend their behavior. Unnecessary overrides can complicate the class hierarchy and introduce bugs.
 
-
 ## 🔍 Subtyping Outside Inheritance
 
 While inheritance is a primary means of achieving subtyping, Python's dynamic nature allows for more flexible subtyping through **duck typing**.
@@ -634,14 +479,22 @@ While inheritance is a primary means of achieving subtyping, Python's dynamic na
 **Example:**
 
 ```python
-def double_value(x):
-    return x + x
+def make_animal_sound(animal):
+    animal.make_sound()
 
-print(double_value(3))        # Output: 6
-print(double_value("abc"))    # Output: abcabc
+class Snake:
+    def make_sound(self):
+        print("Snake hisses!")
+
+class Parrot:
+    def make_sound(self):
+        print("Parrot squawks!")
+
+make_animal_sound(Snake())   # Output: Snake hisses!
+make_animal_sound(Parrot())  # Output: Parrot squawks!
 ```
 
-In this example, `double_value` works with any object that supports the `+` operator with itself. It doesn't care about the object's actual type, just its behavior.
+In this example, the `make_animal_sound` function works with any object that has a `make_sound` method, regardless of its actual type.
 
 **Implications:**
 
@@ -656,58 +509,50 @@ Whether using inheritance or duck typing, the principles of substitutability rem
 **Example with Abstract Base Classes:**
 
 ```python
-# restaurant/abstract_restaurant.py
+# zoo/abstract_animal.py
 
 from abc import ABC, abstractmethod
 from typing import List
-from restaurant import geo, operations as ops
+from zoo import operations as ops
 
-class AbstractRestaurant(ABC):
+class AbstractAnimal(ABC):
     @abstractmethod
-    def order_dish(self, dish: ops.Dish):
+    def make_sound(self):
         pass
 
     @abstractmethod
-    def move_location(self, new_location: geo.Coordinates):
+    def move(self):
         pass
 
     # Define other abstract methods as needed
 ```
 
 ```python
-# restaurant/restaurant.py
+# zoo/mammal.py
 
-from typing import List
-from dataclasses import dataclass
-from restaurant import geo
-from restaurant import operations as ops
-from restaurant.abstract_restaurant import AbstractRestaurant
+from zoo.abstract_animal import AbstractAnimal
 
-@dataclass
-class Restaurant(AbstractRestaurant):
-    name: str
-    location: geo.Coordinates
-    employees: List[ops.Employee]
-    inventory: List[ops.Ingredient]
-    menu: ops.Menu
-    finances: ops.Finances
+class Mammal(AbstractAnimal):
+    def __init__(self, name: str, age: int, fur_color: str):
+        self.name = name
+        self.age = age
+        self.fur_color = fur_color
+        print(f"Initialized Mammal: {self.name}, Age: {self.age}, Fur Color: {self.fur_color}")
 
-    def order_dish(self, dish: ops.Dish):
-        # Implementation as before
-        pass
-
-    def move_location(self, new_location: geo.Coordinates):
-        # Implementation as before
-        pass
-
-    # Implement other abstract methods
+    def make_sound(self):
+        print(f"{self.name} says: Roar!")
+    
+    def move(self):
+        print(f"{self.name} is walking.")
+    
+    def nurse(self):
+        print(f"{self.name} is nursing its young.")
 ```
 
 **📌 Explanation:**
 
-- **Abstract Classes:** `AbstractRestaurant` defines the interface that all restaurant types must adhere to.
-- **Implementation:** The `Restaurant` class implements the abstract methods, ensuring consistency across different restaurant types.
-
+- **Abstract Classes:** `AbstractAnimal` defines the interface that all animal types must adhere to.
+- **Implementation:** The `Mammal` class implements the abstract methods, ensuring consistency across different animal types.
 
 ## 💬 Discussion Topics
 
@@ -744,7 +589,6 @@ Ensure that derived classes fully adhere to the behaviors and expectations of th
 - Use magic methods for operations that have clear and logical real-world analogs.
 - Avoid overloading magic methods for operations that can lead to confusion or have no meaningful interpretation.
 
-
 ## 🎯 Conclusion
 
 Inheritance is a powerful tool in Python's **OOP arsenal**, enabling developers to create flexible and reusable code. However, with great power comes great responsibility. Properly implementing inheritance requires a deep understanding of class hierarchies, substitutability, and design principles like the **Liskov Substitution Principle (LSP)**.
@@ -773,9 +617,6 @@ Inheritance is a powerful tool in Python's **OOP arsenal**, enabling developers 
 
 Investing time and effort into mastering inheritance and its principles leads to more maintainable, robust, and scalable Python applications. Always strive to write code that is not only functional but also clean and intuitive for others to use and extend.
 
-**Happy Coding!** 🚀😊🎉
-
-
 ## 🌐 Additional Resources
 
 To further enhance your understanding of inheritance and related Python concepts, explore the following **valuable resources**:
@@ -789,628 +630,3 @@ To further enhance your understanding of inheritance and related Python concepts
 - [**Design Patterns in Python**](https://refactoring.guru/design-patterns/python) 🛠️🔍
 
 
-**Author:** Jane Smith  
-**Email:** jane.smith@example.com 📧
-
-*Note: Replace `Jane Smith` and `jane.smith@example.com` with your actual name and email address.*
-
-
-Feel free to **integrate inheritance principles** into your Python projects to harness the full potential of **object-oriented programming**, **encapsulation**, and **robust code design**! 🚀 Happy coding! 😊🎉
-
-
-## 🛠️ **Detailed Code Examples**
-
-To ensure clarity and ease of understanding, here's a breakdown of each module and class with complete code examples.
-
-### 1. `restaurant/__init__.py`
-
-```python
-# restaurant/__init__.py
-
-from .geo import Coordinates, find_coordinates
-from .operations import (
-    Employee,
-    Ingredient,
-    Dish,
-    Menu,
-    Finances,
-    RestaurantData,
-    GPS
-)
-from .restaurant import Restaurant
-from .food_truck import FoodTruck
-from .popup_stall import PopUpStall
-from .inventory_management import Inventory
-from .rectangle import Rectangle, Square
-```
-
-**📌 Explanation:**
-
-- **Purpose:** Imports essential classes and functions, making them accessible when the package is imported.
-- **Usage:** Allows users to import classes directly from the `restaurant` package, e.g., `from restaurant import Restaurant`.
-
-
-### 2. `restaurant/geo.py`
-
-```python
-# restaurant/geo.py
-
-from dataclasses import dataclass
-from typing import Tuple
-
-@dataclass
-class Coordinates:
-    latitude: float
-    longitude: float
-
-def find_coordinates(location_name: str) -> Coordinates:
-    """
-    Mock function to find coordinates based on a location name.
-    In a real application, this would interface with a geocoding service.
-    """
-    mock_locations = {
-        'Huntsville, Alabama': Coordinates(34.7304, -86.5861),
-        'New York, NY': Coordinates(40.7128, -74.0060),
-        'Los Angeles, CA': Coordinates(34.0522, -118.2437),
-    }
-    return mock_locations.get(location_name, Coordinates(0.0, 0.0))
-```
-
-**📌 Explanation:**
-
-- **`Coordinates` Class:** Represents geographical coordinates with latitude and longitude.
-- **`find_coordinates` Function:** A mock function that returns `Coordinates` based on a location name. In real-world scenarios, this would utilize a geocoding API to retrieve accurate coordinates.
-
-
-### 3. `restaurant/operations.py`
-
-```python
-# restaurant/operations.py
-
-from dataclasses import dataclass, field
-from typing import List
-
-@dataclass
-class Employee:
-    name: str
-    role: str
-    salary_per_hour: float
-    hours_worked: float = 0.0
-
-    def record_hours(self, minutes_worked: int):
-        hours = minutes_worked / 60
-        self.hours_worked += hours
-        print(f"{self.name} worked {hours:.2f} hours. Total hours: {self.hours_worked:.2f}")
-
-    def calculate_pay(self, minutes_worked: int) -> float:
-        hours = minutes_worked / 60
-        pay = hours * self.salary_per_hour
-        print(f"Calculating pay for {self.name}: {hours:.2f} hours * ${self.salary_per_hour}/hr = ${pay:.2f}")
-        return pay
-
-@dataclass(frozen=True)
-class Ingredient:
-    name: str
-    brand: str
-    amount: float = 1.0
-    units: str = "CUP"
-
-@dataclass
-class Dish:
-    name: str
-    ingredients: List[Ingredient]
-    price: float
-
-    def __str__(self):
-        return f"Dish(name={self.name}, price=${self.price:.2f})"
-
-@dataclass
-class Menu:
-    dishes: List[Dish] = field(default_factory=list)
-
-    def add_dish(self, dish: Dish):
-        self.dishes.append(dish)
-        print(f"Added {dish} to the menu.")
-
-    def remove_dish(self, dish: Dish):
-        if dish in self.dishes:
-            self.dishes.remove(dish)
-            print(f"Removed {dish} from the menu.")
-        else:
-            raise ValueError(f"Dish {dish.name} not found in the menu.")
-
-    def contains(self, ingredient: Ingredient) -> bool:
-        for dish in self.dishes:
-            if ingredient in dish.ingredients:
-                return True
-        return False
-
-@dataclass
-class Finances:
-    funds: float = 0.0
-
-    def increase_funds(self, amount: float):
-        self.funds += amount
-        print(f"Funds increased by ${amount:.2f}. Total funds: ${self.funds:.2f}")
-
-    def decrease_funds(self, amount: float):
-        self.funds -= amount
-        print(f"Funds decreased by ${amount:.2f}. Total funds: ${self.funds:.2f}")
-
-@dataclass
-class RestaurantData:
-    name: str
-    location: 'restaurant.geo.Coordinates'
-    employees: List[Employee]
-    inventory: List[Ingredient]
-    menu: Menu
-    finances: Finances
-
-@dataclass
-class GPS:
-    current_coordinates: 'restaurant.geo.Coordinates' = field(default_factory=lambda: Coordinates(0.0, 0.0))
-
-    def get_coordinates(self) -> 'restaurant.geo.Coordinates':
-        return self.current_coordinates
-
-    def update_coordinates(self, new_coordinates: 'restaurant.geo.Coordinates'):
-        self.current_coordinates = new_coordinates
-        print(f"GPS updated to {self.current_coordinates}")
-```
-
-**📌 Explanation:**
-
-- **`Employee` Class:** Represents an employee with attributes like name, role, salary, and methods to record hours worked and calculate pay.
-- **`Ingredient` Class:** Immutable class representing an ingredient with name, brand, amount, and units.
-- **`Dish` Class:** Represents a dish with a name, list of ingredients, and price. Includes a `__str__` method for readable representation.
-- **`Menu` Class:** Manages a list of dishes, providing methods to add or remove dishes and check if a particular ingredient is present in any dish.
-- **`Finances` Class:** Manages the restaurant's funds, allowing increases and decreases.
-- **`RestaurantData` Class:** Aggregates all relevant data about the restaurant, facilitating easy data retrieval.
-- **`GPS` Class:** Simulates a GPS system for tracking the current location, with methods to get and update coordinates.
-
-
-### 4. `restaurant/restaurant.py`
-
-```python
-# restaurant/restaurant.py
-
-from typing import List
-from dataclasses import dataclass
-from restaurant import geo
-from restaurant import operations as ops
-
-@dataclass
-class Restaurant:
-    name: str
-    location: geo.Coordinates
-    employees: List[ops.Employee]
-    inventory: List[ops.Ingredient]
-    menu: ops.Menu
-    finances: ops.Finances
-
-    def transfer_employees(self, employees: List[ops.Employee], restaurant: 'Restaurant'):
-        """
-        Transfers a list of employees from this restaurant to another.
-        """
-        for employee in employees:
-            if employee in self.employees:
-                self.employees.remove(employee)
-                restaurant.employees.append(employee)
-                print(f"Transferred {employee.name} to {restaurant.name}.")
-            else:
-                raise ValueError(f"Employee {employee.name} not found in {self.name}.")
-
-    def order_dish(self, dish: ops.Dish):
-        """
-        Processes the ordering of a dish by removing the necessary ingredients from inventory
-        and updating finances.
-        """
-        print(f"Ordering dish: {dish.name}")
-        for ingredient in dish.ingredients:
-            if ingredient in self.inventory:
-                self.inventory.remove(ingredient)
-                self.finances.increase_funds(dish.price)
-                print(f"Removed {ingredient.name} from inventory.")
-            else:
-                raise ValueError(f"Ingredient {ingredient.name} is depleted.")
-        self.menu.remove_dish(dish)
-        print(f"Dish {dish.name} ordered successfully.")
-
-    def add_inventory(self, ingredients: List[ops.Ingredient], cost_in_cents: float):
-        """
-        Adds new ingredients to the inventory and decreases funds accordingly.
-        """
-        self.inventory.extend(ingredients)
-        self.finances.decrease_funds(cost_in_cents)
-        print(f"Added {len(ingredients)} ingredients to inventory.")
-
-    def register_hours_employee_worked(self, employee: ops.Employee, minutes_worked: int):
-        """
-        Registers the hours an employee has worked and updates finances based on salary.
-        """
-        employee.record_hours(minutes_worked)
-        cost = employee.calculate_pay(minutes_worked)
-        self.finances.decrease_funds(cost)
-        print(f"Registered {minutes_worked} minutes worked for {employee.name}.")
-
-    def get_restaurant_data(self) -> ops.RestaurantData:
-        """
-        Retrieves all relevant data about the restaurant.
-        """
-        print(f"Retrieving data for {self.name}.")
-        return ops.RestaurantData(
-            name=self.name,
-            location=self.location,
-            employees=self.employees,
-            inventory=self.inventory,
-            menu=self.menu,
-            finances=self.finances
-        )
-
-    def change_menu(self, menu: ops.Menu):
-        """
-        Updates the restaurant's menu.
-        """
-        self.menu = menu
-        print(f"Menu updated for {self.name}.")
-
-    def move_location(self, new_location: geo.Coordinates):
-        """
-        Updates the restaurant's location.
-        """
-        self.location = new_location
-        print(f"{self.name} moved to new location: {new_location}.")
-```
-
-**📌 Explanation:**
-
-- **Attributes:**
-  - `name`: Name of the restaurant.
-  - `location`: Geographical coordinates.
-  - `employees`: List of employees.
-  - `inventory`: List of ingredients.
-  - `menu`: The restaurant's menu.
-  - `finances`: Financial records.
-
-- **Methods:**
-  - `transfer_employees`: Transfers employees to another restaurant.
-  - `order_dish`: Processes a dish order by updating inventory and finances.
-  - `add_inventory`: Adds ingredients and updates finances.
-  - `register_hours_employee_worked`: Logs employee work hours and updates finances.
-  - `get_restaurant_data`: Retrieves comprehensive data about the restaurant.
-  - `change_menu`: Updates the menu.
-  - `move_location`: Changes the restaurant's location.
-
-
-### 5. `restaurant/food_truck.py`
-
-```python
-# restaurant/food_truck.py
-
-from typing import List
-from restaurant import geo
-from restaurant import operations as ops
-from restaurant.restaurant import Restaurant
-
-class FoodTruck(Restaurant):
-    def __init__(self, name: str, location: geo.Coordinates, employees: List[ops.Employee],
-                 inventory: List[ops.Ingredient], menu: ops.Menu, finances: ops.Finances):
-        super().__init__(name, location, employees, inventory, menu, finances)
-        self.__gps = self.initialize_gps()
-        print(f"Initialized FoodTruck: {self.name} at {self.location}.")
-
-    def initialize_gps(self) -> ops.GPS:
-        """
-        Initializes the GPS system for the food truck.
-        """
-        gps = ops.GPS()
-        gps.update_coordinates(self.location)
-        print(f"GPS initialized for {self.name}.")
-        return gps
-
-    def move_location(self, new_location: geo.Coordinates):
-        """
-        Overrides the move_location method to include automatic driving.
-        """
-        self.schedule_auto_driving_task(new_location)
-        super().move_location(new_location)
-        self.__gps.update_coordinates(new_location)
-        print(f"{self.name} has moved to new location: {new_location}.")
-
-    def schedule_auto_driving_task(self, new_location: geo.Coordinates):
-        """
-        Schedules a task to drive the food truck to the new location.
-        """
-        # Implementation details for scheduling the drive
-        print(f"Scheduling drive to {new_location} for {self.name}.")
-
-    def get_current_location(self) -> geo.Coordinates:
-        """
-        Retrieves the current location from the GPS system.
-        """
-        current_location = self.__gps.get_coordinates()
-        print(f"Current location of {self.name}: {current_location}.")
-        return current_location
-```
-
-**📌 Explanation:**
-
-- **Initialization (`__init__`):** Inherits from `Restaurant` and initializes a GPS system specific to the `FoodTruck`.
-- **Overridden Method (`move_location`):** Adds functionality to automatically drive to the new location before updating the location.
-- **Additional Methods:**
-  - `initialize_gps`: Sets up the GPS system.
-  - `schedule_auto_driving_task`: Simulates scheduling a drive to a new location.
-  - `get_current_location`: Retrieves the current location from the GPS system.
-
-
-### 6. `restaurant/popup_stall.py`
-
-```python
-# restaurant/popup_stall.py
-
-from typing import List
-from dataclasses import dataclass
-from restaurant import geo
-from restaurant import operations as ops
-from restaurant.restaurant import Restaurant
-
-@dataclass
-class PopUpStall(Restaurant):
-    event_date: str
-
-    def __init__(self, name: str, location: geo.Coordinates, employees: List[ops.Employee],
-                 inventory: List[ops.Ingredient], menu: ops.Menu, finances: ops.Finances,
-                 event_date: str):
-        super().__init__(name, location, employees, inventory, menu, finances)
-        self.event_date = event_date
-        print(f"Initialized PopUpStall: {self.name} for event on {self.event_date} at {self.location}.")
-
-    def setup_for_event(self):
-        """
-        Prepares the pop-up stall for the event.
-        """
-        # Implementation details for setting up the stall
-        print(f"Setting up {self.name} for event on {self.event_date}.")
-
-    def teardown_after_event(self):
-        """
-        Cleans up the pop-up stall after the event.
-        """
-        # Implementation details for tearing down the stall
-        print(f"Tearing down {self.name} after event on {self.event_date}.")
-```
-
-**📌 Explanation:**
-
-- **Attributes:**
-  - `event_date`: Date of the event the pop-up stall is attending.
-
-- **Initialization (`__init__`):** Calls the base class constructor and sets the `event_date`.
-- **Additional Methods:**
-  - `setup_for_event`: Prepares the stall for the event.
-  - `teardown_after_event`: Cleans up after the event concludes.
-
-
-### 7. `restaurant/inventory_management.py`
-
-```python
-# restaurant/inventory_management.py
-
-from typing import List
-from dataclasses import dataclass
-from restaurant import operations as ops
-
-@dataclass
-class Inventory:
-    ingredients: List[ops.Ingredient]
-
-    def add_ingredients(self, new_ingredients: List[ops.Ingredient]):
-        self.ingredients.extend(new_ingredients)
-        print(f"Added {len(new_ingredients)} ingredients to inventory.")
-
-    def remove_ingredient(self, ingredient: ops.Ingredient):
-        if ingredient in self.ingredients:
-            self.ingredients.remove(ingredient)
-            print(f"Removed {ingredient.name} from inventory.")
-        else:
-            raise ValueError(f"Ingredient {ingredient.name} not found in inventory.")
-```
-
-**📌 Explanation:**
-
-- **Attributes:**
-  - `ingredients`: List of ingredients available in the inventory.
-
-- **Methods:**
-  - `add_ingredients`: Adds new ingredients to the inventory.
-  - `remove_ingredient`: Removes an ingredient from the inventory.
-
-
-### 8. `restaurant/rectangle.py`
-
-```python
-# restaurant/rectangle.py
-
-from dataclasses import dataclass
-
-@dataclass
-class Rectangle:
-    _height: int
-    _width: int
-
-    def set_width(self, new_width: int):
-        self._width = new_width
-        print(f"Rectangle width set to {self._width}.")
-
-    def set_height(self, new_height: int):
-        self._height = new_height
-        print(f"Rectangle height set to {self._height}.")
-
-    def get_width(self) -> int:
-        return self._width
-
-    def get_height(self) -> int:
-        return self._height
-
-@dataclass
-class Square(Rectangle):
-    def __init__(self, length: int):
-        super().__init__(length, length)
-        print(f"Square initialized with side length {length}.")
-
-    def set_side_length(self, new_length: int):
-        self._width = new_length
-        self._height = new_length
-        print(f"Square side length set to {new_length}.")
-
-    def set_width(self, new_width: int):
-        self.set_side_length(new_width)
-
-    def set_height(self, new_height: int):
-        self.set_side_length(new_height)
-```
-
-**📌 Explanation:**
-
-- **`Rectangle` Class:** Represents a rectangle with mutable height and width.
-- **`Square` Class:** Inherits from `Rectangle`, ensuring that both height and width remain equal when either is set. This demonstrates how improper inheritance can violate the **Liskov Substitution Principle**.
-
-
-### 9. `main.py`
-
-```python
-# main.py
-
-from restaurant import (
-    geo,
-    operations as ops,
-    Restaurant,
-    FoodTruck,
-    PopUpStall,
-    Inventory,
-    Rectangle,
-    Square
-)
-
-def main():
-    # Initialize Employees
-    emp1 = ops.Employee(name="Alice", role="Chef", salary_per_hour=20.0)
-    emp2 = ops.Employee(name="Bob", role="Cashier", salary_per_hour=15.0)
-    
-    # Initialize Ingredients
-    ingredient1 = ops.Ingredient(name="Flour", brand="BrandA", amount=5.0, units="CUP")
-    ingredient2 = ops.Ingredient(name="Eggs", brand="BrandB", amount=12.0, units="UNIT")
-    
-    # Initialize Dishes
-    dish1 = ops.Dish(name="Pasta with Sausage", ingredients=[ingredient1, ingredient2], price=12.99)
-    
-    # Initialize Menu
-    menu = ops.Menu()
-    menu.add_dish(dish1)
-    
-    # Initialize Finances
-    finances = ops.Finances(funds=1000.0)
-    
-    # Initialize Inventory
-    inventory = Inventory(ingredients=[ingredient1, ingredient2])
-    
-    # Initialize Coordinates
-    location = geo.find_coordinates("Huntsville, Alabama")
-    
-    # Initialize Restaurant
-    restaurant = Restaurant(
-        name="Downtown Diner",
-        location=location,
-        employees=[emp1, emp2],
-        inventory=inventory.ingredients,
-        menu=menu,
-        finances=finances
-    )
-    
-    # Initialize FoodTruck
-    food_truck = FoodTruck(
-        name="Pat's Food Truck",
-        location=geo.find_coordinates("New York, NY"),
-        employees=[emp1],
-        inventory=[ingredient1],
-        menu=menu,
-        finances=finances
-    )
-    
-    # Initialize PopUpStall
-    popup_stall = PopUpStall(
-        name="Festival Feast",
-        location=geo.find_coordinates("Los Angeles, CA"),
-        employees=[emp2],
-        inventory=[ingredient2],
-        menu=menu,
-        finances=finances,
-        event_date="2024-12-25"
-    )
-    
-    # Example Operations
-    restaurant.order_dish(dish1)
-    food_truck.move_location(geo.find_coordinates("Huntsville, Alabama"))
-    popup_stall.setup_for_event()
-    popup_stall.teardown_after_event()
-    
-    # Substitutability Example
-    restaurants = [restaurant, food_truck, popup_stall]
-    
-    def display_restaurant_data(restaurant_obj: Restaurant):
-        data = restaurant_obj.get_restaurant_data()
-        print(f\nRestaurant: {data.name}")
-        print(f"Location: {data.location}")
-        print(f"Employees: {[emp.name for emp in data.employees]}")
-        print(f"Inventory: {[ing.name for ing in data.inventory]}")
-        print(f"Menu: {[dish.name for dish in data.menu.dishes]}")
-        print(f"Funds: ${data.finances.funds:.2f}")
-    
-    for res in restaurants:
-        display_restaurant_data(res)
-    
-    # Demonstrate Liskov Substitution Principle Violation
-    rectangle = Rectangle(height=10, width=20)
-    square = Square(length=15)
-    
-    def double_width(rect: Rectangle):
-        old_height = rect.get_height()
-        rect.set_width(rect.get_width() * 2)
-        # Ensure height remains unchanged
-        assert rect.get_height() == old_height, "Height should remain unchanged."
-        print(f"Width doubled. New dimensions: {rect.get_width()}x{rect.get_height()}")
-    
-    print("\nDoubling width of Rectangle:")
-    double_width(rectangle)
-    
-    print("\nDoubling width of Square (LSP Violation):")
-    try:
-        double_width(square)
-    except AssertionError as e:
-        print(f"Assertion Error: {e}")
-
-if __name__ == "__main__":
-    main()
-```
-
-**📌 Explanation:**
-
-- **Initialization:**
-  - Creates instances of `Employee`, `Ingredient`, `Dish`, `Menu`, `Finances`, `Inventory`, and `Coordinates`.
-  - Initializes `Restaurant`, `FoodTruck`, and `PopUpStall` with the created objects.
-  
-- **Operations:**
-  - Orders a dish from the restaurant.
-  - Moves the food truck to a new location.
-  - Sets up and tears down the pop-up stall for an event.
-  
-- **Substitutability Example:**
-  - Demonstrates how instances of derived classes can be treated uniformly as instances of the base class.
-  
-- **Liskov Substitution Principle (LSP) Violation:**
-  - Shows how substituting a `Square` for a `Rectangle` can lead to assertion errors, violating LSP.
-
-
-## 📝 Final Notes
-
-This comprehensive codebase illustrates the power and complexity of inheritance in Python. By following the structured approach and adhering to best practices, you can harness inheritance to create flexible, maintainable, and robust applications. However, always be mindful of principles like the **Liskov Substitution Principle** to avoid subtle bugs and maintain code integrity.
