@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 Product Selection</h1>
+        
+        <div class="products">
+            {% for product in products %}
+            <div class="product">
+                <input type="checkbox" class="product-checkbox" data-id="{{ product.id }}" data-price="{{ product.price }}">
+                <span>{{ product.name }} - Rs. {{ product.price }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="cart">
+            <h2>Cart Total</h2>
+            <p>Total: Rs. <span id="total">0</span></p>
+        </div>
+    </div>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
