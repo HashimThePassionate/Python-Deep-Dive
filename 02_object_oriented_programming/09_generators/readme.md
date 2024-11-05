@@ -114,6 +114,26 @@ gen_expr = (expression for item in iterable if condition)
 Imagine processing a huge log file, one line at a time, without loading the entire file into memory.
 
 ```python
+def generate_large_file(file_path, repetitions):
+    """Generate a large file with repeated information about you."""
+    with open(file_path, 'w') as file:
+        for _ in range(repetitions):
+            file.write("Name: Muhammad Hashim\n")
+            file.write("Profession: Python Instructor and Web Developer\n")
+            file.write("Location: Islamabad\n")
+            file.write("Interests: Coffee, Nature, and Software Engineering\n")
+            file.write("Experience: 3 years in Python, Django, and DRF\n")
+            file.write("GitHub: hashimthepassionate\n")
+            file.write("\n")  # Add a blank line for readability
+
+# Define the file path and repetitions
+input_file = 'large_info_file.txt'
+repetitions = 10000  # Number of times to repeat the information
+
+# Generate the large file
+generate_large_file(input_file, repetitions)
+print(f"Large file '{input_file}' generated with {repetitions} repetitions.")
+
 def read_large_file(file_path):
     """Generator to read a large file line by line."""
     with open(file_path, 'r') as file:
@@ -127,8 +147,8 @@ def process(line, output_file):
             f.write(line)  # Write only lines containing Name or Profession
 
 # Define input and output file paths
-input_file = 'large_log_file.txt'
-output_file = 'filtered_log_file.txt'
+input_file = 'large_info_file.txt'  # Apni input file ka naam aur path yahan specify karen
+output_file = 'filtered_info_file.txt'
 
 # Clear the output file before writing new content
 open(output_file, 'w').close()
