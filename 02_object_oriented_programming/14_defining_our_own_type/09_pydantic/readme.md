@@ -1,816 +1,883 @@
-# 🏦 **Runtime Checking with Pydantic** ✨
+# 🧑‍💻 **Runtime Validation with Pydantic** ✨
 
-Ensuring the integrity and correctness of data is paramount in developing robust software systems. In banking applications, where financial data is sensitive and critical, validating data at runtime becomes essential to prevent inconsistencies, fraud, and operational errors. This guide delves into **runtime checking** using the **Pydantic** library in Python, illustrating its application through a **Bank Management System** example. We'll explore key concepts, provide detailed code examples, discuss best practices, and highlight potential pitfalls to help you effectively implement runtime validation in your projects.
+If you're looking to learn data validation in Python, especially if you're a beginner, **Pydantic** is an excellent tool that can assist you. This guide will walk you through step-by-step on how to use Pydantic to apply runtime validation in your Python classes. We'll create a simple **User Profile** class and implement Pydantic validations within it.
 
 
 ## 📚 **Table of Contents**
 
-- [🏦 **Runtime Checking with Pydantic** ✨](#-runtime-checking-with-pydantic-)
-  - [📚 **Table of Contents**](#-table-of-contents)
-  - [🌟 Overview](#-overview)
-    - [🌟 **Key Benefits of Runtime Checking with Pydantic:**](#-key-benefits-of-runtime-checking-with-pydantic)
-  - [📂 Project Structure](#-project-structure)
-  - [🔑 Key Concepts in Runtime Checking with Pydantic](#-key-concepts-in-runtime-checking-with-pydantic)
-    - [👨‍👩‍👧 Defining Data Models with Pydantic](#-defining-data-models-with-pydantic)
-    - [🛡️ Validation and Parsing](#️-validation-and-parsing)
-    - [🔄 Constrained Types and Validators](#-constrained-types-and-validators)
-  - [🏦 Practical Example: Bank Management System](#-practical-example-bank-management-system)
-    - [📄 Defining the Base Models](#-defining-the-base-models)
-    - [💳 Creating Derived Models: `SavingsAccount` and `CheckingAccount`](#-creating-derived-models-savingsaccount-and-checkingaccount)
-    - [🗂️ Loading and Validating Data](#️-loading-and-validating-data)
-  - [🔧 Advanced Pydantic Features](#-advanced-pydantic-features)
-    - [🔍 Custom Validators](#-custom-validators)
-    - [🛠️ Strict Types](#️-strict-types)
-  - [✅ Best Practices for Using Pydantic in Banking Applications](#-best-practices-for-using-pydantic-in-banking-applications)
-    - [🏗️ Designing Robust Models](#️-designing-robust-models)
-    - [🧩 Separating Concerns](#-separating-concerns)
-  - [💬 Discussion Topic](#-discussion-topic)
-  - [🎯 Conclusion](#-conclusion)
-    - [🌟 **Key Takeaways:**](#-key-takeaways)
-    - [🎯 **Final Thoughts:**](#-final-thoughts)
-  - [🌐 Additional Resources](#-additional-resources)
-  - [🛠️ **Detailed Code Examples**](#️-detailed-code-examples)
-    - [1. `bank/__init__.py`](#1-bank__init__py)
-    - [2. `bank/models.py`](#2-bankmodelspy)
-    - [3. `bank/main.py`](#3-bankmainpy)
-  - [📝 Final Notes](#-final-notes)
-  - [📝 Final Notes](#-final-notes-1)
-  - [🌐 Additional Resources](#-additional-resources-1)
+1. [🌟 What is Pydantic?](#-what-is-pydantic)
+2. [🔧 Installing Pydantic](#-installing-pydantic)
+3. [👨‍💼 Creating a Simple User Profile Class](#-creating-a-simple-user-profile-class)
+4. [✅ Adding Validations with Pydantic](#-adding-validations-with-pydantic)
+5. [🔄 Viewing Runtime Validation](#-viewing-runtime-validation)
+6. [❌ Handling Validation Errors](#-handling-validation-errors)
+7. [📝 Complete Code Example](#-complete-code-example)
+8. [📌 Summary](#-summary)
 
 
-## 🌟 Overview
+## 🌟 What is Pydantic?
 
-In software development, especially in domains like banking where data integrity is non-negotiable, **runtime checking** plays a crucial role in ensuring that the data flowing through the system adheres to expected formats and constraints. **Pydantic** is a powerful Python library that facilitates this by providing data validation and settings management using Python type annotations.
+**Pydantic** is a Python library that simplifies data validation and settings management. It uses Python's type annotations to create data models and automatically validates data when you instantiate the model. This means that if there's an error in your data, Pydantic will notify you immediately.
 
-### 🌟 **Key Benefits of Runtime Checking with Pydantic:**
+### 🌟 **Key Features:**
 
-- **🔒 Data Integrity:** Ensures that all data entering the system meets predefined criteria, reducing the risk of errors and inconsistencies.
-- **🚀 Developer Efficiency:** Minimizes the need for boilerplate validation code, allowing developers to focus on core functionalities.
-- **🛡️ Security Enhancement:** Prevents malformed or malicious data from causing unforeseen issues or vulnerabilities.
-- **📈 Improved Maintainability:** Centralizes validation logic within models, making the codebase easier to manage and understand.
+- **Type Validation:** Checks data against specified types.
+- **Data Parsing:** Parses data from different sources (like JSON, YAML, etc.).
+- **Error Reporting:** Provides detailed error messages when validation fails.
+- **Ease of Use:** Comes with simple syntax and powerful features.
 
 
-## 📂 Project Structure
+## 🔧 Installing Pydantic
 
-To illustrate the concepts, we'll structure our **Bank Management System** project as follows:
+First, you'll need to install Pydantic. This is quite straightforward if you're using Python and `pip`.
 
+### **Installation Steps:**
+
+1. **Create a Virtual Environment (Recommended):**
+
+   Virtual environments keep your project's dependencies isolated, preventing conflicts between different projects.
+
+   ```bash
+   python3 -m venv venv
+   ```
+
+   **Explanation:**
+   - The command `python3 -m venv venv` creates a virtual environment named `venv`. This isolates your project's dependencies from other projects.
+
+2. **Activate the Virtual Environment:**
+
+   - **macOS/Linux:**
+
+     ```bash
+     source venv/bin/activate
+     ```
+
+   - **Windows:**
+
+     ```bash
+     venv\Scripts\activate
+     ```
+
+   **Explanation:**
+   - Running `source venv/bin/activate` (macOS/Linux) or `venv\Scripts\activate` (Windows) activates the virtual environment. This ensures that any packages you install using `pip` are confined to this environment.
+
+3. **Install Pydantic:**
+
+   ```bash
+   pip install pydantic
+   ```
+
+   **Explanation:**
+   - The command `pip install pydantic` installs the Pydantic library, which is essential for data validation in your project.
+
+   > **Note:** If you also want to use type checking (`mypy`), you can run:
+   
+   ```bash
+   pip install pydantic[mypy]
+   ```
+
+
+## 👨‍💼 Creating a Simple User Profile Class
+
+Let's create a simple **User Profile** class that will store a user's name, email, age, and phone number.
+
+### **Step 1: Create a Python File**
+
+First, create a Python file, for example, `user.py`.
+
+```bash
+touch user.py
 ```
-bank_management/
-├── bank/
-│   ├── __init__.py
-│   ├── models.py
-├── main.py
-└── README.md
-```
 
+### **Step 2: Define the User Class Without Pydantic**
 
-## 🔑 Key Concepts in Runtime Checking with Pydantic
-
-### 👨‍👩‍👧 Defining Data Models with Pydantic
-
-Pydantic allows you to define **data models** using Python's type annotations. These models not only serve as schemas for your data but also enforce validation rules automatically when data is instantiated.
-
-### 🛡️ Validation and Parsing
-
-While Python's type annotations provide a form of documentation and hint for developers, Pydantic leverages these annotations to perform **runtime validation**. It parses incoming data, ensuring that it conforms to the specified types and constraints, raising informative errors when violations occur.
-
-### 🔄 Constrained Types and Validators
-
-Pydantic offers **constrained types** (like `constr`, `conint`) that allow you to enforce additional restrictions on your data beyond basic type checking. Additionally, **validators** can be custom methods that perform more intricate validation logic, ensuring that your data meets complex business rules.
-
-
-## 🏦 Practical Example: Bank Management System
-
-Let's build a simple **Bank Management System** to demonstrate how Pydantic can be used for runtime data validation. We'll focus on modeling **accounts**, ensuring that all data conforms to banking regulations and business rules.
-
-### 📄 Defining the Base Models
-
-We'll start by defining the fundamental data structures required for our banking application.
+Initially, let's create a simple Python class without any validation.
 
 ```python
-# bank/models.py
+# user.py
 
-from pydantic import BaseModel, Field, constr, conint, validator
-from typing import List, Optional, Literal
-import re
+class User:
+    def __init__(self, name: str, email: str, age: int, phone: str):
+        self.name = name
+        self.email = email
+        self.age = age
+        self.phone = phone
 
-class BankDetails(BaseModel):
-    routing_number: constr(regex=r'^\d{9}$')  # Exactly 9 digits
-    account_number: constr(regex=r'^\d{10,12}$')  # 10 to 12 digits
-
-class Employee(BaseModel):
-    name: constr(min_length=1)
-    position: Literal['Teller', 'Manager', 'Loan Officer', 'Customer Service']
-    payment_details: Optional[BankDetails] = None
-
-    @validator('payment_details', always=True)
-    def check_payment_details(cls, v, values):
-        if values.get('position') in ['Manager', 'Loan Officer']:
-            if v is None:
-                raise ValueError(f"Payment details required for position {values.get('position')}")
-        return v
-
-class Dish(BaseModel):
-    name: constr(min_length=1, max_length=16)
-    price_in_cents: conint(gt=0)
-    description: constr(min_length=1, max_length=80)
-    picture: Optional[constr(regex=r'^[\w,\s-]+\.[A-Za-z]{3,4}$')] = None  # e.g., "image.png"
-
-class Account(BaseModel):
-    account_id: constr(regex=r'^ACCT\d{6}$')  # e.g., ACCT123456
-    owner_name: constr(min_length=1)
-    balance_in_cents: conint(ge=0)
-    transactions: List[str] = Field(default_factory=list)
-
-class Restaurant(BaseModel):
-    name: constr(regex=r'^[A-Za-z0-9 "\']{1,32}$')
-    owner_full_name: constr(min_length=1)
-    address: constr(min_length=1)
-    employees: List[Employee]
-    dishes: List[Dish]
-    number_of_seats: conint(gt=0)
-    offers_to_go: bool
-    offers_delivery: bool
-
-    @validator('employees')
-    def check_employee_roles(cls, v):
-        positions = [employee.position for employee in v]
-        if 'Chef' not in positions:
-            raise ValueError("At least one Chef is required.")
-        if 'Server' not in positions:
-            raise ValueError("At least one Server is required.")
-        return v
-
-    @validator('dishes')
-    def check_unique_dishes(cls, v):
-        dish_names = [dish.name for dish in v]
-        if len(dish_names) != len(set(dish_names)):
-            raise ValueError("Each dish must have a unique name.")
-        if len(v) < 3:
-            raise ValueError("There must be at least three dishes on the menu.")
-        return v
+# Example Usage
+user = User(name="Ali Ahmed", email="ali@example.com", age=30, phone="1234567890")
+print(user.name)
 ```
 
-**📌 Explanation:**
+**Explanation:**
 
-- **`BankDetails` Model:**
-  - **Fields:**
-    - `routing_number`: Exactly 9 digits, matching the standard U.S. routing number format.
-    - `account_number`: Between 10 to 12 digits to accommodate various bank account numbers.
+- **Class Definition:**
+  - `class User:` defines a new class named `User`.
   
-- **`Employee` Model:**
-  - **Fields:**
-    - `name`: Non-empty string.
-    - `position`: Must be one of the specified roles.
-    - `payment_details`: Optional `BankDetails`. However, positions like 'Manager' and 'Loan Officer' require payment details.
+- **Constructor (`__init__` Method):**
+  - `def __init__(self, name: str, email: str, age: int, phone: str):` is the constructor method that's called when creating a new `User` object.
+  - `self.name = name` assigns the `name` parameter to the instance variable `self.name`.
+  - Similarly, `email`, `age`, and `phone` are assigned to their respective instance variables.
   
-  - **Validator `check_payment_details`:**
-    - Ensures that certain positions have payment details provided.
+- **Example Usage:**
+  - `user = User(name="Ali Ahmed", email="ali@example.com", age=30, phone="1234567890")` creates a `User` object.
+  - `print(user.name)` prints the user's name.
 
-- **`Dish` Model:**
-  - **Fields:**
-    - `name`: Between 1 to 16 characters.
-    - `price_in_cents`: Positive integer representing the price in cents.
-    - `description`: Between 1 to 80 characters.
-    - `picture`: Optional filename with a valid image extension.
+**Limitation:**
+This class lacks any form of validation. You can provide any type of data, whether it's correct or not.
 
-- **`Account` Model:**
-  - **Fields:**
-    - `account_id`: Must follow the pattern 'ACCT' followed by six digits.
-    - `owner_name`: Non-empty string.
-    - `balance_in_cents`: Non-negative integer.
-    - `transactions`: List of transaction descriptions.
 
-- **`Restaurant` Model:**
-  - **Fields:**
-    - `name`: Up to 32 characters, allowing letters, numbers, spaces, and certain punctuation.
-    - `owner_full_name`: Non-empty string.
-    - `address`: Non-empty string.
-    - `employees`: List of `Employee` instances.
-    - `dishes`: List of `Dish` instances.
-    - `number_of_seats`: Positive integer.
-    - `offers_to_go` and `offers_delivery`: Boolean flags.
-  
-  - **Validators:**
-    - `check_employee_roles`: Ensures that there's at least one 'Chef' and one 'Server'.
-    - `check_unique_dishes`: Ensures all dish names are unique and there are at least three dishes.
+## ✅ Adding Validations with Pydantic
 
-### 💳 Creating Derived Models: `SavingsAccount` and `CheckingAccount`
+Now, let's modify this class using Pydantic to add runtime data validation.
 
-Building upon the base `Account` model, we can create specialized account types with additional constraints or fields.
+### **Step 1: Import Pydantic**
+
+Import `BaseModel` from Pydantic, which serves as the base for creating data models.
 
 ```python
-# bank/models.py (continued)
-
-class SavingsAccount(Account):
-    interest_rate: conint(gt=0, lt=100)  # Interest rate as a percentage
-
-    @validator('balance_in_cents')
-    def check_min_balance(cls, v):
-        if v < 10000:  # Minimum balance of $100
-            raise ValueError("Savings account must have a minimum balance of $100.")
-        return v
-
-class CheckingAccount(Account):
-    overdraft_limit_in_cents: conint(ge=0)  # Overdraft limit
-
-    @validator('overdraft_limit_in_cents')
-    def check_overdraft_limit(cls, v):
-        if v > 50000:  # Maximum overdraft limit of $500
-            raise ValueError("Overdraft limit cannot exceed $500.")
-        return v
+from pydantic import BaseModel
 ```
 
-**📌 Explanation:**
+**Explanation:**
 
-- **`SavingsAccount` Model:**
-  - **Fields:**
-    - `interest_rate`: An integer between 1 and 99 representing the annual interest rate.
-  
-  - **Validator `check_min_balance`:**
-    - Ensures that the account maintains a minimum balance of $100.
+- `from pydantic import BaseModel` imports the `BaseModel` class from Pydantic. This is the foundation for all Pydantic models.
 
-- **`CheckingAccount` Model:**
-  - **Fields:**
-    - `overdraft_limit_in_cents`: Non-negative integer representing the overdraft limit.
-  
-  - **Validator `check_overdraft_limit`:**
-    - Ensures that the overdraft limit does not exceed $500.
+### **Step 2: Define the User Class with Pydantic**
 
-### 🗂️ Loading and Validating Data
-
-Let's demonstrate how to load data from a YAML file, parse it into our Pydantic models, and handle validation errors gracefully.
-
-**Sample YAML Configuration (`bank_config.yaml`):**
-
-```yaml
-name: "City Bank"
-owner_full_name: "Alice Johnson"
-address: "456 Elm Street, Metropolis, MT 54321"
-employees:
-  - name: "Bob Smith"
-    position: "Teller"
-  - name: "Carol White"
-    position: "Manager"
-    payment_details:
-      routing_number: "987654321"
-      account_number: "123456789012"
-dishes:
-  - name: "Grilled Chicken"
-    price_in_cents: 1299
-    description: "Juicy grilled chicken with herbs."
-  - name: "Caesar Salad"
-    price_in_cents: 899
-    description: "Fresh romaine with Caesar dressing."
-  - name: "Beef Burger"
-    price_in_cents: 1499
-    description: "Classic beef burger with cheese."
-number_of_seats: 50
-offers_to_go: true
-offers_delivery: true
-```
-
-**Loading and Validating the Configuration:**
+Now, inherit the `User` class from `BaseModel` and use type annotations.
 
 ```python
-# bank/main.py
+# user.py
 
-from pydantic import ValidationError
-from bank.models import Restaurant
-import yaml
+from pydantic import BaseModel
 
-def load_bank_config(filename: str) -> Restaurant:
-    with open(filename, 'r') as file:
-        data = yaml.safe_load(file)
-    try:
-        restaurant = Restaurant(**data)
-        print("Bank configuration loaded successfully.")
-        return restaurant
-    except ValidationError as e:
-        print("Error loading bank configuration:")
-        print(e.json())
-        raise
+class User(BaseModel):
+    name: str
+    email: str
+    age: int
+    phone: str
+```
+
+**Explanation:**
+
+- **Inheritance:**
+  - `class User(BaseModel):` means the `User` class now inherits from Pydantic's `BaseModel`. This brings in Pydantic's data validation capabilities.
+  
+- **Type Annotations:**
+  - `name: str` specifies that the `name` field should be of type string.
+  - `email: str` specifies that the `email` field should be of type string.
+  - `age: int` specifies that the `age` field should be of type integer.
+  - `phone: str` specifies that the `phone` field should be of type string.
+
+### **Step 3: Adding Basic Validations**
+
+Next, we'll add some basic validations such as ensuring the email format and setting an age range.
+
+```python
+# user.py
+
+from pydantic import BaseModel, EmailStr, Field, validator
+
+class User(BaseModel):
+    name: str = Field(..., min_length=1)
+    email: EmailStr
+    age: int = Field(..., ge=0, le=120)  # age >= 0 and <= 120
+    phone: str
+
+    @validator('phone')
+    def phone_must_be_digits(cls, v):
+        if not v.isdigit():
+            raise ValueError('Phone number must contain only digits.')
+        if len(v) != 10:
+            raise ValueError('Phone number must be exactly 10 digits.')
+        return v
+```
+
+**Explanation:**
+
+- **Imports:**
+  - `from pydantic import BaseModel, EmailStr, Field, validator` imports necessary components from Pydantic:
+    - `EmailStr`: A special type that handles email validation.
+    - `Field`: Allows adding additional configurations to fields.
+    - `validator`: Used to define custom validation methods.
+  
+- **Field Definitions with Validations:**
+  - **`name: str = Field(..., min_length=1)`**
+    - Defines the `name` field as a string.
+    - `Field(..., min_length=1)` specifies that `name` is required (denoted by `...`) and must have a minimum length of 1 character.
+  
+  - **`email: EmailStr`**
+    - Defines the `email` field using `EmailStr`, which ensures the email has a valid format.
+  
+  - **`age: int = Field(..., ge=0, le=120)`**
+    - Defines the `age` field as an integer.
+    - `Field(..., ge=0, le=120)` specifies that `age` must be greater than or equal to 0 and less than or equal to 120.
+  
+  - **`phone: str`**
+    - Defines the `phone` field as a string.
+    - A custom validator will be added to enforce additional constraints.
+  
+- **Custom Validator:**
+  
+  ```python
+  @validator('phone')
+  def phone_must_be_digits(cls, v):
+      if not v.isdigit():
+          raise ValueError('Phone number must contain only digits.')
+      if len(v) != 10:
+          raise ValueError('Phone number must be exactly 10 digits.')
+      return v
+  ```
+  
+  - **Decorator `@validator('phone')`:**
+    - Indicates that the following method is a validator for the `phone` field.
+  
+  - **Method `phone_must_be_digits`:**
+    - `cls`: Reference to the class.
+    - `v`: The value of the `phone` field being validated.
+  
+  - **Validation Logic:**
+    - `if not v.isdigit():` checks if the phone number contains only digits.
+      - If not, it raises a `ValueError` with the message `'Phone number must contain only digits.'`
+    
+    - `if len(v) != 10:` checks if the phone number is exactly 10 digits long.
+      - If not, it raises a `ValueError` with the message `'Phone number must be exactly 10 digits.'`
+    
+    - `return v`: If all validations pass, it returns the validated value.
+
+
+## 🔄 Viewing Runtime Validation
+
+Now, let's test the runtime validation by creating `User` instances with both valid and invalid data.
+
+### **Step 1: Instantiate the User Class with Valid Data**
+
+```python
+# user.py (continued)
 
 def main():
-    config_file = 'bank_config.yaml'
     try:
-        restaurant = load_bank_config(config_file)
-        # Proceed with using the validated restaurant data
-        print(restaurant)
-    except ValidationError:
-        print("Failed to load bank configuration due to validation errors.")
+        user = User(
+            name="Ali Ahmed",
+            email="ali@example.com",
+            age=30,
+            phone="1234567890"
+        )
+        print(user)
+    except ValidationError as e:
+        print(e.json())
+
+if __name__ == "__main__":
+        main()
+```
+
+**Explanation:**
+
+- **Function `main`:**
+  - **Try Block:**
+    - Attempts to create a `User` instance with valid data:
+      - `name="Ali Ahmed"`: Valid name (more than 1 character).
+      - `email="ali@example.com"`: Valid email format.
+      - `age=30`: Valid age (0 <= 30 <= 120).
+      - `phone="1234567890"`: Valid phone number (only digits and exactly 10 digits).
+  
+    - `print(user)`: If the instantiation is successful, it prints the `User` object.
+  
+  - **Except Block:**
+    - Catches any `ValidationError` that occurs during instantiation.
+    - `print(e.json())`: Prints the validation errors in JSON format for detailed information.
+  
+- **Execution Guard:**
+  - `if __name__ == "__main__":` ensures that the `main()` function runs only when the script is executed directly, not when imported as a module.
+
+**Expected Output:**
+
+```
+name='Ali Ahmed' email='ali@example.com' age=30 phone='1234567890'
+```
+
+### **Step 2: Instantiate with Invalid Email**
+
+```python
+# user.py (continued)
+
+def main():
+    try:
+        user = User(
+            name="Ali Ahmed",
+            email="aliexample.com",  # Invalid email
+            age=30,
+            phone="1234567890"
+        )
+        print(user)
+    except ValidationError as e:
+        print(e.json())
+```
+
+**Explanation:**
+
+- **Invalid Data:**
+  - `email="aliexample.com"`: Invalid email format (missing `@`).
+  
+- **Process:**
+  - Attempts to create a `User` instance with an invalid email.
+  
+- **Output:**
+
+```
+[
+  {
+    "loc": ["email"],
+    "msg": "value is not a valid email address",
+    "type": "value_error.email"
+  }
+]
+```
+
+**Explanation:**
+
+- **Validation Error:**
+  - `loc`: Location of the error (`email` field).
+  - `msg`: Error message (`value is not a valid email address`).
+  - `type`: Type of error (`value_error.email`).
+
+### **Step 3: Instantiate with Invalid Phone Number**
+
+```python
+# user.py (continued)
+
+def main():
+    try:
+        user = User(
+            name="Ali Ahmed",
+            email="ali@example.com",
+            age=30,
+            phone="12345abc90"  # Invalid phone
+        )
+        print(user)
+    except ValidationError as e:
+        print(e.json())
+```
+
+**Explanation:**
+
+- **Invalid Data:**
+  - `phone="12345abc90"`: Phone number contains non-digit characters (`abc`).
+  
+- **Process:**
+  - Attempts to create a `User` instance with an invalid phone number.
+  
+- **Output:**
+
+```
+[
+  {
+    "loc": ["phone"],
+    "msg": "Phone number must contain only digits.",
+    "type": "value_error"
+  }
+]
+```
+
+**Explanation:**
+
+- **Validation Error:**
+  - `loc`: Location of the error (`phone` field).
+  - `msg`: Error message (`Phone number must contain only digits.`).
+  - `type`: Type of error (`value_error`).
+
+### **Step 4: Instantiate with Short Phone Number**
+
+```python
+# user.py (continued)
+
+def main():
+    try:
+        user = User(
+            name="Ali Ahmed",
+            email="ali@example.com",
+            age=30,
+            phone="123456789"  # Only 9 digits
+        )
+        print(user)
+    except ValidationError as e:
+        print(e.json())
+```
+
+**Explanation:**
+
+- **Invalid Data:**
+  - `phone="123456789"`: Phone number is only 9 digits long, whereas 10 digits are required.
+  
+- **Process:**
+  - Attempts to create a `User` instance with a short phone number.
+  
+- **Output:**
+
+```
+[
+  {
+    "loc": ["phone"],
+    "msg": "Phone number must be exactly 10 digits.",
+    "type": "value_error"
+  }
+]
+```
+
+**Explanation:**
+
+- **Validation Error:**
+  - `loc`: Location of the error (`phone` field).
+  - `msg`: Error message (`Phone number must be exactly 10 digits.`).
+  - `type`: Type of error (`value_error`).
+
+
+## ❌ Handling Validation Errors
+
+Gracefully handling Pydantic validation errors is crucial to prevent your application from crashing and to provide informative messages to users.
+
+### **Step 1: Catching Validation Errors**
+
+```python
+# user.py (continued)
+
+from pydantic import ValidationError
+
+def main():
+    try:
+        user = User(
+            name="",  # Invalid name
+            email="ali@example.com",
+            age=130,  # Invalid age
+            phone="1234567890"
+        )
+        print(user)
+    except ValidationError as e:
+        print("Validation Error:")
+        print(e.json())
+
+if __name__ == "__main__":
+        main()
+```
+
+**Explanation:**
+
+- **Invalid Data:**
+  - `name=""`: Name is an empty string.
+  - `age=130`: Age exceeds the allowed maximum (120).
+  
+- **Process:**
+  - Attempts to create a `User` instance with an invalid name and age.
+  
+- **Output:**
+
+```
+Validation Error:
+[
+  {
+    "loc": ["name"],
+    "msg": "ensure this value has at least 1 characters",
+    "type": "value_error.any_str.min_length",
+    "ctx": {
+      "limit_value": 1
+    }
+  },
+  {
+    "loc": ["age"],
+    "msg": "ensure this value is less than or equal to 120",
+    "type": "value_error.number.not_le",
+    "ctx": {
+      "limit_value": 120
+    }
+  }
+]
+```
+
+**Explanation:**
+
+- **Validation Errors:**
+  - `name`: Must have at least 1 character.
+  - `age`: Must be less than or equal to 120.
+
+### **Step 2: Providing User-Friendly Error Messages**
+
+You can present validation errors in a user-friendly format to make it easier for users to understand what went wrong.
+
+```python
+# user.py (continued)
+
+def main():
+    try:
+        user = User(
+            name="",
+            email="aliexample.com",  # Invalid email
+            age=-5,  # Invalid age
+            phone="12345abc"  # Invalid phone
+        )
+        print(user)
+    except ValidationError as e:
+        print("Validation Failed:")
+        for error in e.errors():
+            field = error['loc'][0]
+            message = error['msg']
+            print(f"Error in '{field}': {message}")
+```
+
+**Explanation:**
+
+- **Invalid Data:**
+  - `name=""`: Empty string.
+  - `email="aliexample.com"`: Invalid email format.
+  - `age=-5`: Negative age.
+  - `phone="12345abc"`: Phone number contains non-digit characters.
+  
+- **Process:**
+  - Attempts to create a `User` instance with multiple invalid fields.
+  
+- **Output:**
+
+```
+Validation Failed:
+Error in 'name': ensure this value has at least 1 characters
+Error in 'email': value is not a valid email address
+Error in 'age': ensure this value is greater than or equal to 0
+Error in 'phone': Phone number must contain only digits.
+```
+
+**Explanation:**
+
+- **Custom Error Handling:**
+  - Iterates through each validation error.
+  - Extracts the field (`loc`) and the error message (`msg`).
+  - Prints the errors in a readable format for users.
+
+
+## 📝 Complete Code Example
+
+Let's combine everything to see a complete example.
+
+```python
+# user.py
+
+from pydantic import BaseModel, EmailStr, Field, validator, ValidationError
+from typing import Optional
+
+class User(BaseModel):
+    name: str = Field(..., min_length=1, description="User's name")
+    email: EmailStr = Field(..., description="User's valid email address")
+    age: int = Field(..., ge=0, le=120, description="User's age, between 0 and 120")
+    phone: str = Field(..., description="User's 10-digit phone number")
+
+    @validator('phone')
+    def phone_must_be_valid(cls, v):
+        if not v.isdigit():
+            raise ValueError('Phone number must contain only digits.')
+        if len(v) != 10:
+            raise ValueError('Phone number must be exactly 10 digits.')
+        return v
+
+def main():
+    # Valid User Example
+    try:
+        user = User(
+            name="Ali Ahmed",
+            email="ali@example.com",
+            age=30,
+            phone="1234567890"
+        )
+        print("Valid User Created:")
+        print(user)
+    except ValidationError as e:
+        print("Validation Error for Valid User:")
+        print(e.json())
+
+    print("\n" + "-"*50 + "\n")
+
+    # Invalid User Example
+    try:
+        user = User(
+            name="",  # Invalid name
+            email="aliexample.com",  # Invalid email
+            age=130,  # Invalid age
+            phone="12345abcde"  # Invalid phone
+        )
+        print("Invalid User Created:")
+        print(user)
+    except ValidationError as e:
+        print("Validation Error for Invalid User:")
+        for error in e.errors():
+            field = error['loc'][0]
+            message = error['msg']
+            print(f"Error in '{field}': {message}")
 
 if __name__ == "__main__":
     main()
 ```
 
-**📌 Explanation:**
+### **Code Breakdown:**
 
-- **Function `load_bank_config`:**
-  - Reads the YAML configuration file.
-  - Attempts to instantiate the `Restaurant` model with the loaded data.
-  - Catches and prints validation errors if any constraints are violated.
+1. **Imports:**
 
-- **Function `main`:**
-  - Calls `load_bank_config` and handles potential validation failures gracefully.
+   ```python
+   from pydantic import BaseModel, EmailStr, Field, validator, ValidationError
+   from typing import Optional
+   ```
 
-**Sample Output on Successful Load:**
+   - **`BaseModel`**: Pydantic's base class for defining data models.
+   - **`EmailStr`**: A special type for email validation.
+   - **`Field`**: Used to add additional configurations to fields.
+   - **`validator`**: Used to define custom validation methods.
+   - **`ValidationError`**: Used to handle validation errors.
+   - **`Optional`**: From the `typing` module, used if a field is optional.
 
-```
-Bank configuration loaded successfully.
-name='City Bank' owner_full_name='Alice Johnson' address='456 Elm Street, Metropolis, MT 54321' employees=[Employee(name='Bob Smith', position='Teller', payment_details=None), Employee(name='Carol White', position='Manager', payment_details=BankDetails(routing_number='987654321', account_number='123456789012'))] dishes=[Dish(name='Grilled Chicken', price_in_cents=1299, description='Juicy grilled chicken with herbs.', picture=None), Dish(name='Caesar Salad', price_in_cents=899, description='Fresh romaine with Caesar dressing.', picture=None), Dish(name='Beef Burger', price_in_cents=1499, description='Classic beef burger with cheese.', picture=None)] number_of_seats=50 offers_to_go=True offers_delivery=True
-```
+2. **User Class Definition:**
 
-**Sample Output on Validation Error (e.g., Missing Chef):**
+   ```python
+   class User(BaseModel):
+       name: str = Field(..., min_length=1, description="User's name")
+       email: EmailStr = Field(..., description="User's valid email address")
+       age: int = Field(..., ge=0, le=120, description="User's age, between 0 and 120")
+       phone: str = Field(..., description="User's 10-digit phone number")
 
-```yaml
-# bank_config.yaml (modified to remove a Chef)
-employees:
-  - name: "Bob Smith"
-    position: "Teller"
-  - name: "Carol White"
-    position: "Manager"
-    payment_details:
-      routing_number: "987654321"
-      account_number: "123456789012"
-```
+       @validator('phone')
+       def phone_must_be_valid(cls, v):
+           if not v.isdigit():
+               raise ValueError('Phone number must contain only digits.')
+           if len(v) != 10:
+               raise ValueError('Phone number must be exactly 10 digits.')
+           return v
+   ```
 
-```
-Error loading bank configuration:
-{
-  "detail": [
-    {
-      "loc": ["employees"],
-      "msg": "At least one Chef is required.",
-      "type": "value_error"
-    },
-    {
-      "loc": ["employees"],
-      "msg": "At least one Server is required.",
-      "type": "value_error"
-    }
-  ]
-}
-Failed to load bank configuration due to validation errors.
-```
+   **Explanation:**
 
-
-## 🔧 Advanced Pydantic Features
-
-### 🔍 Custom Validators
-
-While Pydantic provides a robust set of built-in validators, sometimes your application requires more nuanced validation logic. Custom validators allow you to implement bespoke validation rules tailored to your business needs.
-
-**Example: Validating Unique Account IDs Across All Accounts**
-
-```python
-# bank/models.py (continued)
-
-from pydantic import root_validator
-
-class Bank(BaseModel):
-    name: constr(min_length=1, max_length=50)
-    accounts: List[Account]
-
-    @root_validator
-    def check_unique_account_ids(cls, values):
-        accounts = values.get('accounts', [])
-        account_ids = [account.account_id for account in accounts]
-        if len(account_ids) != len(set(account_ids)):
-            raise ValueError("All account IDs must be unique.")
-        return values
-```
-
-**Explanation:**
-
-- **`Bank` Model:**
-  - **Fields:**
-    - `name`: Name of the bank.
-    - `accounts`: List of `Account` instances.
-  
-  - **`root_validator` `check_unique_account_ids`:**
-    - Ensures that all `account_id` values are unique across the bank's accounts.
-
-### 🛠️ Strict Types
-
-By default, Pydantic is permissive in type coercion. However, for critical applications like banking, you might want to enforce stricter type checks to prevent unintended data transformations.
-
-**Example: Enforcing Strict Integers for `balance_in_cents`**
-
-```python
-# bank/models.py (continued)
-
-from pydantic import StrictInt
-
-class Account(BaseModel):
-    account_id: constr(regex=r'^ACCT\d{6}$')  # e.g., ACCT123456
-    owner_name: constr(min_length=1)
-    balance_in_cents: StrictInt  # Must be an integer, no coercion
-    transactions: List[str] = Field(default_factory=list)
-```
-
-**Explanation:**
-
-- **`balance_in_cents`:**
-  - Changed from `conint(ge=0)` to `StrictInt`, ensuring that only integer types are accepted without coercion from other types like strings or floats.
-
-**Attempting to Instantiate with a Float:**
-
-```python
-from bank.models import Account
-
-try:
-    account = Account(
-        account_id="ACCT123456",
-        owner_name="David Lee",
-        balance_in_cents=1500.75  # Float instead of int
-    )
-except ValidationError as e:
-    print(e.json())
-```
-
-**Output:**
-
-```
-[
-  {
-    "loc": ["balance_in_cents"],
-    "msg": "value is not a valid integer",
-    "type": "type_error.integer"
-  }
-]
-```
-
-
-## ✅ Best Practices for Using Pydantic in Banking Applications
-
-### 🏗️ Designing Robust Models
-
-1. **📄 Define Clear Schemas:**
-   - Clearly outline the structure of your data models, specifying required fields and their types.
+   - **Field Definitions with Validations:**
+     - **`name: str = Field(..., min_length=1, description="User's name")`**
+       - Defines the `name` field as a string.
+       - `Field(..., min_length=1)` specifies that `name` is required and must have a minimum length of 1 character.
+       - `description="User's name"` provides a description for the field, useful for documentation.
+     
+     - **`email: EmailStr = Field(..., description="User's valid email address")`**
+       - Defines the `email` field using `EmailStr`, ensuring a valid email format.
+       - `Field(..., description="User's valid email address")` specifies that this field is required and provides a description.
+     
+     - **`age: int = Field(..., ge=0, le=120, description="User's age, between 0 and 120")`**
+       - Defines the `age` field as an integer.
+       - `Field(..., ge=0, le=120)` ensures that `age` is greater than or equal to 0 and less than or equal to 120.
+       - `description="User's age, between 0 and 120"` provides a description.
+     
+     - **`phone: str = Field(..., description="User's 10-digit phone number")`**
+       - Defines the `phone` field as a string.
+       - `Field(..., description="User's 10-digit phone number")` specifies that this field is required and provides a description.
    
-2. **🔄 Use Constrained Types:**
-   - Leverage Pydantic's constrained types to enforce size, format, and value restrictions.
+   - **Custom Validator:**
+     
+     ```python
+     @validator('phone')
+     def phone_must_be_valid(cls, v):
+         if not v.isdigit():
+             raise ValueError('Phone number must contain only digits.')
+         if len(v) != 10:
+             raise ValueError('Phone number must be exactly 10 digits.')
+         return v
+     ```
+     
+     - **Decorator `@validator('phone')`:**
+       - Indicates that this method is a validator for the `phone` field.
+     
+     - **Method `phone_must_be_valid`:**
+       - `cls`: Reference to the class.
+       - `v`: Value of the `phone` field being validated.
+     
+     - **Validation Logic:**
+       - `if not v.isdigit():` checks if the phone number contains only digits.
+         - If not, it raises a `ValueError` with the message `'Phone number must contain only digits.'`
+       
+       - `if len(v) != 10:` checks if the phone number is exactly 10 digits long.
+         - If not, it raises a `ValueError` with the message `'Phone number must be exactly 10 digits.'`
+       
+       - `return v`: If all validations pass, it returns the validated value.
 
-3. **🔍 Implement Comprehensive Validators:**
-   - Utilize both built-in and custom validators to cover all business rules and data integrity constraints.
+3. **Main Function:**
 
-4. **🛡️ Enforce Strict Typing Where Necessary:**
-   - Use `StrictInt`, `StrictStr`, etc., to prevent unintended type coercion, especially for sensitive fields.
+   ```python
+   def main():
+       # Valid User Example
+       try:
+           user = User(
+               name="Ali Ahmed",
+               email="ali@example.com",
+               age=30,
+               phone="1234567890"
+           )
+           print("Valid User Created:")
+           print(user)
+       except ValidationError as e:
+           print("Validation Error for Valid User:")
+           print(e.json())
 
-### 🧩 Separating Concerns
+       print("\n" + "-"*50 + "\n")
 
-1. **🔗 Modularize Models:**
-   - Organize your models into separate modules/files based on their domain or functionality to enhance maintainability.
+       # Invalid User Example
+       try:
+           user = User(
+               name="",  # Invalid name
+               email="aliexample.com",  # Invalid email
+               age=130,  # Invalid age
+               phone="12345abcde"  # Invalid phone
+           )
+           print("Invalid User Created:")
+           print(user)
+       except ValidationError as e:
+           print("Validation Error for Invalid User:")
+           for error in e.errors():
+               field = error['loc'][0]
+               message = error['msg']
+               print(f"Error in '{field}': {message}")
+   ```
 
-2. **🧱 Use Composition Over Inheritance When Appropriate:**
-   - While inheritance is powerful, sometimes composing models (nesting) can lead to more flexible and manageable code.
+   **Explanation:**
 
-3. **📝 Document Your Models:**
-   - Provide clear docstrings and comments within your models to explain the purpose of each field and any validation logic.
+   - **Valid User Example:**
+     - **Try Block:**
+       - Attempts to create a `User` instance with valid data:
+         - `name="Ali Ahmed"`: Valid name (more than 1 character).
+         - `email="ali@example.com"`: Valid email format.
+         - `age=30`: Valid age (0 <= 30 <= 120).
+         - `phone="1234567890"`: Valid phone number (only digits and exactly 10 digits).
+     
+       - `print("Valid User Created:")` prints a message indicating a valid user was created.
+       - `print(user)` prints the details of the `User` object.
+     
+     - **Except Block:**
+       - Catches any `ValidationError` that occurs during instantiation.
+       - `print(e.json())` prints the validation errors in JSON format for detailed information.
+   
+   - **Separator:**
+     - `print("\n" + "-"*50 + "\n")` prints a line of dashes to separate the output of the valid and invalid user examples.
+   
+   - **Invalid User Example:**
+     - **Try Block:**
+       - Attempts to create a `User` instance with invalid data:
+         - `name=""`: Invalid name (empty string).
+         - `email="aliexample.com"`: Invalid email format (missing `@`).
+         - `age=130`: Invalid age (130 > 120).
+         - `phone="12345abcde"`: Invalid phone number (contains non-digit characters).
+     
+       - `print("Invalid User Created:")` prints a message indicating an invalid user was attempted to be created.
+       - `print(user)` attempts to print the `User` object, but since validation fails, this line won't execute.
+     
+     - **Except Block:**
+       - Catches the `ValidationError`.
+       - Iterates through each validation error using `for error in e.errors():`.
+       - Extracts the field (`loc`) and the error message (`msg`).
+       - Prints the errors in a readable format: `Error in 'field': message`.
+
+4. **Execution Guard:**
+
+   ```python
+   if __name__ == "__main__":
+       main()
+   ```
+
+   **Explanation:**
+
+   - `if __name__ == "__main__":` ensures that the `main()` function runs only when the script is executed directly, not when imported as a module.
+   - `main()` function is called, which handles both valid and invalid user examples.
+
+### **Running the Code:**
+
+1. **Ensure Virtual Environment is Activated:**
+
+   ```bash
+   source venv/bin/activate  # macOS/Linux
+   # or
+   venv\Scripts\activate     # Windows
+   ```
+
+2. **Run the Script:**
+
+   ```bash
+   python user.py
+   ```
+
+### **Expected Output:**
+
+```
+Valid User Created:
+name='Ali Ahmed' email='ali@example.com' age=30 phone='1234567890'
+--
+
+Validation Error for Invalid User:
+Error in 'name': ensure this value has at least 1 characters
+Error in 'email': value is not a valid email address
+Error in 'age': ensure this value is less than or equal to 120
+Error in 'phone': Phone number must contain only digits.
+```
+
+**Explanation:**
+
+- **First Part:**
+  - With valid data, the `User` instance is created successfully and its details are printed.
+
+- **Second Part:**
+  - With invalid data, the `User` instance fails to be created.
+  - Validation errors are caught and printed in a user-friendly format, specifying which fields have issues and what the issues are.
 
 
-## 💬 Discussion Topic
+## 📌 Summary
 
-**Considerations for Handling Sensitive Financial Data:**
+In this guide, we learned how to apply runtime validations in a simple **User Profile** class using Pydantic. Here's what we covered:
 
-- **Data Privacy:** How do you ensure that sensitive information like account numbers and routing numbers are handled securely within your models and throughout your application?
-  
-- **Error Handling:** What strategies can you implement to gracefully handle validation errors without exposing sensitive information to end-users or logs?
-
-- **Extensibility:** As banking regulations evolve, how can your Pydantic models adapt to incorporate new validation rules or data fields without disrupting existing functionalities?
-
-
-## 🎯 Conclusion
-
-Runtime data validation is a critical aspect of developing reliable and secure banking applications. **Pydantic** offers a streamlined and efficient way to enforce data integrity through its powerful modeling and validation capabilities. By leveraging Pydantic's features, developers can ensure that their applications handle data consistently and securely, reducing the likelihood of runtime errors and enhancing overall system robustness.
+1. **Installed Pydantic:** Used `pip` to install Pydantic.
+2. **Defined the User Class:** Inherited the `User` class from Pydantic's `BaseModel`.
+3. **Added Validations:** Used type hints and Pydantic validators to impose restrictions on fields.
+4. **Tested Runtime Validation:** Provided both valid and invalid data to observe Pydantic's validation in action.
+5. **Handled Validation Errors:** Caught errors and displayed user-friendly messages.
 
 ### 🌟 **Key Takeaways:**
 
-1. **🔒 Ensure Data Integrity:**
-   - Utilize Pydantic to enforce strict data schemas, preventing malformed or inconsistent data from propagating through your system.
-
-2. **🚀 Enhance Developer Productivity:**
-   - Reduce boilerplate validation code, allowing developers to focus on implementing core business logic.
-
-3. **🛡️ Strengthen Security:**
-   - Prevent potential vulnerabilities by validating and sanitizing all incoming data, especially from external sources.
-
-4. **📈 Improve Maintainability:**
-   - Centralize validation logic within data models, making the codebase easier to manage and extend.
+- **Powerful Data Validation with Pydantic:** Pydantic allows you to implement complex data validations effortlessly.
+- **Importance of Type Hints:** Utilizing Python's type hints helps in writing cleaner and more reliable code.
+- **Essential of Error Handling:** Gracefully handling validation errors makes your application robust.
+- **Flexibility:** Pydantic offers flexibility from simple to complex validations, making it suitable for various use-cases.
 
 ### 🎯 **Final Thoughts:**
 
-Integrating **Pydantic** into your Python projects, particularly in sensitive domains like banking, is a strategic move towards building more secure, reliable, and maintainable applications. Embrace Pydantic's capabilities to elevate your data validation practices, ensuring that your systems not only meet but exceed the standards required for handling critical financial data.
+**Pydantic** streamlines data validation in your Python projects, which is especially crucial for sensitive domains like banking applications. By adopting it, you can ensure data integrity, boost developer productivity, and enhance the overall reliability of your applications.
 
 **Happy Coding!** 🚀😊🎉
 
 
 ## 🌐 Additional Resources
 
-To further enhance your understanding of runtime data validation with Pydantic and its application in Python projects, explore the following **valuable resources**:
+If you want to delve deeper into Pydantic, explore the following resources:
 
 - [**Pydantic Official Documentation**](https://pydantic-docs.helpmanual.io/) 📘
+  - A comprehensive guide covering all features and use-cases of Pydantic.
+  
 - [**Real Python: Pydantic Data Validation in Python**](https://realpython.com/pydantic-python/) 🛠️🔍
+  - A practical tutorial that explains Pydantic's features with examples.
+  
 - [**Pydantic Tutorial by Sebastián Ramírez**](https://pydantic-docs.helpmanual.io/usage/models/) 🧑‍💻✨
+  - Detailed explanations and advanced usage scenarios.
+  
 - [**Effective Python: 59 Specific Ways to Write Better Python**](https://effectivepython.com/) 📚🧠
+  - Tips for writing efficient and maintainable Python code.
+  
 - [**Python Type Hints Guide**](https://docs.python.org/3/library/typing.html) 📄🔧
+  - Official Python documentation on type hints, which are foundational for Pydantic's functionality.
+  
 - [**Design Patterns in Python**](https://refactoring.guru/design-patterns/python) 🛠️🔍
+  - Methods to apply design patterns in Python, complementing Pydantic's capabilities.
+  
 - [**Mypy Official Documentation**](https://mypy.readthedocs.io/en/stable/) 📈🔧
+  - Integrate type checking into your development workflow.
+  
 - [**Secure Coding in Python**](https://realpython.com/python-secure/) 🔐🐍
+  - Best practices for writing secure Python applications, essential when handling sensitive data.
 
-
-**Author:** Alex Thompson  
-**Email:** alex.thompson@example.com 📧
-
-*Note: Replace `Alex Thompson` and `alex.thompson@example.com` with your actual name and email address.*
-
-
-Feel free to **integrate Pydantic and runtime validation** into your Python projects to harness the full potential of **robust data management**, **security**, and **maintainable code design**! 🚀 Happy coding! 😊🎉
-
-
-## 🛠️ **Detailed Code Examples**
-
-To ensure clarity and ease of understanding, here's a breakdown of each module and class with complete code examples tailored for a **Bank Management System**.
-
-### 1. `bank/__init__.py`
-
-```python
-# bank/__init__.py
-
-from .models import (
-    BankDetails,
-    Employee,
-    Dish,
-    SavingsAccount,
-    CheckingAccount,
-    Account,
-    Restaurant,
-    Bank
-)
-```
-
-**📌 Explanation:**
-
-- **Purpose:** Imports essential classes, making them accessible when the package is imported.
-- **Usage:** Allows users to import classes directly from the `bank` package, e.g., `from bank import SavingsAccount`.
-
-### 2. `bank/models.py`
-
-```python
-# bank/models.py
-
-from pydantic import BaseModel, Field, constr, conint, validator
-from typing import List, Optional, Literal
-import re
-
-class BankDetails(BaseModel):
-    routing_number: constr(regex=r'^\d{9}$')  # Exactly 9 digits
-    account_number: constr(regex=r'^\d{10,12}$')  # 10 to 12 digits
-
-class Employee(BaseModel):
-    name: constr(min_length=1)
-    position: Literal['Teller', 'Manager', 'Loan Officer', 'Customer Service']
-    payment_details: Optional[BankDetails] = None
-
-    @validator('payment_details', always=True)
-    def check_payment_details(cls, v, values):
-        if values.get('position') in ['Manager', 'Loan Officer']:
-            if v is None:
-                raise ValueError(f"Payment details required for position {values.get('position')}")
-        return v
-
-class Dish(BaseModel):
-    name: constr(min_length=1, max_length=16)
-    price_in_cents: conint(gt=0)
-    description: constr(min_length=1, max_length=80)
-    picture: Optional[constr(regex=r'^[\w,\s-]+\.[A-Za-z]{3,4}$')] = None  # e.g., "image.png"
-
-class Account(BaseModel):
-    account_id: constr(regex=r'^ACCT\d{6}$')  # e.g., ACCT123456
-    owner_name: constr(min_length=1)
-    balance_in_cents: conint(ge=0)
-    transactions: List[str] = Field(default_factory=list)
-
-class SavingsAccount(Account):
-    interest_rate: conint(gt=0, lt=100)  # Interest rate as a percentage
-
-    @validator('balance_in_cents')
-    def check_min_balance(cls, v):
-        if v < 10000:  # Minimum balance of $100
-            raise ValueError("Savings account must have a minimum balance of $100.")
-        return v
-
-class CheckingAccount(Account):
-    overdraft_limit_in_cents: conint(ge=0)  # Overdraft limit
-
-    @validator('overdraft_limit_in_cents')
-    def check_overdraft_limit(cls, v):
-        if v > 50000:  # Maximum overdraft limit of $500
-            raise ValueError("Overdraft limit cannot exceed $500.")
-        return v
-
-class Bank(BaseModel):
-    name: constr(min_length=1, max_length=50)
-    accounts: List[Account]
-
-    @validator('accounts')
-    def check_unique_account_ids(cls, v):
-        account_ids = [account.account_id for account in v]
-        if len(account_ids) != len(set(account_ids)):
-            raise ValueError("All account IDs must be unique.")
-        return v
-
-class Restaurant(BaseModel):
-    name: constr(regex=r'^[A-Za-z0-9 "\']{1,32}$')
-    owner_full_name: constr(min_length=1)
-    address: constr(min_length=1)
-    employees: List[Employee]
-    dishes: List[Dish]
-    number_of_seats: conint(gt=0)
-    offers_to_go: bool
-    offers_delivery: bool
-
-    @validator('employees')
-    def check_employee_roles(cls, v):
-        positions = [employee.position for employee in v]
-        if 'Chef' not in positions:
-            raise ValueError("At least one Chef is required.")
-        if 'Server' not in positions:
-            raise ValueError("At least one Server is required.")
-        return v
-
-    @validator('dishes')
-    def check_unique_dishes(cls, v):
-        dish_names = [dish.name for dish in v]
-        if len(dish_names) != len(set(dish_names)):
-            raise ValueError("Each dish must have a unique name.")
-        if len(v) < 3:
-            raise ValueError("There must be at least three dishes on the menu.")
-        return v
-```
-
-**📌 Explanation:**
-
-- **Models Overview:**
-  - **`BankDetails`**: Captures routing and account numbers with strict regex patterns.
-  - **`Employee`**: Represents bank employees with conditional payment details based on position.
-  - **`Dish`**: (Included from previous example) Represents menu items, showing versatility in modeling different domains.
-  - **`Account`**: Base account model with unique account IDs.
-  - **`SavingsAccount` & `CheckingAccount`**: Derived models with additional constraints.
-  - **`Bank`**: Aggregates accounts, ensuring uniqueness of account IDs.
-  - **`Restaurant`**: (Included from previous example) Demonstrates cross-domain applicability.
-
-- **Validators:**
-  - **`check_payment_details`**: Ensures essential positions have payment details.
-  - **`check_min_balance` & `check_overdraft_limit`**: Enforce financial constraints.
-  - **`check_unique_account_ids`**: Prevents duplicate accounts within a bank.
-
-### 3. `bank/main.py`
-
-```python
-# bank/main.py
-
-from pydantic import ValidationError
-from bank.models import Bank, SavingsAccount, CheckingAccount
-import yaml
-
-def load_bank_config(filename: str) -> Bank:
-    with open(filename, 'r') as file:
-        data = yaml.safe_load(file)
-    try:
-        bank = Bank(**data)
-        print("Bank configuration loaded successfully.")
-        return bank
-    except ValidationError as e:
-        print("Error loading bank configuration:")
-        print(e.json())
-        raise
-
-def main():
-    config_file = 'bank_config.yaml'
-    try:
-        bank = load_bank_config(config_file)
-        # Proceed with using the validated bank data
-        print(bank)
-    except ValidationError:
-        print("Failed to load bank configuration due to validation errors.")
-
-if __name__ == "__main__":
-    main()
-```
-
-**📌 Explanation:**
-
-- **Function `load_bank_config`:**
-  - Reads the YAML configuration file.
-  - Attempts to instantiate the `Bank` model with the loaded data.
-  - Catches and prints validation errors if any constraints are violated.
-
-- **Function `main`:**
-  - Calls `load_bank_config` and handles potential validation failures gracefully.
-
-**Sample YAML Configuration (`bank_config.yaml`):**
-
-```yaml
-name: "Global Trust Bank"
-accounts:
-  - account_id: "ACCT000001"
-    owner_name: "Emily Clark"
-    balance_in_cents: 150000  # $1,500.00
-    transactions:
-      - "Deposit: $1,000.00"
-      - "Withdrawal: $500.00"
-  - account_id: "ACCT000002"
-    owner_name: "Michael Brown"
-    balance_in_cents: 25000  # $250.00
-    interest_rate: 2
-    transactions:
-      - "Deposit: $2,500.00"
-```
-
-**Loading and Validating the Configuration:**
-
-```python
-# bank/main.py (continued)
-
-def main():
-    config_file = 'bank_config.yaml'
-    try:
-        bank = load_bank_config(config_file)
-        # Example Operations
-        print("\ Bank Details")
-        print(f"Bank Name: {bank.name}")
-        print(f"Number of Accounts: {len(bank.accounts)}\n")
-
-        for account in bank.accounts:
-            print(f"Account ID: {account.account_id}")
-            print(f"Owner: {account.owner_name}")
-            print(f"Balance: ${account.balance_in_cents / 100:.2f}")
-            print(f"Transactions: {', '.join(account.transactions)}\n")
-    except ValidationError:
-        print("Failed to load bank configuration due to validation errors.")
-
-if __name__ == "__main__":
-    main()
-```
-
-**Sample Output on Successful Load:**
-
-```
-Bank configuration loaded successfully.
-Bank(name='Global Trust Bank', accounts=[SavingsAccount(account_id='ACCT000001', owner_name='Emily Clark', balance_in_cents=150000, transactions=['Deposit: $1,000.00', 'Withdrawal: $500.00'], interest_rate=2), SavingsAccount(account_id='ACCT000002', owner_name='Michael Brown', balance_in_cents=25000, transactions=['Deposit: $2,500.00'], interest_rate=2)])
- Bank Details
-Bank Name: Global Trust Bank
-Number of Accounts: 2
-
-Account ID: ACCT000001
-Owner: Emily Clark
-Balance: $1500.00
-Transactions: Deposit: $1,000.00, Withdrawal: $500.00
-
-Account ID: ACCT000002
-Owner: Michael Brown
-Balance: $250.00
-Transactions: Deposit: $2,500.00
-```
-
-**Sample Output on Validation Error (e.g., Duplicate Account ID):**
-
-```yaml
-# bank_config.yaml (modified to include a duplicate account_id)
-accounts:
-  - account_id: "ACCT000001"
-    owner_name: "Emily Clark"
-    balance_in_cents: 150000
-    transactions:
-      - "Deposit: $1,000.00"
-      - "Withdrawal: $500.00"
-  - account_id: "ACCT000001"  # Duplicate ID
-    owner_name: "Michael Brown"
-    balance_in_cents: 25000
-    interest_rate: 2
-    transactions:
-      - "Deposit: $2,500.00"
-```
-
-```
-Error loading bank configuration:
-{
-  "detail": [
-    {
-      "loc": ["accounts"],
-      "msg": "All account IDs must be unique.",
-      "type": "value_error"
-    }
-  ]
-}
-Failed to load bank configuration due to validation errors.
-```
-
-
+!
 ## 📝 Final Notes
-
 Implementing runtime data validation is indispensable for developing secure and reliable banking applications. **Pydantic** streamlines this process by allowing developers to define clear, concise, and robust data models that enforce data integrity automatically. By integrating Pydantic into your projects, you can significantly reduce the risk of data-related errors, enhance security, and improve overall system reliability.
 
 However, it's essential to balance strict validation with flexibility. Overly rigid models might impede legitimate data flows, while too lenient models can introduce vulnerabilities. Always tailor your validation logic to align with your application's specific requirements and business rules.
