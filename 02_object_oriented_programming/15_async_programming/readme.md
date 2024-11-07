@@ -4,19 +4,43 @@ Welcome to the **Asyncio Guide**! 🎉 In this section, we'll explore what **Asy
 
 ## 📖 **Table of Contents**
 
-1. [🌟 What is Asyncio? 🤔](#1-what-is-asyncio-)
-2. [🌟 Why Use Asyncio? 🌟](#2-why-use-asyncio-)
-3. [🌀 Understanding Concurrency in Python 🌀](#3-understanding-concurrency-in-python-)
-4. [🥊 Asyncio vs. Threading 🥊](#4-asyncio-vs-threading-)
-5. [🚀 Getting Started with Asyncio 🚀](#5-getting-started-with-asyncio-)
-6. [🌐 Practical Examples 🌐](#6-practical-examples-)
-    - [🍽️ Example 1: The Restaurant Analogy 🍽️](#example-1-the-restaurant-analogy-)
-    - [🌐 Example 2: Concurrent HTTP Requests 🌐](#example-2-concurrent-http-requests-)
-    - [⏳ Example 3: Async Tasks with Waiting Periods ⏳](#example-3-async-tasks-with-waiting-periods-)
-7. [🌟 Best Practices 🌟](#7-best-practices-)
-8. [🎉 Conclusion 🎉](#8-conclusion-)
-9. [💬 Discussion Topic 💬](#9-discussion-topic-)
-10. [📚 Additional Resources 📚](#10-additional-resources-)
+- [🚀 **Introducing Asyncio in Python** 🐍✨](#-introducing-asyncio-in-python-)
+  - [📖 **Table of Contents**](#-table-of-contents)
+  - [1. What is Asyncio? 🤔](#1-what-is-asyncio-)
+    - [**Key Features:**](#key-features)
+  - [2. Why Use Asyncio? 🌟](#2-why-use-asyncio-)
+    - [**Use Cases:**](#use-cases)
+  - [3. Understanding Concurrency in Python 🌀](#3-understanding-concurrency-in-python-)
+    - [**Comparison:**](#comparison)
+  - [4. Asyncio vs. Threading 🥊](#4-asyncio-vs-threading-)
+    - [**Threading 🧵**](#threading-)
+    - [**Asyncio 🔄**](#asyncio-)
+  - [5. Getting Started with Asyncio 🚀](#5-getting-started-with-asyncio-)
+    - [**Basic Example 🐍**](#basic-example-)
+    - [**Detailed Code Explanation 📝**](#detailed-code-explanation-)
+  - [6. Practical Examples 🌐](#6-practical-examples-)
+    - [🍽️ Example 1: The Restaurant Analogy 🍽️](#️-example-1-the-restaurant-analogy-️)
+      - [**Code Example 🖥️**](#code-example-️)
+      - [**Detailed Code Explanation 📝**](#detailed-code-explanation--1)
+    - [🌐 Example 2: Concurrent HTTP Requests 🌐](#-example-2-concurrent-http-requests-)
+      - [**Prerequisites 📦:**](#prerequisites-)
+      - [**Code Example 🖥️**](#code-example-️-1)
+      - [**Detailed Code Explanation 📝**](#detailed-code-explanation--2)
+    - [⏳ Example 3: Async Tasks with Waiting Periods ⏳](#-example-3-async-tasks-with-waiting-periods-)
+      - [**Code Example 🖥️**](#code-example-️-2)
+      - [**Detailed Code Explanation 📝**](#detailed-code-explanation--3)
+  - [7. Best Practices 🌟](#7-best-practices-)
+    - [1. **🚫 Avoid Blocking Calls**](#1--avoid-blocking-calls)
+    - [2. **🔧 Use Async Libraries**](#2--use-async-libraries)
+    - [3. **⏱️ Limit Long-Running Tasks**](#3-️-limit-long-running-tasks)
+    - [4. **🛡️ Handle Exceptions Gracefully**](#4-️-handle-exceptions-gracefully)
+    - [5. **🛠️ Use `asyncio.run` Appropriately**](#5-️-use-asynciorun-appropriately)
+    - [6. **🔍 Understand the Event Loop**](#6--understand-the-event-loop)
+    - [7. **👥 Leverage Task Management**](#7--leverage-task-management)
+  - [8. Conclusion 🎉](#8-conclusion-)
+    - [**Key Takeaways:**](#key-takeaways)
+  - [9. Discussion Topic 💬](#9-discussion-topic-)
+  - [10. Additional Resources 📚](#10-additional-resources-)
 
 
 ## 1. What is Asyncio? 🤔
@@ -620,248 +644,3 @@ Have you encountered scenarios where Asyncio could improve the efficiency of you
 - **📕 [PEP 492: Coroutines with async and await syntax](https://www.python.org/dev/peps/pep-0492/):** Python Enhancement Proposal introducing the `async` and `await` syntax.
 - **📙 [Eloquent Python: Async IO](https://www.eloquentpython.net/async.html):** Chapter from the book "Eloquent Python" discussing Asyncio in detail.
 - **📓 [You Don't Know JS: Async & Performance](https://github.com/getify/You-Dont-Know-JS/tree/2nd-ed/async%20%26%20performance):** Book series exploring JavaScript's asynchronous capabilities, offering parallels and insights applicable to Python's Asyncio.
-
-
-**Happy Coding!** 🚀😊🎉
-
-
-## 📜 Appendix: Comprehensive `Person` Class Example 🧑‍💼✨
-
-To further illustrate the power and flexibility of classes in Python, let's explore a more complex example involving a `Person` class with multiple properties and methods.
-
-### **Code Example 🖥️**
-
-```python
-class Person:
-    def __init__(self, firstName, lastName, age, gender, height, weight, hairColor, eyeColor):
-        self.firstName = firstName
-        self.lastName = lastName
-        self.age = age
-        self.gender = gender
-        self.height = height  # in meters
-        self.weight = weight  # in kilograms
-        self.hairColor = hairColor
-        self.eyeColor = eyeColor
-
-    def fullName(self):
-        return f"{self.firstName} {self.lastName} 📝"
-
-    def bmi(self):
-        bmi_value = self.weight / (self.height ** 2)
-        return f"{self.firstName}'s BMI is {bmi_value:.2f} 📊"
-
-    def walk(self):
-        return f"{self.firstName} is walking 🚶‍♂️"
-
-    def sleep(self):
-        return f"{self.firstName} is sleeping 🛌"
-
-    def eat(self):
-        return f"{self.firstName} is eating 🍽️"
-
-    def talk(self):
-        return f"{self.firstName} is talking 💬"
-
-# Creating Instances
-Saad = Person('Saad', 'Rehman', 20, 'Male', 1.78, 60, 'Black', 'Brown')
-Mustamin = Person('Mustamin', 'Aman', 15, 'Female', 1.63, 45.8, 'Brown', 'Brown')
-
-# Accessing Methods
-print(Saad.fullName())   # Saad Rehman 📝
-print(Saad.bmi())        # Saad's BMI is 18.99 📊
-print(Saad.walk())       # Saad is walking 🚶‍♂️
-print(Saad.sleep())      # Saad is sleeping 🛌
-print(Saad.eat())        # Saad is eating 🍽️
-print(Saad.talk())       # Saad is talking 💬
-
-print(Mustamin.fullName()) # Mustamin Aman 📝
-print(Mustamin.bmi())      # Mustamin's BMI is 17.32 📊
-print(Mustamin.walk())     # Mustamin is walking 🚶‍♀️
-print(Mustamin.sleep())    # Mustamin is sleeping 🛌
-print(Mustamin.eat())      # Mustamin is eating 🍽️
-print(Mustamin.talk())     # Mustamin is talking 💬
-```
-
-### **Detailed Code Explanation 📝**
-
-1. **Class Definition:**
-    ```python
-    class Person:
-        def __init__(self, firstName, lastName, age, gender, height, weight, hairColor, eyeColor):
-            self.firstName = firstName
-            self.lastName = lastName
-            self.age = age
-            self.gender = gender
-            self.height = height  # in meters
-            self.weight = weight  # in kilograms
-            self.hairColor = hairColor
-            self.eyeColor = eyeColor
-    ```
-    - **`__init__` Method:**
-        - Initializes the `Person` instance with various attributes.
-        - **Parameters:**
-            - `firstName`: First name of the person.
-            - `lastName`: Last name of the person.
-            - `age`: Age of the person.
-            - `gender`: Gender of the person.
-            - `height`: Height in meters.
-            - `weight`: Weight in kilograms.
-            - `hairColor`: Hair color.
-            - `eyeColor`: Eye color.
-
-2. **Defining Methods:**
-    ```python
-    def fullName(self):
-        return f"{self.firstName} {self.lastName} 📝"
-
-    def bmi(self):
-        bmi_value = self.weight / (self.height ** 2)
-        return f"{self.firstName}'s BMI is {bmi_value:.2f} 📊"
-
-    def walk(self):
-        return f"{self.firstName} is walking 🚶‍♂️"
-
-    def sleep(self):
-        return f"{self.firstName} is sleeping 🛌"
-
-    def eat(self):
-        return f"{self.firstName} is eating 🍽️"
-
-    def talk(self):
-        return f"{self.firstName} is talking 💬"
-    ```
-    - **`fullName`:** Concatenates `firstName` and `lastName` to return the full name with a notepad emoji.
-    - **`bmi`:** Calculates the Body Mass Index using the formula `weight / (height ** 2)` and returns it with a chart emoji.
-    - **`walk`, `sleep`, `eat`, `talk`:** Return strings indicating the person's actions with corresponding emojis.
-
-3. **Creating Instances:**
-    ```python
-    Saad = Person('Saad', 'Rehman', 20, 'Male', 1.78, 60, 'Black', 'Brown')
-    Mustamin = Person('Mustamin', 'Aman', 15, 'Female', 1.63, 45.8, 'Brown', 'Brown')
-    ```
-    - **`Saad` Instance:**
-        - `firstName`: "Saad"
-        - `lastName`: "Rehman"
-        - `age`: 20
-        - `gender`: "Male"
-        - `height`: 1.78 meters
-        - `weight`: 60 kilograms
-        - `hairColor`: "Black"
-        - `eyeColor`: "Brown"
-
-    - **`Mustamin` Instance:**
-        - `firstName`: "Mustamin"
-        - `lastName`: "Aman"
-        - `age`: 15
-        - `gender`: "Female"
-        - `height`: 1.63 meters
-        - `weight`: 45.8 kilograms
-        - `hairColor`: "Brown"
-        - `eyeColor`: "Brown"
-
-4. **Accessing Methods:**
-    ```python
-    print(Saad.fullName())   # Saad Rehman 📝
-    print(Saad.bmi())        # Saad's BMI is 18.99 📊
-    print(Saad.walk())       # Saad is walking 🚶‍♂️
-    print(Saad.sleep())      # Saad is sleeping 🛌
-    print(Saad.eat())        # Saad is eating 🍽️
-    print(Saad.talk())       # Saad is talking 💬
-
-    print(Mustamin.fullName()) # Mustamin Aman 📝
-    print(Mustamin.bmi())      # Mustamin's BMI is 17.32 📊
-    print(Mustamin.walk())     # Mustamin is walking 🚶‍♀️
-    print(Mustamin.sleep())    # Mustamin is sleeping 🛌
-    print(Mustamin.eat())      # Mustamin is eating 🍽️
-    print(Mustamin.talk())     # Mustamin is talking 💬
-    ```
-    - **`fullName()`:** Combines `firstName` and `lastName` to display the full name with a notepad emoji.
-    - **`bmi()`:** Calculates and displays the BMI with a chart emoji.
-    - **Action Methods (`walk`, `sleep`, `eat`, `talk`):** Indicate the person's current action with relevant emojis.
-
-- **Expected Output:**
-  ```
-  Saad Rehman 📝
-  Saad's BMI is 18.99 📊
-  Saad is walking 🚶‍♂️
-  Saad is sleeping 🛌
-  Saad is eating 🍽️
-  Saad is talking 💬
-  Mustamin Aman 📝
-  Mustamin's BMI is 17.32 📊
-  Mustamin is walking 🚶‍♀️
-  Mustamin is sleeping 🛌
-  Mustamin is eating 🍽️
-  Mustamin is talking 💬
-  ```
-
-
-## 📚 Summary
-
-Let's recap the essential concepts covered in this guide:
-
-1. **🐍 Classes:** Define the structure and behavior of objects, providing a clear syntax for creating constructors and methods.
-2. **🧬 Prototypes:** Allow objects to share properties and methods, promoting code reuse and efficiency.
-3. **🔧 Constructor Functions:** The old way to create objects and handle inheritance before the introduction of classes.
-4. **🏃 Instance Creation:** Use the `new` keyword to create instances from classes or constructor functions, setting up the prototype linkage.
-5. **🏷️ Class Properties:** Declare properties directly in the class for default values or instance-specific data.
-6. **📜 Repeating Methods and the DRY Principle:** Avoid method duplication by sharing methods through shared functions, prototypes, or classes.
-
-### 🔑 **Key Points**
-
-- **✨ Classes Simplify Object Creation:** Providing a structured and readable syntax for defining objects and their behaviors.
-  
-- **🧬 Prototypes Enhance Objects:** By linking objects to prototypes, you enable inheritance, allowing objects to access shared methods and properties seamlessly. 🐰✨
-  
-- **⚠️ Avoid Method Duplication:** Storing methods on prototypes or classes prevents each object from having its own copy of the method, making your code more efficient. 🗂️✅
-  
-- **🛠️ Use `Object.create` for Clear Prototyping:** This method provides a straightforward way to create objects with a specific prototype, making your code organized and maintainable. 🛠️📂
-  
-- **🔍 Understand the Prototype Chain:** Grasping how JavaScript traverses the prototype chain is crucial for debugging and writing effective code. 🕵️‍♀️🔍
-  
-- **🔧 Different Objects Have Different Prototypes:** Functions, arrays, and other object types have their own prototypes (`Function.prototype`, `Array.prototype`, etc.), which provide specialized methods and properties. 🛠️🔧
-  
-- **📚 Applying DRY Principle:**
-  - **Shared Functions:** Define methods once and assign them to multiple objects to avoid duplication.
-  - **Prototypes:** Use the prototype chain to share methods among instances of a constructor function or class.
-  - **Classes:** Utilize ES6 classes to define shared methods, promoting cleaner and more maintainable code structures.
-  
-- **💾 Benefits of DRY in Methods:**
-  - **⚡ Memory Efficiency:** Reduces memory consumption by avoiding multiple copies of the same method.
-  - **🛠️ Maintainability:** Simplifies updates and bug fixes, as changes to shared methods propagate across all objects that use them.
-  - **📖 Code Clarity:** Enhances code readability by centralizing method definitions.
-
-
-## 🎓 Conclusion 🎓
-
-**Asyncio** in Python provides powerful tools for writing concurrent code efficiently. By understanding and leveraging coroutines and the event loop, you can write programs that handle multiple tasks seamlessly, especially those involving I/O-bound operations. Remember, while Asyncio simplifies handling concurrency, it requires a shift in how we think about structuring our programs. 🧠🔄
-
-**Key Takeaways:**
-- **Asynchronous Programming:** Allows writing code that can handle multiple operations concurrently without traditional threading.
-- **🌀 Event Loop:** Central to managing and scheduling asynchronous tasks.
-- **🧑‍💻 Coroutines:** Enable pausing and resuming execution, making concurrency manageable.
-- **⚡ Efficiency:** Ideal for I/O-bound tasks, providing high throughput with minimal overhead.
-
-Embracing Asyncio can lead to more responsive and efficient applications, especially in scenarios where tasks spend a significant amount of time waiting for external resources. 🌟🐍
-
-
-## 💬 Discussion Topic 💬
-
-**Question:**
-
-Have you encountered scenarios where Asyncio could improve the efficiency of your programs? How would you refactor existing blocking code to use Asyncio? Share your experiences and thoughts.
-
-**Points to Consider:**
-- **🔍 Specific Use Cases:** Where Asyncio provided significant performance improvements.
-- **🛠️ Transition Challenges:** Challenges faced while transitioning from synchronous to asynchronous code.
-- **🔗 Complementary Tools:** Tools and libraries that complement Asyncio in your projects.
-
-
-## 📚 Additional Resources 📚
-
-- **📘 [Official Documentation](https://docs.python.org/3/library/asyncio.html):** Comprehensive guide on Asyncio, including detailed explanations and advanced usage.
-- **📗 [Asyncio Tutorial by Real Python](https://realpython.com/async-io-python/):** In-depth tutorial covering Asyncio fundamentals and practical applications.
-- **📕 [PEP 492: Coroutines with async and await syntax](https://www.python.org/dev/peps/pep-0492/):** Python Enhancement Proposal introducing the `async` and `await` syntax.
-- **📙 [Eloquent Python: Async IO](https://www.eloquentpython.net/async.html):** Chapter from the book "Eloquent Python" discussing Asyncio in detail.
-- **📓 [You Don't Know JS: Async & Performance](https://github.com/getify/You-Dont-Know-JS/tree/2nd-ed/async%20%26%20performance):** Book series exploring JavaScript's asynchronous capabilities, offering parallels and insights applicable to Python's Asyncio.
-
