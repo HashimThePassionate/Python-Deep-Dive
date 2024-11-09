@@ -6,3 +6,4 @@ migrations/
 *.dat
 *.dir
 .mypy_cache/
+.pytest_cache/
