@@ -12,6 +12,7 @@ In this section, we'll explore **Literal Types** and **Enums** in Python. Litera
     - [**Syntax of Literal Types**](#syntax-of-literal-types)
   - [2. **Practical Examples of Literal Types** 🔧](#2-practical-examples-of-literal-types-)
     - [**Simple Validation**](#simple-validation)
+    - [**Runtime Validationsn**](#runtime-validations)
     - [**Setting Fixed Options**](#setting-fixed-options)
   - [3. **Introduction to Enums** 🌟](#3-introduction-to-enums-)
     - [**What Are Enums?**](#what-are-enums)
@@ -65,6 +66,28 @@ print(order_item("Pizza"))  # Output: Order placed for: Pizza.
 
 # Invalid call (Type checker will warn)
 # print(order_item("Sandwich")) 
+```
+
+### **Runtime Validations**
+```python
+from typing import Literal
+
+def order_tea(tea: Literal['doodhpatti', 'sulaimani', 'greentea']) -> str:
+    # Run-time validation
+    valid_teas = ['doodhpatti', 'sulaimani', 'greentea']
+    if tea not in valid_teas:
+        raise ValueError(f"Invalid tea selection: {tea}. Please choose from {valid_teas}.")
+    return f"Here is your {tea}."
+
+# Valid order
+print(order_tea('doodhpatti'))  # Output: Here is your doodh patti.
+
+# Invalid order (will raise ValueError)
+try:
+    print(order_tea('coffee'))  # This will raise an error at run-time.
+except ValueError as e:
+    print(e)
+
 ```
 
 ### **Setting Fixed Options**
