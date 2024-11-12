@@ -6,6 +6,8 @@ Welcome to the **Data Classes in Action** section! 🎉 Data classes in Python p
 
 1. [🔹 Introduction to Data Classes](#-introduction-to-data-classes)
 2. [🛠️ Creating a Basic Data Class](#-creating-a-basic-data-class)
+   - [🔸 Example: Representing a Fraction](#-example-representing-a-fraction)
+   - [🔸 Example: Managing Student Records](#-example-managing-student-records)
 3. [🔗 Nesting Data Classes](#-nesting-data-classes)
 4. [🧩 Adding Methods to Data Classes](#-adding-methods-to-data-classes)
 5. [🔄 Immutability with `frozen=True`](#-immutability-with-frozentrue)
@@ -27,9 +29,9 @@ Welcome to the **Data Classes in Action** section! 🎉 Data classes in Python p
 
 ## 🛠️ Creating a Basic Data Class
 
-Let's start by creating a simple data class to represent a fraction, which consists of a numerator and a denominator.
+Let's start by creating simple data classes to represent a fraction and manage student records. These examples will demonstrate how data classes can simplify data storage and manipulation.
 
-### **Example: Representing a Fraction**
+### 🔸 Example: Representing a Fraction
 
 ```python
 from dataclasses import dataclass
@@ -46,7 +48,7 @@ class Fraction:
    ```python
    from dataclasses import dataclass
    ```
-   - `@dataclass` is a decorator that transforms the class below it into a data class.
+   - **`@dataclass`:** A decorator that automatically adds special methods to the class, such as `__init__`, `__repr__`, and `__eq__`.
 
 2. **Defining the `Fraction` Data Class:**
    ```python
@@ -55,7 +57,7 @@ class Fraction:
        numerator: int = 0
        denominator: int = 1
    ```
-   - **`@dataclass`:** Automatically adds an `__init__` method and others.
+   - **`@dataclass`:** Transforms the `Fraction` class into a data class.
    - **Attributes:**
      - `numerator`: An integer representing the top part of the fraction. Defaults to `0`.
      - `denominator`: An integer representing the bottom part of the fraction. Defaults to `1`.
@@ -72,6 +74,233 @@ print(half)  # Output: Fraction(numerator=1, denominator=2)
 - **Simplicity:** Quickly define classes to store data without writing boilerplate code.
 - **Readability:** Clear definition of what data the class holds.
 - **Type Safety:** Enforces type annotations, reducing errors.
+
+---
+
+### 🔸 Example: Managing Student Records
+
+Let's explore a more complex, real-world example involving a `Student` data class. This class will manage student information, including enrolling in courses and completing them.
+
+```python
+from dataclasses import dataclass, field
+from typing import List
+
+@dataclass
+class Student:
+    student_id: int
+    name: str
+    major: str
+    credits_completed: int = 0
+    enrolled_courses: List[str] = field(default_factory=list)
+
+    def enroll_course(self, course_name: str) -> str:
+        if course_name not in self.enrolled_courses:
+            self.enrolled_courses.append(course_name)
+            return f'✅ {self.name} has successfully enrolled in {course_name}.'
+        return f'⚠️ {self.name} is already enrolled in {course_name}'
+    
+    def complete_course(self, course_name: str, credits: int) -> str:
+        if course_name in self.enrolled_courses:
+            self.enrolled_courses.remove(course_name)
+            self.credits_completed += credits
+            return f"🏆 {self.name} has completed {course_name} and earned {credits} credits."
+        return f"❌ {self.name} is not enrolled in {course_name}, so it cannot be completed."
+    
+    def __str__(self) -> str:
+        courses = ', '.join(self.enrolled_courses) if self.enrolled_courses else 'None'
+
+        return f"""
+📋 Student Info:
+🆔 ID: {self.student_id}
+👤 Name: {self.name}
+🎓 Major: {self.major}
+📚 Credits Completed: {self.credits_completed}
+📝 Enrolled Courses: {courses}
+""" 
+
+# Creating and Using a Student Instance
+student1 = Student(student_id=1999, name='Muhammad Hashim', major='Computer Science')
+print(student1)
+
+print(student1.enroll_course('Python Programming'))
+print(student1.enroll_course('Data Structures'))
+print(student1.enroll_course('Django Framework'))
+print(student1)
+print(student1.complete_course('Python Programming', 6))
+print(student1)
+print(student1.complete_course('Data Structures', 6))
+print(student1)
+print(student1.complete_course('Django Framework', 6))
+print(student1)
+print(student1.complete_course('Design Patterns', 6))
+print(student1)
+```
+
+**Explanation:**
+
+1. **Importing Required Modules:**
+   ```python
+   from dataclasses import dataclass, field
+   from typing import List
+   ```
+   - **`@dataclass`:** Decorator for creating data classes.
+   - **`field`:** Function to customize individual fields within the data class.
+   - **`List`:** Type hint for a list of enrolled courses.
+
+2. **Defining the `Student` Data Class:**
+   ```python
+   @dataclass
+   class Student:
+       student_id: int
+       name: str
+       major: str
+       credits_completed: int = 0
+       enrolled_courses: List[str] = field(default_factory=list)
+   ```
+   - **Attributes:**
+     - `student_id`: Unique identifier for the student.
+     - `name`: Full name of the student.
+     - `major`: Student's major field of study.
+     - `credits_completed`: Total credits the student has completed. Defaults to `0`.
+     - `enrolled_courses`: List of courses the student is currently enrolled in. Initialized as an empty list using `default_factory`.
+
+3. **Adding Methods to Manage Courses:**
+   
+   - **`enroll_course` Method:**
+     ```python
+     def enroll_course(self, course_name: str) -> str:
+         if course_name not in self.enrolled_courses:
+             self.enrolled_courses.append(course_name)
+             return f'✅ {self.name} has successfully enrolled in {course_name}.'
+         return f'⚠️ {self.name} is already enrolled in {course_name}'
+     ```
+     - **Purpose:** Enrolls the student in a new course if not already enrolled.
+     - **Parameters:**
+       - `course_name`: Name of the course to enroll in.
+     - **Returns:** A success message if enrollment is successful, otherwise a warning message.
+
+   - **`complete_course` Method:**
+     ```python
+     def complete_course(self, course_name: str, credits: int) -> str:
+         if course_name in self.enrolled_courses:
+             self.enrolled_courses.remove(course_name)
+             self.credits_completed += credits
+             return f"🏆 {self.name} has completed {course_name} and earned {credits} credits."
+         return f"❌ {self.name} is not enrolled in {course_name}, so it cannot be completed."
+     ```
+     - **Purpose:** Marks a course as completed, removes it from enrolled courses, and updates credits.
+     - **Parameters:**
+       - `course_name`: Name of the course to complete.
+       - `credits`: Number of credits earned from completing the course.
+     - **Returns:** A success message if completion is successful, otherwise an error message.
+
+4. **Overriding the `__str__` Method for Readable Output:**
+   ```python
+   def __str__(self) -> str:
+       courses = ', '.join(self.enrolled_courses) if self.enrolled_courses else 'None'
+
+       return f"""
+📋 Student Info:
+🆔 ID: {self.student_id}
+👤 Name: {self.name}
+🎓 Major: {self.major}
+📚 Credits Completed: {self.credits_completed}
+📝 Enrolled Courses: {courses}
+""" 
+   ```
+   - **Purpose:** Provides a formatted string representation of the `Student` instance.
+   - **Output Example:**
+     ```
+     📋 Student Info:
+     🆔 ID: 1999
+     👤 Name: Muhammad Hashim
+     🎓 Major: Computer Science
+     📚 Credits Completed: 0
+     📝 Enrolled Courses: None
+     ```
+
+5. **Creating and Using a `Student` Instance:**
+   ```python
+   # Creating and Using a Student Instance
+   student1 = Student(student_id=1999, name='Muhammad Hashim', major='Computer Science')
+   print(student1)
+
+   print(student1.enroll_course('Python Programming'))
+   print(student1.enroll_course('Data Structures'))
+   print(student1.enroll_course('Django Framework'))
+   print(student1)
+   print(student1.complete_course('Python Programming', 6))
+   print(student1)
+   print(student1.complete_course('Data Structures', 6))
+   print(student1)
+   print(student1.complete_course('Django Framework', 6))
+   print(student1)
+   print(student1.complete_course('Design Patterns', 6))
+   print(student1)
+   ```
+
+   **Sample Output:**
+   ```
+   📋 Student Info:
+   🆔 ID: 1999
+   👤 Name: Muhammad Hashim
+   🎓 Major: Computer Science
+   📚 Credits Completed: 0
+   📝 Enrolled Courses: None
+
+   ✅ Muhammad Hashim has successfully enrolled in Python Programming.
+   ✅ Muhammad Hashim has successfully enrolled in Data Structures.
+   ✅ Muhammad Hashim has successfully enrolled in Django Framework.
+
+   📋 Student Info:
+   🆔 ID: 1999
+   👤 Name: Muhammad Hashim
+   🎓 Major: Computer Science
+   📚 Credits Completed: 0
+   📝 Enrolled Courses: Python Programming, Data Structures, Django Framework
+
+   🏆 Muhammad Hashim has completed Python Programming and earned 6 credits.
+
+   📋 Student Info:
+   🆔 ID: 1999
+   👤 Name: Muhammad Hashim
+   🎓 Major: Computer Science
+   📚 Credits Completed: 6
+   📝 Enrolled Courses: Data Structures, Django Framework
+
+   🏆 Muhammad Hashim has completed Data Structures and earned 6 credits.
+
+   📋 Student Info:
+   🆔 ID: 1999
+   👤 Name: Muhammad Hashim
+   🎓 Major: Computer Science
+   📚 Credits Completed: 12
+   📝 Enrolled Courses: Django Framework
+
+   🏆 Muhammad Hashim has completed Django Framework and earned 6 credits.
+
+   📋 Student Info:
+   🆔 ID: 1999
+   👤 Name: Muhammad Hashim
+   🎓 Major: Computer Science
+   📚 Credits Completed: 18
+   📝 Enrolled Courses: Django Framework
+
+   ❌ Muhammad Hashim is not enrolled in Design Patterns, so it cannot be completed.
+
+   📋 Student Info:
+   🆔 ID: 1999
+   👤 Name: Muhammad Hashim
+   🎓 Major: Computer Science
+   📚 Credits Completed: 18
+   📝 Enrolled Courses: Django Framework
+   ```
+
+**Benefits:**
+- **Structured Data Management:** Clearly organizes student information and their course enrollments.
+- **Encapsulation of Behavior:** Methods like `enroll_course` and `complete_course` manage student actions, keeping related logic within the class.
+- **Immutability (Optional):** Using `frozen=True` (as seen in the `Ingredient` example) can prevent accidental modifications, enhancing data integrity.
+- **Readability and Maintainability:** The `__str__` method provides a clean and informative string representation of the student, making debugging and logging easier.
 
 ## 🔗 Nesting Data Classes
 
@@ -184,6 +413,8 @@ Recipe(aromatics={Ingredient(name='Pepper', amount=1, units=<ImperialMeasure.TAB
 - **Immutability:** Ensures that ingredients cannot be altered once defined, preventing accidental modifications.
 - **Type Safety:** Enforces that each field contains data of the specified type.
 
+---
+
 ## 🧩 Adding Methods to Data Classes
 
 Data classes aren't limited to just storing data; you can also add methods to encapsulate behaviors and functionality related to the data they hold. This enhances reusability and maintainability.
@@ -261,6 +492,8 @@ print(ingredient_names)
 - **Reusability:** Methods can be reused across different instances without rewriting code.
 - **Maintainability:** Changes to behavior are localized within the class, making updates easier.
 
+---
+
 ## 🔄 Immutability with `frozen=True`
 
 Immutability ensures that once an instance of a data class is created, its fields cannot be altered. This is crucial for maintaining data integrity, especially in multi-threaded environments or when using instances as dictionary keys.
@@ -310,6 +543,8 @@ dataclasses.FrozenInstanceError: cannot assign to field 'amount'
   ```
 
 - **Final Fields:** To enforce deeper immutability, ensure that all fields are themselves immutable or use immutable collections.
+
+---
 
 ## 🔢 Equality and Comparison
 
@@ -426,6 +661,8 @@ NutritionInfo(calories=125, fat=12, carbohydrates=3)
 **Caveats:**
 - **Conflicting with `order=True`:** If you manually override comparison methods, avoid setting `order=True` to prevent `ValueError`.
 
+---
+
 ## 🔒 Ensuring Uniqueness with `@unique`
 
 Sometimes, you may inadvertently assign the same value to multiple Enum members, leading to aliases. While aliases can be useful, they might introduce confusion or bugs. Python provides the `@unique` decorator to enforce that all Enum members have distinct values.
@@ -487,6 +724,8 @@ print(list(MotherSauce))
 ### **Caveats:**
 - **Unintentional Aliases:** Without `@unique`, accidental duplicates can lead to unexpected behavior.
 - **Intentional Aliases:** If you intentionally want multiple names for the same value, omit `@unique`.
+
+---
 
 ## 💡 Best Practices for Using Data Classes
 
@@ -722,6 +961,8 @@ class ProductCategory(Enum):
     GROCERY = "Grocery"
 ```
 
+---
+
 ## 🎯 Conclusion 🎯
 
 **Data classes** in Python are powerful tools that simplify the creation of classes meant primarily for storing data. By leveraging features like automatic method generation, type annotations, immutability, and nesting, you can build robust, readable, and maintainable codebases with ease.
@@ -765,3 +1006,4 @@ To further enhance your understanding and mastery of data classes in Python, exp
 - [**Mypy Official Documentation on Data Classes**](https://mypy.readthedocs.io/en/stable/data_classes.html) 📈🔧
 - [**Type Checking in Python: Data Classes and Beyond**](https://www.typing.io/docs/dataclasses) 📚🧠
 - [**Data Classes in Python Tutorial by Programiz**](https://www.programiz.com/python-programming/dataclass) 📄🔧
+
