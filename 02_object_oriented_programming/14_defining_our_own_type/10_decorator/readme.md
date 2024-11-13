@@ -211,33 +211,95 @@ add(5, 7)
 Restrict access to certain functions based on user permissions.
 
 ```python
-import functools
+#database.py
+def get_user_from_database(email):
+    # Fake database of users
+    database = [
+        {
+            'name': 'Muhammad Hashim',
+            'email': 'hashim@example.com',
+            'age': 25,
+            'current_stack': 'Python, Django, Vue.js',
+            'profession': 'Python Instructor',
+            'is_authenticated': True
+        },
+        {
+            'name': 'Ali Raza',
+            'email': 'ali.raza@example.com',
+            'age': 30,
+            'current_stack': 'JavaScript, React, Node.js',
+            'profession': 'Full Stack Developer',
+            'is_authenticated': False
+        },
+        {
+            'name': 'Ayesha Khan',
+            'email': 'ayesha.khan@example.com',
+            'age': 28,
+            'current_stack': 'Java, Spring Boot, MySQL',
+            'profession': 'Backend Developer',
+            'is_authenticated': True
+        },
+        {
+            'name': 'Hafiz Ibrahim',
+            'email': 'hafiz.ibrahim@example.com',
+            'age': 23,
+            'current_stack': 'PHP, Laravel, Vue.js',
+            'profession': 'Freelancer',
+            'is_authenticated': False
+        }
+    ]
+    # Find and return user details by email
+    for user in database:
+        if user['email'] == email:
+            return user
+    return None
+```
+```python
+# main.py
+from database import get_user_from_database
 
 def authenticate(func):
-    @functools.wraps(func)
-    def wrapper(user, *args, **kwargs):
-        if not user.get('is_authenticated'):
-            print("🚫 Authentication failed. Access denied.")
+    def wrapper(email, *args, **kwargs):
+        user = get_user_from_database(email)
+        if user is None or not user.get('is_authenticated'):
+            print("🚫 Authentication failed. Access denied.\n")
             return
         return func(user, *args, **kwargs)
     return wrapper
 
+# Function to access the dashboard
 @authenticate
 def access_dashboard(user):
-    print("📈 Accessing dashboard...")
+    return f""" 
+    📈 Accessing dashboard...
+    Welcome, {user['name']}!
+    Name: {user['name']}
+    Email: {user['email']}
+    Age: {user['age']}
+    Current Stack: {user['current_stack']}
+    Profession: {user['profession']}
+    Redirecting to dashboard... 🚀\n
+    """
 
-# Usage
-user1 = {'is_authenticated': True}
-user2 = {'is_authenticated': False}
 
-access_dashboard(user1)  # Allowed
-access_dashboard(user2)  # Denied
+
+access = access_dashboard('hashim@example.com')
+if access:
+    print(access)
+else:
+    print("Please login to access the dashboard.")
 ```
 
 **Output:**
 ```
 📈 Accessing dashboard...
-🚫 Authentication failed. Access denied.
+Welcome, Muhammad Hashim!
+Name: Muhammad Hashim
+Email: hashim@example.com
+Age: 25
+Current Stack: Python, Django, Vue.js
+Profession: Python Instructor        
+Redirecting to dashboard... 🚀
 ```
 
 ### 3. **Caching Decorator** 🗂️💾
