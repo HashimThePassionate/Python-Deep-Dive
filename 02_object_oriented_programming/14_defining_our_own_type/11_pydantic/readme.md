@@ -96,13 +96,13 @@ Initially, let's create a simple Python class without any validation.
 
 ```python
 # user.py
-
+from dataclasses import dataclass
+@dataclass
 class User:
-    def __init__(self, name: str, email: str, age: int, phone: str):
-        self.name = name
-        self.email = email
-        self.age = age
-        self.phone = phone
+    name : str
+    email: str
+    age: int
+    phone: str
 
 # Example Usage
 user = User(name="Ali Ahmed", email="ali@example.com", age=30, phone="1234567890")
@@ -115,7 +115,7 @@ print(user.name)
   - `class User:` defines a new class named `User`.
   
 - **Constructor (`__init__` Method):**
-  - `def __init__(self, name: str, email: str, age: int, phone: str):` is the constructor method that's called when creating a new `User` object.
+  - `Constructor generated automatically called when creating a new `User` object.
   - `self.name = name` assigns the `name` parameter to the instance variable `self.name`.
   - Similarly, `email`, `age`, and `phone` are assigned to their respective instance variables.
   
