@@ -560,7 +560,7 @@ Let's combine everything to see a complete example.
 ```python
 # user.py
 
-from pydantic import BaseModel, EmailStr, Field, validator, ValidationError
+from pydantic import BaseModel, EmailStr, Field, field_validator, ValidationError
 from typing import Optional
 
 class User(BaseModel):
@@ -569,7 +569,7 @@ class User(BaseModel):
     age: int = Field(..., ge=0, le=120, description="User's age, between 0 and 120")
     phone: str = Field(..., description="User's 10-digit phone number")
 
-    @validator('phone')
+    @field_validator('phone')
     def phone_must_be_valid(cls, v):
         if not v.isdigit():
             raise ValueError('Phone number must contain only digits.')
@@ -620,14 +620,14 @@ if __name__ == "__main__":
 1. **Imports:**
 
    ```python
-   from pydantic import BaseModel, EmailStr, Field, validator, ValidationError
+   from pydantic import BaseModel, EmailStr, Field, field_validatorr, ValidationError
    from typing import Optional
    ```
 
    - **`BaseModel`**: Pydantic's base class for defining data models.
    - **`EmailStr`**: A special type for email validation.
    - **`Field`**: Used to add additional configurations to fields.
-   - **`validator`**: Used to define custom validation methods.
+   - **`field_validatorr`**: Used to define custom validation methods.
    - **`ValidationError`**: Used to handle validation errors.
    - **`Optional`**: From the `typing` module, used if a field is optional.
 
@@ -640,7 +640,7 @@ if __name__ == "__main__":
        age: int = Field(..., ge=0, le=120, description="User's age, between 0 and 120")
        phone: str = Field(..., description="User's 10-digit phone number")
 
-       @validator('phone')
+       @field_validator('phone')
        def phone_must_be_valid(cls, v):
            if not v.isdigit():
                raise ValueError('Phone number must contain only digits.')
@@ -673,7 +673,7 @@ if __name__ == "__main__":
    - **Custom Validator:**
      
      ```python
-     @validator('phone')
+     @field_validator('phone')
      def phone_must_be_valid(cls, v):
          if not v.isdigit():
              raise ValueError('Phone number must contain only digits.')
@@ -682,7 +682,7 @@ if __name__ == "__main__":
          return v
      ```
      
-     - **Decorator `@validator('phone')`:**
+     - **Decorator `@field_validatorr('phone')`:**
        - Indicates that this method is a validator for the `phone` field.
      
      - **Method `phone_must_be_valid`:**
