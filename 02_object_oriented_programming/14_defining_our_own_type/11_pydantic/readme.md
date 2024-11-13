@@ -177,7 +177,7 @@ Next, we'll add some basic validations such as ensuring the email format and set
 ```python
 # user.py
 
-from pydantic import BaseModel, EmailStr, Field, validator
+from pydantic import BaseModel, EmailStr, Field, field_validator
 
 class User(BaseModel):
     name: str = Field(..., min_length=1)
@@ -185,7 +185,7 @@ class User(BaseModel):
     age: int = Field(..., ge=0, le=120)  # age >= 0 and <= 120
     phone: str
 
-    @validator('phone')
+    @field_validator('phone')
     def phone_must_be_digits(cls, v):
         if not v.isdigit():
             raise ValueError('Phone number must contain only digits.')
@@ -197,7 +197,7 @@ class User(BaseModel):
 **Explanation:**
 
 - **Imports:**
-  - `from pydantic import BaseModel, EmailStr, Field, validator` imports necessary components from Pydantic:
+  - `from pydantic import BaseModel, EmailStr, Field, field_validator` imports necessary components from Pydantic:
     - `EmailStr`: A special type that handles email validation.
     - `Field`: Allows adding additional configurations to fields.
     - `validator`: Used to define custom validation methods.
@@ -221,7 +221,7 @@ class User(BaseModel):
 - **Custom Validator:**
   
   ```python
-  @validator('phone')
+  @field_validator('phone')
   def phone_must_be_digits(cls, v):
       if not v.isdigit():
           raise ValueError('Phone number must contain only digits.')
@@ -230,7 +230,7 @@ class User(BaseModel):
       return v
   ```
   
-  - **Decorator `@validator('phone')`:**
+  - **Decorator `@field_validator('phone')`:**
     - Indicates that the following method is a validator for the `phone` field.
   
   - **Method `phone_must_be_digits`:**
