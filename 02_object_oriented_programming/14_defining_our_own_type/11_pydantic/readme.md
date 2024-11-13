@@ -74,6 +74,7 @@ First, you'll need to install Pydantic. This is quite straightforward if you're 
    
    ```bash
    pip install pydantic[mypy]
+   pip install pydantic[email]
    ```
 
 
