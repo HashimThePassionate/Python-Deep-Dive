@@ -1,6 +1,6 @@
 # ✨ **Composition Over Inheritance Principle** 🚗
 
-Welcome to a **comprehensive and professional** guide on the **Composition Over Inheritance** principle! 🛠️ This principle is essential for writing flexible, maintainable, and high-quality code in object-oriented programming (OOP).Let’s dive in! 🚀💡
+Welcome to a **comprehensive and professional** guide on the **Composition Over Inheritance** principle! 🛠️ This principle is essential for writing flexible, maintainable, and high-quality code in object-oriented programming (OOP). Whether you're a beginner or looking to enhance your skills, this README utilizes clear language, proper static typing, and a vibrant array of emojis to help you master this concept effectively. Let’s dive in! 🚀💡
 
 
 ## 📑🗂️ Table of Contents 📋📌
@@ -20,6 +20,14 @@ Welcome to a **comprehensive and professional** guide on the **Composition Over 
     - [🖥️ Running the Code](#️-running-the-code)
     - [💬 Expected Output](#-expected-output)
     - [🔍 Detailed Explanation](#-detailed-explanation)
+  - [🌐 Real-World Example: Building a Computer 🖥️🔧](#-real-world-example-building-a-computer-️)
+    - [1️⃣ Define the Component Classes](#1️⃣-define-the-component-classes)
+    - [2️⃣ Define the Computer Class](#2️⃣-define-the-computer-class)
+    - [3️⃣ Test the Composition](#3️⃣-test-the-composition-1)
+    - [📜 Complete Code (`computer_composition.py`)](#-complete-code-computer_compositionpy)
+    - [🖥️ Running the Code](#️-running-the-code-1)
+    - [💬 Expected Output](#-expected-output-1)
+    - [🔍 Detailed Explanation](#-detailed-explanation-1)
   - [🎓 Conclusion](#-conclusion)
 
 
@@ -181,6 +189,138 @@ Car started
 - 🔄 **Flexibility**: Easily replace the `Engine` with a different implementation (e.g., `ElectricEngine`) without modifying the `Car` class.
 - ♻️ **Reusability**: The `Engine` class can be reused in other contexts or composed into different classes.
 - 🛠️ **Maintainability**: Changes to the `Engine` class (e.g., adding new functionalities) do not affect the `Car` class.
+
+
+## 🌐 Real-World Example: Building a Computer 🖥️🔧
+
+To further illustrate the **Composition Over Inheritance** principle, let's explore a real-world analogy: building a computer from various components. This example will demonstrate how composition allows for flexibility and reusability, much like assembling a computer from interchangeable parts.
+
+### 1️⃣ Define the Component Classes
+
+First, we'll define classes for the different components of a computer: `CPU`, `RAM`, and `Storage`.
+
+```python
+class CPU:
+    def process(self) -> None:
+        print("CPU is processing data.")
+
+class RAM:
+    def load_data(self) -> None:
+        print("RAM is loading data.")
+
+class Storage:
+    def read_data(self) -> None:
+        print("Storage is reading data.")
+```
+
+**Explanation:**
+- **`CPU` Class**: Represents the central processing unit, responsible for processing data.
+- **`RAM` Class**: Represents the random-access memory, responsible for loading data.
+- **`Storage` Class**: Represents the storage device, responsible for reading data.
+
+### 2️⃣ Define the Computer Class
+
+Next, we'll define the `Computer` class, which composes instances of `CPU`, `RAM`, and `Storage`.
+
+```python
+class Computer:
+    def __init__(self) -> None:
+        self.cpu: CPU = CPU()
+        self.ram: RAM = RAM()
+        self.storage: Storage = Storage()
+    
+    def start(self) -> None:
+        self.cpu.process()
+        self.ram.load_data()
+        self.storage.read_data()
+        print("Computer has started successfully!")
+```
+
+**Explanation:**
+- **`__init__` Method**: Initializes the `Computer` object by creating instances of `CPU`, `RAM`, and `Storage` and assigning them to `self.cpu`, `self.ram`, and `self.storage`, respectively.
+- **`start` Method**: Calls the respective methods of each component to simulate starting the computer, followed by a confirmation message.
+
+### 3️⃣ Test the Composition
+
+Create an instance of the `Computer` class and call its `start` method.
+
+```python
+if __name__ == "__main__":
+    my_computer: Computer = Computer()
+    my_computer.start()
+```
+
+**Explanation:**
+- **Instantiation**: `my_computer = Computer()` creates a new `Computer` object, which in turn creates `CPU`, `RAM`, and `Storage` objects.
+- **Method Call**: `my_computer.start()` initiates the startup sequence, demonstrating composition.
+
+### 📜 Complete Code (`computer_composition.py`)
+
+```python
+class CPU:
+    def process(self) -> None:
+        print("CPU is processing data.")
+
+class RAM:
+    def load_data(self) -> None:
+        print("RAM is loading data.")
+
+class Storage:
+    def read_data(self) -> None:
+        print("Storage is reading data.")
+
+class Computer:
+    def __init__(self) -> None:
+        self.cpu: CPU = CPU()
+        self.ram: RAM = RAM()
+        self.storage: Storage = Storage()
+    
+    def start(self) -> None:
+        self.cpu.process()
+        self.ram.load_data()
+        self.storage.read_data()
+        print("Computer has started successfully!")
+
+if __name__ == "__main__":
+    my_computer: Computer = Computer()
+    my_computer.start()
+```
+
+### 🖥️ Running the Code
+
+Execute the following command to test the composition:
+
+```bash
+python computer_composition.py
+```
+
+### 💬 Expected Output
+
+```
+CPU is processing data.
+RAM is loading data.
+Storage is reading data.
+Computer has started successfully!
+```
+
+### 🔍 Detailed Explanation
+
+- **Instantiation Flow:**
+  - `Computer` is instantiated, which in turn instantiates `CPU`, `RAM`, and `Storage`.
+  
+- **Method Execution:**
+  - Calling `my_computer.start()` triggers the `start` method of `Computer`.
+  - `Computer.start()` calls:
+    - `self.cpu.process()`: Executes the `process` method of the `CPU` class, printing "CPU is processing data."
+    - `self.ram.load_data()`: Executes the `load_data` method of the `RAM` class, printing "RAM is loading data."
+    - `self.storage.read_data()`: Executes the `read_data` method of the `Storage` class, printing "Storage is reading data."
+  - Finally, it prints "Computer has started successfully!"
+
+**Benefits Demonstrated:**
+- 🔄 **Flexibility**: Easily upgrade or replace components (e.g., swapping out `CPU` with a more powerful model) without modifying the `Computer` class.
+- ♻️ **Reusability**: The `CPU`, `RAM`, and `Storage` classes can be reused in other systems or composed into different types of computers.
+- 🛠️ **Maintainability**: Changes to one component (e.g., enhancing the `RAM` class with additional features) do not affect the other components or the `Computer` class.
+- 📦 **Modularity**: Each component is self-contained, promoting a modular architecture that is easier to manage and scale.
 
 
 ## 🎓 Conclusion
