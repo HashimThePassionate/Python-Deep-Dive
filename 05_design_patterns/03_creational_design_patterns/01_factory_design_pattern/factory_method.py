@@ -27,3 +27,5 @@ class XMLDataExtractor:
     @property
     def parsed_data(self):
         return self.tree
+
+

@@ -47,3 +47,4 @@ if __name__ == "__main__":
     extract(case="json")
     print("* XML case *")
     extract(case="xml")
+
