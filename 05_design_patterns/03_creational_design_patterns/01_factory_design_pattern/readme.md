@@ -143,7 +143,7 @@ Let's dive into a practical implementation of the Factory Method pattern using P
 We'll start by defining two data extractor classes: `JSONDataExtractor` and `XMLDataExtractor`. Each class is responsible for loading and parsing data from its respective file format.
 
 ```python
-# ch03/factory/factory_method.py
+# 03_creational_design_patterns/01_factory_design_pattern/factory_method.py
 
 from typing import Protocol
 from pathlib import Path
@@ -518,10 +518,10 @@ Ensure that you have the following data files in the same directory as your `fac
 
 ### 2. Save the Implementation Code
 
-Save the following implementation code in a file named `factory_method.py` within the `ch03/factory/` directory.
+Save the following implementation code in a file named `factory_method.py` within the `03_creational_design_patterns/01_factory_design_pattern/` directory.
 
 ```python
-# ch03/factory/factory_method.py
+# 03_creational_design_patterns/01_factory_design_pattern/factory_method.py
 
 from typing import Protocol
 from pathlib import Path
@@ -551,6 +551,7 @@ class XMLDataExtractor:
     def parsed_data(self):
         return self.tree
 
+# 03_creational_design_patterns/01_factory_design_pattern/main.py
 def extract_factory(filepath: Path) -> DataExtractor:
     ext = filepath.suffix.lower()
     if ext == ".json":
@@ -604,13 +605,12 @@ if __name__ == "__main__":
 Open your terminal, navigate to the directory containing `factory_method.py`, and execute the following command:
 
 ```bash
-python3.12 ch03/factory/factory_method.py
+python 03_creational_design_patterns/01_factory_design_pattern/main.py
 ```
 
 ### 4. Expected Output
 
 You should see output similar to the following:
-
 ```
 * JSON case *
 - After Dark in Central Park
@@ -920,7 +920,7 @@ Let's run the `factory_method.py` script to observe how the Factory Method patte
 Run the following command in your terminal:
 
 ```bash
-python3.12 ch03/factory/factory_method.py
+python 03_creational_design_patterns/factory/factory_method.py
 ```
 
 ### 2. Sample Output
@@ -1196,18 +1196,18 @@ Let's run the `abstract_factory.py` script to observe how the Abstract Factory p
 Run the following command in your terminal:
 
 ```bash
-python3.12 ch03/factory/abstract_factory.py
+python 03_creational_design_patterns/factory/abstract_factory.py
 ```
 
 ### 2. Sample Output
 
 **Teenager (FrogWorld)**:
 ```
-Hello. What's your name? Arthur
-Welcome Arthur. How old are you? 13
+Hello. What's your name? Muhammad Hashim
+Welcome Muhammad Hashim. How old are you? 25
 
 	------ Frog World -------
-Arthur the Frog encounters a bug and eats it!
+Muhammad Hashim the Frog encounters a bug and eats it!
 ```
 
 **Adult (WizardWorld)**:
@@ -1222,9 +1222,9 @@ Tom the Wizard battles against an evil ork and kills it!
 ### 3. Verification
 
 - **Teenager Scenario**:
-    - User inputs name "Arthur" and age "13".
+    - User inputs name "Muhammad Hashim" and age "25".
     - The game selects `FrogWorld`.
-    - Outputs interaction between Arthur the Frog and a bug.
+    - Outputs interaction between Muhammad Hashim the Frog and a bug.
 
 - **Adult Scenario**:
     - User inputs name "Tom" and age "34".
