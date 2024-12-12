@@ -264,13 +264,13 @@ Enter the height of the pyramid (e.g., 5): 5
 🎨 Here is your pyramid of height 5 🎨
 
     ⭐
-   ⭐⭐⭐
-  ⭐⭐⭐⭐⭐
- ⭐⭐⭐⭐⭐⭐⭐
-⭐⭐⭐⭐⭐⭐⭐⭐⭐
+   ⭐⭐
+  ⭐⭐⭐
+ ⭐⭐⭐⭐
+⭐⭐⭐⭐⭐
 
-✨ Do you want to create another pyramid? (yes/no): yes
-👍 Let's build another pyramid! 🎉
+Do you want to create another pyramid? (yes/no): no
+👋 Exiting the program. Thank you for using the Pyramid Pattern Generator! Goodbye
 ```
 
 ## 📊 Conclusion
