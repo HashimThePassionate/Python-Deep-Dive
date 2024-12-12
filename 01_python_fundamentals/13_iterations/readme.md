@@ -210,9 +210,8 @@ This program allows the user to print a pyramid pattern of a specified height. A
 
 ```python
 print("🏔️ Welcome to the Pyramid Pattern Generator! 🏔️")
-
 while True:
-    # 🎯 Ask the user for the height of the pyramid
+    # \ud83c\udf1f Ask the user for the height of the pyramid
     try:
         height = int(input("\nEnter the height of the pyramid (e.g., 5): "))
     except ValueError:
@@ -220,23 +219,28 @@ while True:
         continue
 
     print(f"\n🎨 Here is your pyramid of height {height} 🎨\n")
-    
-    # 🏗️ Print the pyramid pattern
-    for i in range(1, height + 1):
-        # Print spaces for alignment
-        print(' ' * (height - i), end='')  
-        # Print stars to form the pyramid
-        print('⭐' * (2 * i - 1))
 
-    # 🌟 Ask if the user wants to print another pyramid
-    continue_choice = input("\n✨ Do you want to create another pyramid? (yes/no): ").strip().lower()
-    
-    # 🚪 If the user types 'no', break the loop
+    # \ud83c\udfca Print the pyramid pattern using three loops
+    for i in range(1, height + 1):
+        # Loop 1: Print spaces for alignment
+        for space in range(height - i):
+            print(" ", end='')
+
+        # Loop 2: Print stars to form the left half of the pyramid
+        for star in range(i):
+            print("⭐", end='')
+        print()  # Move to the next line
+
+    # \ud83c\udf1f Ask if the user wants to print another pyramid
+    continue_choice = input(
+        "\nDo you want to create another pyramid? (yes/no): ").strip().lower()
+
+    # \ud83c\udfe2 If the user types 'no', break the loop
     if continue_choice != 'yes':
-        print("👋 Exiting the program. Thank you for using the Pyramid Pattern Generator! Goodbye! 😊")
+        print("👋 Exiting the program. Thank you for using the Pyramid Pattern Generator! Goodbye")
         break
     else:
-        print("👍 Let's build another pyramid! 🎉")
+        print("👍 Let's build another pyramid!")
 ```
 
 ### 💡 Explanation:
