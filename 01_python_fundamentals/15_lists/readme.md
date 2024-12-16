@@ -217,9 +217,7 @@ squares = [1, 4, 9, 16, 25]
 squares += [36, 49, 64, 81, 100]  # Concatenation
 print(squares)  # Output: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 
-c
-
-ubes = [1, 8, 27, 65, 125]
+cubes = [1, 8, 27, 65, 125]
 cubes[3] = 64  # Correcting an incorrect value
 print(cubes)  # Output: [1, 8, 27, 64, 125]
 ```
