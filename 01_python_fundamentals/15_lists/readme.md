@@ -170,7 +170,7 @@ print(lst)  # Output: [5, 4, 3, 2, 1]
 # Sorting by a key
 words = ['apple', 'banana', 'cherry']
 words.sort(key=len)
-print(words)  # Output: ['apple', 'cherry', 'banana'] (sorted by length)
+print(words)  # Output: ['apple', 'banana', 'cherry'] (sorted by length)
 ```
 
 ## 🔄 Checking List Equality
