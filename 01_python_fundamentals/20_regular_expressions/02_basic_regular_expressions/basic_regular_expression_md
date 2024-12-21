@@ -1,0 +1,62 @@
+### 📄 Problem 2.1
+
+Create a regular expression to exactly match this gloriously contrived sentence:
+
+```
+The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
+```
+
+### 📝 Answer
+
+```python
+import re
+
+# The given sentence
+sentence = r'The punctuation characters in the ASCII table are: !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~.'
+
+# Regular expression to exactly match the sentence
+regex = r'^The punctuation characters in the ASCII table are: [!"#$%&\'()*+,-./:;<=>?@[\\\]^_`{|}~.]+$'
+
+# Check if the sentence matches the regular expression
+match = re.match(regex, sentence)
+
+if match:
+    print("The sentence matches the regular expression.")
+else:
+    print("The sentence does not match the regular expression.")
+```
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Sentence:
+
+The sentence to match is:
+
+```
+The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
+```
+
+This sentence includes a string of punctuation characters from the ASCII table.
+
+#### 🛠️ Constructing the Regular Expression:
+
+- `^`: Asserts the position at the start of the string.
+- `The punctuation characters in the ASCII table are: `: Matches the exact literal string.
+- `[!"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~.]+`: Matches one or more of any of the listed punctuation characters. Note the following:
+  - `\\`: Escapes the backslash character.
+  - `^` and `[` are inside the character class and do not need to be escaped.
+- `$`: Asserts the position at the end of the string.
+
+Combined, this regular expression ensures that the entire string exactly matches the given sentence, including all punctuation characters and spacing.
+
+#### 🧪 Matching the Sentence:
+
+The `re.match` function is used to check if the entire string matches the regular expression from the start to the end. If it matches, the function returns a match object; otherwise, it returns `None`.
+
+#### 🖥️ Code Execution:
+
+- The given sentence is defined using a raw string (using `r'...'`) to handle the backslashes correctly.
+- The regular expression is applied to the sentence.
+- The result is printed based on whether the sentence matches the regular expression.
+
+By following these steps, we ensure that the regular expression matches the exact sentence, including all punctuation characters.
