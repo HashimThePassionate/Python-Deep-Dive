@@ -256,3 +256,92 @@ print("Matches for any character including line breaks:", matches_any_character)
 
 By following these steps, we ensure that the regular expressions match their respective patterns correctly.
 ---
+### 📄 Problem 2.5 Match something at start/end of line
+
+1. Create a regular expression to match the word "alpha", but only if it occurs at the very beginning of the subject text.
+2. Create a regular expression to match the word "omega", but only if it occurs at the very end of the subject text.
+3. Create a regular expression to match the word "begin", but only if it occurs at the beginning of a line.
+4. Create a regular expression to match the word "end", but only if it occurs at the end of a line.
+
+### 📝 Answer
+
+```python
+import re
+
+# Regular expression to match the word "alpha" at the very beginning of the subject text
+regex_alpha_beginning = r'^alpha'
+
+# Regular expression to match the word "omega" at the very end of the subject text
+regex_omega_end = r'omega$'
+
+# Regular expression to match the word "begin" at the beginning of a line
+regex_begin_line = r'^begin'
+
+# Regular expression to match the word "end" at the end of a line
+regex_end_line = r'end$'
+
+# Test strings
+test_string_alpha_beginning = "alpha is the first letter of the Greek alphabet."
+test_string_omega_end = "The last letter of the Greek alphabet is omega"
+test_string_begin_line = "begin with the first step\nthen continue"
+test_string_end_line = "This is the end\nof the line"
+
+# Find matches for "alpha" at the beginning of the subject text
+match_alpha_beginning = re.match(regex_alpha_beginning, test_string_alpha_beginning)
+print("Match for 'alpha' at the beginning of the subject text:", bool(match_alpha_beginning))
+
+# Find matches for "omega" at the end of the subject text
+match_omega_end = re.search(regex_omega_end, test_string_omega_end)
+print("Match for 'omega' at the end of the subject text:", bool(match_omega_end))
+
+# Find matches for "begin" at the beginning of a line
+matches_begin_line = re.findall(regex_begin_line, test_string_begin_line, re.MULTILINE)
+print("Matches for 'begin' at the beginning of a line:", matches_begin_line)
+
+# Find matches for "end" at the end of a line
+matches_end_line = re.findall(regex_end_line, test_string_end_line, re.MULTILINE)
+print("Matches for 'end' at the end of a line:", matches_end_line)
+```
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Regular Expressions:
+
+1. **Match the Word "Alpha" at the Very Beginning of the Subject Text:**
+   - Regular expression: `^alpha`
+     - `^`: Asserts the position at the start of the string.
+     - `alpha`: Matches the literal word "alpha".
+   - This pattern ensures that "alpha" must be at the very beginning of the subject text.
+
+2. **Match the Word "Omega" at the Very End of the Subject Text:**
+   - Regular expression: `omega$`
+     - `omega`: Matches the literal word "omega".
+     - `$`: Asserts the position at the end of the string.
+   - This pattern ensures that "omega" must be at the very end of the subject text.
+
+3. **Match the Word "Begin" at the Beginning of a Line:**
+   - Regular expression: `^begin`
+     - `^`: Asserts the position at the start of a line.
+     - `begin`: Matches the literal word "begin".
+   - This pattern ensures that "begin" must be at the beginning of a line. The `re.MULTILINE` flag is used to match the start of each line.
+
+4. **Match the Word "End" at the End of a Line:**
+   - Regular expression: `end$`
+     - `end`: Matches the literal word "end".
+     - `$`: Asserts the position at the end of a line.
+   - This pattern ensures that "end" must be at the end of a line. The `re.MULTILINE` flag is used to match the end of each line.
+
+#### 🧪 Matching the Strings:
+
+- The `re.match` function is used to check if the entire string starts with "alpha".
+- The `re.search` function is used to check if "omega" occurs at the end of the string.
+- The `re.findall` function is used with the `re.MULTILINE` flag to find all occurrences of "begin" at the beginning of lines and "end" at the end of lines.
+
+#### 🖥️ Code Execution:
+
+- The `test_string_alpha_beginning` contains the word "alpha" at the start of the text.
+- The `test_string_omega_end` contains the word "omega" at the end of the text.
+- The `test_string_begin_line` includes lines where "begin" appears at the start of a line.
+- The `test_string_end_line` includes lines where "end" appears at the end of a line.
+
+By following these steps, we ensure that the regular expressions match their respective patterns correctly.
