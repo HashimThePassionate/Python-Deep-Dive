@@ -198,3 +198,61 @@ print("Matches for a single character that is not a hexadecimal character:", mat
 - The `test_string_not_hexadecimal` includes characters that are not hexadecimal.
 
 By following these steps, we ensure that the regular expressions match their respective patterns correctly.
+---
+### 📄 Problem 2.4 Match any characters
+1. Create a regular expression to match a quoted character, allowing any single character, except a line break, between the quotes.
+2. Create another regular expression to match a quoted character, truly allowing any character, including line breaks, between the quotes.
+
+### 📝 Answer
+
+```python
+import re
+
+# Regular expression to match a quoted character, allowing any single character except a line break
+regex_any_single_character = r'"[^"\n]"'
+
+# Regular expression to match a quoted character, truly allowing any character including line breaks
+regex_any_character = r'"(.|\n)"'
+
+# Test strings
+test_string_any_single_character = '"a" "b" "1" "!" "\\\\"'
+test_string_any_character = '"a" "b" "1" "!" "\\\\" "line\nbreak"'
+
+# Find all matches for any single character except a line break
+matches_any_single_character = re.findall(regex_any_single_character, test_string_any_single_character)
+print("Matches for any single character except a line break:", matches_any_single_character)
+
+# Find all matches for any character including line breaks
+matches_any_character = re.findall(regex_any_character, test_string_any_character)
+print("Matches for any character including line breaks:", matches_any_character)
+```
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Regular Expressions:
+
+1. **Match a Quoted Character (Single Character, No Line Breaks):**
+   - Regular expression: `r'"[^"\n]"'
+     - `"`: Matches the literal double quote character.
+     - `[^"\n]`: Matches any single character except a double quote or a line break.
+     - `"`: Matches the literal double quote character again.
+   - This pattern ensures that any single character enclosed in double quotes is matched, except for line breaks and double quotes.
+
+2. **Match a Quoted Character (Any Character, Including Line Breaks):**
+   - Regular expression: `r'"(.|\n)"'
+     - `"`: Matches the literal double quote character.
+     - `(.|\n)`: Matches any single character or a line break.
+     - `"`: Matches the literal double quote character again.
+   - This pattern ensures that any character, including line breaks, enclosed in double quotes is matched.
+
+#### 🧪 Matching the Strings:
+
+- The `re.findall` function is used to find all occurrences of the patterns in the given test strings.
+
+#### 🖥️ Code Execution:
+
+- The `test_string_any_single_character` contains various quoted single characters that do not include line breaks.
+- The `test_string_any_character` includes examples of quoted characters and a quoted string with a line break.
+
+By following these steps, we ensure that the regular expressions match their respective patterns correctly.
+---
