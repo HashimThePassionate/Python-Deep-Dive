@@ -123,3 +123,12 @@ The `re.match` function is used to check if the entire string matches the regula
 - The `test_string_invalid` example contains additional characters and should not match the pattern.
 
 By following these steps, we ensure that the regular expression matches strings consisting solely of the specified ASCII control characters.
+📊 Table 2-1: Nonprinting Characters Representation
+\a	Bell	0x07	.NET, Java, PCRE, Perl, Python, Ruby
+\e	Escape	0x1B	.NET, Java, PCRE, Perl, Ruby
+\f	Form Feed	0x0C	.NET, Java, JavaScript, PCRE, Perl, Python, Ruby
+\n	Line Feed (newline)	0x0A	.NET, Java, JavaScript, PCRE, Perl, Python, Ruby
+\r	Carriage Return	0x0D	.NET, Java, JavaScript, PCRE, Perl, Python, Ruby
+\t	Horizontal Tab	0x09	.NET, Java, JavaScript, PCRE, Perl, Python, Ruby
+\v	Vertical Tab	0x0B	.NET, Java, JavaScript, Python, Ruby
+
