@@ -1,6 +1,7 @@
 ### 📄 Problem 2.1
 
 Create a regular expression to exactly match this gloriously contrived sentence:
+
 The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
 
 
