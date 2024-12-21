@@ -345,3 +345,75 @@ print("Matches for 'end' at the end of a line:", matches_end_line)
 - The `test_string_end_line` includes lines where "end" appears at the end of a line.
 
 By following these steps, we ensure that the regular expressions match their respective patterns correctly.
+---
+### 📄 Problem 2.6 Match whole words
+
+1. Create a regular expression to match "cat" in "My cat is brown", but not in "category" or "bobcat".
+2. Create another regular expression to match "cat" in "staccato", but not in any of the three previous subject strings.
+
+### 📝 Answer
+
+```python
+import re
+
+# Regular expression to match "cat" in "My cat is brown", but not in "category" or "bobcat"
+regex_cat_word = r'\bcat\b'
+
+# Regular expression to match "cat" in "staccato", but not in "My cat is brown", "category", or "bobcat"
+regex_cat_staccato = r'cato'
+
+# Test strings
+test_string_cat = "My cat is brown"
+test_string_category = "category"
+test_string_bobcat = "bobcat"
+test_string_staccato = "staccato"
+
+# Find matches for "cat" in "My cat is brown"
+match_cat = re.search(regex_cat_word, test_string_cat)
+print("Match for 'cat' in 'My cat is brown':", bool(match_cat))
+
+# Ensure no matches for "cat" in "category" and "bobcat"
+match_category = re.search(regex_cat_word, test_string_category)
+match_bobcat = re.search(regex_cat_word, test_string_bobcat)
+print("No match for 'cat' in 'category':", not bool(match_category))
+print("No match for 'cat' in 'bobcat':", not bool(match_bobcat))
+
+# Find matches for "cat" in "staccato"
+match_staccato = re.search(regex_cat_staccato, test_string_staccato)
+print("Match for 'cat' in 'staccato':", bool(match_staccato))
+
+# Ensure no matches for "cat" in the previous strings using the second regex
+match_cat_in_cat = re.search(regex_cat_staccato, test_string_cat)
+match_cat_in_category = re.search(regex_cat_staccato, test_string_category)
+match_cat_in_bobcat = re.search(regex_cat_staccato, test_string_bobcat)
+print("No match for 'cat' in 'My cat is brown':", not bool(match_cat_in_cat))
+print("No match for 'cat' in 'category':", not bool(match_cat_in_category))
+print("No match for 'cat' in 'bobcat':", not bool(match_cat_in_bobcat))
+```
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Regular Expressions:
+
+1. **Match "cat" in "My cat is brown", but not in "category" or "bobcat":**
+   - Regular expression: `r'\bcat\b'`
+     - `\b`: Word boundary assertion ensures that "cat" is matched as a whole word.
+     - `cat`: Matches the literal word "cat".
+   - This pattern ensures that "cat" is matched only when it stands alone as a word and not as part of another word.
+
+2. **Match "cat" in "staccato", but not in "My cat is brown", "category", or "bobcat":**
+   - Regular expression: `r'cato'`
+     - `cato`: Matches the substring "cato" within the word "staccato".
+   - This pattern ensures that "cat" is matched only within the word "staccato".
+
+#### 🧪 Matching the Strings:
+
+- The `re.search` function is used to find occurrences of the patterns in the given test strings.
+
+#### 🖥️ Code Execution:
+
+- The `test_string_cat` contains the word "cat" as a standalone word.
+- The `test_string_category` and `test_string_bobcat` contain "cat" as a substring within other words.
+- The `test_string_staccato` contains "cat" as part of the word "staccato".
+
+By following these steps, we ensure that the regular expressions match their respective patterns correctly.
