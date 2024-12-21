@@ -1,4 +1,4 @@
-### 📄 Problem 2.1
+### 📄 Problem 2.1 Match literel text
 
 Create a regular expression to exactly match this gloriously contrived sentence:
 
@@ -59,7 +59,7 @@ The `re.match` function is used to check if the entire string matches the regula
 
 By following these steps, we ensure that the regular expression matches the exact sentence, including all punctuation characters.
 ---
-### 📄 Problem 2.2
+### 📄 Problem 2.2 Match nonprintable charachters
 
 Match a string of the following ASCII control characters: bell, escape, form feed, line feed, carriage return, horizontal tab, vertical tab. These characters have the hexadecimal ASCII codes 07, 1B, 0C, 0A, 0D, 09, 0B.
 
@@ -123,7 +123,7 @@ The `re.match` function is used to check if the entire string matches the regula
 By following these steps, we ensure that the regular expression matches strings consisting solely of the specified
 ASCII control characters.
 ---
-### 📄 Problem 2.3
+### 📄 Problem 2.3 Match one of many charachters
 
 1. Create a regular expression to match all common misspellings of "calendar", allowing an "a" or "e" to be used in each of the vowel positions.
 2. Create another regular expression to match a single hexadecimal character.
