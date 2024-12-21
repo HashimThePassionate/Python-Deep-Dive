@@ -3,7 +3,7 @@
 Create a regular expression to exactly match this gloriously contrived sentence:
 
 
-#The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
+# The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
 
 
 ### 📝 Answer
@@ -33,7 +33,7 @@ else:
 The sentence to match is:
 
 
-#The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
+# The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
 
 
 This sentence includes a string of punctuation characters from the ASCII table.
@@ -63,7 +63,7 @@ By following these steps, we ensure that the regular expression matches the exac
 ---
 ### 📄 Problem 2.2
 
-#Match a string of the following ASCII control characters: bell, escape, form feed, line feed, carriage return, horizontal tab, vertical tab. These characters have the hexadecimal ASCII codes 07, 1B, 0C, 0A, 0D, 09, 0B.
+# Match a string of the following ASCII control characters: bell, escape, form feed, line feed, carriage return, horizontal tab, vertical tab. These characters have the hexadecimal ASCII codes 07, 1B, 0C, 0A, 0D, 09, 0B.
 
 ### 📝 Answer
 
