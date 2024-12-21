@@ -124,3 +124,79 @@ The `re.match` function is used to check if the entire string matches the regula
 
 By following these steps, we ensure that the regular expression matches strings consisting solely of the specified
 ASCII control characters.
+---
+### 📄 Problem 2.3
+
+1. Create a regular expression to match all common misspellings of "calendar", allowing an "a" or "e" to be used in each of the vowel positions.
+2. Create another regular expression to match a single hexadecimal character.
+3. Create a third regex to match a single character that is not a hexadecimal character.
+
+### 📝 Answer
+
+```python
+import re
+
+# Regular expression to match all common misspellings of "calendar"
+regex_calendar = r'c[ae]l[ae]nd[ae]r'
+
+# Regular expression to match a single hexadecimal character
+regex_hexadecimal = r'[0-9a-fA-F]'
+
+# Regular expression to match a single character that is not a hexadecimal character
+regex_not_hexadecimal = r'[^0-9a-fA-F]'
+
+# Test strings
+test_string_calendar = "calender, calendr, celendar, celendr"
+test_string_hexadecimal = "123abcDEF"
+test_string_not_hexadecimal = "123xyzXYZ!@#"
+
+# Find all matches for common misspellings of "calendar"
+matches_calendar = re.findall(regex_calendar, test_string_calendar)
+print("Matches for common misspellings of 'calendar':", matches_calendar)
+
+# Find all matches for a single hexadecimal character
+matches_hexadecimal = re.findall(regex_hexadecimal, test_string_hexadecimal)
+print("Matches for a single hexadecimal character:", matches_hexadecimal)
+
+# Find all matches for a single character that is not a hexadecimal character
+matches_not_hexadecimal = re.findall(regex_not_hexadecimal, test_string_not_hexadecimal)
+print("Matches for a single character that is not a hexadecimal character:", matches_not_hexadecimal)
+```
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Regular Expressions:
+
+1. **Common Misspellings of "Calendar":**
+   - The word "calendar" can be misspelled by substituting "a" or "e" in each vowel position.
+   - Regular expression: `c[ae]l[ae]nd[ae]r`
+     - `c`: Matches the literal character "c".
+     - `[ae]`: Matches either "a" or "e".
+     - `l`: Matches the literal character "l".
+     - `[ae]`: Matches either "a" or "e".
+     - `nd`: Matches the literal characters "nd".
+     - `[ae]`: Matches either "a" or "e".
+     - `r`: Matches the literal character "r".
+
+2. **Single Hexadecimal Character:**
+   - A hexadecimal character can be a digit from 0 to 9 or a letter from a to f (case insensitive).
+   - Regular expression: `[0-9a-fA-F]`
+     - `[0-9]`: Matches any digit from 0 to 9.
+     - `[a-fA-F]`: Matches any letter from a to f (case insensitive).
+
+3. **Single Character That Is Not a Hexadecimal Character:**
+   - This matches any character that is not a hexadecimal character.
+   - Regular expression: `[^0-9a-fA-F]`
+     - `[^0-9a-fA-F]`: Matches any character except those specified (0-9, a-f, A-F).
+
+#### 🧪 Matching the Strings:
+
+- The `re.findall` function is used to find all occurrences of the patterns in the given test strings.
+
+#### 🖥️ Code Execution:
+
+- The `test_string_calendar` contains various misspellings of "calendar".
+- The `test_string_hexadecimal` contains a mix of hexadecimal characters.
+- The `test_string_not_hexadecimal` includes characters that are not hexadecimal.
+
+By following these steps, we ensure that the regular expressions match their respective patterns correctly.
