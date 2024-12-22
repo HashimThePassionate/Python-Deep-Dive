@@ -1781,3 +1781,136 @@ This ensures the regex correctly matches HTML tags regardless of case.
    - `print("Split list:", result_list)`
    - These lines print the original text and the resulting list of substrings to show the effect of the split.
 ---
+# Problem 3.19 🚩
+
+## Applying Regular Expressions to Each Line of a Multiline String ✨
+
+Traditional grep tools apply your regular expression to one line of text at a time and display the lines matched (or not matched) by the regular expression. You have an array of strings, or a multiline string, that you want to process in this way.
+
+This exercise helps us understand how to use regular expressions to process each line of a multiline string or an array of strings, similar to how traditional grep tools work. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will:
+1. Split the multiline string into individual lines.
+2. Apply the regular expression to each line.
+3. Collect and display the lines that match (or do not match) the regular expression.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression pattern to match
+pattern = re.compile(r'\bbold\b', re.IGNORECASE)
+
+# Multiline string to process
+multiline_text = """I like bold statements.
+This is a bold move.
+Do you prefer bold or italic?
+No boldness here."""
+
+# Split the multiline string into individual lines
+lines = multiline_text.split('\n')
+
+# Function to process each line and match the pattern
+def grep_lines(pattern, lines, invert_match=False):
+    matched_lines = []
+    for line in lines:
+        if pattern.search(line):
+            if not invert_match:
+                matched_lines.append(line)
+        else:
+            if invert_match:
+                matched_lines.append(line)
+    return matched_lines
+
+# Using the function to get matching lines
+matching_lines = grep_lines(pattern, lines)
+
+# Printing the result
+print("Original text:\n", multiline_text)
+print("\nMatching lines:")
+for line in matching_lines:
+    print(line)
+```
+
+🧐 Here’s what this means:
+
+- **`pattern`** 🛡️: This regex pattern matches the word "bold" (case-insensitive) using the `\b` word boundary anchors.
+- **`multiline_text`**: This is the multiline string we want to process.
+- **`split('\n')`**: This splits the multiline string into individual lines.
+- **`grep_lines()` Function**: This function processes each line, checks if the pattern matches, and collects the matching lines.
+- **`pattern.search(line)`**: This checks if the pattern matches the current line.
+
+## Explanation 🌟
+
+### Why Use a Function?
+
+Using a function allows us to encapsulate the logic for processing each line, making it reusable and easier to manage. It also allows us to add additional features, such as inverting the match (to collect lines that do not match).
+
+### Example:
+
+If we want to find all lines containing the word "bold" in the string:
+```
+I like bold statements.
+This is a bold move.
+Do you prefer bold or italic?
+No boldness here.
+```
+We use the regex pattern to match "bold" and the function to process each line and collect the matching lines.
+
+## Tips for Beginners 🐣
+
+- **Understand the Pattern**: Make sure you understand the regex pattern you are using. Test it separately to ensure it matches the parts you want to find.
+- **Visualize the Result**: Use tools like regex101.com to visualize how your pattern works and what it matches.
+
+## Inverting the Match 🔄
+
+To collect lines that do not match the pattern, use the `invert_match` parameter:
+
+```python
+# Using the function to get non-matching lines
+non_matching_lines = grep_lines(pattern, lines, invert_match=True)
+
+# Printing the non-matching result
+print("\nNon-matching lines:")
+for line in non_matching_lines:
+    print(line)
+```
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Pattern**:
+   - `pattern = re.compile(r'\bbold\b', re.IGNORECASE)`
+     - This pattern matches the word "bold" (case-insensitive) using word boundary anchors (`\b`).
+
+3. **Multiline String**:
+   - `multiline_text = """I like bold statements. ... """`
+   - This is the multiline string we want to process.
+
+4. **Splitting the Multiline String into Lines**:
+   - `lines = multiline_text.split('\n')`
+   - This splits the multiline string into individual lines.
+
+5. **Defining the `grep_lines()` Function**:
+   - `def grep_lines(pattern, lines, invert_match=False):`
+     - A function to process each line and match the pattern.
+     - `matched_lines = []`: An empty list to collect matched lines.
+     - `for line in lines:`: Iterates over each line.
+     - `if pattern.search(line):`: Checks if the pattern matches the current line.
+     - `if not invert_match:`: Adds the line to the result if it matches and `invert_match` is `False`.
+     - `else:`: Adds the line to the result if it does not match and `invert_match` is `True`.
+     - `return matched_lines`: Returns the list of matched lines.
+
+6. **Using the Function to Get Matching Lines**:
+   - `matching_lines = grep_lines(pattern, lines)`
+   - Calls the function with the pattern and lines to get the matching lines.
+
+7. **Printing the Result**:
+   - `print("Original text:\n", multiline_text)`
+   - `print("\nMatching lines:")`
+   - Prints the original text and the matching lines to show the effect of the pattern matching.
