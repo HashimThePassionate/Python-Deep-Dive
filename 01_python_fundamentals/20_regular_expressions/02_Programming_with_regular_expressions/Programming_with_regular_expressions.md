@@ -1,6 +1,6 @@
-## Problem 3.1 🚩  Literal Regular Expressions in Source Code 
+# Problem 3.1 🚩  Literal Regular Expressions in Source Code 
  
-# Hardcoding Regular Expression into Source Code ✨
+## Hardcoding Regular Expression into Source Code ✨
 You have been given the regular expression `[$"'\n\d/\\]` as the solution to a problem. This regular expression consists of a single character class that matches a dollar sign, a double quote, a single quote, a line feed, any digit between 0 and 9, a forward slash, or a backslash. You want to hardcode this regular expression into your source code as a string constant or regular expression operator.
 
 This exercise helps us understand how to embed regular expressions into our code properly, ensuring that special characters are correctly escaped. Let's break it down in a detailed way! 🕵️‍♂️
@@ -111,9 +111,9 @@ print("Matches found:", matches)
 6. **`print()`**: Prints the matches found in the text.
 
 ---
-## Problem 3.2 🚩   Import the Regular Expression Library 
+# Problem 3.2 🚩   Import the Regular Expression Library 
 
-# Importing the Regular Expression Library ✨
+## Importing the Regular Expression Library ✨
 To be able to use regular expressions in your application, you want to import the regular expression library or namespace into your source code.
 
 This exercise helps us understand how to prepare our code for using regular expressions by importing the necessary libraries. Let's break it down in a detailed way! 🕵️‍♂️
@@ -186,8 +186,8 @@ This will make the regex match patterns regardless of case.
 6. **`print()`**: Prints the matches found in the text.
 
 ---
-## Problem 3.3  Create Regular Expression Objects  🚩
-# Compiling Regular Expressions for Efficient Use ✨
+# Problem 3.3  Create Regular Expression Objects  🚩
+## Compiling Regular Expressions for Efficient Use ✨
 You want to instantiate a regular expression object or otherwise compile a regular expression so you can use it efficiently throughout your application.
 
 This exercise helps us understand how to compile regular expressions for repeated use, which improves performance and readability. Let's break it down in a detailed way! 🕵️‍♂️
