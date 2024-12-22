@@ -424,3 +424,88 @@ This will make the regex match patterns regardless of case.
 4. **`example_text`**: Example text to demonstrate the pattern matching.
 5. **Checking the Match**: Determines if a match was found by checking if the `match` object is not `None`.
 6. **`print()`**: Prints whether a match was found or not.
+
+---
+# Problem 3.6   Test Whether a Regex Matches the Subject String Entirely 🚩
+## Checking for a Full Match with Regular Expressions ✨
+You want to check whether a string fits a certain pattern in its entirety. That is, you want to check that the regular expression holding the pattern can match the string from start to end. For instance, if your regex is `regex pattern`, it will match input text consisting of `regex pattern` but not the longer string "The regex pattern can be found."
+
+This exercise helps us understand how to use regular expressions to check for full matches within a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To check for a full match in Python, we can use the `re.fullmatch()` function. This function checks if the entire string matches the regular expression pattern from start to end.
+
+### Example in Python:
+
+```python
+import re
+
+# String constant representing the regular expression
+regex_pattern = r'regex pattern'
+
+# The text we want to check for a full match
+example_text = 'regex pattern'
+
+# Performing the full match check
+match = re.fullmatch(regex_pattern, example_text)
+
+# Checking if a full match was found
+if match:
+    print("Full match found! ✅")
+else:
+    print("No full match found. ❌")
+```
+
+🧐 Here’s what this means:
+
+- **`re.fullmatch()`** 🛡️: Checks if the entire string matches the regular expression pattern from start to end. It returns a match object if a full match is found and `None` if no full match is found.
+- **Checking the Match**: By checking if the `match` object is not `None`, we can determine if a full match was found.
+
+## Explanation 🌟
+
+### Why Use `re.fullmatch()`?
+
+The `re.fullmatch()` function is useful for validating that a string conforms exactly to a specified pattern, with no extra characters before or after the match. This is particularly useful for input validation and strict pattern matching.
+
+### Example:
+
+If we want to ensure that the string "regex pattern" matches the pattern `regex pattern` exactly, we use `re.fullmatch()` as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Use Fullmatch for Exact Matches**: When you need to ensure the entire string matches the pattern exactly, use `re.fullmatch()`.
+- **Check the Result**: Always check if the result of `re.fullmatch()` is not `None` to confirm a full match was found.
+
+## Case-Insensitive Matching 🔠
+
+To make the full match case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+regex_pattern = re.compile(r'regex pattern', re.IGNORECASE)
+
+# The text we want to check for a full match
+example_text = 'REGEX PATTERN'
+
+# Performing the full match check
+match = regex_pattern.fullmatch(example_text)
+
+# Checking if a full match was found
+if match:
+    print("Full match found! ✅")
+else:
+    print("No full match found. ❌")
+```
+
+This will make the regex match patterns regardless of case.
+
+### Explanation:
+1. **`import re`**: This line imports the regular expression library in Python.
+2. **`regex_pattern`**: The regular expression pattern provided as a raw string.
+3. **`re.fullmatch()`**: Checks if the entire string matches the regular expression pattern from start to end.
+4. **`example_text`**: Example text to demonstrate the pattern matching.
+5. **Checking the Match**: Determines if a full match was found by checking if the `match` object is not `None`.
+6. **`print()`**: Prints whether a full match was found or not.
