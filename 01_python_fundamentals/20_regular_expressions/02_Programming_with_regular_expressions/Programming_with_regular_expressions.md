@@ -509,3 +509,93 @@ This will make the regex match patterns regardless of case.
 4. **`example_text`**: Example text to demonstrate the pattern matching.
 5. **Checking the Match**: Determines if a full match was found by checking if the `match` object is not `None`.
 6. **`print()`**: Prints whether a full match was found or not.
+
+---
+## Problem 3.7  Retrieve the Matched Text  🚩
+
+# Extracting the First Match with Regular Expressions ✨
+You have a regular expression that matches a part of the subject text, and you want to extract the text that was matched. If the regular expression can match the string more than once, you want only the first match. For example, when applying the regex `\d+` to the string "Do you like 13 or 42?", `13` should be returned.
+
+This exercise helps us understand how to use regular expressions to extract the first match from a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To extract the first match in Python, we can use the `re.search()` function. This function searches the string for the first location where the regular expression pattern produces a match.
+
+### Example in Python:
+
+```python
+import re
+
+# String constant representing the regular expression
+regex_pattern = r'\d+'
+
+# The text in which we want to search for the pattern
+example_text = 'Do you like 13 or 42?'
+
+# Performing the search for the first match
+match = re.search(regex_pattern, example_text)
+
+# Extracting the matched text
+if match:
+    first_match = match.group()
+    print("First match found:", first_match)
+else:
+    print("No match found.")
+```
+
+🧐 Here’s what this means:
+
+- **`re.search()`** 🛡️: Searches the string for the first match to the regular expression pattern. It returns a match object if a match is found and `None` if no match is found.
+- **Extracting the Match**: By using the `group()` method on the match object, we can extract the text that was matched.
+
+## Explanation 🌟
+
+### Why Use `re.search()`?
+
+The `re.search()` function is useful for finding the first occurrence of a pattern in a string. It allows you to quickly locate and extract matched text without needing to check the entire string.
+
+### Example:
+
+If we want to find and extract the first number (`\d+`) in the string "Do you like 13 or 42?", we use `re.search()` as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Check the Result**: Always check if the result of `re.search()` is not `None` to confirm a match was found.
+- **Use `group()`**: Use the `group()` method to extract the matched text from the match object.
+
+## Case-Insensitive Matching 🔠
+
+To make the search case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+regex_pattern = re.compile(r'\d+', re.IGNORECASE)
+
+# The text in which we want to search for the pattern
+example_text = 'Do you like 13 or 42?'
+
+# Performing the search for the first match
+match = regex_pattern.search(example_text)
+
+# Extracting the matched text
+if match:
+    first_match = match.group()
+    print("First match found:", first_match)
+else:
+    print("No match found.")
+```
+
+This will make the regex match patterns regardless of case.
+
+### Explanation:
+1. **`import re`**: This line imports the regular expression library in Python.
+2. **`regex_pattern`**: The regular expression pattern provided as a raw string.
+3. **`re.search()`**: Searches the string for the first match to the regular expression pattern.
+4. **`example_text`**: Example text to demonstrate the pattern matching.
+5. **Extracting the Match**: Uses the `group()` method on the match object to extract the matched text.
+6. **`print()`**: Prints the first match found or indicates if no match was found.
+
+---
