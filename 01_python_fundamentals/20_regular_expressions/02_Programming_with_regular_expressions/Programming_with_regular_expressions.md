@@ -911,3 +911,124 @@ This code will let you know if the provided regular expression finds and iterate
    - This prints the matched text and its position within the string.
 
 ---
+# Problem 3.11 🚩
+
+## Finding Matches Only Within Certain Sections of a String ✨
+You want to find all the matches of a particular regular expression, but only within certain sections of the subject string. Another regular expression matches each of the sections in the string. Suppose you have an HTML file in which various passages are marked as bold with `<b>` tags. You want to find all numbers marked as bold. If some bold text contains multiple numbers, you want to match all of them separately. For example, when processing the string `1 <b>2</b> 3 4 <b>5 6 7</b>`, you want to find four matches: `2`, `5`, `6`, and `7`.
+
+This exercise helps us understand how to use regular expressions to find matches within specific sections of a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will use two regular expressions:
+1. One to find the sections marked as bold (`<b>...</b>`).
+2. Another to find the numbers within these sections.
+
+We will use the `re.finditer()` function to iterate over the bold sections and then apply another regex to find the numbers within each bold section.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression to find bold sections
+bold_section_pattern = re.compile(r'<b>(.*?)</b>', re.IGNORECASE | re.DOTALL)
+
+# Regular expression to find numbers
+number_pattern = re.compile(r'\d+')
+
+# The text in which we want to search for the patterns
+example_text = '1 <b>2</b> 3 4 <b>5 6 7</b>'
+
+# Using finditer to get an iterator over all bold sections
+bold_sections = bold_section_pattern.finditer(example_text)
+
+# List to store all numbers found within bold sections
+numbers_in_bold = []
+
+# Iterating over all bold sections
+for section in bold_sections:
+    # Extracting the content within the bold tags
+    bold_content = section.group(1)
+    # Finding all numbers within the bold content
+    numbers = number_pattern.findall(bold_content)
+    # Adding the numbers to the list
+    numbers_in_bold.extend(numbers)
+
+# Printing all numbers found within bold sections
+print("Numbers found within bold sections:", numbers_in_bold)
+```
+
+🧐 Here’s what this means:
+
+- **`bold_section_pattern`** 🛡️: This regex pattern finds content within `<b>` tags. The `.*?` is a non-greedy match for any character sequence, and `re.IGNORECASE | re.DOTALL` makes the pattern case-insensitive and allows `.` to match newline characters.
+- **`number_pattern`**: This regex pattern finds sequences of digits (`\d+`).
+- **Iterating Over Bold Sections**: We use `re.finditer()` to iterate over each bold section and then apply `number_pattern` to find numbers within each section.
+- **Collecting Matches**: We collect all numbers found within bold sections into a list and print them.
+
+## Explanation 🌟
+
+### Why Use Two Regular Expressions?
+
+Using two regular expressions allows us to first isolate the sections of interest (bold sections) and then apply a second regex to find specific patterns within those sections (numbers). This approach is modular and can be adapted to various scenarios where nested pattern matching is required.
+
+### Example:
+
+If we want to find all numbers within bold sections in the string `1 <b>2</b> 3 4 <b>5 6 7</b>`, we use the two regex patterns as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Understand Nested Matching**: Breaking down the problem into smaller regex tasks (finding sections and then finding patterns within sections) makes it easier to manage.
+- **Check for Correct Flags**: Ensure you use appropriate flags (`re.IGNORECASE`, `re.DOTALL`) to match the desired patterns correctly.
+
+## Case-Insensitive and Dotall Matching 🔠
+
+To make the regex case-insensitive and allow `.` to match newline characters, use the `re.IGNORECASE` and `re.DOTALL` flags:
+
+```python
+bold_section_pattern = re.compile(r'<b>(.*?)</b>', re.IGNORECASE | re.DOTALL)
+```
+
+This ensures the regex correctly matches bold tags and their content regardless of case and newline characters.
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Patterns**:
+   - `bold_section_pattern = re.compile(r'<b>(.*?)</b>', re.IGNORECASE | re.DOTALL)`
+     - This pattern matches content within `<b>` tags. The `.*?` is a non-greedy match for any character sequence.
+     - `re.IGNORECASE` makes the pattern case-insensitive.
+     - `re.DOTALL` allows `.` to match newline characters.
+   - `number_pattern = re.compile(r'\d+')`
+     - This pattern matches sequences of digits (`\d+`).
+
+3. **Example Text**:
+   - `example_text = '1 <b>2</b> 3 4 <b>5 6 7</b>'`
+   - This is the string where we want to find numbers within bold sections.
+
+4. **Using `finditer()` for Bold Sections**:
+   - `bold_sections = bold_section_pattern.finditer(example_text)`
+   - This function returns an iterator over all matches of bold sections in the string.
+
+5. **Iterating Over Bold Sections**:
+   - `for section in bold_sections:`
+   - A for loop is used to iterate over each match object representing a bold section.
+
+6. **Extracting Bold Content**:
+   - `bold_content = section.group(1)`
+   - The `group(1)` method returns the content within the bold tags.
+
+7. **Finding Numbers in Bold Content**:
+   - `numbers = number_pattern.findall(bold_content)`
+   - The `findall()` function returns a list of all numbers found within the bold content.
+
+8. **Collecting Matches**:
+   - `numbers_in_bold.extend(numbers)`
+   - The numbers found are added to the `numbers_in_bold` list.
+
+9. **Printing Matches**:
+   - `print("Numbers found within bold sections:", numbers_in_bold)`
+   - This prints the list of all numbers found within bold sections.
+---
