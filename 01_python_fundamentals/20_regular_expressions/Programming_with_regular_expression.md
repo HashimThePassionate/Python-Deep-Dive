@@ -1601,3 +1601,100 @@ This ensures the regex correctly matches HTML tags regardless of case.
    - `print("Original text:", example_text)`
    - `print("Split list:", result_list)`
    - These lines print the original text and the resulting list of substrings to show the effect of the split.
+---
+# Problem 1.18 🚩
+
+## Retrieving and Filtering Matches Based on Additional Criteria ✨
+
+You want to retrieve a list of all matches a regular expression can find in a string when it is applied repeatedly to the remainder of the string after each match. Now, you want to get a list of matches that meet certain extra criteria that you cannot (easily) express in a regular expression. For example, when retrieving a list of lucky numbers, you only want to retain those that are an integer multiple of 13.
+
+This exercise helps us understand how to use regular expressions to find matches and then apply additional criteria to filter those matches. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will:
+1. Use `re.findall()` to retrieve all matches of the regular expression in the string.
+2. Apply additional criteria to filter the list of matches.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression pattern to find numbers
+number_pattern = re.compile(r'\d+')
+
+# The text in which we want to search for the numbers
+example_text = 'The lucky numbers are 7, 13, 26, 39, 52, 65, and 99.'
+
+# Using re.findall() to retrieve all matches
+all_matches = number_pattern.findall(example_text)
+
+# Function to filter matches based on additional criteria
+def filter_lucky_numbers(matches):
+    # Convert matched strings to integers and filter those that are multiples of 13
+    lucky_numbers = [int(num) for num in matches if int(num) % 13 == 0]
+    return lucky_numbers
+
+# Applying the filter function
+lucky_numbers = filter_lucky_numbers(all_matches)
+
+# Printing the result
+print("All matches:", all_matches)
+print("Lucky numbers:", lucky_numbers)
+```
+
+🧐 Here’s what this means:
+
+- **`number_pattern`** 🛡️: This regex pattern finds sequences of digits (`\d+`).
+- **`re.findall()`**: This function retrieves all matches of the pattern in the string and returns them as a list.
+- **`filter_lucky_numbers()` Function**: This function takes the list of matches, converts them to integers, and retains only those that are multiples of 13.
+- **Filtering Matches**: By using a custom function, we can apply complex criteria to filter the list of matches.
+
+## Explanation 🌟
+
+### Why Use `re.findall()`?
+
+The `re.findall()` function is useful for retrieving all matches of a pattern in a string. It returns a list of matched strings, making it easy to process and filter these matches further.
+
+### Example:
+
+If we want to retrieve all numbers in the string `The lucky numbers are 7, 13, 26, 39, 52, 65, and 99.` and retain only those that are multiples of 13, we use the regex pattern to find all numbers and a custom function to filter the list.
+
+## Tips for Beginners 🐣
+
+- **Understand the Pattern**: Make sure you understand the regex pattern you are using. Test it separately to ensure it matches the parts you want to find.
+- **Visualize the Result**: Use tools like regex101.com to visualize how your pattern works and what it matches.
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Pattern**:
+   - `number_pattern = re.compile(r'\d+')`
+     - This pattern matches sequences of digits (`\d+`).
+
+3. **Example Text**:
+   - `example_text = 'The lucky numbers are 7, 13, 26, 39, 52, 65, and 99.'`
+   - This is the string where we want to find numbers.
+
+4. **Using `re.findall()` to Retrieve All Matches**:
+   - `all_matches = number_pattern.findall(example_text)`
+   - This function retrieves all matches of the pattern in the string and returns them as a list.
+
+5. **Defining the Custom Filter Function**:
+   - `def filter_lucky_numbers(matches):`
+     - A function that takes a list of matched strings.
+     - `lucky_numbers = [int(num) for num in matches if int(num) % 13 == 0]`: Converts matched strings to integers and retains only those that are multiples of 13.
+     - `return lucky_numbers`: Returns the filtered list.
+
+6. **Applying the Filter Function**:
+   - `lucky_numbers = filter_lucky_numbers(all_matches)`
+   - Calls the custom function with the list of matches to get the filtered list.
+
+7. **Printing the Result**:
+   - `print("All matches:", all_matches)`
+   - `print("Lucky numbers:", lucky_numbers)`
+   - These lines print the original list of matches and the filtered list to show the effect of the filtering.
+---
