@@ -1698,3 +1698,86 @@ If we want to retrieve all numbers in the string `The lucky numbers are 7, 13, 2
    - `print("Lucky numbers:", lucky_numbers)`
    - These lines print the original list of matches and the filtered list to show the effect of the filtering.
 ---
+# Problem 3.18 🚩
+
+## Splitting a String with Regular Expressions and Keeping the Matches ✨
+
+You want to split a string using a regular expression. After the split, you will have an array or list of strings with the text between the regular expression matches, as well as the regex matches themselves. Suppose you want to split a string with HTML tags in it along the HTML tags, and also keep the HTML tags. Splitting `I●like●<b>bold</b>●and●<i>italic</i>●fonts` should result in an array of nine strings: `I●like●`, `<b>`, `bold`, `</b>`, `●and●`, `<i>`, `italic`, `</i>`, and `●fonts`.
+
+This exercise helps us understand how to use regular expressions to split a string and retain the matches. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will use the `re.split()` function from Python's `re` module with a capturing group in the regular expression. The capturing group ensures that the matches are included in the resulting list.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression pattern to match HTML tags and keep them in the result
+html_tag_pattern = re.compile(r'(<[^>]+>)')
+
+# The text we want to split
+example_text = 'I●like●<b>bold</b>●and●<i>italic</i>●fonts'
+
+# Using re.split() to split the text along HTML tags and keep the tags
+result_list = html_tag_pattern.split(example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Split list:", result_list)
+```
+
+🧐 Here’s what this means:
+
+- **`html_tag_pattern`** 🛡️: This regex pattern matches HTML tags. The `[^>]+` matches any sequence of characters that are not `>`, ensuring we match an entire HTML tag. The parentheses `()` create a capturing group to keep the matches in the result.
+- **`re.split()`**: This function splits the string by the occurrences of the pattern and includes the matches in the resulting list.
+
+## Explanation 🌟
+
+### Why Use Capturing Groups?
+
+Capturing groups allow us to include the parts of the string that match the pattern in the resulting list when using `re.split()`. This is useful when we want to retain the matches along with the text between them.
+
+### Example:
+
+If we want to split the string `I●like●<b>bold</b>●and●<i>italic</i>●fonts` along the HTML tags and keep the tags, we use the regex pattern with a capturing group and the `re.split()` function to perform the split.
+
+## Tips for Beginners 🐣
+
+- **Understand the Pattern**: Make sure you understand the regex pattern you are using. Test it separately to ensure it matches the parts you want to split by.
+- **Visualize the Result**: Use tools like regex101.com to visualize how your pattern works and what it matches.
+
+## Case-Insensitive Matching 🔠
+
+To make the pattern case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+html_tag_pattern = re.compile(r'(<[^>]+>)', re.IGNORECASE)
+```
+
+This ensures the regex correctly matches HTML tags regardless of case.
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Pattern**:
+   - `html_tag_pattern = re.compile(r'(<[^>]+>)')`
+     - This pattern matches HTML tags. The `[^>]+` matches any sequence of characters that are not `>`, ensuring we match an entire HTML tag. The parentheses `()` create a capturing group to keep the matches in the result.
+
+3. **Example Text**:
+   - `example_text = 'I●like●<b>bold</b>●and●<i>italic</i>●fonts'`
+   - This is the string we want to split along the HTML tags and keep the tags in the resulting list.
+
+4. **Using `re.split()` to Split the Text**:
+   - `result_list = html_tag_pattern.split(example_text)`
+   - This function splits the string by the occurrences of the pattern and includes the matches in the resulting list.
+
+5. **Printing the Result**:
+   - `print("Original text:", example_text)`
+   - `print("Split list:", result_list)`
+   - These lines print the original text and the resulting list of substrings to show the effect of the split.
+---
