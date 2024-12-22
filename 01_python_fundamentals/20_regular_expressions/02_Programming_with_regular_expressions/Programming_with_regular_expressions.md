@@ -1253,3 +1253,120 @@ This will make the regex match patterns regardless of case.
    - `print("Original text:", example_text)`
    - `print("Modified text:", result_text)`
    - These lines print the original and modified strings to show the effect of the replacement.
+---
+# Problem 3.15 🚩
+
+## Search-and-Replace within Certain Sections of a String ✨
+You want to replace all matches of a particular regular expression, but only within certain sections of the subject string. Another regular expression matches each of the sections in the string. Say you have an HTML file in which various passages are marked as bold with `<b>` tags. Between each pair of bold tags, you want to replace all matches of the regular expression `before` with the replacement text `after`. For example, when processing the string `before <b>first before</b> before <b>before before</b>`, you want to end up with: `before <b>first after</b> before <b>after after</b>`.
+
+This exercise helps us understand how to apply regular expressions to specific sections of a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will use two regular expressions:
+1. One to find the sections marked as bold (`<b>...</b>`).
+2. Another to find and replace the target pattern (`before`) within these sections.
+
+We'll use the `re.sub()` function to perform the replacements within the bold sections.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression to find bold sections
+bold_section_pattern = re.compile(r'(<b>.*?</b>)', re.IGNORECASE | re.DOTALL)
+
+# Regular expression to find the target pattern within bold sections
+target_pattern = re.compile(r'before')
+
+# Replacement text
+replacement_text = 'after'
+
+# The text in which we want to search for the patterns
+example_text = 'before <b>first before</b> before <b>before before</b>'
+
+# Function to replace the target pattern within bold sections
+def replace_within_bold(match):
+    # Extract the content within the bold tags
+    bold_content = match.group(0)
+    # Replace the target pattern within the bold content
+    modified_content = target_pattern.sub(replacement_text, bold_content)
+    return modified_content
+
+# Using re.sub() to replace the target pattern within all bold sections
+result_text = bold_section_pattern.sub(replace_within_bold, example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Modified text:", result_text)
+```
+
+🧐 Here’s what this means:
+
+- **`bold_section_pattern`** 🛡️: This regex pattern finds content within `<b>` tags. The `.*?` is a non-greedy match for any character sequence, and `re.IGNORECASE | re.DOTALL` makes the pattern case-insensitive and allows `.` to match newline characters.
+- **`target_pattern`**: This regex pattern finds instances of the word `before`.
+- **`replace_within_bold()` Function**: This function takes a match object, extracts the content within the bold tags, replaces the target pattern within this content, and returns the modified content.
+- **`re.sub()` with Custom Function**: The `re.sub()` function is called with the bold section pattern, the custom replacement function, and the original text. For each match, the replacement function is called to perform the replacement within the bold section.
+
+## Explanation 🌟
+
+### Why Use Two Regular Expressions?
+
+Using two regular expressions allows us to first isolate the sections of interest (bold sections) and then apply a second regex to find and replace specific patterns within those sections. This approach is modular and can be adapted to various scenarios where nested pattern matching and replacement are required.
+
+### Example:
+
+If we want to replace all instances of the word "before" with "after" within bold sections in the string `before <b>first before</b> before <b>before before</b>`, we use the two regex patterns and a custom replacement function to achieve this.
+
+## Tips for Beginners 🐣
+
+- **Understand Nested Matching**: Breaking down the problem into smaller regex tasks (finding sections and then finding patterns within sections) makes it easier to manage.
+- **Test Your Patterns**: Use tools like regex101.com to test and visualize your regex patterns and replacements.
+
+## Case-Insensitive and Dotall Matching 🔠
+
+To make the regex case-insensitive and allow `.` to match newline characters, use the `re.IGNORECASE` and `re.DOTALL` flags:
+
+```python
+bold_section_pattern = re.compile(r'(<b>.*?</b>)', re.IGNORECASE | re.DOTALL)
+```
+
+This ensures the regex correctly matches bold tags and their content regardless of case and newline characters.
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Patterns**:
+   - `bold_section_pattern = re.compile(r'(<b>.*?</b>)', re.IGNORECASE | re.DOTALL)`
+     - This pattern matches content within `<b>` tags. The `.*?` is a non-greedy match for any character sequence.
+     - `re.IGNORECASE` makes the pattern case-insensitive.
+     - `re.DOTALL` allows `.` to match newline characters.
+   - `target_pattern = re.compile(r'before')`
+     - This pattern matches the word "before".
+
+3. **Defining the Replacement Text**:
+   - `replacement_text = 'after'`
+     - This is the text that will replace each match of the target pattern.
+
+4. **Example Text**:
+   - `example_text = 'before <b>first before</b> before <b>before before</b>'`
+   - This is the string where we want to replace the target pattern within bold sections.
+
+5. **Defining the Custom Replacement Function**:
+   - `def replace_within_bold(match):`
+     - A function that takes a match object as an argument.
+     - `bold_content = match.group(0)`: Extracts the content within the bold tags.
+     - `modified_content = target_pattern.sub(replacement_text, bold_content)`: Replaces the target pattern within the bold content.
+     - `return modified_content`: Returns the modified content.
+
+6. **Using `re.sub()` with the Custom Function**:
+   - `result_text = bold_section_pattern.sub(replace_within_bold, example_text)`
+   - This function searches for the bold section pattern in the string and replaces each occurrence with the result of the custom replacement function.
+
+7. **Printing the Result**:
+   - `print("Original text:", example_text)`
+   - `print("Modified text:", result_text)`
+   - These lines print the original and modified strings to show the effect of the replacement.
