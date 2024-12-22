@@ -1032,3 +1032,110 @@ This ensures the regex correctly matches bold tags and their content regardless 
    - `print("Numbers found within bold sections:", numbers_in_bold)`
    - This prints the list of all numbers found within bold sections.
 ---
+# Problem 3.13 🚩
+
+## Performing a Search-and-Replace with Capturing Groups ✨
+You want to run a search-and-replace that reinserts parts of the regex match back into the replacement. The parts you want to reinsert have been isolated in your regular expression using capturing groups. For example, you want to match pairs of words delimited by an equals sign, and swap those words in the replacement.
+
+This exercise helps us understand how to use regular expressions with capturing groups to perform complex replacements. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will use capturing groups in our regular expression and the `re.sub()` function with a replacement string that references these groups.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression pattern to match word pairs delimited by an equals sign
+pattern = r'(\w+)=\w+'
+
+# Replacement pattern to swap the words
+replacement = r'\2=\1'
+
+# The text in which we want to swap the word pairs
+example_text = 'foo=bar fizz=buzz'
+
+# Using re.sub() to replace all matches with the swapped words
+result_text = re.sub(pattern, replacement, example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Modified text:", result_text)
+```
+
+🧐 Here’s what this means:
+
+- **Capturing Groups**: `(\w+)=\w+` uses `(\w+)` to capture the first word and `(\w+)` to capture the second word.
+- **Replacement Pattern**: `r'\2=\1'` swaps the positions of the captured groups.
+- **`re.sub()`**: This function takes the pattern, replacement string, and original text, and returns a new string with all replacements made.
+
+## Explanation 🌟
+
+### Why Use Capturing Groups?
+
+Capturing groups allow us to isolate specific parts of the matched text and reference them in the replacement string. This makes it possible to perform complex replacements where parts of the matched text are rearranged or modified.
+
+### Example:
+
+If we want to swap pairs of words delimited by an equals sign (e.g., `foo=bar` to `bar=foo`), we use capturing groups to isolate each word and then reference these groups in the replacement string.
+
+## Tips for Beginners 🐣
+
+- **Understand Capturing Groups**: Capturing groups are defined by parentheses `()` in the regex pattern. Each group can be referenced in the replacement string using `\1`, `\2`, etc.
+- **Test Your Patterns**: Use tools like regex101.com to test and visualize your regex patterns and replacements.
+
+## Case-Insensitive Matching 🔠
+
+To make the replacement case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Regular expression pattern to match word pairs delimited by an equals sign
+pattern = re.compile(r'(\w+)=(\w+)', re.IGNORECASE)
+
+# Replacement pattern to swap the words
+replacement = r'\2=\1'
+
+# The text in which we want to swap the word pairs
+example_text = 'Foo=Bar Fizz=Buzz'
+
+# Using re.sub() to replace all matches with the swapped words
+result_text = pattern.sub(replacement, example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Modified text:", result_text)
+```
+
+This will make the regex match patterns regardless of case.
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Pattern**:
+   - `pattern = r'(\w+)=\w+'`
+     - This pattern matches pairs of words delimited by an equals sign. The `\w+` matches one or more word characters.
+     - The parentheses `()` create capturing groups for each word.
+
+3. **Defining the Replacement Pattern**:
+   - `replacement = r'\2=\1'`
+     - This pattern references the captured groups and swaps their positions. `\1` refers to the first captured group, and `\2` refers to the second captured group.
+
+4. **Example Text**:
+   - `example_text = 'foo=bar fizz=buzz'`
+   - This is the string where we want to swap the word pairs.
+
+5. **Using `re.sub()` for Replacement**:
+   - `result_text = re.sub(pattern, replacement, example_text)`
+   - This function searches for the pattern in the string and replaces each occurrence with the replacement string.
+
+6. **Printing the Result**:
+   - `print("Original text:", example_text)`
+   - `print("Modified text:", result_text)`
+   - These lines print the original and modified strings to show the effect of the replacement.
+---
