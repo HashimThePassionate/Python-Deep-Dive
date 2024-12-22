@@ -1,4 +1,5 @@
-## Problem 3.1 🚩
+## Problem 3.1 🚩  Literal Regular Expressions in Source Code 
+ 
 # Hardcoding Regular Expression into Source Code ✨
 You have been given the regular expression `[$"'\n\d/\\]` as the solution to a problem. This regular expression consists of a single character class that matches a dollar sign, a double quote, a single quote, a line feed, any digit between 0 and 9, a forward slash, or a backslash. You want to hardcode this regular expression into your source code as a string constant or regular expression operator.
 
@@ -110,7 +111,8 @@ print("Matches found:", matches)
 6. **`print()`**: Prints the matches found in the text.
 
 ---
-## Problem 3.2 🚩
+## Problem 3.2 🚩   Import the Regular Expression Library 
+
 # Importing the Regular Expression Library ✨
 To be able to use regular expressions in your application, you want to import the regular expression library or namespace into your source code.
 
