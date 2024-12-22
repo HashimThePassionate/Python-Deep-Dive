@@ -1914,3 +1914,244 @@ for line in non_matching_lines:
    - `print("Original text:\n", multiline_text)`
    - `print("\nMatching lines:")`
    - Prints the original text and the matching lines to show the effect of the pattern matching.
+
+---
+
+# Custom File Format Parser
+
+# Problem 1.21 🚩
+
+## Parsing a Custom File Format and Storing Data in Existing Data Structures ✨
+
+You need to add a new feature to your application to import data from a file format that your application does not yet support. The file format rules are as follows:
+
+1. The keyword `table` begins a new table. A file can have an unlimited number of tables and must have at least one.
+
+2. Any strings following the `table` keyword form the table’s caption. A table does not need to have a caption.
+
+3. The keyword `row` begins a new row. A row cannot exist outside of a table. A table can have an unlimited number of rows and must have at least one.
+
+4. The `row` keyword cannot be followed by a string.
+
+5. The keyword `cell` begins a new cell. A cell cannot exist outside of a row. A row can have an unlimited number of cells but does not need any.
+
+6. Any strings following the `cell` keyword form the content of the cell. A cell does not need to have any content.
+
+7. A string is a sequence of zero or more characters enclosed by percentage signs. A string with nothing between the percentage signs is an empty string. Two sequential percentage signs in a character string denote a single character, a percentage sign. No characters other than the percentage sign have a special meaning in strings. Line breaks and other control characters that appear between the percentage signs are all part of the string.
+
+8. If two or more strings follow the same `table` or `cell` keyword, those strings form separate lines in the table’s caption or the cell’s content, regardless of whether there is a line break between the strings in the file.
+
+9. Keywords are case insensitive. `Cell`, `cell`, `CELL`, and `CeLl` are all the same.
+
+10. Any whitespace between keywords and/or strings must be ignored. Whitespace is required to delimit adjacent keywords. Whitespace is also required to delimit adjacent strings. Whitespace is not required to delimit keywords from strings.
+
+11. Any characters in the file that do not form a keyword or string are an error.
+
+### Example File:
+
+```
+table %First table%
+row
+cell %A1%
+cell %B1%
+cell%C1%
+cell%D1%
+ROW
+row
+CELL %The previous row was blank%
+cell %B3%
+row
+cell %A4% %second line%
+cEll %B4% %second line%
+cell %C4 second line%
+row
+cell %%%string%%%
+cell %%
+cell %%%%
+cell %%%%%%
+```
+
+### Formatted Table:
+
+```
+Table 3-1. Table to be parsed from the sample file
+A1 B1 C1 D1
+(omitted) (omitted) (omitted) (omitted)
+The previous row was blank B3
+(omitted) (omitted)
+A4 second line B4 second line C4 second line
+(omitted)
+%string% (blank) % %%
+```
+
+## Solution 🛠️
+
+To achieve this, we will:
+1. Define the existing data structures (`RECTable`, `RECRow`, `RECCell`).
+2. Create a parsing function `parse_file_content` to read and parse the file content.
+
+### Step-by-Step Solution
+
+#### 1. Define the Data Structures
+
+First, let's define the existing data structures which are assumed to be provided by the application. These will be used to store the parsed data.
+
+```python
+class RECCell:
+    def __init__(self, content):
+        self.content = content  # Initialize the cell content
+        
+    def __repr__(self):
+        return f"RECCell(content={self.content})"  # Representation of the cell for debugging
+
+class RECRow:
+    def __init__(self):
+        self.cells = []  # Initialize an empty list of cells
+        
+    def add_cell(self, cell):
+        self.cells.append(cell)  # Add a cell to the row
+        
+    def __repr__(self):
+        return f"RECRow(cells={self.cells})"  # Representation of the row for debugging
+
+class RECTable:
+    def __init__(self, caption=None):
+        self.caption = caption if caption else []  # Initialize the caption, default to an empty list if None
+        self.rows = []  # Initialize an empty list of rows
+        
+    def add_row(self, row):
+        self.rows.append(row)  # Add a row to the table
+        
+    def __repr__(self):
+        return f"RECTable(caption={self.caption}, rows={self.rows})"  # Representation of the table for debugging
+```
+
+#### 2. Define the Parsing Function
+
+Now, let's define the parsing function `parse_file_content`. This function will take in a string containing the entire contents of the file and return a list of `RECTable` objects.
+
+```python
+import re
+
+def parse_file_content(file_content):
+    # Regular expression patterns for keywords and strings
+    table_pattern = re.compile(r'\btable\b', re.IGNORECASE)  # Match the keyword 'table' case insensitively
+    row_pattern = re.compile(r'\brow\b', re.IGNORECASE)  # Match the keyword 'row' case insensitively
+    cell_pattern = re.compile(r'\bcell\b', re.IGNORECASE)  # Match the keyword 'cell' case insensitively
+    string_pattern = re.compile(r'%([^%]*)%')  # Match strings enclosed by percentage signs
+
+    tables = []  # List to store all tables
+    current_table = None  # Variable to store the current table being processed
+    current_row = None  # Variable to store the current row being processed
+
+    # Tokenize the file content
+    tokens = re.findall(r'\btable\b|\brow\b|\bcell\b|%[^%]*%|\s+', file_content, re.IGNORECASE)  # Find all keywords, strings, and whitespace
+
+    for token in tokens:
+        token = token.strip()  # Remove leading and trailing whitespace
+        if not token:
+            continue  # Skip empty tokens
+
+        if table_pattern.fullmatch(token):  # Check if the token is a 'table' keyword
+            if current_table:
+                tables.append(current_table)  # Append the current table to the list of tables
+            current_table = RECTable()  # Create a new RECTable instance
+            current_row = None  # Reset the current row
+        elif row_pattern.fullmatch(token):  # Check if the token is a 'row' keyword
+            if not current_table:
+                raise ValueError("Row found outside of a table.")  # Error if a row is found outside a table
+            current_row = RECRow()  # Create a new RECRow instance
+            current_table.add_row(current_row)  # Add the new row to the current table
+        elif cell_pattern.fullmatch(token):  # Check if the token is a 'cell' keyword
+            if not current_row:
+                raise ValueError("Cell found outside of a row.")  # Error if a cell is found outside a row
+            current_row.add_cell(RECCell(""))  # Add a new empty cell to the current row
+        else:
+            match = string_pattern.fullmatch(token)  # Check if the token is a string
+            if match:
+                content = match.group(1).replace("%%", "%")  # Replace '%%' with '%' in the string content
+                if current_table and not current_row:
+                    current_table.caption.append(content)  # Add the string to the table's caption if in a table but not in a row
+                elif current_row:
+                    if current_row.cells:
+                        current_row.cells[-1].content += content  # Append the string content to the last cell in the current row
+                    else:
+                        current_row.add_cell(RECCell(content))  # Add a new cell with the string content if no cells exist
+            else:
+                raise ValueError(f"Unexpected token: {token}")  # Error for unexpected tokens
+
+    if current_table:
+        tables.append(current_table)  # Append the last table to the list of tables
+
+    return tables  # Return the list of tables
+
+# Example usage
+file_content = """
+table %First table%
+row
+cell %A1%
+cell %B1%
+cell%C1%
+cell%D1%
+ROW
+row
+CELL %The previous row was blank%
+cell %B3%
+row
+cell %A4% %second line%
+cEll %B4% %second line%
+cell %C4 second line%
+row
+cell %%%string%%%
+cell %%
+cell %%%%
+cell %%%%%%
+"""
+
+tables = parse_file_content(file_content)
+for table in tables:
+    print(table)
+```
+
+### Detailed Explanation
+
+1. **Importing the `re` Module**:
+   - The `re` module is imported to use regular expressions for matching patterns in the file content.
+
+2. **Defining Regular Expression Patterns**:
+   - `table_pattern`, `row_pattern`, and `cell_pattern` match the keywords 'table', 'row', and 'cell' case insensitively.
+   - `string_pattern` matches strings enclosed by percentage signs and captures their content.
+
+3. **Initialization**:
+   - `tables` is a list to store all parsed tables.
+   - `current_table` and `current_row` are variables to keep track of the current table and row being processed.
+
+4. **Tokenization**:
+   - `tokens` is a list of all keywords, strings, and whitespace in the file content, found using `re.findall`.
+
+5. **Iterating Through Tokens**:
+   - Each token is processed in a loop.
+   - Leading and trailing whitespace is removed from each token. Empty tokens are skipped.
+
+6. **Processing Keywords and Strings**:
+   - **Table Keyword**: If a 'table' keyword is found, the current table is appended to `tables` (if it exists), and a new `RECTable` instance is created.
+   - **Row Keyword**: If a 'row' keyword is found, an error is raised if it is outside a table. A new `RECRow` instance is created and added to the current table.
+   - **Cell Keyword**: If a 'cell' keyword is found, an error is raised if it is outside a row. A new `RECCell` instance with empty content is created and added to the current row.
+   - **String**: If a string is found, its content is processed to replace '%%' with '%'. Depending on the context, the string is added to the table's caption or the last cell's content in the current row.
+
+7. **Handling Errors**:
+   - Errors are raised for unexpected tokens, rows outside tables, and cells outside rows.
+
+8. **Appending the Last Table**:
+   - After the loop, the last table is appended to `tables`.
+
+9. **Returning the Result**:
+   - The function returns the list of parsed tables.
+
+### Example Usage
+
+The provided `file_content` string is parsed, and the resulting tables are printed. This demonstrates how the function processes the file content and stores the data in the predefined data structures.
+
+Understand how the file is parsed according to the specified rules and how the data is stored in the appropriate structures. This solution ensures that the parsing logic is clear and handles the complexity of the custom file format effectively
+
+---
