@@ -511,9 +511,9 @@ This will make the regex match patterns regardless of case.
 6. **`print()`**: Prints whether a full match was found or not.
 
 ---
-## Problem 3.7  Retrieve the Matched Text  🚩
+# Problem 3.7  Retrieve the Matched Text  🚩
 
-# Extracting the First Match with Regular Expressions ✨
+## Extracting the First Match with Regular Expressions ✨
 You have a regular expression that matches a part of the subject text, and you want to extract the text that was matched. If the regular expression can match the string more than once, you want only the first match. For example, when applying the regex `\d+` to the string "Do you like 13 or 42?", `13` should be returned.
 
 This exercise helps us understand how to use regular expressions to extract the first match from a string. Let's break it down in a detailed way! 🕵️‍♂️
@@ -599,3 +599,97 @@ This will make the regex match patterns regardless of case.
 6. **`print()`**: Prints the first match found or indicates if no match was found.
 
 ---
+
+# Problem 3.8 Determine the Position and Length of the Match  🚩
+
+## Finding the Starting Position and Length of a Regex Match ✨
+Instead of extracting the substring matched by the regular expression, as shown in the previous recipe, you want to determine the starting position and length of the match. With this information, you can extract the match in your own code or apply whatever processing you fancy on the part of the original string matched by the regex.
+
+This exercise helps us understand how to use regular expressions to find the starting position and length of a match within a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To find the starting position and length of the first match in Python, we can use the `re.search()` function along with the `start()` and `end()` methods of the match object. These methods provide the start and end positions of the match, respectively.
+
+### Example in Python:
+
+```python
+import re
+
+# String constant representing the regular expression
+regex_pattern = r'\d+'
+
+# The text in which we want to search for the pattern
+example_text = 'Do you like 13 or 42?'
+
+# Performing the search for the first match
+match = re.search(regex_pattern, example_text)
+
+# Checking if a match was found and extracting the starting position and length
+if match:
+    start_position = match.start()
+    end_position = match.end()
+    match_length = end_position - start_position
+    print(f"Match found at position {start_position} with length {match_length}.")
+else:
+    print("No match found.")
+```
+
+🧐 Here’s what this means:
+
+- **`re.search()`** 🛡️: Searches the string for the first match to the regular expression pattern. It returns a match object if a match is found and `None` if no match is found.
+- **`start()` Method**: Returns the starting position of the match.
+- **`end()` Method**: Returns the position just after the end of the match.
+- **Calculating Length**: The length of the match is calculated as `end_position - start_position`.
+
+## Explanation 🌟
+
+### Why Use `start()` and `end()` Methods?
+
+The `start()` and `end()` methods of the match object provide precise positions of where the match starts and ends in the string. This information is useful when you need to process or manipulate the matched substring based on its position within the original string.
+
+### Example:
+
+If we want to find the starting position and length of the first number (`\d+`) in the string "Do you like 13 or 42?", we use `re.search()` and the `start()` and `end()` methods as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Check the Result**: Always check if the result of `re.search()` is not `None` to confirm a match was found.
+- **Use `start()` and `end()`**: Use these methods to get the exact positions of the match within the string.
+
+## Case-Insensitive Matching 🔠
+
+To make the search case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+regex_pattern = re.compile(r'\d+', re.IGNORECASE)
+
+# The text in which we want to search for the pattern
+example_text = 'Do you like 13 or 42?'
+
+# Performing the search for the first match
+match = regex_pattern.search(example_text)
+
+# Checking if a match was found and extracting the starting position and length
+if match:
+    start_position = match.start()
+    end_position = match.end()
+    match_length = end_position - start_position
+    print(f"Match found at position {start_position} with length {match_length}.")
+else:
+    print("No match found.")
+```
+
+This will make the regex match patterns regardless of case.
+
+### Explanation:
+1. **`import re`**: This line imports the regular expression library in Python.
+2. **`regex_pattern`**: The regular expression pattern provided as a raw string.
+3. **`re.search()`**: Searches the string for the first match to the regular expression pattern.
+4. **`example_text`**: Example text to demonstrate the pattern matching.
+5. **`start()` and `end()` Methods**: Used to get the starting and ending positions of the match.
+6. **Calculating Length**: Determines the length of the match by subtracting the start position from the end position.
+7. **`print()`**: Prints the starting position and length of the match or indicates if no match was found.
