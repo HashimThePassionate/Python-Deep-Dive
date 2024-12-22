@@ -1,5 +1,5 @@
-# Problem 3.1 🚩  Literal Regular Expressions in Source Code 
- 
+# Problem 3.1 🚩 
+
 ## Hardcoding Regular Expression into Source Code ✨
 You have been given the regular expression `[$"'\n\d/\\]` as the solution to a problem. This regular expression consists of a single character class that matches a dollar sign, a double quote, a single quote, a line feed, any digit between 0 and 9, a forward slash, or a backslash. You want to hardcode this regular expression into your source code as a string constant or regular expression operator.
 
@@ -111,7 +111,7 @@ print("Matches found:", matches)
 6. **`print()`**: Prints the matches found in the text.
 
 ---
-# Problem 3.2 🚩   Import the Regular Expression Library 
+# Problem 3.2 🚩 
 
 ## Importing the Regular Expression Library ✨
 To be able to use regular expressions in your application, you want to import the regular expression library or namespace into your source code.
@@ -186,7 +186,8 @@ This will make the regex match patterns regardless of case.
 6. **`print()`**: Prints the matches found in the text.
 
 ---
-# Problem 3.3  Create Regular Expression Objects  🚩
+# Problem 3.3 🚩
+
 ## Compiling Regular Expressions for Efficient Use ✨
 You want to instantiate a regular expression object or otherwise compile a regular expression so you can use it efficiently throughout your application.
 
@@ -259,7 +260,8 @@ This will make the regex match patterns regardless of case.
 6. **`print()`**: Prints the matches found in the text.
 
 ---
-# Problem 3.4  Set Regular Expression Options  🚩
+# Problem 3.4 🚩
+
 ## Compiling a Regular Expression with All Matching Modes ✨
 You want to compile a regular expression with all of the available matching modes: free-spacing, case insensitive, dot matches line breaks, and “^ and $ match at line breaks.”
 
@@ -341,7 +343,8 @@ This will make the regex match patterns regardless of case.
 6. **`print()`**: Prints the matches found in the text.
 
 ---
-# Problem 3.5   Test If a Match Can Be Found Within a Subject String  🚩
+# Problem 3.5  🚩
+
 ## Checking for a Partial Match with Regular Expressions ✨
 You want to check whether a match can be found for a particular regular expression in a particular string. A partial match is sufficient. For instance, the regex `regex pattern` partially matches the string "The regex pattern can be found." You don’t care about any of the details of the match. You just want to know whether the regex matches the string.
 
@@ -426,7 +429,8 @@ This will make the regex match patterns regardless of case.
 6. **`print()`**: Prints whether a match was found or not.
 
 ---
-# Problem 3.6   Test Whether a Regex Matches the Subject String Entirely 🚩
+# Problem 3.6 🚩
+
 ## Checking for a Full Match with Regular Expressions ✨
 You want to check whether a string fits a certain pattern in its entirety. That is, you want to check that the regular expression holding the pattern can match the string from start to end. For instance, if your regex is `regex pattern`, it will match input text consisting of `regex pattern` but not the longer string "The regex pattern can be found."
 
@@ -511,7 +515,7 @@ This will make the regex match patterns regardless of case.
 6. **`print()`**: Prints whether a full match was found or not.
 
 ---
-# Problem 3.7  Retrieve the Matched Text  🚩
+# Problem 3.7 🚩
 
 ## Extracting the First Match with Regular Expressions ✨
 You have a regular expression that matches a part of the subject text, and you want to extract the text that was matched. If the regular expression can match the string more than once, you want only the first match. For example, when applying the regex `\d+` to the string "Do you like 13 or 42?", `13` should be returned.
@@ -600,7 +604,7 @@ This will make the regex match patterns regardless of case.
 
 ---
 
-# Problem 3.8 Determine the Position and Length of the Match  🚩
+# Problem 3.8 🚩
 
 ## Finding the Starting Position and Length of a Regex Match ✨
 Instead of extracting the substring matched by the regular expression, as shown in the previous recipe, you want to determine the starting position and length of the match. With this information, you can extract the match in your own code or apply whatever processing you fancy on the part of the original string matched by the regex.
@@ -695,7 +699,7 @@ This will make the regex match patterns regardless of case.
 7. **`print()`**: Prints the starting position and length of the match or indicates if no match was found.
 
 ---
-# Problem 3.9  Retrieve a List of All Matches  🚩
+# Problem 3.9  🚩
 
 ## Retrieving All Matches with Regular Expressions ✨
 All the preceding recipes in this chapter deal only with the first match that a regular expression can find in the subject string. But in many cases, a regular expression that partially matches a string can find another match in the remainder of the string. And there may be a third match after the second, and so on. For example, the regex `\d+` can find six matches in the subject string "The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99." You want to retrieve the list of all substrings that the regular expression finds when it is applied repeatedly to the remainder of the string, after each match.
@@ -772,3 +776,138 @@ This will make the regex match patterns regardless of case.
 3. **`re.findall()`**: Searches the string for all matches to the regular expression pattern and returns them as a list of strings.
 4. **`example_text`**: Example text to demonstrate the pattern matching.
 5. **Printing Matches**: Prints the list of all matches found in the text.
+
+---
+# Problem 3.10 🚩
+## Iterating Over All Matches with Regular Expressions ✨
+The previous recipe shows how a regex could be applied repeatedly to a string to get a list of matches. Now you want to iterate over all the matches in your own code.
+
+This exercise helps us understand how to use regular expressions to iterate over all matches within a string and process each match individually. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To iterate over all matches in Python, we can use the `re.finditer()` function. This function returns an iterator yielding match objects for all non-overlapping matches of the pattern in the string.
+
+### Example in Python:
+
+```python
+import re
+
+# String constant representing the regular expression
+regex_pattern = r'\d+'
+
+# The text in which we want to search for the pattern
+example_text = 'The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99.'
+
+# Using finditer to get an iterator over all matches
+matches = re.finditer(regex_pattern, example_text)
+
+# Iterating over all matches
+for match in matches:
+    # Extracting the matched text
+    matched_text = match.group()
+    # Getting the start and end positions of the match
+    start_position = match.start()
+    end_position = match.end()
+    # Printing match details
+    print(f"Match found: {matched_text} at position {start_position}-{end_position}")
+```
+
+🧐 Here’s what this means:
+
+- **`re.finditer()`** 🛡️: Returns an iterator yielding match objects for all non-overlapping matches of the pattern in the string.
+- **Iterating Over Matches**: By iterating over the matches, we can process each match individually, extracting the matched text and its position within the string.
+
+## Explanation 🌟
+
+### Why Use `re.finditer()`?
+
+The `re.finditer()` function is useful for scenarios where you need to process each match individually. Unlike `re.findall()`, which returns a list of all matched strings, `re.finditer()` gives you match objects. These match objects provide detailed information about each match, such as the start and end positions, which can be useful for further processing.
+
+### Example:
+
+If we want to find and process all numbers (`\d+`) in the string "The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99.", we use `re.finditer()` as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Understand Match Objects**: Match objects contain useful methods like `group()`, `start()`, and `end()`. Familiarize yourself with these methods to effectively work with matches.
+- **Iterate Carefully**: When iterating over matches, ensure you handle cases where no matches are found to avoid errors.
+
+## Case-Insensitive Matching 🔠
+
+To make the search case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+regex_pattern = re.compile(r'\d+', re.IGNORECASE)
+
+# The text in which we want to search for the pattern
+example_text = 'The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99.'
+
+# Using finditer to get an iterator over all matches
+matches = regex_pattern.finditer(example_text)
+
+# Iterating over all matches
+for match in matches:
+    # Extracting the matched text
+    matched_text = match.group()
+    # Getting the start and end positions of the match
+    start_position = match.start()
+    end_position = match.end()
+    # Printing match details
+    print(f"Match found: {matched_text} at position {start_position}-{end_position}")
+```
+
+This will make the regex match patterns regardless of case.
+
+### Explanation:
+1. **`import re`**: This line imports the regular expression library in Python.
+2. **`regex_pattern`**: The regular expression pattern provided as a raw string.
+3. **`re.finditer()`**: Returns an iterator yielding match objects for all non-overlapping matches of the pattern in the string.
+4. **`example_text`**: Example text to demonstrate the pattern matching.
+5. **Iterating Over Matches**: Iterates over all matches using a for loop.
+6. **Extracting the Matched Text**: Uses the `group()` method on the match object to extract the matched text.
+7. **Getting Match Positions**: Uses the `start()` and `end()` methods on the match object to get the start and end positions of the match.
+8. **`print()`**: Prints the matched text and its position within the string.
+
+This code will let you know if the provided regular expression finds and iterates over all matches in the example text, providing details about each match! 🎉
+
+## Detailed Explanation for Beginners 🐣
+
+### Steps to Understand the Example:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Pattern**:
+   - `regex_pattern = r'\d+'`
+   - This pattern matches one or more digits (`\d+`).
+
+3. **Example Text**:
+   - `example_text = 'The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99.'`
+   - This is the string where we want to find all numbers.
+
+4. **Using `re.finditer()`**:
+   - `matches = re.finditer(regex_pattern, example_text)`
+   - This function returns an iterator over all matches of the pattern in the string.
+
+5. **Iterating Over Matches**:
+   - `for match in matches:`
+   - A for loop is used to iterate over each match object.
+
+6. **Extracting Matched Text**:
+   - `matched_text = match.group()`
+   - The `group()` method returns the matched text.
+
+7. **Getting Match Positions**:
+   - `start_position = match.start()`
+   - `end_position = match.end()`
+   - The `start()` method returns the start position of the match, and the `end()` method returns the position just after the end of the match.
+
+8. **Printing Match Details**:
+   - `print(f"Match found: {matched_text} at position {start_position}-{end_position}")`
+   - This prints the matched text and its position within the string.
+
+---
