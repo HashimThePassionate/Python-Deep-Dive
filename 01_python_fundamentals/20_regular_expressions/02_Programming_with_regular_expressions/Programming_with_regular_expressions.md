@@ -257,3 +257,85 @@ This will make the regex match patterns regardless of case.
 4. **`example_text`**: Example text to demonstrate the pattern matching.
 5. **`compiled_regex.findall()`**: Finds all matches in the example text.
 6. **`print()`**: Prints the matches found in the text.
+
+---
+# Problem 3.4  Set Regular Expression Options  🚩
+## Compiling a Regular Expression with All Matching Modes ✨
+You want to compile a regular expression with all of the available matching modes: free-spacing, case insensitive, dot matches line breaks, and “^ and $ match at line breaks.”
+
+This exercise helps us understand how to set various matching modes when compiling regular expressions, enhancing their flexibility and power. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To compile a regular expression with all the available matching modes in Python, we use the `re.compile()` function along with several flags: `re.VERBOSE`, `re.IGNORECASE`, `re.DOTALL`, and `re.MULTILINE`.
+
+### Example in Python:
+
+```python
+import re
+
+# String constant representing the regular expression
+regex_pattern = r'''
+    [$"'\n\d/\\]  # Matches a dollar sign, double quote, single quote, newline, digit, forward slash, or backslash
+'''
+
+# Compiling the regular expression with all matching modes
+compiled_regex = re.compile(
+    regex_pattern, 
+    re.VERBOSE | re.IGNORECASE | re.DOTALL | re.MULTILINE
+)
+
+# Example text to search within
+example_text = '''Here is a test string:
+$ " ' 
+5 / \\'''
+
+# Performing the match
+matches = compiled_regex.findall(example_text)
+
+# Printing the matches
+print("Matches found:", matches)
+```
+
+🧐 Here’s what this means:
+
+- **`re.VERBOSE` (free-spacing mode)** 🛡️: Allows the regex pattern to be spread across multiple lines with comments and whitespace for better readability.
+- **`re.IGNORECASE` (case insensitive)**: Makes the pattern matching case insensitive.
+- **`re.DOTALL` (dot matches line breaks)**: Allows the dot `.` character to match any character, including newline characters.
+- **`re.MULTILINE` (“^ and $ match at line breaks”)**: Makes the `^` and `$` anchors match at the start and end of each line, not just the start and end of the entire string.
+
+## Explanation 🌟
+
+### Why Use Matching Modes?
+
+Matching modes enhance the flexibility and readability of regular expressions. They allow you to write more understandable patterns and handle various text scenarios effectively.
+
+### Example:
+
+If we want to search for the string `[$"'\n\d/\\]` with all matching modes, we compile the regex pattern using the appropriate flags as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Use Comments and Whitespace**: When using `re.VERBOSE`, take advantage of comments and whitespace to make your regular expressions more readable.
+- **Combine Flags**: You can combine multiple flags using the bitwise OR operator (`|`).
+
+## Case-Insensitive Matching 🔠
+
+To make a compiled regex case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+compiled_regex = re.compile(r'[$"\'\n\d/\\]', re.IGNORECASE)
+```
+
+This will make the regex match patterns regardless of case.
+
+### Explanation:
+1. **`import re`**: This line imports the regular expression library in Python.
+2. **`regex_pattern`**: The regular expression pattern provided as a raw string, spread across multiple lines with comments.
+3. **`re.compile()`**: Compiles the regular expression pattern into a regex object with all the matching modes enabled.
+4. **`example_text`**: Example text to demonstrate the pattern matching.
+5. **`compiled_regex.findall()`**: Finds all matches in the example text.
+6. **`print()`**: Prints the matches found in the text.
