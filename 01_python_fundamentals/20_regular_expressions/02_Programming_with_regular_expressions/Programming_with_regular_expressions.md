@@ -110,3 +110,77 @@ print("Matches found:", matches)
 6. **`print()`**: Prints the matches found in the text.
 
 ---
+## Problem 3.2 🚩
+# Importing the Regular Expression Library ✨
+To be able to use regular expressions in your application, you want to import the regular expression library or namespace into your source code.
+
+This exercise helps us understand how to prepare our code for using regular expressions by importing the necessary libraries. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To use regular expressions in Python, we can import the `re` module, which provides support for working with regular expressions.
+
+### Example in Python:
+
+```python
+# Importing the regular expression library
+import re
+
+# String constant representing the regular expression
+regex_pattern = r'[$"\'\n\d/\\]'
+
+# Compiling the regular expression
+compiled_regex = re.compile(regex_pattern)
+
+# Example text to search within
+example_text = 'Here is a test string: $ " \' \n 5 / \\'
+
+# Performing the match
+matches = compiled_regex.findall(example_text)
+
+# Printing the matches
+print("Matches found:", matches)
+```
+
+🧐 Here’s what this means:
+
+- **Importing the Library** 🛡️: We import the `re` module using `import re`. This makes the functions and classes in the `re` module available for use in our code.
+- **Using Regular Expressions**: Once the library is imported, we can use functions like `re.compile()` to create regex objects and methods like `findall()` to search for matches in text.
+
+## Explanation 🌟
+
+### Why Import Libraries?
+
+Libraries provide pre-written code that helps you accomplish common tasks without having to write everything from scratch. In the case of regular expressions, the `re` module in Python provides functions to create, compile, and work with regular expressions efficiently.
+
+### Example:
+
+If we want to search for the string `[$"'\n\d/\\]`, we use the regex as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Start Simple**: Begin with simple regular expressions and gradually move to more complex ones.
+- **Practice**: Regular expressions can be tricky. Practice by writing and testing different patterns.
+
+## Case-Insensitive Matching 🔠
+
+Regular expressions are **case-sensitive** by default. To make them case-insensitive, you can use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+compiled_regex = re.compile(r'pattern', re.IGNORECASE)
+```
+
+This will make the regex match patterns regardless of case.
+
+### Explanation:
+1. **`import re`**: This line imports the regular expression library in Python.
+2. **`regex_pattern`**: The regular expression pattern provided as a raw string.
+3. **`re.compile()`**: Compiles the regular expression pattern into a regex object.
+4. **`example_text`**: Example text to demonstrate the pattern matching.
+5. **`compiled_regex.findall()`**: Finds all matches in the example text.
+6. **`print()`**: Prints the matches found in the text.
+
+---
