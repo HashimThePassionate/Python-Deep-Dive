@@ -1519,3 +1519,85 @@ This ensures the regex correctly matches HTML tags and their content regardless 
    - `print("Original text:", example_text)`
    - `print("Modified text:", result_text)`
    - These lines print the original and modified strings to show the effect of the replacement.
+---
+# Problem 3.16 🚩
+
+## Splitting a String with Regular Expressions ✨
+You want to split a string using a regular expression. After the split, you will have an array or list of strings with the text between the regular expression matches. For example, you want to split a string with HTML tags in it along the HTML tags. Splitting `I●like●<b>bold</b>●and●<i>italic</i>●fonts` should result in an array of five strings: `I●like●`, `bold`, `●and●`, `italic`, and `●fonts`.
+
+This exercise helps us understand how to use regular expressions to split a string into parts based on a pattern. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will use the `re.split()` function from Python's `re` module. This function splits the string by the occurrences of the pattern and includes the matches in the resulting list.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression pattern to match HTML tags
+html_tag_pattern = re.compile(r'<[^>]+>')
+
+# The text we want to split
+example_text = 'I●like●<b>bold</b>●and●<i>italic</i>●fonts'
+
+# Using re.split() to split the text along HTML tags
+result_list = html_tag_pattern.split(example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Split list:", result_list)
+```
+
+🧐 Here’s what this means:
+
+- **`html_tag_pattern`** 🛡️: This regex pattern matches HTML tags. The `[^>]+` matches any sequence of characters that are not `>`, ensuring we match an entire HTML tag.
+- **`re.split()`**: This function splits the string by the occurrences of the pattern and includes the matches in the resulting list.
+
+## Explanation 🌟
+
+### Why Use `re.split()`?
+
+The `re.split()` function is useful for splitting a string into parts based on a pattern. It returns a list of the substrings between the matches, and if the pattern contains capturing groups, the matches themselves are included in the list.
+
+### Example:
+
+If we want to split the string `I●like●<b>bold</b>●and●<i>italic</i>●fonts` along the HTML tags, we use the regex pattern to match the HTML tags and the `re.split()` function to perform the split.
+
+## Tips for Beginners 🐣
+
+- **Understand the Pattern**: Make sure you understand the regex pattern you are using. Test it separately to ensure it matches the parts you want to split by.
+- **Visualize the Result**: Use tools like regex101.com to visualize how your pattern works and what it matches.
+
+## Case-Insensitive Matching 🔠
+
+To make the pattern case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+html_tag_pattern = re.compile(r'<[^>]+>', re.IGNORECASE)
+```
+
+This ensures the regex correctly matches HTML tags regardless of case.
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Pattern**:
+   - `html_tag_pattern = re.compile(r'<[^>]+>')`
+     - This pattern matches HTML tags. The `[^>]+` matches any sequence of characters that are not `>`, ensuring we match an entire HTML tag.
+
+3. **Example Text**:
+   - `example_text = 'I●like●<b>bold</b>●and●<i>italic</i>●fonts'`
+   - This is the string we want to split along the HTML tags.
+
+4. **Using `re.split()` to Split the Text**:
+   - `result_list = html_tag_pattern.split(example_text)`
+   - This function splits the string by the occurrences of the pattern and includes the matches in the resulting list.
+
+5. **Printing the Result**:
+   - `print("Original text:", example_text)`
+   - `print("Split list:", result_list)`
+   - These lines print the original text and the resulting list of substrings to show the effect of the split.
