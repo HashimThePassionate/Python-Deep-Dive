@@ -1602,7 +1602,7 @@ This ensures the regex correctly matches HTML tags regardless of case.
    - `print("Split list:", result_list)`
    - These lines print the original text and the resulting list of substrings to show the effect of the split.
 ---
-# Problem 1.18 🚩
+# Problem 3.17 🚩
 
 ## Retrieving and Filtering Matches Based on Additional Criteria ✨
 
