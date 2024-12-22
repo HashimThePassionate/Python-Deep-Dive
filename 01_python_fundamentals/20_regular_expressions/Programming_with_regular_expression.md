@@ -1032,7 +1032,7 @@ This ensures the regex correctly matches bold tags and their content regardless 
    - `print("Numbers found within bold sections:", numbers_in_bold)`
    - This prints the list of all numbers found within bold sections.
 ---
-# Problem 3.13 🚩
+# Problem 3.12 🚩
 
 ## Performing a Search-and-Replace with Capturing Groups ✨
 You want to run a search-and-replace that reinserts parts of the regex match back into the replacement. The parts you want to reinsert have been isolated in your regular expression using capturing groups. For example, you want to match pairs of words delimited by an equals sign, and swap those words in the replacement.
@@ -1139,7 +1139,7 @@ This will make the regex match patterns regardless of case.
    - `print("Modified text:", result_text)`
    - These lines print the original and modified strings to show the effect of the replacement.
 ---
-# Problem 3.14 🚩
+# Problem 3.13 🚩
 
 ## Replacing Matches with Procedural Code ✨
 You want to replace all matches of a regular expression with a new string that you build up in procedural code. You want to be able to replace each match with a different string, based on the text that was actually matched. For example, suppose you want to replace all numbers in a string with the number multiplied by two.
@@ -1254,7 +1254,7 @@ This will make the regex match patterns regardless of case.
    - `print("Modified text:", result_text)`
    - These lines print the original and modified strings to show the effect of the replacement.
 ---
-# Problem 3.15 🚩
+# Problem 3.14 🚩
 
 ## Search-and-Replace within Certain Sections of a String ✨
 You want to replace all matches of a particular regular expression, but only within certain sections of the subject string. Another regular expression matches each of the sections in the string. Say you have an HTML file in which various passages are marked as bold with `<b>` tags. Between each pair of bold tags, you want to replace all matches of the regular expression `before` with the replacement text `after`. For example, when processing the string `before <b>first before</b> before <b>before before</b>`, you want to end up with: `before <b>first after</b> before <b>after after</b>`.
