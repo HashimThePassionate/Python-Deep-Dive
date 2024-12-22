@@ -1139,3 +1139,117 @@ This will make the regex match patterns regardless of case.
    - `print("Modified text:", result_text)`
    - These lines print the original and modified strings to show the effect of the replacement.
 ---
+# Problem 3.14 🚩
+
+## Replacing Matches with Procedural Code ✨
+You want to replace all matches of a regular expression with a new string that you build up in procedural code. You want to be able to replace each match with a different string, based on the text that was actually matched. For example, suppose you want to replace all numbers in a string with the number multiplied by two.
+
+This exercise helps us understand how to use regular expressions with a custom replacement function to perform complex replacements. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will use the `re.sub()` function with a custom replacement function. The replacement function will be called for each match, allowing us to replace each match with a different string based on the matched text.
+
+### Example in Python:
+
+```python
+import re
+
+# Custom replacement function
+def multiply_by_two(match):
+    # Extract the matched text (a number)
+    number = int(match.group())
+    # Multiply the number by two
+    return str(number * 2)
+
+# Regular expression pattern to find numbers
+pattern = r'\d+'
+
+# The text in which we want to replace the numbers
+example_text = 'The numbers are 1, 2, 3, 4, and 5.'
+
+# Using re.sub() with the custom replacement function
+result_text = re.sub(pattern, multiply_by_two, example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Modified text:", result_text)
+```
+
+🧐 Here’s what this means:
+
+- **Custom Replacement Function**: `multiply_by_two` takes a match object, extracts the matched text (a number), multiplies it by two, and returns the result as a string.
+- **`re.sub()` with Custom Function**: The `re.sub()` function is called with the pattern, the custom replacement function, and the original text. For each match, the replacement function is called to determine the replacement string.
+
+## Explanation 🌟
+
+### Why Use a Custom Replacement Function?
+
+A custom replacement function allows us to perform complex replacements based on the matched text. This is useful when the replacement logic depends on the content of the match, such as modifying numbers, formatting text, or applying transformations.
+
+### Example:
+
+If we want to replace all numbers in the string "The numbers are 1, 2, 3, 4, and 5." with the number multiplied by two, we use a custom replacement function `multiply_by_two` to achieve this.
+
+## Tips for Beginners 🐣
+
+- **Understand Match Objects**: The match object passed to the replacement function contains useful methods like `group()`, `start()`, and `end()`. Familiarize yourself with these methods to effectively work with matches.
+- **Test Your Functions**: Test your replacement function separately to ensure it works correctly before integrating it with `re.sub()`.
+
+## Case-Insensitive Matching 🔠
+
+To make the replacement case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Custom replacement function
+def multiply_by_two(match):
+    # Extract the matched text (a number)
+    number = int(match.group())
+    # Multiply the number by two
+    return str(number * 2)
+
+# Compiling the regular expression with case insensitivity
+pattern = re.compile(r'\d+', re.IGNORECASE)
+
+# The text in which we want to replace the numbers
+example_text = 'The numbers are 1, 2, 3, 4, and 5.'
+
+# Using re.sub() with the custom replacement function
+result_text = pattern.sub(multiply_by_two, example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Modified text:", result_text)
+```
+
+This will make the regex match patterns regardless of case.
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Custom Replacement Function**:
+   - `def multiply_by_two(match):`
+     - A function that takes a match object as an argument.
+     - `number = int(match.group())`: Extracts the matched text and converts it to an integer.
+     - `return str(number * 2)`: Multiplies the number by two and returns the result as a string.
+
+3. **Defining the Regular Expression Pattern**:
+   - `pattern = r'\d+'`
+     - This pattern matches sequences of digits (`\d+`).
+
+4. **Example Text**:
+   - `example_text = 'The numbers are 1, 2, 3, 4, and 5.'`
+   - This is the string where we want to replace the numbers.
+
+5. **Using `re.sub()` with Custom Function**:
+   - `result_text = re.sub(pattern, multiply_by_two, example_text)`
+   - This function searches for the pattern in the string and replaces each occurrence with the result of the custom replacement function.
+
+6. **Printing the Result**:
+   - `print("Original text:", example_text)`
+   - `print("Modified text:", result_text)`
+   - These lines print the original and modified strings to show the effect of the replacement.
