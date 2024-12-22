@@ -339,3 +339,88 @@ This will make the regex match patterns regardless of case.
 4. **`example_text`**: Example text to demonstrate the pattern matching.
 5. **`compiled_regex.findall()`**: Finds all matches in the example text.
 6. **`print()`**: Prints the matches found in the text.
+
+---
+# Problem 3.5   Test If a Match Can Be Found Within a Subject String  🚩
+## Checking for a Partial Match with Regular Expressions ✨
+You want to check whether a match can be found for a particular regular expression in a particular string. A partial match is sufficient. For instance, the regex `regex pattern` partially matches the string "The regex pattern can be found." You don’t care about any of the details of the match. You just want to know whether the regex matches the string.
+
+This exercise helps us understand how to use regular expressions to check for partial matches within a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To check for a partial match in Python, we can use the `re.search()` function. This function scans through a string, looking for any location where the regular expression pattern produces a match.
+
+### Example in Python:
+
+```python
+import re
+
+# String constant representing the regular expression
+regex_pattern = r'regex pattern'
+
+# The text in which we want to search for the pattern
+example_text = 'The regex pattern can be found.'
+
+# Performing the search
+match = re.search(regex_pattern, example_text)
+
+# Checking if a match was found
+if match:
+    print("Match found! ✅")
+else:
+    print("No match found. ❌")
+```
+
+🧐 Here’s what this means:
+
+- **`re.search()`** 🛡️: Searches the string for a match to the regular expression pattern. It returns a match object if a match is found and `None` if no match is found.
+- **Checking the Match**: By checking if the `match` object is not `None`, we can determine if a partial match was found.
+
+## Explanation 🌟
+
+### Why Use `re.search()`?
+
+The `re.search()` function is useful for checking if a pattern exists anywhere in the string, not just at the beginning. It allows for more flexible matching compared to `re.match()`, which only checks for matches at the start of the string.
+
+### Example:
+
+If we want to search for the pattern `regex pattern` in the string "The regex pattern can be found.", we use `re.search()` as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Understand the Difference**: `re.search()` looks for the pattern anywhere in the string, while `re.match()` only looks at the start.
+- **Check the Result**: Always check if the result of `re.search()` is not `None` to confirm a match was found.
+
+## Case-Insensitive Matching 🔠
+
+To make the search case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+regex_pattern = re.compile(r'regex pattern', re.IGNORECASE)
+
+# The text in which we want to search for the pattern
+example_text = 'The REGEX pattern can be found.'
+
+# Performing the search
+match = re.search(regex_pattern, example_text)
+
+# Checking if a match was found
+if match:
+    print("Match found! ✅")
+else:
+    print("No match found. ❌")
+```
+
+This will make the regex match patterns regardless of case.
+
+### Explanation:
+1. **`import re`**: This line imports the regular expression library in Python.
+2. **`regex_pattern`**: The regular expression pattern provided as a raw string.
+3. **`re.search()`**: Searches the string for a match to the regular expression pattern.
+4. **`example_text`**: Example text to demonstrate the pattern matching.
+5. **Checking the Match**: Determines if a match was found by checking if the `match` object is not `None`.
+6. **`print()`**: Prints whether a match was found or not.
