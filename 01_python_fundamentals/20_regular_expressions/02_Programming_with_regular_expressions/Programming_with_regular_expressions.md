@@ -1,4 +1,4 @@
-## Problem 1.2 🚩
+## Problem 3.1 🚩
 # Hardcoding Regular Expression into Source Code ✨
 You have been given the regular expression `[$"'\n\d/\\]` as the solution to a problem. This regular expression consists of a single character class that matches a dollar sign, a double quote, a single quote, a line feed, any digit between 0 and 9, a forward slash, or a backslash. You want to hardcode this regular expression into your source code as a string constant or regular expression operator.
 
