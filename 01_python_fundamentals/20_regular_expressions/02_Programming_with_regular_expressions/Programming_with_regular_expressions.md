@@ -693,3 +693,82 @@ This will make the regex match patterns regardless of case.
 5. **`start()` and `end()` Methods**: Used to get the starting and ending positions of the match.
 6. **Calculating Length**: Determines the length of the match by subtracting the start position from the end position.
 7. **`print()`**: Prints the starting position and length of the match or indicates if no match was found.
+
+---
+# Problem 3.9  Retrieve a List of All Matches  🚩
+
+## Retrieving All Matches with Regular Expressions ✨
+All the preceding recipes in this chapter deal only with the first match that a regular expression can find in the subject string. But in many cases, a regular expression that partially matches a string can find another match in the remainder of the string. And there may be a third match after the second, and so on. For example, the regex `\d+` can find six matches in the subject string "The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99." You want to retrieve the list of all substrings that the regular expression finds when it is applied repeatedly to the remainder of the string, after each match.
+
+This exercise helps us understand how to use regular expressions to find all matches within a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To retrieve all matches in Python, we can use the `re.findall()` function. This function returns a list of all matches found in the string.
+
+### Example in Python:
+
+```python
+import re
+
+# String constant representing the regular expression
+regex_pattern = r'\d+'
+
+# The text in which we want to search for the pattern
+example_text = 'The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99.'
+
+# Finding all matches
+matches = re.findall(regex_pattern, example_text)
+
+# Printing all matches
+print("Matches found:", matches)
+```
+
+🧐 Here’s what this means:
+
+- **`re.findall()`** 🛡️: Searches the string for all matches to the regular expression pattern and returns them as a list of strings.
+- **Retrieving All Matches**: By using `re.findall()`, we can easily retrieve all instances of the pattern within the string.
+
+## Explanation 🌟
+
+### Why Use `re.findall()`?
+
+The `re.findall()` function is useful for retrieving all occurrences of a pattern within a string. It simplifies the process of extracting multiple matches, making it easy to work with repeating patterns.
+
+### Example:
+
+If we want to find all numbers (`\d+`) in the string "The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99.", we use `re.findall()` as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Use `findall()` for Multiple Matches**: When you need to find all occurrences of a pattern, `re.findall()` is the most straightforward method.
+- **Check the Result**: The result is a list of strings, where each string is a match found in the text.
+
+## Case-Insensitive Matching 🔠
+
+To make the search case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+regex_pattern = re.compile(r'\d+', re.IGNORECASE)
+
+# The text in which we want to search for the pattern
+example_text = 'The lucky numbers are 7, 13, 16, 42, 65, and 99: 7, 13, 16, 42, 65, and 99.'
+
+# Finding all matches
+matches = regex_pattern.findall(example_text)
+
+# Printing all matches
+print("Matches found:", matches)
+```
+
+This will make the regex match patterns regardless of case.
+
+### Explanation:
+1. **`import re`**: This line imports the regular expression library in Python.
+2. **`regex_pattern`**: The regular expression pattern provided as a raw string.
+3. **`re.findall()`**: Searches the string for all matches to the regular expression pattern and returns them as a list of strings.
+4. **`example_text`**: Example text to demonstrate the pattern matching.
+5. **Printing Matches**: Prints the list of all matches found in the text.
