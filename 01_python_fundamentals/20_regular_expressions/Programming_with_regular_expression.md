@@ -1370,3 +1370,152 @@ This ensures the regex correctly matches bold tags and their content regardless 
    - `print("Original text:", example_text)`
    - `print("Modified text:", result_text)`
    - These lines print the original and modified strings to show the effect of the replacement.
+---
+# Problem 3.15 🚩
+
+##  Replace All Matches Between the Matches of Another Regex ✨
+
+You want to replace all matches of a particular regular expression, but only within certain sections of the subject string. Another regular expression matches the text between the sections. In other words, you want to search and replace through all parts of the subject string not matched by the other regular expression. Say you have an HTML file in which you want to replace straight double quotes with smart (curly) double quotes, but you only want to replace the quotes outside of HTML tags. Quotes within HTML tags must remain plain ASCII straight quotes, or your web browser won’t be able to parse the HTML anymore. For example, you want to turn `"text" <span class="middle">"text"</span> "text"` into `“text” <span class="middle">"text"</span> “text”`.
+
+This exercise helps us understand how to apply regular expressions to specific sections of a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To achieve this, we will use two regular expressions:
+1. One to find the sections matched by HTML tags (`<[^>]+>`).
+2. Another to find and replace the target pattern (straight quotes) outside these sections.
+
+We'll use the `re.sub()` function to perform the replacements outside the HTML tags.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression to find HTML tags
+html_tag_pattern = re.compile(r'<[^>]+>')
+
+# Regular expression to find straight double quotes
+quote_pattern = re.compile(r'"')
+
+# Replacement text for smart quotes
+left_smart_quote = '“'
+right_smart_quote = '”'
+
+# The text in which we want to replace the quotes
+example_text = '"text" <span class="middle">"text"</span> "text"'
+
+# Function to replace quotes outside of HTML tags
+def replace_quotes_outside_html(text):
+    segments = []
+    last_end = 0
+    
+    # Iterate over all HTML tags
+    for match in html_tag_pattern.finditer(text):
+        start, end = match.span()
+        
+        # Process the text segment before the HTML tag
+        segment_before_tag = text[last_end:start]
+        segment_before_tag = quote_pattern.sub(left_smart_quote, segment_before_tag, 1)
+        segment_before_tag = quote_pattern.sub(right_smart_quote, segment_before_tag)
+        segments.append(segment_before_tag)
+        
+        # Add the HTML tag itself unchanged
+        segments.append(text[start:end])
+        
+        # Update the position for the next iteration
+        last_end = end
+    
+    # Process the remaining text segment after the last HTML tag
+    remaining_segment = text[last_end:]
+    remaining_segment = quote_pattern.sub(left_smart_quote, remaining_segment, 1)
+    remaining_segment = quote_pattern.sub(right_smart_quote, remaining_segment)
+    segments.append(remaining_segment)
+    
+    # Join all segments back into a single string
+    return ''.join(segments)
+
+# Using the custom function to replace quotes
+result_text = replace_quotes_outside_html(example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Modified text:", result_text)
+```
+
+🧐 Here’s what this means:
+
+- **`html_tag_pattern`** 🛡️: This regex pattern finds HTML tags. The `[^>]+` matches any sequence of characters that are not `>`, ensuring we match an entire HTML tag.
+- **`quote_pattern`**: This regex pattern finds instances of straight double quotes (`"`).
+- **`replace_quotes_outside_html()` Function**: This function takes the entire text, processes it to replace quotes outside of HTML tags, and returns the modified text.
+- **`re.sub()` with Custom Function**: The `re.sub()` function is called with the quote pattern and replacement text to replace quotes outside of HTML tags.
+
+## Explanation 🌟
+
+### Why Use Two Regular Expressions?
+
+Using two regular expressions allows us to first isolate the sections of interest (HTML tags) and then apply a second regex to find and replace specific patterns outside those sections. This approach is modular and can be adapted to various scenarios where nested pattern matching and replacement are required.
+
+### Example:
+
+If we want to replace all instances of straight double quotes with smart quotes outside of HTML tags in the string `"text" <span class="middle">"text"</span> "text"`, we use the two regex patterns and a custom replacement function to achieve this.
+
+## Tips for Beginners 🐣
+
+- **Understand Nested Matching**: Breaking down the problem into smaller regex tasks (finding sections and then finding patterns within sections) makes it easier to manage.
+- **Test Your Patterns**: Use tools like regex101.com to test and visualize your regex patterns and replacements.
+
+## Case-Insensitive and Dotall Matching 🔠
+
+To make the regex case-insensitive and allow `.` to match newline characters, use the `re.IGNORECASE` and `re.DOTALL` flags:
+
+```python
+html_tag_pattern = re.compile(r'<[^>]+>', re.IGNORECASE | re.DOTALL)
+```
+
+This ensures the regex correctly matches HTML tags and their content regardless of case and newline characters.
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Patterns**:
+   - `html_tag_pattern = re.compile(r'<[^>]+>')`
+     - This pattern matches HTML tags. The `[^>]+` matches any sequence of characters that are not `>`.
+   - `quote_pattern = re.compile(r'"')`
+     - This pattern matches straight double quotes (`"`).
+
+3. **Defining the Replacement Text**:
+   - `left_smart_quote = '“'`: This is the left smart (curly) quote.
+   - `right_smart_quote = '”'`: This is the right smart (curly) quote.
+
+4. **Example Text**:
+   - `example_text = '"text" <span class="middle">"text"</span> "text"'`
+   - This is the string where we want to replace the straight double quotes with smart quotes, but only outside of HTML tags.
+
+5. **Custom Replacement Function**:
+   - `replace_quotes_outside_html(text)`: This function takes the entire text as an argument and processes it to replace quotes outside of HTML tags.
+   - `segments = []`: An empty list to store the segments of the text.
+   - `last_end = 0`: A variable to keep track of the end position of the last processed segment.
+   - `for match in html_tag_pattern.finditer(text)`: This loop iterates over all HTML tags found in the text.
+   - `start, end = match.span()`: These variables store the start and end positions of the current HTML tag.
+   - `segment_before_tag = text[last_end:start]`: This extracts the text segment before the current HTML tag.
+   - `segment_before_tag = quote_pattern.sub(left_smart_quote, segment_before_tag, 1)`: Replaces the first straight quote with the left smart quote.
+   - `segment_before_tag = quote_pattern.sub(right_smart_quote, segment_before_tag)`: Replaces the remaining straight quotes with the right smart quote.
+   - `segments.append(segment_before_tag)`: Adds the processed segment before the tag to the list.
+   - `segments.append(text[start:end])`: Adds the HTML tag itself unchanged to the list.
+   - `last_end = end`: Updates the end position for the next iteration.
+   - `remaining_segment = text[last_end:]`: Processes the remaining text segment after the last HTML tag.
+   - `remaining_segment = quote_pattern.sub(left_smart_quote, remaining_segment, 1)`: Replaces the first straight quote with the left smart quote.
+   - `remaining_segment = quote_pattern.sub(right_smart_quote, remaining_segment)`: Replaces the remaining straight quotes with the right smart quote.
+   - `segments.append(remaining_segment)`: Adds the processed remaining segment to the list.
+   - `return ''.join(segments)`: Joins all segments back into a single string and returns the result.
+
+6. **Using the Custom Function to Replace Quotes**:
+   - `result_text = replace_quotes_outside_html(example_text)`: Calls the custom function with the example text to get the modified text.
+
+7. **Printing the Result**:
+   - `print("Original text:", example_text)`
+   - `print("Modified text:", result_text)`
+   - These lines print the original and modified strings to show the effect of the replacement.
