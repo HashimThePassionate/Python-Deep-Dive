@@ -226,7 +226,7 @@ def test_first_last_name():
 Open your terminal, navigate to the directory containing `test_name_function.py`, and run:
 
 ```bash
-pytest
+python -m pytest
 ```
 
 **Sample Output**:
