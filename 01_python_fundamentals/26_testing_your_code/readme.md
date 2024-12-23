@@ -317,7 +317,7 @@ def get_formatted_name(first, middle, last):
 ### 🛠️ Run the Test Again
 
 ```bash
-pytest
+python -m pytest
 ```
 
 **Sample Output**:
@@ -408,7 +408,7 @@ def get_formatted_name(first, last, middle=''):
 ### 🛠️ Run the Test Again
 
 ```bash
-pytest
+python -m pytest
 ```
 
 **Sample Output**:
@@ -474,7 +474,7 @@ def test_first_last_middle_name():
 ### 🛠️ Step 2: Run All Tests
 
 ```bash
-pytest
+python -m pytest
 ```
 
 **Sample Output**:
