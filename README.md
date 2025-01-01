@@ -43,7 +43,7 @@ The sections on **Data Structures**, **Algorithms**, **Design Patterns**,**Pytho
 
 ## 📜 License
 
-This repository is licensed under the MIT License. Feel free to use the code and resources in this repository according to the terms of the license.
+This repository is licensed under the [MIT License](./LICENSE). Feel free to use the code and resources in this repository according to the terms of the license.
 
 ## 💬 Feedback
 
