@@ -69,6 +69,8 @@ Welcome to the **Factory Design Pattern** guide! 🚀 This document provides an 
 
 The **Factory Design Pattern** is one of the fundamental creational design patterns described by the Gang of Four (GoF) in their seminal book on design patterns. 🛡️ It provides a way to encapsulate object creation logic, allowing clients to create objects without specifying the exact class of the object that will be created. This promotes loose coupling and enhances the flexibility and maintainability of your codebase. 📈
 
+> [**Before Understand Complex Example Learn Simple Example**](./simple.md)
+
 ### 📌 Why Use the Factory Pattern?
 
 - **Encapsulation of Object Creation**: Centralizes object creation, making it easier to manage and modify.
