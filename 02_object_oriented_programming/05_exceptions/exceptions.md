@@ -175,7 +175,6 @@ Imagine you're in a building (your program), and a fire (exception) breaks out. 
        # Handle file not found
        pass
 
-   -----------------------------------------------------------------------------------------
       # Real Example using if else
       import os
       file_name = "file.txt"
@@ -191,7 +190,7 @@ Imagine you're in a building (your program), and a fire (exception) breaks out. 
               print("Error: Unable to open the file.")  # Handle failure to open
       else:
           print("Error: File not found.")  # Handle file not existing
-----------------------------------------------------------------------------------------------
+
    # With exceptions
    try:
        # Read file
