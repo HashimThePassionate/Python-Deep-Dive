@@ -48,7 +48,7 @@ def main():
     keywords = ("python", "programming", "scripting", "data", "automation")
 
     site1 = Website(
-        "Python",
+        name="Python",
         domain="python.org",
         description="Programming language and ecosystem",
         category="Open Source Software",
