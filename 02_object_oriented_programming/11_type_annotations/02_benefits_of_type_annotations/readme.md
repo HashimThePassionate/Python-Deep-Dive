@@ -79,21 +79,35 @@ mypy example.py
 ## **Exercise: Spot the Bug** 🔍🐞
 
 Here are some examples where typecheckers can catch bugs. Let’s see if you can spot the issues! 💡
+## 📌 Overview
+This script demonstrates an **encoding mismatch** when reading an **ISO-8859-1 encoded** file as **UTF-8**, causing a **UnicodeDecodeError**.
 
-### **Example 1: Reading a File**
-**Incorrect Code:**
+## 🔍 Issue
+- **File written in ISO-8859-1**.
+- **Read as UTF-8**, causing decoding failure.
+
+## 📝 Code
+### **Incorrect Approach** (Raises Error)
 ```python
-# Function to read a file and reverse its content
-def read_file_and_reverse_it(filename: str) -> str:
-    with open(filename, "rb") as f:
-        return f.read().decode("utf-8")[::-1]  # Corrected from earlier
+with open("example.txt", "w", encoding="iso-8859-1") as f:
+    f.write("Héllo Wørld! ñ ü ß")
 
-# Function call
-print(read_file_and_reverse_it("example.txt"))
+def read_file(filename):
+    with open(filename, "rb") as f:
+        return f.read().decode("utf-8")[::-1]  # ❌ Error
+print(read_file("example.txt"))
+```
+🚨 **Error:**
+```
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9...
 ```
 
-**Explanation:** 
-We read the file in binary mode (`rb`) and then **decode** it to convert the bytes into a string. Earlier, we mistakenly used `.encode()`, which would not work because the data was already in bytes form. 
+## ✅ **Solution**
+Use the correct encoding:
+```python
+with open("example.txt", "r", encoding="iso-8859-1") as f:
+    print(f.read()[::-1])  # ✅ Correct
+```
 
 ### **Example 2: Doubling Values in a List**
 **Incorrect Code:**
