@@ -89,6 +89,29 @@ textbox.set_text("Muhammad Hashim")
 print(textbox)  # Output: "Muhammad Hashim" (shows TextBox's text attribute)
 ```
 
+### Class Diagram:
+```mermaid
+classDiagram
+    class UIControl {
+        - _is_enabled: bool
+        + UIControl(is_enabled: bool)
+        + enable(): void
+        + disable(): void
+        + is_enabled(): bool
+        + __str__(): str
+    }
+
+    class TextBox {
+        - text: str
+        + TextBox()
+        + set_text(text: str): void
+        + clear(): void
+        + __str__(): str
+    }
+
+    UIControl <|-- TextBox
+```
+
 #### Explanation
 
 1. **Inheritance**: `TextBox` inherits all methods and attributes of `UIControl`.
