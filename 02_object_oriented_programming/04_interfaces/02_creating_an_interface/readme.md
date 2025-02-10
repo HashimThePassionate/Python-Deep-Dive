@@ -96,6 +96,22 @@ calculator_24 = TaxCalculator24(income)
 display_tax(calculator_24)  # Output: Calculated Tax based on 30%
 ```
 
+## Diagram:
+```mermaid
+classDiagram
+    class TaxCalculator {
+        + calculate_tax() <<abstract>>
+    }
+
+    class TaxCalculator24 {
+        - taxable_income: float
+        + TaxCalculator24(taxable_income: float)
+        + calculate_tax(): float
+    }
+
+    TaxCalculator <|-- TaxCalculator24
+```
+
 ## 🎯 Conclusion
 
 Using interfaces enables flexible, modular, and reusable code. By defining abstract methods and creating multiple implementations, you can write code that’s both adaptable and easy to maintain! 🎉
