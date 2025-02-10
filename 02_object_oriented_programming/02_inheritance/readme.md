@@ -34,6 +34,22 @@ Welcome to a comprehensive guide on **Inheritance in Python**! Inheritance is a 
 
 Inheritance enables a **child class** to inherit attributes and methods from a **parent class**. It allows us to extend or customize the functionality of the parent class, fostering efficient code reuse.
 
+###  Graphical Representation:
+
+```mermaid
+classDiagram
+    class Animal {
+        + speak(): str
+    }
+
+    class Dog {
+        + bark(): str
+    }
+
+    Animal <|-- Dog
+```
+
+
 #### Example
 
 ```python
@@ -64,46 +80,102 @@ Python supports various types of inheritance structures:
 
 #### Examples
 
-```python
-# Single Inheritance
-class Animal:
-    pass
+###  Single Inheritance:
+```mermaid
+classDiagram
+    class Animal {
+        - name: str
+        - age: int
+        + make_sound(): void
+        + eat(): void
+    }
 
-class Dog(Animal):
-    pass
+    class Dog {
+        - breed: str
+        + bark(): void
+        + fetch(): void
+    }
 
-# Multiple Inheritance
-class Mammal:
-    pass
-
-class Swimmer:
-    pass
-
-class Dolphin(Mammal, Swimmer):
-    pass
-
-# Multilevel Inheritance
-class Organism:
-    pass
-
-class Animal(Organism):
-    pass
-
-class Dog(Animal):
-    pass
-
-# Hierarchical Inheritance
-class Animal:
-    pass
-
-class Dog(Animal):
-    pass
-
-class Cat(Animal):
-    pass
+    Animal <|-- Dog
 ```
 
----
+###  Multiple  Inheritance:
+```mermaid
+classDiagram
+    class Mammal {
+        - species: str
+        - lifespan: int
+        + breathe(): void
+        + give_birth(): void
+    }
+
+    class Swimmer {
+        + swim(): void
+        + dive(): void
+    }
+
+    class Dolphin {
+        - intelligence_level: int
+        + communicate(): void
+        + jump(): void
+    }
+
+    Mammal <|-- Dolphin
+    Swimmer <|-- Dolphin
+```
+
+# Multilevel Inheritance
+```mermaid
+classDiagram
+    class Organism {
+        - kingdom: str
+        + grow(): void
+        + reproduce(): void
+    }
+
+    class Animal {
+        - species: str
+        - diet: str
+        + move(): void
+        + make_sound(): void
+    }
+
+    class Dog {
+        - breed: str
+        - age: int
+        + bark(): void
+        + fetch(): void
+    }
+
+    Organism <|-- Animal
+    Animal <|-- Dog
+```
+
+# Hierarchical Inheritance
+```mermaid
+classDiagram
+    class Animal {
+        - species: str
+        - age: int
+        + eat(): void
+        + sleep(): void
+    }
+
+    class Dog {
+        - breed: str
+        + bark(): void
+        + fetch(): void
+    }
+
+    class Cat {
+        - color: str
+        + meow(): void
+        + scratch(): void
+    }
+
+    Animal <|-- Dog
+    Animal <|-- Cat
+```
 
 ### 💡 Inheritance in Django and FastAPI
 
