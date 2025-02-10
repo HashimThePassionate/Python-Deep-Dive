@@ -14,6 +14,50 @@ This guide provides a comprehensive look into **tightly coupled code**, focusing
   - [🚧 Drawbacks of Tight Coupling](#-drawbacks-of-tight-coupling)
   - [📜 Summary](#-summary)
 
+## 🔗 What is Tight Coupling?
+
+In object-oriented programming, **coupling** refers to the level of dependency between classes. **Tight coupling** occurs when one class depends heavily on another, making it hard to change one class without affecting the other.
+
+## Diagraam
+```mermaid
+classDiagram
+    class TaxCalculator {
+        - __taxable_income: float
+        + TaxCalculator(taxable_income: float)
+        + calculate_tax(): float
+    }
+
+    class TaxReport {
+        - __calculator: TaxCalculator
+        + TaxReport()
+        + show(): void
+    }
+
+    TaxReport *-- TaxCalculator
+```
+
+## Code
+```python
+class TaxCalculator:
+    def __init__(self, taxable_income: float):
+        self.__taxable_income = taxable_income
+
+    def calculate_tax(self) -> float:
+        return self.__taxable_income * 0.3
+
+class TaxReport:
+    def __init__(self):
+        self.__calculator = TaxCalculator(1000000)
+
+    def show(self):
+        tax = self.__calculator.calculate_tax()
+        print(tax)
+
+# Create an instance of TaxReport and show the tax
+report = TaxReport()
+report.show()
+```
+
 ## 🔍 Code Explanation
 
 ### Class `TaxCalculator`
@@ -63,10 +107,6 @@ The `TaxReport` class is responsible for generating and showing tax reports. It 
    report.show()
    ```
    - An instance of `TaxReport` is created, and `show` is called to display the calculated tax.
-
-## 🔗 What is Tight Coupling?
-
-In object-oriented programming, **coupling** refers to the level of dependency between classes. **Tight coupling** occurs when one class depends heavily on another, making it hard to change one class without affecting the other.
 
 In this example:
 - The `TaxReport` class is tightly coupled with `TaxCalculator` because it **directly creates an instance** of `TaxCalculator`.
