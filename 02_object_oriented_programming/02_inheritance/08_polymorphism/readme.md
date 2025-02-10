@@ -70,6 +70,26 @@ With duck typing, an object’s type is less important than the methods it imple
 
 Let’s explore polymorphism in action through Python examples.
 
+## Diagram
+```mermaid
+classDiagram
+    class Animal {
+        + speak(): void
+    }
+
+    class Dog {
+        + speak(): void
+    }
+
+    class Cat {
+        + speak(): void
+    }
+
+    Animal <|-- Dog
+    Animal <|-- Cat
+```
+
+
 ### 🚀 Method Overriding
 
 _Method overriding_ is when a subclass redefines a method from its superclass.
@@ -104,6 +124,19 @@ animal_sound(cat)  # Output: Meow!
 
 _Operator overloading_ allows us to define custom behavior for operators with user-defined classes.
 
+## Diagram
+```mermaid
+classDiagram
+    class Vector {
+        - x: int
+        - y: int
+        + Vector(x: int, y: int)
+        + __add__(other: Vector): Vector
+        + __repr__(): str
+    }
+```
+
+## Code
 ```python
 class Vector:
     def __init__(self, x, y):
@@ -129,6 +162,15 @@ print(v3)  # Output: Vector(7, 3)
 
 Functions in Python can handle various types of arguments due to polymorphism.
 
+## Diagram
+```mermaid
+classDiagram
+    class AddFunction {
+        + add(a, b): dynamic
+    }
+```
+
+## Default Polymorphism
 ```python
 def add(a, b):
     return a + b
@@ -143,6 +185,23 @@ print(add("Hello, ", "World!"))    # Output: Hello, World!
 
 An example of duck typing, where the type of the object is less relevant than the methods it implements.
 
+## Diagram
+```mermaid
+classDiagram
+    class Book {
+        - title: str
+        + Book(title: str)
+        + read(): void
+    }
+
+    class Magazine {
+        - title: str
+        + Magazine(title: str)
+        + read(): void
+    }
+```
+
+## Code 
 ```python
 class Book:
     def __init__(self, title):
@@ -175,6 +234,30 @@ start_reading(magazine)   # Output: You flip through the magazine 'National Geog
 ## 🌐 Real-World Examples
 
 Polymorphism is widely applied in real-world applications to improve flexibility and maintainability. Below, we illustrate file handling using polymorphism to work with different file types.
+
+### Diagram
+```mermaid
+classDiagram
+    class FileParser {
+        + parse(filepath: str) <<abstract>>
+    }
+
+    class CSVParser {
+        + parse(filepath: str): list
+    }
+
+    class JSONParser {
+        + parse(filepath: str): dict
+    }
+
+    class XMLParser {
+        + parse(filepath: str): list
+    }
+
+    FileParser <|-- CSVParser
+    FileParser <|-- JSONParser
+    FileParser <|-- XMLParser
+```
 
 ### 📄 File Handling with Different File Types
 
