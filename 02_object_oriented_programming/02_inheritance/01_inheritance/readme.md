@@ -26,6 +26,26 @@ In our example:
 
 ---
 
+### Class Diagram
+```mermaid
+classDiagram
+    class UIControl {
+        - is_enabled: bool
+        + enable(): void
+        + disable(): void
+        + is_enabled(): bool
+    }
+
+    class TextBox {
+        - text: str
+        + set_text(text: str): void
+        + get_text(): str
+        + clear(): void
+    }
+
+    UIControl <|-- TextBox
+```
+
 ### ⚙️ Code Example
 
 ```python
