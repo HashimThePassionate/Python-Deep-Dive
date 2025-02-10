@@ -106,6 +106,28 @@ Abstract classes shine in situations where multiple classes share a common struc
 
 A payment processing system needs to handle different payment methods like **Credit Cards** and **PayPal**. We want each payment method to have methods for **authentication** and **payment processing**.
 
+### Payment Processing System Diagram
+```mermaid
+classDiagram
+    class PaymentProcessor {
+        + authenticate() <<abstract>>
+        + pay(amount: float) <<abstract>>
+    }
+
+    class CreditCardProcessor {
+        + authenticate(): void
+        + pay(amount: float): void
+    }
+
+    class PayPalProcessor {
+        + authenticate(): void
+        + pay(amount: float): void
+    }
+
+    PaymentProcessor <|-- CreditCardProcessor
+    PaymentProcessor <|-- PayPalProcessor
+```
+
 #### Abstract Base Class
 
 ```python
@@ -163,6 +185,35 @@ process_payment(processor, 100.0)
 ### 🖥️ Example 2: UI Controls Framework
 
 A UI framework has different UI controls like **TextBox** and **CheckBox**. Each UI control needs to define a method for **rendering** itself on the screen.
+
+### UI Control Diagram
+```mermaid
+classDiagram
+    class UIControl {
+        - _is_enabled: bool
+        + UIControl()
+        + enable(): void
+        + disable(): void
+        + is_enabled(): bool
+        + render() <<abstract>>
+    }
+
+    class TextBox {
+        - _text: str
+        + TextBox()
+        + set_text(text: str): void
+        + clear(): void
+        + render(): void
+        + __str__(): str
+    }
+
+    class CheckBox {
+        + render(): void
+    }
+
+    UIControl <|-- TextBox
+    UIControl <|-- CheckBox
+```
 
 #### Abstract Base Class
 
