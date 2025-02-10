@@ -59,18 +59,17 @@ Consider a **TextBox** class that represents a graphical user interface (GUI) te
 
 #### 🖼️ Graphical Representation of TextBox Class
 
+```mermaid
+classDiagram
+    class TextBox {
+        - text: str
+        - size: int
+        + setText(text: str): void
+        + getText(): str
+        + setSize(size: int): void
+        + getSize(): int
+    }
 ```
-+----------------------------------+
-|            TextBox               |
-+----------------------------------+
-|    text: str                     | 
-|    size: int                     |
-+----------------------------------+
-|    setText(text: str): void      |
-|    getText(): str                |
-|    setSize(size: int): void      |
-|    getSize(): int                |
-+----------------------------------+
 ```
 
 #### 📋 Properties
