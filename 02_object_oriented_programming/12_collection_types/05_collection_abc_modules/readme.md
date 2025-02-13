@@ -72,6 +72,105 @@ class MyABC(ABC):
 
 Here, `my_method` is an abstract method that any subclass of `MyABC` **must** implement.
 
+### Collections ABCs Classes Diagram
+```mermaid
+classDiagram
+    class Container {
+        +__contains__(item) Yes
+    }
+
+    class Iterable {
+        +__iter__() Yes
+    }
+
+    class Sized {
+        +__len__() Yes
+    }
+
+    class Collection {
+        +__contains__(item) Yes
+        +__iter__() Yes
+        +__len__() Yes
+    }
+
+    class Sequence {
+        +__getitem__(index) Yes
+        +__len__() Yes
+        +__contains__(item) Inherited
+        +__iter__() Inherited
+        +__reversed__() Optional
+        +index(item) Optional
+        +count(item) Optional
+    }
+
+    class MutableSequence {
+        +__getitem__(index) Yes
+        +__len__() Yes
+        +__setitem__(index, val) Yes
+        +__delitem__(index) Yes
+        +insert(index, val) Yes
+        +append(item) Optional
+        +reverse() Optional
+        +extend(other) Optional
+        +pop([index]) Optional
+        +remove(item) Optional
+    }
+
+    class Set {
+        +__contains__(item) Yes
+        +__iter__() Yes
+        +__len__() Yes
+        +__and__(other) Optional
+        +__or__(other) Optional
+        +__sub__(other) Optional
+        +__xor__(other) Optional
+        +isdisjoint(other) Optional
+    }
+
+    class MutableSet {
+        +add(item) Yes
+        +discard(item) Yes
+        +__contains__(item) Inherited
+        +__iter__() Inherited
+        +__len__() Inherited
+        +clear() Optional
+        +pop() Optional
+    }
+
+    class Mapping {
+        +__getitem__(key) Yes
+        +__iter__() Yes
+        +__len__() Yes
+        +keys() Optional
+        +items() Optional
+        +values() Optional
+        +get(key, default) Optional
+    }
+
+    class MutableMapping {
+        +__setitem__(key, val) Yes
+        +__delitem__(key) Yes
+        +__getitem__(key) Inherited
+        +__iter__() Inherited
+        +__len__() Inherited
+        +pop(key) Optional
+        +popitem() Optional
+        +update([other]) Optional
+    }
+
+    Container <|-- Collection
+    Iterable <|-- Collection
+    Sized <|-- Collection
+
+    Collection <|-- Sequence
+    Collection <|-- Set
+    Collection <|-- Mapping
+
+    Sequence <|-- MutableSequence
+    Set <|-- MutableSet
+    Mapping <|-- MutableMapping
+```
+
 ### 📋 Collection ABCs and Their Methods
 
 | **ABC Class**         | **Method**               | **Description**                                                                                                                                                       | **Required?** |
