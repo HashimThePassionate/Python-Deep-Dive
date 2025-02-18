@@ -105,6 +105,341 @@ x = 3.14  # Now, a float object is created and x points to it
 
 <div align="center">
 
-# `New Section Starts here`
+# `New Section Basic Data Types`
 
 </div>
+
+# 📌 **Python Data Types**
+
+## 📖 Introduction
+Python is an **easy-to-learn, object-oriented** language with a rich set of built-in data types. These data types help developers store, manipulate, and process different kinds of data efficiently. Python's built-in types are categorized as follows:
+
+### 🔹 Principal Built-in Data Types:
+- **Numeric types**: `int`, `float`, `complex`
+- **Boolean type**: `bool`
+- **Sequence types**: `str` (string), `range`, `list`, `tuple`
+- **Mapping type**: `dict` (dictionary)
+- **Set types**: `set`, `frozenset`
+
+To make things simpler, we will divide these into:
+- **Basic Data Types**: Numeric, Boolean, and Sequence types
+- **Complex Data Types**: Mapping and Set types
+
+Each type will be explained in detail in subsequent sections. 🚀
+
+---
+
+## 🛠️ Basic Data Types
+### 🔢 Numeric Data Types
+Numeric data types store numerical values and include:
+
+#### 1️⃣ Integer (`int`)
+- Stores whole numbers, positive or negative, without a decimal point.
+- Examples:
+  ```python
+  num1 = 45
+  num2 = 1000
+  num3 = -25
+  print(type(num1))  # Output: <class 'int'>
+  ```
+
+#### 2️⃣ Float (`float`)
+- Stores decimal numbers and floating-point values.
+- Accurate up to **15 decimal places**.
+- Examples:
+  ```python
+  pi = 3.14159
+  price = 100.98
+  print(type(pi))  # Output: <class 'float'>
+  ```
+
+#### 3️⃣ Complex (`complex`)
+- Used to store **complex numbers** with a real and an imaginary part.
+- The imaginary part is denoted by `j` (not `i` like in mathematics).
+- Examples:
+  ```python
+  comp1 = 3.0 + 1.3j
+  comp2 = 4.0j
+  print(type(comp1))  # Output: <class 'complex'>
+  ```
+
+---
+
+### 🔘 Boolean Data Type (`bool`)
+The Boolean type represents **truth values**: `True` or `False`. It is used for decision-making and logic operations.
+
+- Any **non-zero** value is `True`.
+- `0` (zero) is `False`.
+- Examples:
+  ```python
+  print(type(bool(22)))  # Output: <class 'bool'>
+  print(type(True))      # Output: <class 'bool'>
+  print(type(False))     # Output: <class 'bool'>
+  ```
+
+#### ✅ Using Boolean with Numeric Types
+- The `bool()` function can be used to evaluate numeric values as `True` or `False`.
+- Examples:
+  ```python
+  print(bool(False))  # Output: False
+  val1 = 0
+  print(bool(val1))   # Output: False
+  val2 = 11
+  print(bool(val2))   # Output: True
+  val3 = -2.3
+  print(bool(val3))   # Output: True
+  ```
+
+---
+
+## 📌 Sequence Data Types
+Sequence data types allow storing multiple values in an organized and efficient manner. Python provides four basic sequence types:
+- **Strings (`str`)**
+- **Range (`range`)**
+- **Lists (`list`)**
+- **Tuples (`tuple`)**
+
+### 📜 Strings (`str`)
+- A string is an **immutable** sequence of characters enclosed in single, double, or triple quotes.
+- **Immutable** means that once a string is created, it **cannot** be changed.
+- Triple-quoted strings allow multiline text.
+- Examples:
+  ```python
+  str1 = 'Hello how are you'
+  str2 = "Hello how are you"
+  str3 = """multiline
+  String"""
+  print(str1)
+  print(str2)
+  print(str3)
+  ```
+  **Output:**
+  ```
+  Hello how are you
+  Hello how are you
+  multiline
+  String
+  ```
+- **String Concatenation (`+`)**
+  ```python
+  f = 'data'
+  s = 'structure'
+  print(f + s)  # Output: datastructure
+  print('Data ' + 'structure')  # Output: Data structure
+  ```
+- **String Repetition (`*`)**
+  ```python
+  st = 'data.'
+  print(st * 3)  # Output: data.data.data.
+  ```
+
+---
+
+### 🔢 Range (`range`)
+- Represents an **immutable** sequence of numbers.
+- Used primarily in loops.
+- Syntax:
+  ```python
+  range(start, stop, step)
+  ```
+- Examples:
+  ```python
+  print(list(range(10)))  # [0, 1, 2, ..., 9]
+  print(list(range(1, 10, 2)))  # [1, 3, 5, 7, 9]
+  print(list(range(20, 10, -2)))  # [20, 18, 16, 14, 12]
+  ```
+
+---
+
+### 📋 Lists (`list`)
+- Stores multiple values, allowing duplicates and mixed data types.
+- Lists are **mutable**, meaning elements can be modified.
+- Syntax:
+  ```python
+  mylist = [10, "world", "world", 8]
+  print(mylist[1])  # Output: world
+  ```
+- **Properties of Lists:**
+  - **Ordered**: Elements maintain their defined order.
+  - **Dynamic**: Can grow or shrink.
+  - **Mixed Data Types**: Lists can contain numbers, strings, etc.
+  - **Indexing & Slicing**: Supports positive and negative indexing.
+  - **Mutable**: Elements can be modified.
+
+#### 🔧 List Operations
+- **Accessing Elements:**
+  ```python
+  a = ['data', 'structures', 'using', 'python']
+  print(a[0])  # Output: data
+  print(a[-1])  # Output: python
+  print(a[1:3])  # Output: ['structures', 'using']
+  ```
+- **Modifying Elements:**
+  ```python
+  a[1] = 'and'
+  print(a)  # Output: ['data', 'and', 'using', 'python']
+  ```
+- **List Operators:**
+  ```python
+  a = ['data', 'python']
+  print(a + ['new', 'elements'])  # Concatenation
+  print(a * 2)  # Replication
+  print(len(a))  # Length
+  ```
+
+# **Membership, identity, and logical operations** 📋
+Python supports membership, identity, and logical operators. Several data types in Python support them. In order to understand how these operators work, we’ll discuss each of these operations in this section.
+
+# **Membership Operators**  🚀
+
+## Introduction 📌
+
+Membership operators in Python are used to ***validate the membership*** of an item within a sequence. A sequence can be a ***string, list, or tuple***. These operators help us determine whether a given value exists in the specified sequence or not.
+
+Python provides **two membership operators**:
+
+1. `in` 👉 Returns `True` if the value exists in the sequence, otherwise returns `False`.
+2. `not in` 👉 Returns `True` if the value **does not** exist in the sequence, otherwise returns `False`.
+
+---
+
+## 1️⃣ `in` Operator 🔍
+
+The `in` operator checks if an element exists in a sequence. If found, it returns **`True`**, otherwise, it returns **`False`**.
+
+### Example:
+
+```python
+# Python program to check if an item exists in another list
+mylist1 = [100, 20, 30, 40]
+mylist2 = [10, 50, 60, 90]
+
+if mylist1[1] in mylist2:
+    print("Elements are overlapping")
+else:
+    print("Elements are not overlapping")
+```
+
+### Output:
+
+```
+Elements are not overlapping
+```
+
+✅ Since `mylist1[1]` (which is `20`) is not present in `mylist2`, the output is **"Elements are not overlapping"**.
+
+---
+
+## 2️⃣ `not in` Operator ❌
+
+The `not in` operator checks if an element **does not exist** in a sequence. If the element is absent, it returns **`True`**, otherwise, it returns **`False`**.
+
+### Example:
+
+```python
+val = 104
+mylist = [100, 210, 430, 840, 108]
+
+if val not in mylist:
+    print("Value is NOT present in mylist")
+else:
+    print("Value is present in mylist")
+```
+
+### Output:
+
+```
+Value is NOT present in mylist
+```
+
+✅ Since `104` is **not present** in `mylist`, the output is **"Value is NOT present in mylist"**.
+
+---
+# **Identity Operators in Python** 🆔
+
+## Introduction 📌
+Identity operators in Python are used to **compare objects** based on their memory location rather than their values. Python provides two identity operators:
+
+1. **`is`** 👉 Checks if two variables refer to the **same object** in memory.
+2. **`is not`** 👉 Checks if two variables refer to **different objects** in memory.
+
+These operators are **different from the equality (`==`) operator**, which checks if the values of two variables are the same, not their memory locations.
+
+---
+
+## 1️⃣ `is` Operator 🔍
+The `is` operator checks whether two variables point to the **same object** in memory. It returns **`True`** if both variables reference the same object; otherwise, it returns **`False`**.
+
+### Example:
+```python
+Firstlist = []
+Secondlist = []
+
+if Firstlist == Secondlist:
+    print("Both are equal")
+else:
+    print("Both are not equal")
+
+if Firstlist is Secondlist:
+    print("Both variables are pointing to the same object")
+else:
+    print("Both variables are not pointing to the same object")
+
+thirdList = Firstlist
+if thirdList is Secondlist:
+    print("Both are pointing to the same object")
+else:
+    print("Both are not pointing to the same object")
+```
+
+### Output:
+```
+Both are equal
+Both variables are not pointing to the same object
+Both are not pointing to the same object
+```
+✅ Here, `Firstlist` and `Secondlist` have **equal values**, but they are **different objects** in memory. That’s why `is` returns `False`.
+
+---
+
+## 2️⃣ `is not` Operator ❌
+The `is not` operator checks whether two variables **do not** refer to the same object in memory. If they refer to **different objects**, it returns **`True`**; otherwise, it returns **`False`**.
+
+### Example:
+```python
+Firstlist = []
+Secondlist = []
+
+if Firstlist is not Secondlist:
+    print("Both Firstlist and Secondlist variables are different objects")
+else:
+    print("Both Firstlist and Secondlist variables are the same object")
+```
+
+### Output:
+```
+Both Firstlist and Secondlist variables are different objects
+```
+✅ Here, `Firstlist` and `Secondlist` are two **different objects** in memory, so `is not` returns `True`.
+
+---
+
+## Visual Representation 🖼️
+To understand `is` and `is not`, let's visualize memory allocation:
+
+### **Memory Representation**
+```md
+Firstlist  --->  [ ]  (Memory Location: 0x1234)
+Secondlist --->  [ ]  (Memory Location: 0x5678)
+```
+Since `Firstlist` and `Secondlist` are created separately, they occupy different memory locations. Hence, `Firstlist is not Secondlist` returns `True`.
+
+### **Comparison Table**
+| Expression                | Description                                      | Output |
+|---------------------------|--------------------------------------------------|--------|
+| `Firstlist == Secondlist` | Checks if values are equal                      | `True`  |
+| `Firstlist is Secondlist` | Checks if objects are the same in memory        | `False` |
+| `Firstlist is not Secondlist` | Checks if objects are different in memory | `True`  |
+
+---
+
