@@ -443,3 +443,119 @@ Since `Firstlist` and `Secondlist` are created separately, they occupy different
 
 ---
 
+# **Logical Operators**&#x20;
+
+## Introduction 📌
+
+Logical operators in Python are used to **combine conditional statements** that evaluate to **True or False**. These operators help in decision-making by allowing multiple conditions to be checked within a single statement.
+
+Python provides **three types** of logical operators:
+
+1. **`and`** 👉 Returns `True` if **both conditions** are `True`, otherwise returns `False`.
+2. **`or`** 👉 Returns `True` if **at least one condition** is `True`, otherwise returns `False`.
+3. **`not`** 👉 Reverses the Boolean value of a condition.
+
+---
+
+## 1️⃣ Logical `and` Operator 🔗
+
+The `and` operator returns `True` **only if both conditions are \*\*\*\*\*\*\*\*****`True`**. If any one condition is `False`, it returns `False`.
+
+### Syntax:
+
+```python
+A and B
+```
+
+### Example:
+
+```python
+a = 32
+b = 132
+
+if a > 0 and b > 0:
+    print("Both a and b are greater than zero")
+else:
+    print("At least one variable is less than 0")
+```
+
+### Output:
+
+```
+Both a and b are greater than zero
+```
+
+✅ Since **both ************`a`************ and ************`b`************ are greater than zero**, the condition evaluates to `True`.
+
+---
+
+## 2️⃣ Logical `or` Operator 🔀
+
+The `or` operator returns `True` **if at least one condition is \*\*\*\*\*\*\*\*****`True`**. It returns `False` **only if both conditions are \*\*\*\*\*\*\*\*****`False`**.
+
+### Syntax:
+
+```python
+A or B
+```
+
+### Example:
+
+```python
+a = 32
+b = -32
+
+if a > 0 or b > 0:
+    print("At least one variable is greater than zero")
+else:
+    print("Both variables are less than 0")
+```
+
+### Output:
+
+```
+At least one variable is greater than zero
+```
+
+✅ Since **`a`**\*\* is greater than zero\*\*, the condition evaluates to `True`, even though `b` is negative.
+
+---
+
+## 3️⃣ Logical `not` Operator ❌
+
+The `not` operator **reverses the Boolean value** of a condition. If a condition is `True`, `not` makes it `False`, and vice versa.
+
+### Example:
+
+```python
+a = 32
+
+if not a < 0:
+    print("Boolean value of a is True")
+else:
+    print("Boolean value of a is False")
+```
+
+### Output:
+
+```
+Boolean value of a is True
+```
+
+✅ Here, `not a < 0` means **`a`**\*\* is not less than 0\*\*, which is `True`, so the statement prints correctly.
+
+---
+
+## Visual Representation 🖼️
+
+To better understand logical operators, consider the following **truth table**:
+
+### **Truth Table for ************`and`************, ************`or`************, and ************`not`************ Operators**
+
+| A (Condition 1) | B (Condition 2) | `A and B` | `A or B` | `not A` |
+| --------------- | --------------- | --------- | -------- | ------- |
+| `True`          | `True`          | `True`    | `True`   | `False` |
+| `True`          | `False`         | `False`   | `True`   | `False` |
+| `False`         | `True`          | `False`   | `True`   | `True`  |
+| `False`         | `False`         | `False`   | `False`  | `True`  |
+
