@@ -570,3 +570,65 @@ To better understand logical operators, consider the following **truth table**:
 | `False`         | `True`          | `False`   | `True`   | `True`  |
 | `False`         | `False`         | `False`   | `False`  | `True`  |
 
+# **Tuples** 📌
+
+## Introduction 🚀
+
+Tuples in Python are used to **store multiple items in a single variable**. Unlike lists, tuples are **immutable**, meaning their elements **cannot be changed, added, or removed** after assignment. They are particularly useful when dealing with **fixed collections of data** that should remain unchanged throughout the program.
+
+### **Key Characteristics of Tuples**:
+
+- ✅ **Ordered** (Uses zero-based indexing)
+- 🚫 **Immutable** (Cannot be modified after creation)
+- ✅ **Allows Duplicates**
+- ✅ **Can contain different data types**
+- ✅ \*\*Uses round brackets \*\***`()`**
+- ✅ **Supports operations like concatenation, repetition, membership, and iteration**
+
+**Syntax:**
+
+```python
+tuple_name = ("entry1", "entry2", "entry3")
+```
+
+Example:
+
+```python
+my_tuple = ("Shyam", 23, True, "male")
+```
+
+---
+
+## 📊 Tuple Operations
+
+| **Expression**                | **Result**             | **Description**                 |
+| ----------------------------- | ---------------------- | ------------------------------- |
+| `print(len((4,5, "hello")))`  | `3`                    | Returns the length of the tuple |
+| `print((4,5)+(10,20))`        | `(4,5,10,20)`          | Concatenation of two tuples     |
+| `print((2,1)*3)`              | `(2,1,2,1,2,1)`        | Repeats the tuple elements      |
+| `print(3 in ('hi', 'xyz',3))` | `True`                 | Checks membership               |
+| `for p in (6,7,8): print(p)`  | `6,7,8` (line by line) | Iteration over tuple elements   |
+
+📌 **Tuples support concatenation (********`+`********), repetition (********`*`********), membership (********`in`********), and iteration.**
+
+---
+
+## 🔢 Tuple Indexing & Slicing
+
+Tuples in Python support **zero-based indexing**, **negative indexing**, and **slicing**.
+
+Example:
+
+```python
+x = ("hello", "world", "pakistan")
+```
+
+| **Expression** | **Result**           | **Description**                                               |
+| -------------- | -------------------- | ------------------------------------------------------------- |
+| `print(x[1])`  | `"world"`            | **Zero-based indexing** (index `1` refers to the second item) |
+| `print(x[-2])` | `"world"`            | **Negative indexing** (counts from the right)                 |
+| `print(x[1:])` | `("world", "pakistan")` | **Slicing** (fetches a section of the tuple)                  |
+
+📌 **Tuples behave similarly to lists when it comes to accessing elements but remain immutable.**
+
+---
