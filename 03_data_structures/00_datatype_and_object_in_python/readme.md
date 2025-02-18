@@ -287,6 +287,17 @@ Sequence data types allow storing multiple values in an organized and efficient 
   print(len(a))  # Length
   ```
 
+## 📊 Properties of Lists
+
+| Property                  | Description                                                                                                  | Example                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| **Ordered** ✅             | Lists maintain the order in which elements are added. The order remains **fixed** unless explicitly changed. | `[10, 12, 31, 14] == [14, 10, 31, 12] → False`                                      |
+| **Dynamic** 🔄            | Lists can **grow or shrink** dynamically by adding or removing elements.                                     | `b = ['data', 'and', 'book']; b += [32]; del b[0]`                                  |
+| **Heterogeneous** 🎭      | Lists can contain multiple data types, including numbers, strings, and booleans.                             | `['python', 31, False, 2.2]`                                                        |
+| **Indexing & Slicing** 🔍 | Supports zero-based indexing, negative indexing, and slicing for retrieving elements.                        | `a[0] → 'data'`, `a[-1] → 'learning'`, `a[1:4] → ['structures', 'using', 'python']` |
+| **Mutable** ✏️            | List elements can be modified using indexing and slicing.                                                    | `a[1] = 'new_value'`, `a[2:4] = [1, 2, 3]`                                          |
+| **Operators** 🛠️         | Lists support `in`, `+`, `*`, `len()`, `min()`, `max()` operations.                                          | `a + ['new']`, `len(a)`, `min(a)`                                                   |
+
 # **Membership, identity, and logical operations** 📋
 Python supports membership, identity, and logical operators. Several data types in Python support them. In order to understand how these operators work, we’ll discuss each of these operations in this section.
 
