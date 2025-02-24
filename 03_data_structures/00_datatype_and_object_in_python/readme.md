@@ -632,3 +632,98 @@ x = ("hello", "world", "pakistan")
 📌 **Tuples behave similarly to lists when it comes to accessing elements but remain immutable.**
 
 ---
+
+# 📖 **Python Dictionaries - A Complete Guide**
+
+## 🧐 What is a Dictionary in Python?
+
+A **dictionary** in Python is an important data structure that allows you to store data in **unordered key-value pairs**. It is similar to a list but differs in how data is stored and accessed.
+
+### 🔑 Key Characteristics of Dictionaries:
+
+- Stores data in `{key: value}` pairs.
+- The **key** must be **hashable** and **immutable** (e.g., strings, numbers, or tuples with immutable elements).
+- The **value** can be any **arbitrary Python object** (strings, numbers, lists, other dictionaries, etc.).
+- The dictionary itself is **mutable and dynamic**, meaning elements can be modified, added, or removed.
+- Items are enclosed in \*\*curly braces \*\***`{}`** and separated by commas.
+- **Keys are unique and case-sensitive**, but **values can be duplicated**.
+
+## 📌 Syntax and Creating a Dictionary
+
+A dictionary is defined using curly braces `{}` with key-value pairs:
+
+```python
+my_dict = {
+    "1": "data",
+    "2": "structure",
+    "3": "python",
+    "4": "programming",
+    "5": "language"
+}
+```
+
+### 📝 Explanation of the Code:
+
+- Each **key** (e.g., "1", "2", "3", etc.) is mapped to a **value**.
+- The values represent different words associated with programming.
+- The dictionary follows the `{key: value}` format.
+- The **keys must be unique**, while values can be repeated.
+
+## 🔍 Accessing Values from a Dictionary
+
+We can retrieve a value by referencing its **key**:
+
+```python
+print(my_dict["1"])  # Output: data
+```
+
+### 📝 Explanation:
+
+- `my_dict["1"]` fetches the value associated with the key **"1"**, which is **"data"**.
+
+## 🔄 Dictionary vs. List - Key Differences
+
+| Feature           | Dictionary                                        | List                       |
+| ----------------- | ------------------------------------------------- | -------------------------- |
+| **Data Storage**  | Key-value pairs `{key: value}`                    | Ordered elements `[value]` |
+| **Access Method** | Accessed using **keys**                           | Accessed using **index**   |
+| **Order**         | Unordered (Python 3.7+ maintains insertion order) | Ordered                    |
+| **Mutability**    | keys must be immutable                            | Mutable                    |
+| **Duplicates**    | Keys must be unique, values can repeat            | Values can repeat          |
+
+## 🎯 Additional Dictionary Features
+
+### 1️⃣ Checking if a Key Exists
+
+```python
+if "3" in my_dict:
+    print("Key exists!")
+```
+
+🔹 This checks whether the key **"3"** exists in `my_dict`.
+
+### 2️⃣ Adding New Key-Value Pairs
+
+```python
+my_dict["6"] = "coding"
+print(my_dict)
+```
+
+🔹 Adds a new key-value pair **"6": "coding"**.
+
+### 3️⃣ Removing an Item
+
+```python
+del my_dict["2"]  # Removes key "2"
+```
+
+🔹 Deletes the key **"2"** and its associated value.
+
+### 4️⃣ Iterating Over a Dictionary
+
+```python
+for key, value in my_dict.items():
+    print(f"Key: {key}, Value: {value}")
+```
+
+🔹 Loops through all key-value pairs and prints them.
