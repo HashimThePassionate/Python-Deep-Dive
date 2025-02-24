@@ -727,3 +727,56 @@ for key, value in my_dict.items():
 ```
 
 🔹 Loops through all key-value pairs and prints them.
+
+# 📖 Python Dictionaries - Advanced Guide
+
+## 📝 Creating and Accessing Dictionary Elements
+### 🔹 Example:
+```python
+person = {}
+print(type(person))  # Output: <class 'dict'>
+
+# Adding elements to the dictionary
+person['name'] = 'ABC'
+person['lastname'] = 'XYZ'
+person['age'] = 31
+person['address'] = ['Jaipur']
+
+print(person)  # Output: {'name': 'ABC', 'lastname': 'XYZ', 'age': 31, 'address': ['Jaipur']}
+print(person['name'])  # Output: ABC
+```
+### 📝 Explanation:
+- A dictionary `person` is created using `{}`.
+- Elements are added using key-value pairs.
+- Accessing an element is done using `person['name']`, which retrieves the value **'ABC'**.
+
+## 🔍 `in` and `not in` Operators
+```python
+print('name' in person)  # Output: True
+print('fname' not in person)  # Output: True
+```
+### 📝 Explanation:
+- `'name' in person` checks if the key **'name'** exists in the dictionary, returning `True`.
+- `'fname' not in person` confirms that **'fname'** is not a key in `person`, returning `True`.
+
+## 📏 Length of a Dictionary
+```python
+print(len(person))  # Output: 4
+```
+### 📝 Explanation:
+- `len(person)` returns the number of key-value pairs in the dictionary.
+
+## 🔧 **Dictionary Methods**
+
+| Function            | Description                                                                 | Example |
+|---------------------|-----------------------------------------------------------------------------|---------|
+| `mydict.clear()`    | Removes all elements from a dictionary.                                   | ```python mydict = {'a': 1, 'b': 2, 'c': 3} print(mydict) mydict.clear() print(mydict)  # Output: {} ``` |
+| `mydict.get(<key>)` | Searches for a key and returns the corresponding value; otherwise, returns `None`. | ```python mydict = {'a': 1, 'b': 2, 'c': 3} print(mydict.get('b'))  # Output: 2 print(mydict.get('z'))  # Output: None ``` |
+| `mydict.items()`    | Returns a list of dictionary items as `(key, value)` pairs.               | ```python mydict = {'a': 1, 'b': 2, 'c': 3} print(list(mydict.items()))  # Output: [('a', 1), ('b', 2), ('c', 3)] ``` |
+| `mydict.keys()`     | Returns a list of dictionary keys.                                        | ```python mydict = {'a': 1, 'b': 2, 'c': 3} print(list(mydict.keys()))  # Output: ['a', 'b', 'c'] ``` |
+| `mydict.values()`   | Returns a list of dictionary values.                                      | ```python mydict = {'a': 1, 'b': 2, 'c': 3} print(list(mydict.values()))  # Output: [1, 2, 3] ``` |
+| `mydict.pop(<key>)` | Removes a key and returns the associated value.                          | ```python mydict = {'a': 1, 'b': 2, 'c': 3} print(mydict.pop('b'))  # Output: 2 print(mydict)  # Output: {'a': 1, 'c': 3} ``` |
+| `mydict.popitem()`  | Removes and returns the last inserted key-value pair.                    | ```python mydict = {'a': 1, 'b': 2, 'c': 3} print(mydict.popitem())  # Output: ('c', 3) print(mydict)  # Output: {'a': 1, 'b': 2} ``` |
+| `mydict.update(<obj>)` | Merges two dictionaries, updating existing keys and adding new ones.     | ```python dict1 = {'a': 1, 'b': 2} dict2 = {'b': 3, 'c': 4} dict1.update(dict2) print(dict1)  # Output: {'a': 1, 'b': 3, 'c': 4} ``` |
+
+---
