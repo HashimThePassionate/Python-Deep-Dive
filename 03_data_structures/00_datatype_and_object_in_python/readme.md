@@ -780,3 +780,257 @@ print(len(person))  # Output: 4
 | `mydict.update(<obj>)` | Merges two dictionaries, updating existing keys and adding new ones.     | ```python dict1 = {'a': 1, 'b': 2} dict2 = {'b': 3, 'c': 4} dict1.update(dict2) print(dict1)  # Output: {'a': 1, 'b': 3, 'c': 4} ``` |
 
 ---
+
+# **Python Sets Overview** ✨
+
+**Sets** are a powerful data structure in Python used to store **unordered collections** of **unique, hashable objects**. They are mutable, iterable, and perfect for performing mathematical operations such as union, intersection, difference, and symmetric difference. This guide provides detailed examples and explanations to help you understand sets in depth. 🎯🔍
+
+---
+
+## What is a Set? 🎲
+
+- **Definition:**  
+  A **set** is an unordered collection of unique, hashable objects.  
+  - **Unordered:** The items do not follow any specific order. 🔄
+  - **Unique Elements:** Duplicate items are automatically removed. 🚫➕
+  - **Mutable:** You can add or remove items, but each element must be immutable. 🔧🛠️
+
+- **Usage:**  
+  Sets are ideal for:
+  - Membership testing (`in`, `not in`) ✔️
+  - Mathematical operations: intersection, union, difference, and symmetric difference ➕➖
+  
+- **Creation:**  
+  Create a set using the built-in `set()` function or curly braces `{}`.
+
+---
+
+## Creating Sets with Examples 🛠️💡
+
+### Example 1: Using the `set()` Function
+
+```python
+# Creating a set from a list using set()
+x1 = set(['and', 'python', 'data', 'structure'])  # Converts list to set, removing duplicates if any 🌀
+print(x1)  # Displays the set (order may vary) 🎲
+print(type(x1))  # Confirms the type is <class 'set'> 🔍
+```
+
+**Line-by-Line Explanation:**
+1. **`x1 = set(['and', 'python', 'data', 'structure'])`**  
+   👉 This line converts a list of strings into a set, ensuring each element is unique.  
+2. **`print(x1)`**  
+   👉 Prints the set. Remember, the order is not defined because sets are unordered.  
+3. **`print(type(x1))`**  
+   👉 Verifies that `x1` is indeed a set.  
+
+---
+
+### Example 2: Using Curly Braces `{}`
+
+```python
+# Directly creating a set using curly braces
+x2 = {'and', 'python', 'data', 'structure'}  # Direct set creation with unique elements 🔥
+print(x2)  # Displays the set; the order might be different from the input order 🌀
+```
+
+**Line-by-Line Explanation:**
+1. **`x2 = {'and', 'python', 'data', 'structure'}`**  
+   👉 Directly defines a set with the given elements.  
+2. **`print(x2)`**  
+   👉 Prints the set. As with all sets, the output order is arbitrary.
+
+**Expected Output:**
+```plaintext
+{'python', 'structure', 'data', 'and'}
+<class 'set'>
+{'python', 'structure', 'data', 'and'}
+```
+
+> **Note:** The output order may vary due to the unordered nature of sets. 🎲
+
+---
+
+## Membership Testing & Basic Operations 🔎✅
+
+Sets allow you to easily test for membership and check their size using `len()`.
+
+```python
+# Define a set with four elements
+x = {'data', 'structure', 'and', 'python'}
+print(len(x))             # Outputs the number of elements (4) 🎯
+print('structure' in x)   # Checks if 'structure' exists in the set; returns True 👍
+```
+
+**Line-by-Line Explanation:**
+1. **`x = {'data', 'structure', 'and', 'python'}`**  
+   👉 Initializes a set with four unique elements.
+2. **`print(len(x))`**  
+   👉 Prints the size of the set.  
+3. **`print('structure' in x)`**  
+   👉 Checks for membership; outputs `True` if the element is present.
+
+**Expected Output:**
+```plaintext
+4
+True
+```
+
+---
+
+## Set Operations Explained ✨🔢
+
+Python sets support several mathematical operations. Let's break them down with detailed examples and explanations.
+
+### 1. Union ( ∪ ) ➕
+
+Union combines all elements from two sets, eliminating duplicates.
+
+```python
+# Define two sets
+x1 = {'data', 'structure'}
+x2 = {'python', 'java', 'c', 'data'}
+# Method 1: Using the | operator for union
+x3 = x1 | x2  # Merges x1 and x2 into one set containing all unique items 🌐
+print(x3)
+
+# Method 2: Using the union() method
+print(x1.union(x2))  # Achieves the same result with a method call 📞
+```
+<div align="center">
+  <img src="./images/03.jpg" alt="" width="600px"/>
+
+  **Figure 1.6**: Venn diagram of sets
+
+</div>
+
+
+**Line-by-Line Explanation:**
+1. **`x1 = {'data', 'structure'}`**  
+   👉 Creates the first set.
+2. **`x2 = {'python', 'java', 'c', 'data'}`**  
+   👉 Creates the second set (note: 'data' is common to both).  
+3. **`x3 = x1 | x2`**  
+   👉 Combines both sets using the union operator `|`.  
+4. **`print(x3)`**  
+   👉 Prints the result of the union operation.  
+5. **`print(x1.union(x2))`**  
+   👉 Prints the union result using the built-in method.
+
+**Expected Output:**
+```plaintext
+{'structure', 'data', 'java', 'c', 'python'}
+{'structure', 'data', 'java', 'c', 'python'}
+```
+
+---
+
+### 2. Intersection ( ∩ ) 🔄
+
+Intersection finds common elements between two sets.
+
+```python
+# Intersection using both methods
+print(x1.intersection(x2))  # Returns elements common to both sets: {'data'} 💡
+print(x1 & x2)              # Same result using the & operator 🔗
+```
+
+**Line-by-Line Explanation:**
+1. **`print(x1.intersection(x2))`**  
+   👉 Uses the `.intersection()` method to get common items between x1 and x2.
+2. **`print(x1 & x2)`**  
+   👉 Uses the `&` operator for the same purpose.
+
+**Expected Output:**
+```plaintext
+{'data'}
+{'data'}
+```
+
+---
+
+### 3. Difference ( - ) ➖
+
+Difference shows the elements in one set that are not in the other.
+
+```python
+# Difference using both methods
+print(x1.difference(x2))  # Returns elements in x1 but not in x2: {'structure'} 🔍
+print(x1 - x2)            # Same result using the subtraction operator ➖
+```
+
+**Line-by-Line Explanation:**
+1. **`print(x1.difference(x2))`**  
+   👉 Gets elements from x1 that are not in x2 using the method.  
+2. **`print(x1 - x2)`**  
+   👉 Achieves the same using the `-` operator.
+
+**Expected Output:**
+```plaintext
+{'structure'}
+{'structure'}
+```
+
+---
+
+### 4. Symmetric Difference ( ^ ) 🔄❌
+
+Symmetric difference returns elements that are in either set, but not in both.
+
+```python
+# Symmetric difference using both methods
+print(x1.symmetric_difference(x2))  # Returns items in either x1 or x2 but not in both 🌟
+print(x1 ^ x2)                      # Same result using the ^ operator 💥
+```
+
+**Line-by-Line Explanation:**
+1. **`print(x1.symmetric_difference(x2))`**  
+   👉 Uses the `.symmetric_difference()` method to find non-common elements.
+2. **`print(x1 ^ x2)`**  
+   👉 Uses the `^` operator to perform the symmetric difference.
+
+**Expected Output:**
+```plaintext
+{'structure', 'python', 'c', 'java'}
+{'structure', 'python', 'c', 'java'}
+```
+
+---
+
+### 5. Subset Testing 🔍✅
+
+Subset testing checks if all elements of one set are present in another.
+
+```python
+# Checking if x1 is a subset of x2 using two methods
+print(x1.issubset(x2))  # Returns False if any element in x1 is missing in x2 ❌
+print(x1 <= x2)         # Same check using the <= operator 🔍
+```
+
+**Line-by-Line Explanation:**
+1. **`print(x1.issubset(x2))`**  
+   👉 Checks whether every element of x1 exists in x2.
+2. **`print(x1 <= x2)`**  
+   👉 Performs the same subset test using the operator.
+
+**Expected Output:**
+```plaintext
+False
+False
+```
+
+---
+
+## Summary Table of Set Operations 📊🌈
+
+| **Operation**            | **Description**                                                                         | **Example Code**                                                                               | **Output**                                      |
+|--------------------------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| **Union**                | Combines two sets to include all unique elements.                                       | `x3 = x1 | x2` <br> `print(x1.union(x2))`                                                         | `{'structure', 'data', 'java', 'c', 'python'}`  |
+| **Intersection**         | Retrieves elements common to both sets.                                                 | `print(x1.intersection(x2))` <br> `print(x1 & x2)`                                               | `{'data'}`                                      |
+| **Difference**           | Elements in the first set not present in the second set.                                | `print(x1.difference(x2))` <br> `print(x1 - x2)`                                                 | `{'structure'}`                                 |
+| **Symmetric Difference** | Elements in either set but not in both.                                                 | `print(x1.symmetric_difference(x2))` <br> `print(x1 ^ x2)`                                       | `{'structure', 'python', 'c', 'java'}`           |
+| **Subset Test**          | Tests if one set is entirely contained within another.                                  | `print(x1.issubset(x2))` <br> `print(x1 <= x2)`                                                  | `False`                                         |
+
+> **Note:** Due to the unordered nature of sets, the order of elements in the outputs may differ from what is shown above. 🎲
+
+---
