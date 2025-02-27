@@ -1034,3 +1034,127 @@ False
 > **Note:** Due to the unordered nature of sets, the order of elements in the outputs may differ from what is shown above. 🎲
 
 ---
+
+# **Immutable Sets in Python: Frozenset** ❄️🔒
+
+Python offers a special type of set called a **frozenset**. A frozenset is very similar to a regular set, with one key difference: **it is immutable**. This means once you create a frozenset, you cannot change its content. Frozensets are ideal for situations where you need an immutable (unchangeable) collection that can be used as a dictionary key or stored in other sets. 🌟
+
+---
+
+## What is a Frozenset? ❄️
+
+- **Definition:**  
+  A **frozenset** is an immutable version of a set.  
+  - **Immutable:** Once created, its elements cannot be modified. 🔒  
+  - **Unordered:** Like sets, the order of elements in a frozenset is undefined. 🔄
+
+- **Usage:**  
+  Use frozensets when you need a constant collection of unique items that must be hashable, such as keys in dictionaries or elements within other sets. 📌
+
+- **Creation:**  
+  Create a frozenset using the built-in `frozenset()` function.
+
+---
+
+## What Does "Unhashable" Mean? 🔍❌
+
+- **Hashable:**  
+  An object is **hashable** if it has a hash value that never changes during its lifetime. This allows it to be used as a key in a dictionary or as an element in a set.
+  
+- **Unhashable:**  
+  An object is **unhashable** if it is mutable (can be changed after creation) and does not have a fixed hash value.  
+  - **Example:** A regular set is mutable, so it is unhashable, meaning you cannot use it as an element in another set or as a dictionary key. 🚫🔑  
+  - **Implication:** Trying to use an unhashable object in a context that requires hashable items will raise a `TypeError`.
+
+---
+
+## Creating a Frozenset with Examples 🛠️💡
+
+### Example 1: Basic Frozenset Creation
+
+```python
+# Creating a frozenset from a list
+x = frozenset(['data', 'structure', 'and', 'python'])  # Converts list to an immutable frozenset ❄️
+print(x)  # Displays the frozenset; order is not guaranteed 🚀
+```
+
+**Line-by-Line Explanation:**
+1. **`x = frozenset(['data', 'structure', 'and', 'python'])`**  
+   👉 This line creates a frozenset from a list of strings using the `frozenset()` function.
+2. **`print(x)`**  
+   👉 Prints the frozenset. The output shows its elements (order may vary because frozensets are unordered).
+
+**Expected Output:**
+```plaintext
+frozenset({'python', 'structure', 'data', 'and'})
+```
+
+---
+
+## Why Use Frozenset? 💭🔍
+
+Frozensets are useful when you need to store a set in contexts that require hashable (immutable) objects. For instance, you cannot add a mutable set to another set because mutable sets are unhashable. Let's see what happens with mutable sets.
+
+### Example 2: Error When Using Mutable Sets
+
+```python
+# Creating regular mutable sets
+a11 = set(['data'])
+a21 = set(['structure'])
+a31 = set(['python'])
+
+# Attempting to create a set of sets
+x1 = {a11, a21, a31}  # ❌ This will raise an error because sets are unhashable
+```
+
+**Line-by-Line Explanation:**
+1. **`a11 = set(['data'])`**  
+   👉 Creates a mutable set containing the string `'data'`.
+2. **`a21 = set(['structure'])`**  
+   👉 Creates another mutable set containing `'structure'`.
+3. **`a31 = set(['python'])`**  
+   👉 Creates a mutable set containing `'python'`.
+4. **`x1 = {a11, a21, a31}`**  
+   👉 Attempts to create a set that contains the mutable sets. Since mutable sets are unhashable, this raises a `TypeError`.
+
+**Error Output:**
+```plaintext
+TypeError: unhashable type: 'set'
+```
+
+---
+
+## Using Frozenset to Create a Set of Immutable Sets 🎉✅
+
+By converting sets to frozensets, you make them immutable and hashable, allowing you to store them within another set.
+
+### Example 3: Creating a Set of Frozensets
+
+```python
+# Creating frozensets (immutable sets)
+a1 = frozenset(['data'])         # Creates an immutable frozenset containing 'data' ❄️
+a2 = frozenset(['structure'])    # Creates an immutable frozenset containing 'structure' 🔒
+a3 = frozenset(['python'])       # Creates an immutable frozenset containing 'python' 🚀
+
+# Creating a set that contains frozensets
+x = {a1, a2, a3}  
+print(x)  # Successfully prints a set of frozensets 🌈
+```
+
+**Line-by-Line Explanation:**
+1. **`a1 = frozenset(['data'])`**  
+   👉 Converts a list to a frozenset containing `'data'`, making it immutable.
+2. **`a2 = frozenset(['structure'])`**  
+   👉 Converts a list to a frozenset containing `'structure'`.
+3. **`a3 = frozenset(['python'])`**  
+   👉 Converts a list to a frozenset containing `'python'`.
+4. **`x = {a1, a2, a3}`**  
+   👉 Combines the frozensets into a new set. Since frozensets are hashable, this operation works correctly.
+5. **`print(x)`**  
+   👉 Prints the set of frozensets, demonstrating that immutable sets can be nested inside other sets.
+
+**Expected Output:**
+```plaintext
+{frozenset({'structure'}), frozenset({'python'}), frozenset({'data'})}
+```
+
