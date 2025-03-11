@@ -383,3 +383,120 @@ print("After popleft (removed from left):", my_queue, "| Removed:", removed_left
 
 
 ---
+
+<div align="center">
+
+# `New Section OrderedDict`
+
+</div>
+
+
+# **OrderedDict: Preserving Key Order in Dictionaries** 🗂️✨
+
+An **OrderedDict** is a subclass of the regular Python dictionary available in the `collections` module. Unlike standard dictionaries (especially in Python versions prior to 3.7), an OrderedDict maintains the order in which keys are inserted. This means that when you iterate over an OrderedDict, keys are returned in the same order as they were added. This predictable order can be very useful for many applications.  
+
+---
+
+## How Does OrderedDict Maintain Order? 🔍
+
+- **Internal Doubly-Linked List:**  
+  OrderedDict uses a doubly-linked list to store the keys. Each time a key is inserted, it is added at the end of this list, preserving the order of insertion.
+
+- **Insertion Order:**  
+  The order of the key-value pairs in an OrderedDict is exactly the same as the order in which they were added. This means if you create an OrderedDict with a list of tuples, the keys will remain in that sequence.
+
+- **Iteration:**  
+  When you iterate over an OrderedDict (using a for loop, for example), it traverses the internal linked list in order, so the keys are returned in the insertion order.
+
+---
+
+## Example: Creating and Iterating Over an OrderedDict 📖✨
+
+Let's look at a sample code snippet that creates an OrderedDict and then iterates over it using a for loop to print the keys in the expected order:
+
+```python
+from collections import OrderedDict  # Import OrderedDict from collections module 📦
+
+# Creating an OrderedDict with keys and values
+od = OrderedDict([
+    ('my', 2),
+    ('name', 4),
+    ('is', 2),
+    ('Mohan', 5),
+    ('hello', 4)
+])
+# Explanation:
+# - The OrderedDict is initialized with a list of tuples.
+# - Each tuple represents a key-value pair.
+# - The keys are stored in the order: 'my', 'name', 'is', 'Mohan', 'hello'.
+
+# Printing the entire OrderedDict
+print("OrderedDict:", od)
+# Expected output:
+# OrderedDict([('my', 2), ('name', 4), ('is', 2), ('Mohan', 5), ('hello', 4)])
+
+# Using a for loop to iterate over the OrderedDict and print each key in order
+print("\nIterating over OrderedDict keys:")
+for key in od:
+    print(key, "->", od[key])
+# Expected output:
+# my -> 2
+# name -> 4
+# is -> 2
+# Mohan -> 5
+# hello -> 4
+```
+
+**Line-by-Line Explanation:**
+
+1. **`from collections import OrderedDict`**  
+   👉 Imports the OrderedDict class from the `collections` module.  
+   👉 **Why?**  
+      - To use a dictionary-like structure that preserves the order of key insertion.
+
+2. **Creating the OrderedDict:**
+   ```python
+   od = OrderedDict([
+       ('my', 2),
+       ('name', 4),
+       ('is', 2),
+       ('Mohan', 5),
+       ('hello', 4)
+   ])
+   ```
+   👉 **What it does:**  
+      - An OrderedDict named `od` is created using a list of tuples.
+      - Each tuple represents a key-value pair.
+      - The order of the tuples in the list determines the order of keys in the OrderedDict.
+   👉 **Internal Mechanism:**  
+      - The OrderedDict maintains a doubly-linked list to store keys in the order they were inserted.
+
+3. **`print("OrderedDict:", od)`**  
+   👉 Prints the entire OrderedDict to show that the keys appear in the insertion order.  
+   👉 **Expected Output:**  
+      - `OrderedDict([('my', 2), ('name', 4), ('is', 2), ('Mohan', 5), ('hello', 4)])`
+
+4. **Using a For Loop to Iterate Over Keys:**
+   ```python
+   print("\nIterating over OrderedDict keys:")
+   for key in od:
+       print(key, "->", od[key])
+   ```
+   👉 **What it does:**  
+      - The for loop iterates over the OrderedDict `od`.
+      - In each iteration, the variable `key` holds the next key in the insertion order.
+      - `od[key]` accesses the corresponding value.
+   👉 **Why it's useful:**  
+      - This loop demonstrates that the keys are retrieved in the same order they were added.
+   👉 **Expected Output:**  
+      - The output will display:
+        ```
+        my -> 2
+        name -> 4
+        is -> 2
+        Mohan -> 5
+        hello -> 4
+        ```
+
+
+---
