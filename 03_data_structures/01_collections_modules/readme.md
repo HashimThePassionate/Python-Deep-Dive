@@ -211,3 +211,175 @@ Using key ISBN: 9781788995573
 ```
 
 ---
+
+<div align="center">
+
+# `New Section Deque`
+
+</div>
+
+
+
+# **Deque: Double-Ended Queue in Python** ⏩⏪
+
+A **deque** (pronounced "deck") is a double-ended queue that allows you to append and pop elements from both the front and the back. Deques are implemented as doubly-linked lists, making operations like inserting and deleting elements highly efficient—typically in O(1) time complexity. This makes deques a powerful tool when you need a flexible and fast data structure for queue-like operations.
+
+---
+
+## What is a Deque? 🧐
+
+- **Definition:**  
+  A deque is a list-like container with fast appends and pops from both ends.
+  
+- **Key Characteristics:**  
+  - **Double-Ended:** Supports operations on both ends (left and right). ⏩⏪  
+  - **Efficiency:** Insertion and deletion operations are executed in constant time, O(1). ⚡  
+  - **Implementation:** Built using a doubly-linked list for optimal performance. 🔗
+
+---
+
+## Creating and Using a Deque 🛠️💡
+
+Below is an enhanced example demonstrating how to create an empty deque, initialize one with elements, and perform basic operations:
+
+```python
+from collections import deque  # Import deque from the collections module 📦
+
+# Create an empty deque
+s = deque()  # Initializes an empty deque, ready to be used 🆕
+print("Empty deque:", s)  # Expected output: deque([])
+
+# Create a deque with initial elements
+my_queue = deque([1, 2, 'Name'])  # Initializes deque with a mix of integers and a string 🔢🔤
+print("Initial deque:", my_queue)  # Expected output: deque([1, 2, 'Name'])
+```
+
+**Line-by-Line Explanation:**
+
+1. **`from collections import deque`**  
+   👉 This line imports the `deque` class from Python's built-in `collections` module.  
+   👉 **Why?** The `collections` module provides alternative container types that offer more flexibility and performance for specific tasks.
+
+2. **`s = deque()`**  
+   👉 Creates an empty deque named `s`.  
+   👉 **What happens?**  
+      - An empty deque is initialized.
+      - Ready to be populated with elements later.
+      
+3. **`print("Empty deque:", s)`**  
+   👉 Prints the empty deque, which should output: `deque([])`.  
+   👉 **Why?**  
+      - To verify that the deque has been created and is currently empty.
+
+4. **`my_queue = deque([1, 2, 'Name'])`**  
+   👉 Initializes a new deque called `my_queue` with the elements `1`, `2`, and `'Name'`.  
+   👉 **What happens?**  
+      - The deque now contains three items.
+      - It supports various operations at both ends.
+      
+5. **`print("Initial deque:", my_queue)`**  
+   👉 Prints the initialized deque, expected to output: `deque([1, 2, 'Name'])`.
+
+---
+
+## Common Deque Operations 🚀🔧
+
+Deques offer several built-in functions to manipulate data efficiently. The following table summarizes the most common operations along with their descriptions:
+
+| **Function**               | **Description**                                                                  |
+|----------------------------|----------------------------------------------------------------------------------|
+| `my_queue.append('age')`   | Inserts `'age'` at the right end of the deque. ➕                                 |
+| `my_queue.appendleft('age')` | Inserts `'age'` at the left end of the deque. ⬅️                                 |
+| `my_queue.pop()`           | Removes and returns the rightmost element of the deque. ➖                        |
+| `my_queue.popleft()`       | Removes and returns the leftmost element of the deque. ⬅️                        |
+
+*Table 1.8: Description of different deque functions*
+
+---
+
+## Enhanced Example: Using Deque Operations 🔄💥
+
+Let’s see a more detailed example demonstrating several deque operations:
+
+```python
+from collections import deque  # Import deque from the collections module
+
+# Initialize a deque with some initial elements
+my_queue = deque([1, 2, 'Name'])
+print("Original deque:", my_queue)  # Expected: deque([1, 2, 'Name'])
+
+# Append an element at the right end
+my_queue.append('age')  
+print("After append:", my_queue)  # Expected: deque([1, 2, 'Name', 'age'])
+
+# Append an element at the left end
+my_queue.appendleft('start')
+print("After appendleft:", my_queue)  # Expected: deque(['start', 1, 2, 'Name', 'age'])
+
+# Remove an element from the right end
+removed_right = my_queue.pop()
+print("After pop (removed from right):", my_queue, "| Removed:", removed_right)
+# Expected: deque(['start', 1, 2, 'Name']) and removed element 'age'
+
+# Remove an element from the left end
+removed_left = my_queue.popleft()
+print("After popleft (removed from left):", my_queue, "| Removed:", removed_left)
+# Expected: deque([1, 2, 'Name']) and removed element 'start'
+```
+
+**Detailed Explanation of the Enhanced Example:**
+
+1. **`from collections import deque`**  
+   👉 Imports the `deque` class, which is necessary for creating deque objects.
+
+2. **`my_queue = deque([1, 2, 'Name'])`**  
+   👉 Initializes `my_queue` with three items: `1`, `2`, and `'Name'`.
+
+3. **`print("Original deque:", my_queue)`**  
+   👉 Prints the original state of the deque.  
+   👉 **Output:** `deque([1, 2, 'Name'])`
+
+4. **`my_queue.append('age')`**  
+   👉 Appends the string `'age'` to the right end of the deque.  
+   👉 **Why?**  
+      - Use `append` when you want to add an element at the end of the deque.
+
+5. **`print("After append:", my_queue)`**  
+   👉 Prints the state of the deque after the append operation.  
+   👉 **Output:** `deque([1, 2, 'Name', 'age'])`
+
+6. **`my_queue.appendleft('start')`**  
+   👉 Inserts the string `'start'` at the left end of the deque.  
+   👉 **Why?**  
+      - Use `appendleft` when you need to add an element at the beginning.
+
+7. **`print("After appendleft:", my_queue)`**  
+   👉 Prints the deque after inserting `'start'` at the beginning.  
+   👉 **Output:** `deque(['start', 1, 2, 'Name', 'age'])`
+
+8. **`removed_right = my_queue.pop()`**  
+   👉 Removes and returns the rightmost element from the deque.  
+   👉 **Why?**  
+      - The `pop` operation is useful when you want to process or remove the last element.
+   👉 **Output:** The removed element is stored in `removed_right`.
+
+9. **`print("After pop (removed from right):", my_queue, "| Removed:", removed_right)`**  
+   👉 Prints the deque after the `pop` operation along with the removed element.  
+   👉 **Expected Output:**  
+      - Deque: `deque(['start', 1, 2, 'Name'])`  
+      - Removed element: `'age'`
+
+10. **`removed_left = my_queue.popleft()`**  
+    👉 Removes and returns the leftmost element from the deque.  
+    👉 **Why?**  
+       - The `popleft` operation is used when you need to process or remove the first element.
+    👉 **Output:** The removed element is stored in `removed_left`.
+
+11. **`print("After popleft (removed from left):", my_queue, "| Removed:", removed_left)`**  
+    👉 Prints the deque after the `popleft` operation along with the removed element.  
+    👉 **Expected Output:**  
+       - Deque: `deque([1, 2, 'Name'])`  
+       - Removed element: `'start'`
+
+
+---
