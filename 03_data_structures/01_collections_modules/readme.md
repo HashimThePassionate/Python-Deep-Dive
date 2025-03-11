@@ -861,3 +861,119 @@ print(inventory['o'])
       - The character `'o'` appears once in `'hello'`.
 
 ---
+
+<div align="center">
+
+# `New Section UserDict`
+
+</div>
+
+
+# **UserDict: Customizable Dictionary Wrapper** 🗃️🔧
+
+The **UserDict** class, available in the `collections` module, is a wrapper around the built-in dictionary object. It is designed to be easily extended and modified. With UserDict, you can override or add new methods to change the dictionary's behavior without affecting the original dict class. This is especially useful for applications where you want to enforce custom rules or add extra functionality.
+
+---
+
+## Why Use UserDict? 🤔
+
+- **Customization:**  
+  UserDict allows you to add, update, or modify the functionality of a dictionary. You can define custom behaviors for operations like insertion, deletion, or even retrieval of items.
+  
+- **Inheritance:**  
+  Since UserDict is implemented as a class, you can subclass it to create your own dictionary types with specialized behavior.
+  
+- **Isolation:**  
+  Custom behaviors defined in a subclass of UserDict do not affect the built-in dict type, ensuring that your customizations remain contained.
+
+---
+
+## Example: Preventing Insertion with a Custom push Method 🚫➕
+
+In the following example, we subclass UserDict to create a dictionary that does not allow pushing (i.e., adding) new elements. Instead of inserting a new key-value pair, the custom `push` method raises a `RuntimeError`.
+
+```python
+from collections import UserDict  # Import UserDict from the collections module 📦
+
+# Define a custom dictionary class that extends UserDict
+class MyDict(UserDict):
+    # Define a custom push method that prohibits insertion
+    def push(self, key, value):
+        raise RuntimeError("Cannot insert")  # Raises an error when trying to push a new element 🚫
+
+# Create an instance of MyDict with initial key-value pairs
+d = MyDict({'ab': 1, 'bc': 2, 'cd': 3})
+# Explanation:
+# - The dictionary d is initialized with three key-value pairs.
+# - It behaves like a normal dictionary until we call our custom method.
+
+# Attempt to push (insert) a new key-value pair
+d.push('b', 2)
+# Explanation:
+# - The push method is called with key 'b' and value 2.
+# - Instead of inserting the pair, it raises a RuntimeError as defined.
+```
+
+**Expected Output:**
+
+```plaintext
+RuntimeError: Cannot insert
+```
+
+---
+
+## Detailed Explanation of the Code 🔍💡
+
+1. **Importing UserDict:**
+   ```python
+   from collections import UserDict
+   ```
+   - **Purpose:**  
+     - This line imports the `UserDict` class from the `collections` module, making it available for subclassing.
+   - **Why?**  
+     - It allows you to create a custom dictionary with behaviors that extend or override the standard dictionary.
+
+2. **Defining the Custom Dictionary Class:**
+   ```python
+   class MyDict(UserDict):
+       def push(self, key, value):
+           raise RuntimeError("Cannot insert")
+   ```
+   - **What it does:**  
+     - A new class `MyDict` is defined that inherits from `UserDict`.
+     - The `push` method is added to `MyDict`. Instead of adding a key-value pair, this method immediately raises a `RuntimeError`.
+   - **Line-by-Line:**
+     - **`class MyDict(UserDict):`**  
+       - Declares a new class that extends `UserDict`, so it inherits all methods and behaviors of a normal dictionary.
+     - **`def push(self, key, value):`**  
+       - Defines a new method named `push` that accepts `key` and `value` as parameters.
+     - **`raise RuntimeError("Cannot insert")`**  
+       - When `push` is called, a `RuntimeError` with the message "Cannot insert" is raised. This prevents any insertion of new items via the push method.
+
+3. **Creating an Instance of MyDict:**
+   ```python
+   d = MyDict({'ab': 1, 'bc': 2, 'cd': 3})
+   ```
+   - **What it does:**  
+     - Instantiates an object `d` of type `MyDict` with initial key-value pairs.
+   - **Why?**  
+     - The object `d` now behaves like a regular dictionary with the added custom behavior from `MyDict`.
+
+4. **Attempting to Push a New Element:**
+   ```python
+   d.push('b', 2)
+   ```
+   - **What it does:**  
+     - Calls the custom `push` method on the `d` object with `'b'` as the key and `2` as the value.
+   - **Outcome:**  
+     - Instead of inserting the new key-value pair, the method raises a `RuntimeError` as defined in the class, preventing the insertion.
+
+
+---
+
+
+<div align="center">
+
+# `New Section UserList`
+
+</div>
