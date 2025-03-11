@@ -977,3 +977,108 @@ RuntimeError: Cannot insert
 # `New Section UserList`
 
 </div>
+
+
+# **UserList: Customizable List Wrapper** 📝🔧
+
+The **UserList** class, available in the `collections` module, is a container that wraps the built-in list object. It allows you to extend and customize the behavior of lists without modifying the built-in list type. This is especially useful when you want to enforce specific rules or add custom functionality to list operations.
+
+---
+
+## Why Use UserList? 🤔
+
+- **Customization:**  
+  With UserList, you can easily override or add new methods to enhance list behavior. For example, you might want to prevent insertion of new elements, validate items before adding, or log modifications.
+  
+- **Inheritance:**  
+  UserList serves as a base class that provides standard list methods, which you can extend in your own custom list classes.
+  
+- **Isolation:**  
+  Any custom behaviors you define remain isolated to your subclass, so the built-in list functionality is not affected.
+
+---
+
+## Example: Preventing Insertion with a Custom push Method 🚫➕
+
+In the following example, we subclass UserList to create a custom list called `MyList` that does not allow adding new elements via a custom `push` method. Instead of inserting a new element, the `push` method raises a `RuntimeError`.
+
+```python
+from collections import UserList  # Import UserList from the collections module 📦
+
+# Define a custom list class that extends UserList
+class MyList(UserList):
+    # Define a custom push method that prohibits insertion of new elements
+    def push(self, key):
+        raise RuntimeError("Cannot insert in the list")  # Raise an error if push is attempted 🚫
+
+# Create an instance of MyList with initial elements
+d = MyList([11, 12, 13])
+# Explanation:
+# - The MyList object 'd' is initialized with the list [11, 12, 13].
+# - It behaves like a regular list but includes our custom behavior.
+
+# Attempt to push (insert) a new element
+d.push(2)
+# Explanation:
+# - The push method is called with the element 2.
+# - Instead of adding the element to the list, the custom push method raises a RuntimeError.
+```
+
+**Expected Output:**
+
+```plaintext
+RuntimeError: Cannot insert in the list
+```
+
+---
+
+## Detailed Explanation of the Code 🔍💡
+
+1. **Importing UserList:**
+   ```python
+   from collections import UserList
+   ```
+   - **Purpose:**  
+     - This line imports the `UserList` class from the `collections` module, allowing us to create a custom list type.
+   - **Why:**  
+     - By using UserList, you inherit all standard list behaviors while gaining the ability to customize operations.
+
+2. **Defining the Custom List Class:**
+   ```python
+   class MyList(UserList):
+       def push(self, key):
+           raise RuntimeError("Cannot insert in the list")
+   ```
+   - **What it does:**  
+     - Defines a new class `MyList` that inherits from `UserList`.
+     - Adds a custom method `push` that takes a parameter `key`.
+   - **Line-by-Line:**
+     - **`class MyList(UserList):`**  
+       - Declares a new class that extends UserList, meaning it behaves like a list but can be customized.
+     - **`def push(self, key):`**  
+       - Defines the method `push`, intended to simulate adding a new element.
+     - **`raise RuntimeError("Cannot insert in the list")`**  
+       - Instead of inserting, the method raises a `RuntimeError` with the message "Cannot insert in the list", thereby preventing any addition of new elements.
+
+3. **Creating an Instance of MyList:**
+   ```python
+   d = MyList([11, 12, 13])
+   ```
+   - **What it does:**  
+     - Instantiates a new `MyList` object named `d` with initial elements `[11, 12, 13]`.
+   - **Why:**  
+     - This demonstrates that `d` initially behaves like a standard list with pre-populated elements.
+
+4. **Attempting to Push a New Element:**
+   ```python
+   d.push(2)
+   ```
+   - **What it does:**  
+     - Calls the custom `push` method on the `MyList` object `d` with the value `2`.
+   - **Outcome:**  
+     - Instead of adding the element, the method raises a `RuntimeError` as defined, preventing insertion.
+   - **Result:**  
+     - The program will output a `RuntimeError: Cannot insert in the list`, signaling that the custom behavior is in effect.
+
+---
+
