@@ -1082,3 +1082,100 @@ RuntimeError: Cannot insert in the list
 
 ---
 
+<div align="center">
+
+# `New Section UserString`
+
+</div>
+
+# **UserString: Customizable String Wrapper** 🔠🔧
+
+In Python, strings are sequences of characters that can be treated like arrays. The **UserString** class, available in the `collections` module, is a container that wraps a built-in string object. It allows you to extend or modify the functionality of strings without altering the built-in `str` type. This can be especially useful when you want to add custom behaviors to string operations.
+
+---
+
+## Why Use UserString? 🤔
+
+- **Customization:**  
+  UserString lets you create your own string-like classes with customized methods, making it possible to extend standard string functionality.
+- **Encapsulation:**  
+  By wrapping the built-in string, you can add new methods or modify existing ones while keeping the original string behavior intact.
+- **Flexibility:**  
+  Ideal for applications where you need strings with additional features, such as custom append, formatting, or validation functions.
+
+---
+
+## Example: Custom Append Function for a String 🚀✨
+
+In the example below, we subclass UserString to create a custom string class called `MyString`. This class adds an `append` method that allows you to concatenate additional text to the string.
+
+```python
+from collections import UserString  # Import UserString from the collections module 📦
+
+# Define a custom string class that extends UserString
+class MyString(UserString):
+    # Define a custom append method to add functionality for concatenating strings
+    def append(self, value):
+        self.data += value  # Append the given value to the underlying string stored in self.data
+
+# Create an instance of MyString with the initial value "data"
+s1 = MyString("data")
+print("Original:", s1)  # Expected output: Original: data
+
+# Use the custom append method to concatenate 'h' to the string
+s1.append('h')
+print("After append:", s1)  # Expected output: After append: datah
+```
+
+**Line-by-Line Explanation:**
+
+1. **`from collections import UserString`**  
+   👉 **Purpose:**  
+      - This line imports the `UserString` class from the `collections` module, allowing us to create a custom string wrapper.  
+   👉 **Why:**  
+      - To extend string functionalities without modifying the built-in `str` type.
+
+2. **Defining the Custom Class `MyString`:**
+   ```python
+   class MyString(UserString):
+       def append(self, value):
+           self.data += value
+   ```
+   - **What It Does:**  
+     - A new class, `MyString`, is defined that inherits from `UserString`.
+     - The class includes a custom method `append` to add a new string to the existing string.
+   - **Detailed Breakdown:**  
+     - **`class MyString(UserString):`**  
+       - Declares `MyString` as a subclass of `UserString`, inheriting all its properties.
+     - **`def append(self, value):`**  
+       - Defines a new method `append` that takes a parameter `value` representing the string to be appended.
+     - **`self.data += value`**  
+       - Updates the underlying string (`self.data`) by concatenating the new value to it.
+
+3. **Creating an Instance of MyString:**
+   ```python
+   s1 = MyString("data")
+   print("Original:", s1)
+   ```
+   - **What It Does:**  
+     - An instance of `MyString` is created with the initial value `"data"`.
+     - The `print` function displays the original string.
+   - **Expected Output:**  
+     - `Original: data`
+   - **Why:**  
+     - To verify that our custom string object is initialized correctly.
+
+4. **Using the Custom Append Method:**
+   ```python
+   s1.append('h')
+   print("After append:", s1)
+   ```
+   - **What It Does:**  
+     - Calls the `append` method on the `MyString` object `s1` to concatenate the character `'h'` to the existing string.
+     - The updated string is printed.
+   - **Expected Output:**  
+     - `After append: datah`
+   - **Why:**  
+     - To demonstrate that the custom `append` method successfully modifies the underlying string by appending the new value.
+
+---
