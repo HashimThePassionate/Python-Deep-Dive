@@ -613,3 +613,126 @@ print(dd)
   Ideal for counting occurrences or aggregating values.
 
 ---
+
+<div align="center">
+
+# `New Section ChainMap`
+
+</div>
+
+# **ChainMap: Combining Multiple Dictionaries into a Single View** 🔗🗂️
+
+A **ChainMap** is a data structure in the `collections` module that groups multiple dictionaries (or other mappings) into a single, unified view. When you search for a key in a ChainMap, it checks each dictionary in order—returning the value from the first dictionary where the key is found. This makes it an excellent tool for scenarios like managing configurations or merging contexts.
+
+---
+
+## How ChainMap Works 🤔
+
+- **Multiple Mappings:**  
+  A ChainMap combines several dictionaries into one view. You can pass two or more dictionaries when creating a ChainMap.
+  
+- **Search Order:**  
+  When you look up a key, the ChainMap searches each dictionary in the order they were provided. The first occurrence of the key is returned.
+  
+- **Unified View:**  
+  Although the underlying dictionaries remain separate, the ChainMap provides a unified mapping interface. You can access keys, values, and iterate over the ChainMap just as you would with a regular dictionary.
+
+---
+
+## Example Code with Detailed Explanations
+
+Below is an example that demonstrates how to create a ChainMap, access its keys and values, and retrieve items from it.
+
+```python
+from collections import ChainMap  # Import the ChainMap class from the collections module 📦
+
+# Create two dictionaries
+dict1 = {"data": 1, "structure": 2}      # First dictionary with two key-value pairs 🗃️
+dict2 = {"python": 3, "language": 4}       # Second dictionary with two key-value pairs 📚
+
+# Combine the dictionaries using ChainMap
+chain = ChainMap(dict1, dict2)             # Creates a ChainMap that combines dict1 and dict2 🔗
+# Explanation:
+# - The ChainMap will first search in dict1; if the key is not found, it will search dict2.
+
+# Print the ChainMap
+print(chain)
+# Expected output:
+# ChainMap({'data': 1, 'structure': 2}, {'python': 3, 'language': 4})
+# This shows that the ChainMap holds the two dictionaries.
+
+# Get and print all keys from the ChainMap
+print(list(chain.keys()))
+# Explanation:
+# - list(chain.keys()) collects keys from both dictionaries.
+# Expected output (order depends on internal implementation):
+# ['python', 'language', 'data', 'structure']
+
+# Get and print all values from the ChainMap
+print(list(chain.values()))
+# Explanation:
+# - list(chain.values()) collects values corresponding to the keys.
+# Expected output:
+# [3, 4, 1, 2]
+
+# Access a key that exists in the first dictionary (dict1)
+print(chain["data"])
+# Explanation:
+# - 'data' is found in dict1, and its value (1) is returned.
+# Expected output: 1
+
+# Access a key that exists in the second dictionary (dict2)
+print(chain["language"])
+# Explanation:
+# - 'language' is not in dict1, so the ChainMap checks dict2, where it is found with value 4.
+# Expected output: 4
+```
+
+**Line-by-Line Explanation:**
+
+1. **`from collections import ChainMap`**  
+   👉 Imports the `ChainMap` class, allowing you to combine multiple dictionaries into a single view.
+
+2. **`dict1 = {"data": 1, "structure": 2}`**  
+   👉 Creates the first dictionary, `dict1`, with keys `"data"` and `"structure"` and their corresponding values.
+
+3. **`dict2 = {"python": 3, "language": 4}`**  
+   👉 Creates the second dictionary, `dict2`, with keys `"python"` and `"language"`.
+
+4. **`chain = ChainMap(dict1, dict2)`**  
+   👉 Combines `dict1` and `dict2` into a single ChainMap called `chain`.  
+   👉 **Internal Behavior:**  
+      - The ChainMap maintains the order: it will first search in `dict1`, then in `dict2`.
+
+5. **`print(chain)`**  
+   👉 Displays the entire ChainMap, showing both dictionaries.  
+   👉 **Output:**  
+      - `ChainMap({'data': 1, 'structure': 2}, {'python': 3, 'language': 4})`
+
+6. **`print(list(chain.keys()))`**  
+   👉 Retrieves and prints a list of all keys in the ChainMap.  
+   👉 **Note:**  
+      - The order of keys may vary based on internal dictionary ordering.  
+   👉 **Example Output:**  
+      - `['python', 'language', 'data', 'structure']`
+
+7. **`print(list(chain.values()))`**  
+   👉 Retrieves and prints a list of all values in the ChainMap corresponding to the keys.  
+   👉 **Example Output:**  
+      - `[3, 4, 1, 2]`
+
+8. **`print(chain["data"])`**  
+   👉 Accesses the value associated with the key `"data"`.  
+   👉 **Explanation:**  
+      - `"data"` is found in `dict1`, so its value `1` is returned.  
+   👉 **Output:**  
+      - `1`
+
+9. **`print(chain["language"])`**  
+   👉 Accesses the value associated with the key `"language"`.  
+   👉 **Explanation:**  
+      - `"language"` is not found in `dict1`, so the ChainMap checks `dict2` where it is found with value `4`.  
+   👉 **Output:**  
+      - `4`
+
+---
