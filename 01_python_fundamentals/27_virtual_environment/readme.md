@@ -55,3 +55,28 @@ No conflicts! Both can run on the same computer without clashing.
 
 ---
 
+# 🏗 What Are `venv` and `virtualenv`?
+
+- **`virtualenv`**: A library that creates virtual environments for your Python projects.
+- **`venv`** (available by default in Python 3.3+): A built-in tool that acts almost like a drop-in replacement for `virtualenv`.
+
+Both help you avoid conflicts between different projects’ dependencies.
+
+---
+
+## 📂 Where Should You Put Your Environment?
+
+Instead of creating your `env` (or `.venv`, `venv`) **inside** the project folder, you can keep it somewhere else. Why?
+
+1. **Faster & Lighter Backups**  
+   If you keep the environment **outside** your main project, you don’t waste time and space backing up all the installed packages again and again.
+
+2. **Portability**  
+   You can move or share your project without dragging along its virtual environment. This means you can store your project on a flash drive or remote drive and keep it super portable.
+
+3. **No Source Control Bloats**  
+   Virtual environment files can clutter your version control system (like Git). If the environment is outside the project, you won’t risk accidentally uploading these files.
+
+> **Tip**: If you do keep the environment in your project, remember to add the environment folder (for example, `.venv`) to your `.gitignore` or similar files so it’s not committed to source control.
+
+---
