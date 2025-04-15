@@ -7,3 +7,4 @@ migrations/
 *.dir
 .mypy_cache/
 .pytest_cache/
+envs/
