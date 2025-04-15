@@ -253,3 +253,49 @@ envs\your_env\Scripts\Activate.ps1
 2. Your prompt changes to `(your_env)`—a clear reminder you’re using a separate environment.
 
 ---
+
+# 🚀 Installing Packages in Your Virtual Environment
+
+Below is a **simple** explanation of how to install Python packages inside a virtual environment, see which packages you’ve installed, and optionally share packages between your system and your virtual environment.
+
+---
+
+## 🍃 Isolated Package Installs
+
+### Basic Installation
+When your virtual environment is **activated**, you can install packages as usual:
+```bash
+pip3 install <package>
+```
+All installed packages are kept **separate** from your system’s global Python packages.
+
+### Listing Installed Packages
+```bash
+pip3 freeze
+```
+You’ll see only the packages (and dependencies) installed **in** your virtual environment – no extra clutter.
+
+---
+
+## 🔗 Using System Packages (Optional)
+
+Sometimes, you might want your environment to access **system** packages (for example, you have a system-installed package that you don’t want to reinstall). In that case, you can create the environment like this:
+```bash
+python.exe -m venv --system-site-packages envs/your_env
+```
+This tells Python to **append** system packages to your environment’s search path:
+- If a package isn’t found in the environment, Python will check your system’s global packages.
+
+### Listing Only Local Packages
+If you choose to allow system packages, your `pip3 freeze` might show **everything**, including system-wide packages. To limit the listing to **just** local packages:
+```bash
+pip3 freeze --local
+```
+You’ll then see only the packages actually installed in your virtual environment, ignoring any system-wide packages.
+
+
+Explicitly installing or updating a package within your virtual environment will effectively
+hide the system package from within your virtual environment. Uninstalling the package
+from your virtual environment will make it reappear.
+
+---
