@@ -447,3 +447,142 @@ This means “3.46 or above, but skip exactly 3.47.0.”
    - Use `pip freeze -r requirements.txt` to see newly added or changed packages.
 
 ---
+
+#  **Installing Packages from Source Repositories** 📚
+
+## 1. Installing Packages Directly from a Git Repository 🐙
+
+Sometimes, a package fix **hasn’t** been officially released, but you need it right away. If the fix exists on a repository’s **development** branch (or any branch/tag/commit), you can install from source.
+
+### Basic Example
+
+```bash
+pip3 install --editable \
+  git+https://github.com/WoLpH/python-progressbar.git@develop#egg=progressbar2
+```
+
+**Detailed Explanation**:
+- **`pip3 install`**: Standard pip installation command.
+- **`--editable`** or `-e`:  
+  - Tells pip to **clone** the repository into your environment’s `src/` folder.  
+  - Allows you to **re-run** the command later to pull the latest changes from the repo (e.g., if more commits were made).  
+  - Lets you **edit** the source code in place. Super handy for:
+    - **Debugging** or exploring how the library works.  
+    - **Contributing** a pull request back to the library.
+- **`git+https://github.com/WoLpH/python-progressbar.git@develop#egg=progressbar2`**:  
+  - `git+<URL>`: The **Git** protocol prefix so pip knows to treat it like a Git repo.  
+  - `@develop`: Specifies which **branch** (or commit/tag) to install from.  
+  - `#egg=progressbar2`: Tells pip the **package name**.
+
+> **Tip**: The `@develop` part can be replaced with any **branch**, **tag**, or **commit hash** you want. Perfect for grabbing exactly the code you need! 💡
+
+### Other Version Control Systems
+
+Besides **Git**, pip supports installing from:
+- **Mercurial** (`hg+<URL>`)
+- **Subversion** (`svn+<URL>`)
+- **Bazaar** (`bzr+<URL>`)
+
+Syntax is similar; just replace `git+` with `hg+`, `svn+`, or `bzr+`. 🗃
+
+---
+
+## 2. Extras: Installing Optional Dependencies 🍱
+
+Some packages provide **optional features** that require additional dependencies. These features are grouped under **“extras”**. Think of it like a buffet 🍛—you can pick and choose the extra pieces you want!
+
+### Basic Syntax
+
+```bash
+pip3 install "package_name[extra1, extra2]"
+```
+- The **square brackets** follow the core package’s name.
+- Separate multiple extras with commas.
+
+### Example 1: `progressbar2`
+
+```bash
+pip3 install "progressbar2[docs,tests]"
+```
+- **docs** extra: Installs documentation-building tools (like `Sphinx`).  
+- **tests** extra: Installs test framework dependencies (like `pytest`).
+
+### Example 2: `requests`
+
+```bash
+pip3 install "requests[security]"
+```
+- The **security** extra includes additional libraries (e.g., `pyOpenSSL`) for more secure connections.
+
+**Detailed Explanation**:
+- Packages define **extras** in their setup or configuration files.  
+- Installing with **extras** ensures those additional dependencies are fetched at the same time, so you don’t have to install them manually one by one. 🎉
+
+---
+
+## 3. Conditional Dependencies (Environment Markers) ⚙️
+
+If your library **only** needs certain dependencies on **Windows** or if it **only** needs a special library for Python versions below 3.7, you can use **environment markers**. They let you conditionally specify dependencies based on factors like:
+
+- Operating System  
+- Python Version  
+- CPU Architecture  
+- …and more!
+
+### Example 1: Windows-Only Dependency
+
+```bash
+pywin32!=226; platform_system == "Windows"
+```
+
+**Detailed Explanation**:
+- `pywin32` is a package that provides Windows-specific functionalities.  
+- `!=226`: Excludes version `226` due to a known bug. 🐞  
+- `platform_system == "Windows"`: Only install `pywin32` if you’re on Windows.
+
+### Example 2: Python Version Condition
+
+```bash
+dataclasses; python_version < '3.7'
+```
+
+**Detailed Explanation**:
+- The `dataclasses` module is built into Python 3.7+.  
+- If your project must run on older Python versions (3.6 or below), you need the backport from PyPI.  
+- This marker ensures **only** Python 3.6 (or older) will install the `dataclasses` library.
+
+### Common Markers
+
+- **`platform_system`**: `'Windows'`, `'Linux'`, `'Darwin'`  
+- **`python_version`**: e.g., `<= '3.6'`  
+- **`platform_machine`**: e.g., `'x86_64'`  
+- **`platform_python_implementation`**: e.g., `'CPython'`, `'PyPy'`  
+
+> For more, see [PEP 508 (environment markers)](https://peps.python.org/pep-0508/) and [PEP 440 (versioning)](https://peps.python.org/pep-0440/). 📝
+
+---
+
+## 4. Storing These Dependencies in `requirements.txt` or Setup Files 📄
+
+### In `requirements.txt`
+
+You can specify extras or VCS installs **directly** in `requirements.txt`:
+
+```txt
+-e git+https://github.com/WoLpH/python-progressbar.git@develop#egg=progressbar2
+progressbar2[docs,tests]
+pywin32!=226; platform_system == "Windows"
+dataclasses; python_version < '3.7'
+```
+
+Then install everything with:
+```bash
+pip3 install -r requirements.txt
+```
+(It’s that easy! ✨)
+
+### In `setup.py` or `pyproject.toml`
+
+If you’re building a **distributable** Python package, you can place these markers and extras in your **setup** configuration so that when others install your package, they also see these optional or conditional dependencies. Tools like **Poetry** or **pipenv** let you define these conditions in a structured format.
+
+---
