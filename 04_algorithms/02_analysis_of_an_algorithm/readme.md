@@ -283,15 +283,21 @@ print(squares(nums))               # Output: [4, 9, 25, 64]
 
 ## Analyzing the Memory Usage 📊
 
-- **Input Storage:** The original list `n` uses \(O(n)\) space.  
+- **Input Storage:**  
+  The original list `n` uses **O(n)** space.
+
 - **Auxiliary Space:**  
-  - `square_numbers` grows to size \(n\), so \(O(n)\).  
-  - Loop variables and function call overhead are \(O(1)\).  
+  - The `square_numbers` list grows to size **n**, so it requires **O(n)** space.  
+  - Loop variables and function call overhead remain constant at **O(1)**.
+
 - **Total Space Complexity:**  
-  \[
-    \underbrace{O(n)}_{\text{input}} + \underbrace{O(n)}_{\text{output}} + \underbrace{O(1)}_{\text{overhead}}
-    = O(n)
-  \]
+  We sum up the three components:
+  ```markdown
+  O(n)   ← input storage  
+  + O(n) ← output list  
+  + O(1) ← overhead  
+  = O(n)
+  ```
 
 ---
 
