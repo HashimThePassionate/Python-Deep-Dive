@@ -319,3 +319,60 @@ print(squares(nums))               # Output: [4, 9, 25, 64]
 - **Practical Takeaway:** For large inputs, prefer algorithms whose space grows linearly (\(O(n)\)) or better (\(O(\log n)\), \(O(1)\)) rather than quadratic or worse.
 
 ---
+
+## **Asymptotic Notation** 📈
+
+When input sizes get large, we focus on how an algorithm’s running time **grows** rather than its exact runtime. Asymptotic analysis lets us:
+
+- **Ignore** lower‑order terms (e.g. the “+ 2n” in 3n² + 2n + 1)  
+- **Drop** constant multipliers (e.g. the “3” in 3n²)  
+- Compare algorithms by their **order of growth** (how they scale)
+
+---
+
+### Why It Matters 🎯
+
+- Helps predict performance for very large inputs  
+- Makes it easy to compare algorithms across different machines  
+- Guides you to choose the most scalable solution
+
+---
+
+### Common Notations 🔣
+
+| Notation | Meaning                                           | Reads As                                          |
+|----------|---------------------------------------------------|---------------------------------------------------|
+| **Θ(f(n))** | **Tight bound**: the running time grows exactly on the order of f(n)   | “Theta of f of n”                                 |
+| **O(f(n))** | **Upper bound**: the running time grows at most on the order of f(n)   | “Big‑O of f of n”                                 |
+| **Ω(f(n))** | **Lower bound**: the running time grows at least on the order of f(n)  | “Omega of f of n”                                 |
+
+- **Θ(f(n))** means the algorithm’s time is both O(f(n)) and Ω(f(n)).  
+- **O(f(n))** guarantees the runtime will **not exceed** some constant × f(n) for large n.  
+- **Ω(f(n))** guarantees the runtime will be **at least** some constant × f(n) for large n.  
+
+---
+
+### How to Simplify a Function 🧮
+
+Given a running‑time expression, say:
+
+```
+T(n) = 3n^2 + 2n + 1
+```
+
+1. **Drop lower‑order term** (`2n` and `1`)  
+2. **Ignore constant factor** (`3`)  
+3. Conclude **T(n) is O(n²)**, Ω(n²), and therefore Θ(n²)
+
+---
+
+### Quick Reference Table 📊
+
+| Expression         | Simplified Bound | Example Notation |
+|--------------------|------------------|------------------|
+| 5n + 20            | O(n)             | O(n)             |
+| n log n + 100     | O(n log n)       | Θ(n log n)       |
+| 2n² + 7n + 10     | Θ(n²)            | Ω(n²)            |
+| 100               | O(1)             | Θ(1), Ω(1)       |
+
+---
