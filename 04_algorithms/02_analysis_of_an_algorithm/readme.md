@@ -219,3 +219,97 @@ Index position for the element x is: 1
   \( O(1) \) — When the element is at the first position.
 
 ---
+
+# **Space Complexity: Estimating Memory Requirements** 💾🔍
+
+## Overview
+
+**Space complexity** measures the total amount of memory an algorithm needs to run, expressed as a function of the input size, \(n\). It accounts for:
+
+- **Fixed Overhead:** Memory for variables, constants, and program instructions.  
+- **Auxiliary Space:** Additional data structures or temporary storage used during execution.  
+- **Input Storage:** Space required to hold the input data itself.
+
+An algorithm with lower space complexity is often preferred when working with large inputs or memory-constrained environments.
+
+---
+
+## Why It Matters 🎯
+
+- **Resource Constraints:** Embedded systems, mobile devices, or large-scale data processing may have limited memory.  
+- **Performance Trade‑offs:** Sometimes you can trade time for space or vice versa—knowing space requirements helps make informed decisions.  
+- **Scalability:** As \(n\) grows, algorithms with high space usage may become impractical.
+
+---
+
+## Worked Example: Computing Squares of a List 📐✨
+
+```python
+def squares(n):
+    square_numbers = []            # O(1) fixed overhead + O(n) for the list
+    for number in n:               # Loop over each of the n input elements
+        square_numbers.append(     # Appending takes O(1) time and O(1) extra space each
+            number * number
+        )
+    return square_numbers          # Returns a new list of size n
+
+nums = [2, 3, 5, 8]
+print(squares(nums))               # Output: [4, 9, 25, 64]
+```
+
+### Line-by-Line Explanation 🔍
+
+1. **`def squares(n):`**  
+   - Declares a function that accepts a list `n` of size \(n\).  
+   - **Space Impact:** Minimal—only the function call stack and parameter reference.  
+
+2. **`square_numbers = []`**  
+   - Initializes an empty list to hold results.  
+   - **Space Impact:** Creates an empty list structure; will grow to size \(n\).  
+
+3. **`for number in n:`**  
+   - Iterates over each input element.  
+   - **Space Impact:** Does not allocate extra memory per iteration (uses loop variable only).  
+
+4. **`square_numbers.append(number * number)`**  
+   - Computes the square and appends it.  
+   - **Space Impact:** Each append increases the result list by one element; after \(n\) iterations, the list is size \(n\).  
+
+5. **`return square_numbers`**  
+   - Returns a new list containing \(n\) squared values.  
+   - **Space Impact:** Final output list requires \(O(n)\) space.  
+
+---
+
+## Analyzing the Memory Usage 📊
+
+- **Input Storage:** The original list `n` uses \(O(n)\) space.  
+- **Auxiliary Space:**  
+  - `square_numbers` grows to size \(n\), so \(O(n)\).  
+  - Loop variables and function call overhead are \(O(1)\).  
+- **Total Space Complexity:**  
+  \[
+    \underbrace{O(n)}_{\text{input}} + \underbrace{O(n)}_{\text{output}} + \underbrace{O(1)}_{\text{overhead}}
+    = O(n)
+  \]
+
+---
+
+## Comparing Space Complexity 🚥
+
+| **Algorithm**        | **Space Complexity** | **When to Choose**                                    |
+|----------------------|----------------------|--------------------------------------------------------|
+| **In-Place Sort**    | \(O(1)\)             | Memory-critical environments; small constant overhead. |
+| **Merge Sort**       | \(O(n)\)             | When stable sorting of large datasets is required.     |
+| **This `squares`**   | \(O(n)\)             | Needs to produce a list of results of size \(n\).      |
+| **Other Approaches** | \(O(n \log n)\)      | If using auxiliary trees or heaps for data processing. |
+
+---
+
+## Asymptotic Efficiency 🔄
+
+- **Asymptotic Analysis:** Focuses on growth rates for very large \(n\).  
+- **Big O Notation:** Abstracts away constants to compare algorithms at scale.  
+- **Practical Takeaway:** For large inputs, prefer algorithms whose space grows linearly (\(O(n)\)) or better (\(O(\log n)\), \(O(1)\)) rather than quadratic or worse.
+
+---
