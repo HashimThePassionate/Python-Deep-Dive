@@ -209,6 +209,138 @@ Assume each statement takes a constant time: ( c1, c2, c3, c4, c5 ) for statemen
 
 This example shows how the **frequency of execution** (e.g., once for condition vs. ( n ) times for loop) and **statement times** (( c1, c2, etc. )) determine the runtime. For small ( n ) (like 0 or 3), the constant-time path (( T(n) = c1 + c2 )) is super fast. For large ( n ) (like 1000), the loop path (( T(n) = c1 + c3 + c4 \* n + c5 \* n )) takes much longer because of the ( n ) repetitions. Understanding this helps us predict and optimize algorithm performance! 💡
 
+# Linear Search Runtime Analysis ⏱️✨
+
+Let's dive into **linear search**, a simple algorithm that looks for an element in a list by checking each item one by one. We’ll analyze its **worst-case**, **average-case**, and **best-case** time complexities to see how it performs under different conditions. Each case depends on the number of **comparisons**—the key operation driving the runtime. Let’s explore with a Python example and break it down step-by-step! 🐍📈
+
+## Linear Search: The Code 🔍
+
+Here’s the linear search algorithm we’re analyzing. It searches for an element in a list and returns its index (or -1 if not found).
+
+```python
+def linear_search(input_list, element):
+    for index, value in enumerate(input_list):
+        if value == element:
+            return index
+    return -1
+
+# Test
+input_list = [3, 4, 1, 6, 14]
+element = 4
+print("Index position for the element x is:", linear_search(input_list, element))
+# Output: Index position for the element x is: 1
+```
+
+**What Does It Do?**\
+The `linear_search` function takes a list (`input_list`) and an `element` to find. It checks each item in the list:
+
+- If the element is found, it returns the **index** (e.g., `4` is at index 1).
+- If the element isn’t in the list, it returns `-1`.\
+  The **key operation** is the comparison (`if value == element`), which happens for each element until a match is found or the list ends. Let’s see how this affects runtime in different scenarios! 🌟
+
+## Analyzing Time Complexity 📊
+
+Time complexity measures how an algorithm’s runtime scales with input size (`n`, the number of elements in the list). We’ll look at three cases: **worst-case**, **average-case**, and **best-case**, focusing on the number of comparisons needed.
+
+### 1. Worst-Case Time Complexity 😓
+
+The **worst-case** represents the maximum time an algorithm takes for any input. It’s the upper bound, guaranteeing that the runtime won’t exceed this limit no matter what.
+
+**In Linear Search**:
+
+- The worst-case occurs when:
+  - The element is at the **last position** in the list, or
+  - The element is **not in the list** at all.
+- In these scenarios, the algorithm must check **every element**, traversing the entire list of `n` elements.
+
+**Example**:
+
+- For `input_list = [3, 4, 1, 6, 14]` and `element = 14` (last element), it takes 5 comparisons (checking indices 0 to 4).
+- For `element = 10` (not in the list), it also takes 5 comparisons to check all elements and return -1.
+
+**Time Complexity**:
+
+- Each comparison takes constant time (say, `c`).
+- In the worst-case, `n` comparisons are needed for `n` elements.
+- Total time: **T(n) = c \* n**, which is **O(n)** (linear time).
+- This means the runtime grows directly with the list size `n`. 📉
+
+**Why It Matters**:\
+Worst-case analysis is super useful because it provides a **guarantee**—the algorithm will never take longer than `O(n)` for any input. This is often used in real-world applications to ensure predictable performance. ✅
+
+### 2. Average-Case Time Complexity 🤔
+
+The **average-case** measures the average time an algorithm takes across **all possible inputs**. For linear search, we assume the element could be at any index (or not in the list), with each position being equally likely.
+
+**In Linear Search**:
+
+- If the element is in the list, the number of comparisons depends on its position:
+  - At index 0: 1 comparison.
+  - At index 1: 2 comparisons.
+  - At index 2: 3 comparisons.
+  - ... up to index n-1: n comparisons.
+- We typically assume the element is found (for simplicity) and calculate the average number of comparisons across all positions.
+
+**Calculation**:
+
+- Total comparisons if the element is at each index: 1 + 2 + 3 + ... + n.
+- This is an arithmetic series with sum: **(n \* (n + 1)) / 2**.
+- Average comparisons: **\[(n \* (n + 1)) / 2\] / n = (n + 1) / 2**.
+- Each comparison takes constant time (`c`), so average-case time:\
+  **T(n) = c \* (n + 1) / 2**, which is **O(n)** (linear time).
+
+**Example**:
+
+- For a list with 5 elements (`n = 5`):
+  - Total comparisons: 1 + 2 + 3 + 4 + 5 = 15.
+  - Average: 15 / 5 = 3 comparisons.
+- On average, you’ll check about half the list to find the element. 🔄
+
+**Why It Matters**:\
+Average-case is great for understanding typical performance when inputs are random. It assumes the element is equally likely to be anywhere, which may not always hold true but gives a realistic estimate. 📊
+
+### 3. Best-Case Time Complexity 😎
+
+The **best-case** is the minimum time an algorithm takes. It’s the lower bound, showing how fast the algorithm can be under ideal conditions.
+
+**In Linear Search**:
+
+- The best-case happens when the element is at the **first position** (index 0).
+- Only **one comparison** is needed to find the element and return its index.
+
+**Example**:
+
+- For `input_list = [3, 4, 1, 6, 14]` and `element = 3`, the first comparison (index 0) finds the element.
+- Comparisons: 1.
+
+**Time Complexity**:
+
+- One comparison takes constant time (`c`).
+- Total time: **T(n) = c**, which is **O(1)** (constant time).
+- The runtime doesn’t depend on `n`—it’s always one comparison. 🚀
+
+**Why It’s Less Used**:\
+Best-case is less practical because it only occurs in ideal scenarios. It doesn’t guarantee performance for typical or worst inputs, so it’s rarely used for planning. 🌈
+
+## Relating to the Code 🎯
+
+Let’s connect the analysis back to the example:
+
+```python
+input_list = [3, 4, 1, 6, 14]
+element = 4
+# Output: Index position for the element x is: 1
+```
+
+- **Best-Case**: If `element = 3`, it’s found at index 0 with 1 comparison. **T(n) = O(1)**. 😊
+- **Average-Case**: On average, it takes \~3 comparisons for `n = 5` (as calculated). For `element = 4`, it took 2 comparisons (indices 0 and 1), which is close to the average. **T(n) = O(n)**. 🤝
+- **Worst-Case**: If `element = 14` or a missing element like 10, it takes 5 comparisons to check the whole list. **T(n) = O(n)**. 🥳
+
+## Key Takeaways 💡
+
+- **Worst-Case (O(n))**: Most used because it guarantees the runtime won’t exceed `n` comparisons, no matter where the element is (or if it’s missing). Perfect for real-world reliability. 🛡️
+- **Average-Case (O(n))**: Useful for random inputs, showing you’ll typically check about half the list. Still linear, but a bit optimistic. 📉
+- **Best-Case (O(1))**: Only happens when the element is first, which is rare and not a reliable measure for planning. 🌟
 
 ---
 
