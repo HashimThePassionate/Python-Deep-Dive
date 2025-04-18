@@ -525,3 +525,120 @@ Asymptotic notation simplifies algorithm comparison by focusing on **growth rate
 - **Theta** nails down the exact pace your algorithm usually runs at. 🎯
 - **Omega** shows the fastest it can go in a perfect world. 🌈
 - It lets us pick the **most efficient algorithm** for large inputs without sweating small details like constants or hardware differences.
+
+---
+
+# **Theta Notation** ⏱️✨
+
+Dive into **Theta notation (θ)**, a powerful way to understand an algorithm’s **worst-case runtime** with precision! Theta notation gives us a **tight bound**, meaning it describes the exact rate at which an algorithm’s time grows as the input size (`n`) gets large—no overestimating or underestimating. Let’s break it down with examples and see why it’s so useful for comparing algorithms! 🧠🚀
+
+## What is Theta Notation? 🔍
+
+Theta notation tells us how an algorithm’s runtime behaves **exactly** in the worst-case scenario for large inputs. It’s like fitting a glove perfectly—not too loose (like Big-O) or too specific (like exact seconds). When we say an algorithm’s runtime is **θ(f(n))**, it means the time grows at the same rate as `f(n)`, within a well-defined range.
+
+<div align="center">
+  <img src="./images/01.jpg" alt="" width="400px"/>
+</div>
+
+**How It Works**:
+
+- We find two constants, `c1` and `c2`, and a starting point `n0` such that: **0 ≤ c1 \* f(n) ≤ T(n) ≤ c2 \* f(n)** for all `n ≥ n0`.
+- Here, `T(n)` (the actual runtime) always stays between `c1 * f(n)` (a lower bound) and `c2 * f(n)` (an upper bound) for big `n`.
+- This “sandwich” proves `T(n)` grows **exactly** like `f(n)`!
+
+**Why It Matters**:
+
+- Theta notation helps us compare algorithms accurately. An algorithm with a lower Theta bound (e.g., θ(n) vs. θ(n²)) is more efficient for large inputs.
+- For small inputs, constants or minor terms might make a slower algorithm seem faster, but Theta focuses on the **long-term growth rate**, which rules for big data! 📈
+
+Think of the graph you shared: `T(n)` (the blue line) stays snugly between `c1 * f(n)` (green line) and `c2 * f(n)` (brown line) after `n0`, showing a perfect fit for the growth rate! 🖼️
+
+## Mathematical Examples 📝
+
+Let’s see Theta notation in action with two mathematical functions to understand how we find tight bounds.
+
+### Example 1: f(n) = n² + n (θ(n²)) 🧮
+
+We want to prove that `f(n) = n² + n` has a Theta bound of **θ(n²)**.
+
+- **Goal**: Find constants `c1`, `c2`, and `n0` such that: **0 ≤ c1 \* n² ≤ n² + n ≤ c2 \* n²** for all `n ≥ n0`.
+- **Simplify**:
+  - Divide everything by `n²`: **0 ≤ c1 ≤ 1 + 1/n ≤ c2**.
+  - For large `n`, `1/n` becomes tiny, so it’s roughly `c1 ≤ 1 ≤ c2`.
+- **Choose Constants**:
+  - Let’s pick `c1 = 1`, `c2 = 2`, and `n0 = 1`.
+  - Check: **0 ≤ n² ≤ n² + n ≤ 2n²** for `n ≥ 1`.
+    - Left: `n² ≤ n² + n` is true (since `n` is positive).
+    - Right: `n² + n ≤ 2n²` is true (since `n` adds less than another `n²`).
+- **Result**: The condition holds, so `f(n) = n² + n` is **θ(n²)**! 🎉
+
+**Takeaway**: The `n²` term dominates, and `n` becomes negligible for large `n`, confirming a quadratic growth rate.
+
+### Example 2: f(n) = (n²/2) + (n/2) (θ(n²)) 📐
+
+Now, let’s prove that `f(n) = (n²/2) + (n/2)` is also **θ(n²)**.
+
+- **Goal**: Find `c1`, `c2`, and `n0` such that: **0 ≤ c1 \* n² ≤ (n²/2) + (n/2) ≤ c2 \* n²** for all `n ≥ n0`.
+- **Choose Constants**:
+  - Let’s try `c1 = 1/5`, `c2 = 1`, and `n0 = 1`.
+  - Check: **0 ≤ n²/5 ≤ (n²/2) + (n/2) ≤ n²** for `n ≥ 1`.
+    - Left: `n²/5 ≤ (n²/2) + (n/2)` is true (since `n²/2` is larger, and `n/2` adds extra margin).
+    - Right: `(n²/2) + (n/2) ≤ n²` is true (since `n²/2` is half, and `n/2` is much smaller than `n²`).
+- **Result**: The condition satisfies, so `f(n) = (n²/2) + (n/2)` is **θ(n²)**! 🥳
+
+**Takeaway**: Again, `n²` drives the growth, and constants like `1/2` or small terms like `n/2` don’t change the quadratic rate for large `n`.
+
+## Python Example: Sum of Squares (θ(n)) 🐍
+
+Let’s bring Theta notation to life with a practical algorithm that calculates the sum of squares of all elements in a list. This has a linear worst-case runtime.
+
+```python
+def sum_of_squares(input_list):
+    total = 0  # Store the sum
+    for num in input_list:  # Loop through each element
+        total += num * num  # Add square
+    return total
+
+# Test
+input_list = [2, 3, 4]
+print("Sum of squares:", sum_of_squares(input_list))  # Output: Sum of squares: 29 (4 + 9 + 16)
+```
+
+### Theta Analysis 📊
+
+- **What It Does**: The algorithm computes the square of each element and adds them to a running total. It processes every element exactly once.
+- **Runtime (T(n))**:
+  - The loop runs `n` times (for `n` elements).
+  - Each iteration does constant-time operations:
+    - `num * num` (multiplication): constant time, say `c1`.
+    - `total += ...` (addition): constant time, say `c2`.
+  - Total runtime: **T(n) = n \* (c1 + c2)**.
+- **Theta Bound**:
+  - The runtime grows **exactly linearly** with `n` because it always performs `n` iterations.
+  - We can define constants to bound it:
+    - Lower bound: `c1 * n ≤ T(n)`—let `c1 = (c1 + c2)/2`.
+    - Upper bound: `T(n) ≤ c2 * n`—let `c2 = c1 + c2`.
+    - For `n0 = 1`, the condition holds: **c1 \* n ≤ n \* (c1 + c2) ≤ c2 \* n** for all `n ≥ 1`.
+  - Thus, **T(n) = θ(n)**—the runtime is precisely linear! 🎯
+- **Why θ(n)?**: Whether the input is big or small, the algorithm always does `n` operations—no more, no less. Theta captures this exact linear growth perfectly.
+
+**Takeaway**: This algorithm’s worst-case runtime is **θ(n)**, meaning it scales linearly and predictably, making Theta notation ideal for describing its behavior. 🌈
+
+## Why Theta Notation Rocks 💡
+
+Theta notation is like a laser-focused tool for algorithm analysis:
+
+- It gives a **tight bound**, so you know **exactly** how your algorithm performs in the worst-case—no guesswork!
+- It’s great for comparing algorithms: a lower Theta bound (e.g., θ(n) vs. θ(n²)) means better efficiency for large inputs.
+- It ignores constants and small terms, focusing on the **big picture** growth rate, which matters most for big data.
+
+For example, merge sort (θ(n log n)) beats insertion sort (θ(n²)) for large inputs because its growth rate is lower, even if insertion sort might seem faster for tiny lists due to constants. 🏆
+
+## Key Takeaways 🌟
+
+- **Theta Notation (θ)**: Describes the **exact growth rate** of an algorithm’s worst-case runtime.
+- **How It Works**: Bounds the runtime between `c1 * f(n)` and `c2 * f(n)` for large `n`.
+- **Examples**:
+  - Math: `n² + n` and `(n²/2) + (n/2)` are both **θ(n²)** because `n²` dominates.
+  - Python: `sum_of_squares` is **θ(n)** because it always does `n` operations.
+- Use Theta to **compare algorithms** and pick the most efficient one for big inputs!
