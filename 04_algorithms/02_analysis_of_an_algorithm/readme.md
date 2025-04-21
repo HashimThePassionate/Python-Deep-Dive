@@ -642,3 +642,249 @@ For example, merge sort (θ(n log n)) beats insertion sort (θ(n²)) for large i
   - Math: `n² + n` and `(n²/2) + (n/2)` are both **θ(n²)** because `n²` dominates.
   - Python: `sum_of_squares` is **θ(n)** because it always does `n` operations.
 - Use Theta to **compare algorithms** and pick the most efficient one for big inputs!
+
+---
+
+# 📖 **What is Big O Notation**?
+
+Big O Notation is a mathematical tool used to describe the **worst-case time complexity** or **space complexity** of an algorithm as the input size (`n`) grows. It provides an **asymptotic upper bound**, meaning it tells us the maximum time an algorithm might take for large inputs. 🕒
+
+In simple terms:
+
+- **Big O** helps us understand how an algorithm scales.
+- It focuses on the **growth rate** of the algorithm, ignoring constants and smaller terms.
+- We care about what happens when `n` is very large (asymptotic behavior).
+
+Formally, a function `T(n)` is `O(F(n))` if there exist constants `c` and `n0` such that:
+
+<div align="center">
+  <img src="./images/02.jpg" alt="" width="400px"/>
+</div>
+
+```
+T(n) ≤ c * F(n) for all n ≥ n0
+```
+
+---
+
+## 🌟 Why Learn Big O Notation?
+
+Understanding Big O Notation is crucial for:
+
+- **Optimizing Code**: Write faster and more efficient programs. ⚡
+- **Comparing Algorithms**: Choose the best algorithm for a problem. 🥇
+- **Interview Prep**: Ace technical interviews with confidence. 🎯
+- **Scalability**: Build systems that perform well with large datasets. 📈
+
+---
+
+## 📊 Common Time Complexities
+
+Here’s a quick overview of the most common time complexities, ordered from fastest to slowest:
+
+| **Time Complexity** | **Name** | **Description** |
+| --- | --- | --- |
+| `O(1)` | Constant | Fixed time, regardless of input size (e.g., accessing an array element). |
+| `O(log n)` | Logarithmic | Time grows logarithmically (e.g., binary search). |
+| `O(n)` | Linear | Time grows linearly with input size (e.g., iterating through an array). |
+| `O(n log n)` | Linear-Logarithmic | Common in efficient sorting algorithms (e.g., MergeSort, QuickSort). |
+| `O(n²)` | Quadratic | Time grows with the square of input size (e.g., nested loops). |
+| `O(n³)` | Cubic | Time grows with the cube of input size (e.g., three nested loops). |
+| `O(2ⁿ)` | Exponential | Time doubles with each input increment (e.g., recursive Fibonacci). |
+
+---
+
+## 🛠️ Code Examples with Explanations
+
+This repository contains **Python code examples** for each time complexity to help you visualize how they work. Below, each example is accompanied by a **detailed explanation** of how the algorithm works and why it has the given time complexity.
+
+### 1. **O(1) - Constant Time** ⏰
+
+Accessing the first element of an array takes the same time, no matter the size.
+
+**File**: `constant_time.py`
+
+```python
+def constant_time(arr):
+    return arr[0]
+
+# Example
+arr = [1, 2, 3, 4, 5]
+print(constant_time(arr))  # Output: 1
+```
+
+**Explanation**:
+
+- **What it does**: The function `constant_time` simply returns the first element of the input array using index `0`.
+- **Why O(1)**: Accessing an element by index in an array is a direct operation that takes a fixed amount of time, regardless of the array’s size. Whether the array has 5 elements or 5 million, the operation is instantaneous.
+- **Real-world analogy**: Think of picking the first book from a shelf. It doesn’t matter how many books are on the shelf; grabbing the first one always takes the same time. 📚
+- **Key takeaway**: Constant time operations are the fastest and most efficient.
+
+### 2. **O(log n) - Logarithmic Time** 🔍
+
+Binary search halves the search space in each step, making it highly efficient.
+
+**File**: `binary_search.py`
+
+```python
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+# Example
+arr = [1, 2, 3, 4, 5, 6, 7, 8]
+print(binary_search(arr, 6))  # Output: 5
+```
+
+**Explanation**:
+
+- **What it does**: Binary search finds a target value in a **sorted array** by repeatedly dividing the search space in half. It checks the middle element and decides whether to search in the left or right half.
+- **Why O(log n)**: Each iteration reduces the search space by half. For an array of size `n`, the number of steps is approximately `log₂(n)`. For example, if `n = 8`, it takes at most 3 steps (`log₂(8) = 3`).
+- **Real-world analogy**: Imagine finding a word in a dictionary. You open to the middle, decide if the word is before or after, and repeat. This process is much faster than checking every page. 📖
+- **Key takeaway**: Logarithmic algorithms are very efficient for large datasets, especially for searching.
+
+### 3. **O(n) - Linear Time** 📏
+
+Iterating through an array once scales linearly with input size.
+
+**File**: `linear_time.py`
+
+```python
+def linear_time(arr):
+    for i in arr:
+        print(i)
+
+# Example
+arr = [1, 2, 3, 4, 5]
+linear_time(arr)  # Output: 1 2 3 4 5
+```
+
+**Explanation**:
+
+- **What it does**: The function `linear_time` iterates through each element in the array and prints it.
+- **Why O(n)**: The loop runs exactly `n` times, where `n` is the size of the array. If the array has 5 elements, the loop runs 5 times; if it has 1000 elements, it runs 1000 times.
+- **Real-world analogy**: Imagine checking every item on a shopping list one by one. The time it takes depends on how many items are on the list. 🛒
+- **Key takeaway**: Linear time is reasonable for small inputs but can become slow for very large datasets.
+
+### 4. **O(n log n) - Linear-Logarithmic Time** 🌳
+
+MergeSort divides the array recursively and merges it efficiently.
+
+**File**: `merge_sort.py`
+
+```python
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+# Example
+arr = [64, 34, 25, 12, 22, 11, 90]
+print(merge_sort(arr))  # Output: [11, 12, 22, 25, 34, 64, 90]
+```
+
+**Explanation**:
+
+- **What it does**: MergeSort is a divide-and-conquer algorithm that recursively splits the array into two halves, sorts each half, and then merges them back into a sorted array.
+- **Why O(n log n)**: The algorithm divides the array into halves (`log n` levels of recursion). At each level, it performs `n` comparisons during the merge step. Thus, the total time is `n * log n`.
+- **Real-world analogy**: Imagine organizing a deck of cards by splitting it into smaller piles, sorting each pile, and then combining them. The splitting is logarithmic, and combining takes linear time per level. 🃏
+- **Key takeaway**: O(n log n) is the best time complexity for general-purpose sorting algorithms.
+
+### 5. **O(n²) - Quadratic Time** 📉
+
+Nested loops cause the time to grow quadratically.
+
+**File**: `quadratic_time.py`
+
+```python
+def quadratic_time(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            print(f"i: {i}, j: {j}")
+
+# Example
+arr = [1, 2, 3]
+quadratic_time(arr)
+```
+
+**Explanation**:
+
+- **What it does**: The function `quadratic_time` uses two nested loops to print every possible pair of indices in the array.
+- **Why O(n²)**: For an array of size `n`, the outer loop runs `n` times, and for each iteration, the inner loop also runs `n` times. Total iterations: `n * n = n²`.
+- **Real-world analogy**: Imagine pairing every student in a class with every other student for a project. If there are 10 students, you’d have 10 \* 10 = 100 pairs. 👥
+- **Key takeaway**: Quadratic time is inefficient for large inputs and should be avoided when possible.
+
+### 6. **O(n³) - Cubic Time** 🧊
+
+Three nested loops result in cubic growth.
+
+**File**: `cubic_time.py`
+
+```python
+def cubic_time(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            for k in range(len(arr)):
+                print(f"i: {i}, j: {j}, k: {k}")
+
+# Example
+arr = [1, 2, 3]
+cubic_time(arr)
+```
+
+**Explanation**:
+
+- **What it does**: The function `cubic_time` uses three nested loops to print every possible combination of three indices in the array.
+- **Why O(n³)**: Each loop runs `n` times, so the total number of iterations is `n * n * n = n³`. For `n = 3`, it runs 27 times; for `n = 10`, it runs 1000 times.
+- **Real-world analogy**: Imagine scheduling meetings where every student meets every other student in groups of three. The number of meetings grows cubically. 📅
+- **Key takeaway**: Cubic time is highly inefficient and practical only for very small inputs.
+
+### 7. **O(2ⁿ) - Exponential Time** 💥
+
+Recursive Fibonacci without memoization grows exponentially.
+
+**File**: `exponential_time.py`
+
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# Example
+print(fibonacci(10))  # Output: 55
+```
+
+**Explanation**:
+
+- **What it does**: The function `fibonacci` calculates the nth Fibonacci number by recursively summing the two previous numbers.
+- **Why O(2ⁿ)**: Each function call spawns two more calls, creating a binary tree of depth `n`. The total number of operations is approximately `2ⁿ`. For `n = 10`, it’s manageable, but for `n = 50`, it’s astronomical.
+- **Real-world analogy**: Imagine a chain reaction where each action triggers two more actions, like a viral video spreading. It grows out of control quickly! 📹
+- **Key takeaway**: Exponential time is impractical for large inputs and should be optimized (e.g., using memoization).
+
+---
