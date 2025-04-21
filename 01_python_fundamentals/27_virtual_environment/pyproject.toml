@@ -1,0 +1,18 @@
+[project]
+name = "django-project"
+version = "0.1.0"
+description = "Poetry For Django"
+authors = [
+    {name = "Muhammad Hashim",email = "hashiimtahir@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django (>=5.2,<6.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
