@@ -8,3 +8,4 @@ migrations/
 .mypy_cache/
 .pytest_cache/
 envs/
+db.sqlite3
