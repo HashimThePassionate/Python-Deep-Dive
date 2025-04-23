@@ -888,3 +888,225 @@ print(fibonacci(10))  # Output: 55
 - **Key takeaway**: Exponential time is impractical for large inputs and should be optimized (e.g., using memoization).
 
 ---
+
+# **Understanding Omega Notation (Ω) with Examples** 📊🔍
+
+Omega notation (Ω) is a mathematical concept used in computer science to describe the **asymptotic lower bound** of an algorithm's runtime complexity. It represents the **best-case runtime** of an algorithm, ensuring that the runtime is at least a certain amount for large inputs. Let’s dive into the details with examples, a graph explanation, and a practical Python code snippet! 🚀
+
+---
+
+## What is Omega Notation (Ω)? 🤔
+
+Omega notation (Ω) defines a **lower bound** on an algorithm's runtime, meaning the algorithm will take *at least* this amount of time (or more) for sufficiently large input sizes. It’s the opposite of Big O notation, which gives an upper bound (worst-case scenario). Omega notation focuses on the **best-case scenario**.
+
+<div align="center">
+  <img src="./images/03.jpg" alt="" width="400px"/>
+</div>
+
+### Formal Definition 📝
+
+A function `T(n)` is said to be in `Ω(F(n))` if there exist positive constants `c` and `n0` such that for all `n ≥ n0`:
+
+```
+0 ≤ c * F(n) ≤ T(n)
+```
+
+- `T(n)`: The actual runtime of the algorithm.
+- `F(n)`: The function representing the lower bound.
+- `c`: A positive constant.
+- `n0`: A threshold value of `n` after which the condition holds.
+
+This means `T(n)` will always be greater than or equal to `c * F(n)` for large enough `n`. 🌟
+
+---
+
+## Graph Explanation (Figure 2.4) 📈
+
+The provided graph visually represents Omega notation:
+
+- **T(n)** (blue curve): This is the actual runtime of the algorithm.
+- **c \* F(n)** (green curve): This is the lower bound, scaled by a constant `c`.
+- **n0**: A point on the x-axis (representing input size `n`) after which `T(n)` is always above `c * F(n)`.
+
+### Observations from the Graph 🔎
+
+- For `n < n0`, `T(n)` might dip below `c * F(n)` (as seen in the oscillatory behavior of the blue curve).
+- For `n ≥ n0`, `T(n)` stays above `c * F(n)`, satisfying the Omega condition.
+- This shows that Omega notation guarantees a **minimum runtime** for the algorithm when the input size is large enough.
+
+---
+
+## Examples of Omega Notation 🧠
+
+Let’s go through the examples provided to understand how to apply Omega notation.
+
+### Example 1: T(n) = 2n² + 3 🧮
+
+We need to find `F(n)` such that `T(n) = Ω(F(n))`.
+
+#### Step 1: Apply the Omega Condition
+
+The condition for Omega notation is:
+
+```
+c * F(n) ≤ T(n)
+```
+
+Assume `F(n) = n²`. Then:
+
+```
+c * n² ≤ 2n² + 3
+```
+
+Let’s try `c = 1` and check for all `n ≥ 0`:
+
+```
+1 * n² ≤ 2n² + 3
+```
+
+Simplify:
+
+```
+n² ≤ 2n² + 3
+```
+
+This is always true because `2n² + 3` is greater than `n²` for all `n ≥ 0`. ✅
+
+#### Result
+
+```
+T(n) = 2n² + 3 = Ω(n²)
+```
+
+So, `F(n) = n²`.
+
+---
+
+### Example 2: T(n) = 3n² 📐
+
+Again, we apply the Omega condition:
+
+```
+c * F(n) ≤ T(n)
+```
+
+Assume `F(n) = n²`:
+
+```
+c * n² ≤ 3n²
+```
+
+Try `c = 2` and `n0 = 1`:
+
+```
+2 * n² ≤ 3n²
+```
+
+This holds true because `2n²` is less than `3n²` for all `n ≥ 1`. ✅
+
+#### Result
+
+```
+T(n) = 3n² = Ω(n²)
+```
+
+---
+
+### Example 3: T(n) = 3n 📏
+
+Apply the condition:
+
+```
+c * F(n) ≤ T(n)
+```
+
+Assume `F(n) = n`:
+
+```
+c * n ≤ 3n
+```
+
+Try `c = 1` and `n0 = 1`:
+
+```
+1 * n ≤ 3n
+```
+
+This is true for all `n ≥ 1`. ✅
+
+#### Result
+
+```
+T(n) = 3n = Ω(n)
+```
+
+---
+
+## Practical Python Code Example 💻
+
+Let’s write a Python program to demonstrate Omega notation by measuring the runtime of a simple algorithm and verifying the Omega condition.
+
+### Scenario
+
+We’ll create a function that prints elements of an array (linear time complexity, `T(n) = n`). We’ll measure its runtime and check if it satisfies `T(n) = Ω(n)`.
+
+### Code
+
+```python
+import time
+
+# Function to print array elements
+def print_array(arr):
+    for i in range(len(arr)):
+        print(arr[i])
+
+# Function to measure runtime
+def measure_time(n):
+    arr = list(range(n))  # Create an array of size n
+    start_time = time.time()
+    print_array(arr)
+    end_time = time.time()
+    return end_time - start_time
+
+# Test with different input sizes
+n_values = [1000, 10000, 100000]
+for n in n_values:
+    t = measure_time(n)
+    print(f"n = {n}, Time taken = {t} seconds")
+
+# Verify Omega notation: T(n) >= c * F(n)
+c = 1e-6  # Small constant
+for n in n_values:
+    t = measure_time(n)
+    f_n = n  # F(n) = n
+    if t >= c * f_n:
+        print(f"✅ Omega condition satisfied for n = {n}: T(n) = {t} >= {c} * {f_n} = {c * f_n}")
+    else:
+        print(f"❌ Omega condition NOT satisfied for n = {n}")
+```
+
+### Code Explanation 🛠️
+
+1. **Function** `print_array`: A simple loop that prints each element of the array. Its time complexity is `O(n)`, but for Omega notation, we’re checking the lower bound, which is also `Ω(n)` since it performs at least `n` operations.
+2. **Function** `measure_time`: Measures the actual runtime of `print_array` for an array of size `n` using the `time` module.
+3. **Omega Check**: We verify if the measured time `T(n)` satisfies `T(n) ≥ c * F(n)`, where `F(n) = n` and `c` is a small constant (e.g., `1e-6`).
+
+### Sample Output 📜
+
+```
+n = 1000, Time taken = 0.002 seconds
+n = 10000, Time taken = 0.015 seconds
+n = 100000, Time taken = 0.150 seconds
+
+✅ Omega condition satisfied for n = 1000: T(n) = 0.002 >= 1e-6 * 1000 = 0.001
+✅ Omega condition satisfied for n = 10000: T(n) = 0.015 >= 1e-6 * 10000 = 0.01
+✅ Omega condition satisfied for n = 100000: T(n) = 0.150 >= 1e-6 * 100000 = 0.1
+```
+
+### What Does This Show? 🎉
+
+- The measured time `T(n)` is always greater than `c * F(n)` for large `n`.
+- This confirms that `T(n) = Ω(n)`, meaning the algorithm’s runtime is at least linear in the best case.
+- The Omega condition holds, as expected! 🥳
+
+---
