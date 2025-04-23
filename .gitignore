@@ -9,3 +9,4 @@ migrations/
 .pytest_cache/
 envs/
 db.sqlite3
+readme.txt
