@@ -20,6 +20,21 @@ Each recursive call creates a new "layer" in memory (called a stack frame), and 
 
 ---
 
+## Python Code Example:
+```python
+def factorial(n):
+   if n == 0:
+      return 1
+   else:
+      return n*factorial(n-1)
+
+print(factorial(4))
+```
+
+<div align="center">
+  <img src="./diagram/02.png" alt="" width="300px"/>
+</div>
+
 ## How Recursion Works: Factorial Example 🧮
 
 Let’s look at a classic example: calculating the factorial of a number. The factorial of `n` (written as `n!`) is the product of all numbers from 1 to `n`. For example, `4! = 4 × 3 × 2 × 1 = 24`.
@@ -97,7 +112,6 @@ def sum(n):
         return 0
     else:
         return n + sum(n - 1)
-
 
 print(sum(5))  # Output: 15
 ```
