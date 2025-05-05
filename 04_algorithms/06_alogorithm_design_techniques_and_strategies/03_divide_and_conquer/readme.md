@@ -29,6 +29,32 @@ in algorithm design.
   - [Karatsuba Multiplication 🧮](#karatsuba-multiplication-)
   - [Strassen’s Matrix Multiplication 📊](#strassens-matrix-multiplication-)
   - [Conclusion 🎉](#conclusion--1)
+- [Quicksort Ko Roman Urdu Mein Samjhein](#quicksort-ko-roman-urdu-mein-samjhein)
+  - [Quicksort Kya Hai?](#quicksort-kya-hai)
+  - [Quicksort Ka Kaam Karne Ka Tareeka](#quicksort-ka-kaam-karne-ka-tareeka)
+  - [Python Code Example](#python-code-example)
+    - [Code Explanation in Roman Urdu](#code-explanation-in-roman-urdu)
+  - [Time Complexity](#time-complexity)
+  - [Use Cases of Quicksort](#use-cases-of-quicksort)
+  - [Advantages aur Disadvantages](#advantages-aur-disadvantages)
+    - [Advantages](#advantages)
+    - [Disadvantages](#disadvantages)
+- [**Quicksort Algorithm**  🚀](#quicksort-algorithm--)
+  - [How Quicksort Works 🛠️](#how-quicksort-works-️)
+  - [Python Implementation 🐍](#python-implementation-)
+    - [Output:](#output-1)
+  - [Step-by-Step Explanation 📝](#step-by-step-explanation-)
+    - [1. **Main Test Code**](#1-main-test-code)
+    - [2. **Quicksort Function**](#2-quicksort-function)
+    - [3. **Partition Function**](#3-partition-function)
+    - [4. **Dry Run Example**](#4-dry-run-example)
+      - [Initial Call: `quicksort(arr, 0, 5)`](#initial-call-quicksortarr-0-5)
+      - [Second Call: `quicksort(arr, 2, 5)`](#second-call-quicksortarr-2-5)
+  - [Time and Space Complexity ⏱️](#time-and-space-complexity-️)
+  - [Use Cases 🌍](#use-cases-)
+  - [Advantages and Disadvantages ✅❌](#advantages-and-disadvantages-)
+    - [Advantages](#advantages-1)
+    - [Disadvantages](#disadvantages-1)
 
 ---
 
@@ -290,3 +316,374 @@ Merge Sort is an awesome way to sort lists with a steady **O(n log n)** time com
 
 The Divide and Conquer paradigm is a versatile and powerful approach to problem-solving, enabling efficient solutions for searching, sorting, multiplication, and geometric problems. By mastering algorithms like Binary Search, Merge Sort, Quick Sort, Karatsuba Multiplication, Strassen’s Matrix Multiplication, and Closest Pair of Points, you’ll gain a deep understanding of how to break down complex problems into manageable parts. Keep practicing, and you’ll be a Divide and Conquer pro in no time! 💪
 
+
+# Quicksort Ko Roman Urdu Mein Samjhein
+
+Quicksort ek bohat efficient aur popular **sorting algorithm** hai jo **divide and conquer** technique use karta hai. Yeh array ko chhote chhote hisson mein divide karta hai, unko sort karta hai, aur phir combine karta hai. Iska concept simple hai, lekin yeh real-world applications mein bohat fast aur effective hai. Chalo, isko step-by-step samajhte hain aur Python code ke sath detail mein dekhte hain.
+
+---
+
+## Quicksort Kya Hai?
+
+Quicksort ka basic idea yeh hai ke hum ek array mein se ek element chunte hain, jise **pivot** kehte hain. Phir array ko do hisson mein divide karte hain:
+1. **Chhote elements** jo pivot se chhote hain.
+2. **Bade elements** jo pivot se bade hain.
+
+Yeh process recursively chhote sub-arrays par apply hota hai jab tak pura array sort na ho jaye. Yeh **divide and conquer** isliye hai kyunki:
+- **Divide**: Array ko pivot ke around chhote aur bade elements mein tod do.
+- **Conquer**: Chhote sub-arrays ko recursively sort karo.
+- **Combine**: Sorted sub-arrays ko merge karne ki zarurat nahi hoti kyunki Quicksort **in-place** sorting karta hai.
+
+---
+
+## Quicksort Ka Kaam Karne Ka Tareeka
+
+1. **Pivot Select Karo**:
+   - Pivot ek element hai jo array ko divide karne ke liye use hota hai.
+   - Pivot ka selection alag alag tarike se ho sakta hai:
+     - First element
+     - Last element
+     - Random element
+     - Median of first, middle, and last element
+   - Aam tor par last element ko pivot ke tor par use karte hain kyunki yeh simple hai.
+
+2. **Partitioning**:
+   - Array ko rearrange karo taake:
+     - Pivot se chhote elements pivot ke left side par hon.
+     - Pivot se bade elements pivot ke right side par hon.
+   - Pivot apni final sorted position par aa jata hai.
+
+3. **Recursion**:
+   - Left sub-array (pivot se chhote elements) aur right sub-array (pivot se bade elements) ko recursively Quicksort se sort karo.
+
+---
+
+## Python Code Example
+
+Chalo, Quicksort ka Python code dekhte hain aur usko line-by-line samajhte hain.
+
+```python
+def quicksort(arr, low, high):
+    if low < high:
+        # Partition index find karo
+        pi = partition(arr, low, high)
+        
+        # Left sub-array sort karo
+        quicksort(arr, low, pi - 1)
+        # Right sub-array sort karo
+        quicksort(arr, pi + 1, high)
+
+def partition(arr, low, high):
+    # Last element ko pivot chuno
+    pivot = arr[high]
+    # Chhote elements ke liye index
+    i = low - 1
+    
+    # Array traverse karo
+    for j in range(low, high):
+        # Agar current element pivot se chhota ya barabar hai
+        if arr[j] <= pivot:
+            i += 1  # Chhote element ka index increment karo
+            arr[i], arr[j] = arr[j], arr[i]  # Swap karo
+    
+    # Pivot ko sahi position par rakho
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1  # Partition index return karo
+
+# Test karne ke liye
+arr = [10, 7, 8, 9, 1, 5]
+n = len(arr)
+print("Original array:", arr)
+quicksort(arr, 0, n-1)
+print("Sorted array:", arr)
+```
+
+### Code Explanation in Roman Urdu
+
+- **`quicksort` Function**:
+  - Yeh main function hai jo array ko sort karta hai.
+  - `low` aur `high` array ke starting aur ending indices hain.
+  - Agar `low < high` hai, toh hum partition karte hain aur recursively left aur right sub-arrays ko sort karte hain.
+
+- **`partition` Function**:
+  - Yeh function array ko pivot ke around divide karta hai.
+  - `pivot` ko last element (`arr[high]`) ke tor par chuna gaya hai.
+  - `i` ek index hai jo chhote elements ke liye track rakhta hai.
+  - Loop mein har element ko pivot se compare karte hain:
+    - Agar element pivot se chhota ya barabar hai, toh `i` increment hota hai aur element ko `i` position par swap karte hain.
+  - Loop ke baad, pivot ko uski final position (`i + 1`) par rakhte hain aur `i + 1` return karte hain.
+
+- **Output**:
+  ```
+  Original array: [10, 7, 8, 9, 1, 5]
+  Sorted array: [1, 5, 7, 8, 9, 10]
+  ```
+
+---
+
+## Time Complexity
+
+Quicksort ki time complexity pivot ke selection aur data ke arrangement par depend karti hai:
+
+| Case              | Time Complexity | Description                                                                 |
+|-------------------|-----------------|-----------------------------------------------------------------------------|
+| **Best Case**     | O(n log n)      | Jab pivot har baar array ko balanced halves mein divide karta hai (e.g., median pivot). |
+| **Average Case**  | O(n log n)      | Random pivot selection ke case mein, yeh normally balanced partitions deta hai. |
+| **Worst Case**    | O(n²)           | Jab pivot hamesha smallest ya largest element hota hai (e.g., already sorted array). |
+
+**Space Complexity**:
+- **O(log n)** average case mein recursion stack ke liye.
+- **O(n)** worst case mein recursion stack ke liye.
+
+---
+
+## Use Cases of Quicksort
+
+Quicksort ka use wahan hota hai jahan fast sorting ki zarurat ho aur memory kam use karna ho. Kuch examples:
+
+1. **General Sorting**:
+   - Databases mein records ko sort karne ke liye.
+   - File management systems mein files ko alphabetically ya size ke hisaab se arrange karne ke liye.
+
+2. **In-Memory Sorting**:
+   - Jab data RAM mein hai aur in-place sorting chahiye (extra memory nahi chahiye).
+
+3. **Libraries aur Frameworks**:
+   - Python ka `sorted()` function aur `.sort()` method internally Quicksort ka hybrid version use karte hain (TimSort ke sath).
+
+4. **Real-Time Applications**:
+   - Game development mein objects ko distance ya priority ke hisaab se sort karne ke liye.
+   - Network algorithms mein data packets ko prioritize karne ke liye.
+
+---
+
+## Advantages aur Disadvantages
+
+### Advantages
+- **Fast**: Average case mein O(n log n) time complexity ke sath bohat efficient.
+- **In-Place**: Extra memory ka use nahi karta (sirf recursion stack ke liye thodi memory).
+- **Versatile**: Alag alag pivot selection strategies ke sath customize kiya ja sakta hai.
+
+### Disadvantages
+- **Worst Case**: O(n²) time complexity ho sakti hai agar pivot selection kharab ho.
+- **Unstable**: Equal elements ki relative order change ho sakti hai.
+- **Recursion**: Deep recursion stack ke liye memory issue ho sakta hai large arrays mein.
+
+---
+
+# **Quicksort Algorithm**  🚀
+
+Quicksort is a highly efficient **divide-and-conquer** sorting algorithm that sorts an array by selecting a **pivot** element and partitioning the array around it. It recursively sorts the resulting sub-arrays to produce a fully sorted array. Below, we explore Quicksort in detail, including its implementation in Python, time complexity, use cases, and more. 🌟
+
+## How Quicksort Works 🛠️
+
+Quicksort operates in three main steps:
+
+1. **Choose a Pivot**:
+   - Select an element from the array as the pivot. Common strategies include:
+     - First element
+     - Last element
+     - Random element
+     - Median of first, middle, and last elements
+   - The pivot divides the array into two parts.
+
+2. **Partition the Array**:
+   - Rearrange the array so that:
+     - Elements smaller than the pivot are on the left.
+     - Elements larger than the pivot are on the right.
+   - The pivot is placed in its final sorted position.
+
+3. **Recurse**:
+   - Apply Quicksort recursively to the left and right sub-arrays.
+
+## Python Implementation 🐍
+
+Here’s a Python implementation of Quicksort with detailed comments:
+
+```python
+def quicksort(arr, low, high):
+    if low < high:
+        # Find the partition index
+        pi = partition(arr, low, high)
+        
+        # Sort the left sub-array
+        quicksort(arr, low, pi - 1)
+        # Sort the right sub-array
+        quicksort(arr, pi + 1, high)
+
+def partition(arr, low, high):
+    # Choose the last element as the pivot
+    pivot = arr[high]
+    # Index for smaller elements
+    i = low - 1
+    
+    # Traverse the array
+    for j in range(low, high):
+        # If current element is smaller than or equal to pivot
+        if arr[j] <= pivot:
+            i += 1  # Increment index of smaller element
+            arr[i], arr[j] = arr[j], arr[i]  # Swap elements
+    
+    # Place pivot in its correct position
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1  # Return partition index
+
+# Test the algorithm
+arr = [10, 7, 8, 9, 1, 5]
+n = len(arr)
+print("Original array:", arr)
+quicksort(arr, 0, n-1)
+print("Sorted array:", arr)
+```
+
+### Output:
+```
+Original array: [10, 7, 8, 9, 1, 5]
+Sorted array: [1, 5, 7, 8, 9, 10]
+```
+
+Chalo, Quicksort ke is Python code ko ek ek line aur step ko Roman Urdu mein bohat detail ke sath samajhte hain. Har function, har line, aur har concept ko break down karenge taake yeh bilkul clear ho jaye. Yeh code **divide and conquer** technique ka use karta hai, aur hum isko step-by-step dekhein ge. Neeche code diya hua hai, aur uske baad har part ki explanation hai.
+
+```python
+def quicksort(arr, low, high):
+    if low < high:
+        # Partition index find karo
+        pi = partition(arr, low, high)
+        
+        # Left sub-array sort karo
+        quicksort(arr, low, pi - 1)
+        # Right sub-array sort karo
+        quicksort(arr, pi + 1, high)
+
+def partition(arr, low, high):
+    # Last element ko pivot chuno
+    pivot = arr[high]
+    # Chhote elements ke liye index
+    i = low - 1
+    
+    # Array traverse karo
+    for j in range(low, high):
+        # Agar current element pivot se chhota ya barabar hai
+        if arr[j] <= pivot:
+            i += 1  # Chhote element ka index increment karo
+            arr[i], arr[j] = arr[j], arr[i]  # Swap karo
+    
+    # Pivot ko sahi position par rakho
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1  # Partition index return karo
+
+# Test karne ke liye
+arr = [10, 7, 8, 9, 1, 5]
+n = len(arr)
+print("Original array:", arr)
+quicksort(arr=arr, low=0, high=n-1)
+print("Sorted array:", arr)
+```
+
+---
+
+## Step-by-Step Explanation 📝
+
+### 1. **Main Test Code**
+This section initializes the array and calls the Quicksort function.
+
+- **`arr = [10, 7, 8, 9, 1, 5]`**: Creates an unsorted array with 6 elements.
+- **`n = len(arr)`**: Stores the length of the array (`n = 6`).
+- **`print("Original array:", arr)`**: Prints the unsorted array: `[10, 7, 8, 9, 1, 5]`.
+- **`quicksort(arr=arr, low=0, high=n-1)`**: Calls the `quicksort` function with:
+  - `arr`: The input array.
+  - `low = 0`: Starting index.
+  - `high = 5`: Ending index.
+- **`print("Sorted array:", arr)`**: Prints the sorted array: `[1, 5, 7, 8, 9, 10]`.
+
+### 2. **Quicksort Function**
+The `quicksort` function implements the recursive divide-and-conquer logic.
+
+- **`def quicksort(arr, low, high):`**: Defines the function with parameters:
+  - `arr`: The array to sort.
+  - `low`: Starting index of the sub-array.
+  - `high`: Ending index of the sub-array.
+- **`if low < high:`**: Ensures the sub-array has at least 2 elements. If `low >= high`, the sub-array is already sorted (0 or 1 element).
+- **`pi = partition(arr, low, high)`**: Calls the `partition` function to:
+  - Rearrange the array around a pivot.
+  - Return the pivot’s final index (`pi`).
+- **`quicksort(arr, low, pi - 1)`**: Recursively sorts the left sub-array (elements before the pivot).
+- **`quicksort(arr, pi + 1, high)`**: Recursively sorts the right sub-array (elements after the pivot).
+
+### 3. **Partition Function**
+The `partition` function divides the array around a pivot.
+
+- **`def partition(arr, low, high):`**: Defines the function to partition the sub-array.
+- **`pivot = arr[high]`**: Selects the last element as the pivot.
+- **`i = low - 1`**: Initializes `i` as the index for smaller elements, starting at `low - 1`.
+- **`for j in range(low, high):`**: Loops through the sub-array from `low` to `high-1` (excluding the pivot).
+- **`if arr[j] <= pivot:`**: If the current element is less than or equal to the pivot:
+  - **`i += 1`**: Increment the smaller element index.
+  - **`arr[i], arr[j] = arr[j], arr[i]`**: Swap the elements at indices `i` and `j` to move the smaller element to the left.
+- **`arr[i + 1], arr[high] = arr[high], arr[i + 1]`**: After the loop, place the pivot in its final position by swapping it with the element at `i + 1`.
+- **`return i + 1`**: Returns the pivot’s final index.
+
+### 4. **Dry Run Example**
+Let’s trace the execution for `arr = [10, 7, 8, 9, 1, 5]`:
+
+#### Initial Call: `quicksort(arr, 0, 5)`
+- **Partition**: `pivot = 5`, `i = -1`, loop `j = 0 to 4`:
+  - `j = 0`: `10 > 5`, skip.
+  - `j = 1`: `7 > 5`, skip.
+  - `j = 2`: `8 > 5`, skip.
+  - `j = 3`: `9 > 5`, skip.
+  - `j = 4`: `1 <= 5`, `i = 0`, swap `arr[0]` and `arr[4]`: `[1, 7, 8, 9, 10, 5]`.
+- Place pivot: Swap `arr[1]` and `arr[5]`: `[1, 5, 8, 9, 10, 7]`.
+- Return `pi = 1`.
+- Array: `[1, 5, 8, 9, 10, 7]`.
+- Recursive calls:
+  - Left: `quicksort(arr, 0, 0)` (empty).
+  - Right: `quicksort(arr, 2, 5)`.
+
+#### Second Call: `quicksort(arr, 2, 5)`
+- **Partition**: `pivot = 7`, `i = 1`, loop `j = 2 to 4`:
+  - `j = 2`: `8 > 7`, skip.
+  - `j = 3`: `9 > 7`, skip.
+  - `j = 4`: `10 > 7`, skip.
+- Place pivot: Swap `arr[2]` and `arr[5]`: `[1, 5, 7, 9, 10, 8]`.
+- Return `pi = 2`.
+- Recursive calls:
+  - Left: `quicksort(arr, 2, 1)` (empty).
+  - Right: `quicksort(arr, 3, 5)`.
+
+This process continues until the array is fully sorted: `[1, 5, 7, 8, 9, 10]`.
+
+
+## Time and Space Complexity ⏱️
+
+| Case            | Time Complexity | Description                                                                 |
+|-----------------|-----------------|-----------------------------------------------------------------------------|
+| **Best Case**   | O(n log n)      | Occurs when the pivot divides the array into balanced halves.               |
+| **Average Case**| O(n log n)      | Typical performance with random pivot selection.                            |
+| **Worst Case**  | O(n²)           | Occurs when the pivot is the smallest or largest element (e.g., sorted array). |
+
+**Space Complexity**:
+- **O(log n)** in the average case for the recursion stack.
+- **O(n)** in the worst case for the recursion stack.
+
+## Use Cases 🌍
+
+Quicksort is widely used due to its efficiency and in-place sorting nature. Some common applications include:
+- **General Sorting**: Sorting records in databases or files in file systems.
+- **In-Memory Sorting**: When data fits in memory and minimal extra space is required.
+- **Libraries**: Used in hybrid forms in Python’s `sorted()` and `.sort()` methods.
+- **Real-Time Applications**: Sorting objects in games or prioritizing network packets.
+
+## Advantages and Disadvantages ✅❌
+
+### Advantages
+- Highly efficient with O(n log n) average time complexity.
+- In-place sorting minimizes memory usage.
+- Flexible with various pivot selection strategies.
+
+### Disadvantages
+- O(n²) worst-case time complexity with poor pivot choices.
+- Unstable sorting (relative order of equal elements may change).
+- Recursive nature can lead to stack overflow for very large arrays.
+
+```

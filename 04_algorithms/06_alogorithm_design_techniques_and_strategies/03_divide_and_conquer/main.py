@@ -53,3 +53,41 @@ def merge(first_sublist, second_sublist):
 a = [11, 12, 7, 41, 61, 13, 16, 14]
 print(f'Unsorted List: {a}')
 print(f'Sorted List: {merge_sort(a)}')
+
+
+
+# Quick Sort
+
+def quicksort(arr, low, high):
+    if low < high:
+        # Partition index find karo
+        pi = partition(arr, low, high)
+        
+        # Left sub-array sort karo
+        quicksort(arr, low, pi - 1)
+        # Right sub-array sort karo
+        quicksort(arr, pi + 1, high)
+
+def partition(arr, low, high):
+    # Last element ko pivot chuno
+    pivot = arr[high]
+    # Chhote elements ke liye index
+    i = low - 1
+    
+    # Array traverse karo
+    for j in range(low, high):
+        # Agar current element pivot se chhota ya barabar hai
+        if arr[j] <= pivot:
+            i += 1  # Chhote element ka index increment karo
+            arr[i], arr[j] = arr[j], arr[i]  # Swap karo
+    
+    # Pivot ko sahi position par rakho
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1  # Partition index return karo
+
+# Test karne ke liye
+arr = [10, 7, 8, 9, 1, 5,10, 2, 3, 4, 6, 8]
+n = len(arr)
+print("Original array:", arr)
+quicksort(arr=arr, low=0, high=n-1)
+print("Sorted array:", arr)
