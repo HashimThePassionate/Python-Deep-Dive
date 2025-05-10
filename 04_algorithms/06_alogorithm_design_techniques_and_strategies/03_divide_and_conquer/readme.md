@@ -39,8 +39,6 @@ in algorithm design.
   - [Advantages and Disadvantages ✅❌](#advantages-and-disadvantages-)
     - [Advantages](#advantages)
     - [Disadvantages](#disadvantages)
-  - [Karatsuba Multiplication 🧮](#karatsuba-multiplication-)
-  - [Strassen’s Matrix Multiplication 📊](#strassens-matrix-multiplication-)
   - [Conclusion 🎉](#conclusion-)
 
 ---
@@ -496,16 +494,6 @@ Quicksort is widely used due to its efficiency and in-place sorting nature. Some
 - Unstable sorting (relative order of equal elements may change).
 - Recursive nature can lead to stack overflow for very large arrays.
 
-
----
-
-## Karatsuba Multiplication 🧮
-
----
-
-## Strassen’s Matrix Multiplication 📊
-
----
 
 ---
 
