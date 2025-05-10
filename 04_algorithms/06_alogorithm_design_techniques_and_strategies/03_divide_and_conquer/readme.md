@@ -17,29 +17,13 @@ in algorithm design.
     - [Output:](#output)
   - [Why is Binary Search Efficient? ⚡](#why-is-binary-search-efficient-)
   - [Merge Sort 🛠️](#merge-sort-️)
-  - [**What is Merge Sort? 🌟**](#what-is-merge-sort-)
       - [**How Does Merge Sort Work? 🔧**](#how-does-merge-sort-work-)
       - [**Detailed Explanation of the First Image 🖼️**](#detailed-explanation-of-the-first-image-️)
       - [**Detailed Explanation of the Second Image (Merge Process) 🌈**](#detailed-explanation-of-the-second-image-merge-process-)
       - [**Understanding the Python Code 💻**](#understanding-the-python-code-)
       - [**Why is Merge Sort Efficient? ⚡**](#why-is-merge-sort-efficient-)
       - [**Example Dry Run with Steps 🌱**](#example-dry-run-with-steps-)
-      - [**Conclusion 🎉**](#conclusion-)
   - [Quick Sort ⚡](#quick-sort-)
-  - [Karatsuba Multiplication 🧮](#karatsuba-multiplication-)
-  - [Strassen’s Matrix Multiplication 📊](#strassens-matrix-multiplication-)
-  - [Conclusion 🎉](#conclusion--1)
-- [Quicksort Ko Roman Urdu Mein Samjhein](#quicksort-ko-roman-urdu-mein-samjhein)
-  - [Quicksort Kya Hai?](#quicksort-kya-hai)
-  - [Quicksort Ka Kaam Karne Ka Tareeka](#quicksort-ka-kaam-karne-ka-tareeka)
-  - [Python Code Example](#python-code-example)
-    - [Code Explanation in Roman Urdu](#code-explanation-in-roman-urdu)
-  - [Time Complexity](#time-complexity)
-  - [Use Cases of Quicksort](#use-cases-of-quicksort)
-  - [Advantages aur Disadvantages](#advantages-aur-disadvantages)
-    - [Advantages](#advantages)
-    - [Disadvantages](#disadvantages)
-- [**Quicksort Algorithm**  🚀](#quicksort-algorithm--)
   - [How Quicksort Works 🛠️](#how-quicksort-works-️)
   - [Python Implementation 🐍](#python-implementation-)
     - [Output:](#output-1)
@@ -53,8 +37,11 @@ in algorithm design.
   - [Time and Space Complexity ⏱️](#time-and-space-complexity-️)
   - [Use Cases 🌍](#use-cases-)
   - [Advantages and Disadvantages ✅❌](#advantages-and-disadvantages-)
-    - [Advantages](#advantages-1)
-    - [Disadvantages](#disadvantages-1)
+    - [Advantages](#advantages)
+    - [Disadvantages](#disadvantages)
+  - [Karatsuba Multiplication 🧮](#karatsuba-multiplication-)
+  - [Strassen’s Matrix Multiplication 📊](#strassens-matrix-multiplication-)
+  - [Conclusion 🎉](#conclusion-)
 
 ---
 
@@ -157,7 +144,6 @@ This logarithmic growth makes Binary Search ideal for large datasets! 🌟
 
 ## Merge Sort 🛠️
 
-## **What is Merge Sort? 🌟**
 Merge Sort is like a smart way to arrange a messy list of numbers from smallest to biggest (increasing order). It uses a trick called **divide-and-conquer**, which means we break the big problem into smaller pieces, solve them one by one, and then put everything back together in order. It’s super efficient, and its time complexity is **O(n log n)**, which means it works fast even with big lists! 📈
 
 #### **How Does Merge Sort Work? 🔧**
@@ -293,185 +279,9 @@ Let’s merge `[4, 6, 8]` and `[5, 7, 11, 40]`:
 - **Step 5**: `8 < 11`, add `8` → `[4, 5, 6, 7, 8]`.
 - **Step 6**: First list is empty, add `[11, 40]` → `[4, 5, 6, 7, 8, 11, 40]`.
 
-#### **Conclusion 🎉**
-Merge Sort is an awesome way to sort lists with a steady **O(n log n)** time complexity. It breaks the problem into small pieces (divide), solves them (conquer), and puts them back together (merge), as shown in the images and code. Now you’re ready to use it—happy coding! 😄
-
 ---
 
 ## Quick Sort ⚡
-
----
-
-## Karatsuba Multiplication 🧮
-
----
-
-## Strassen’s Matrix Multiplication 📊
-
----
-
----
-
-## Conclusion 🎉
-
-The Divide and Conquer paradigm is a versatile and powerful approach to problem-solving, enabling efficient solutions for searching, sorting, multiplication, and geometric problems. By mastering algorithms like Binary Search, Merge Sort, Quick Sort, Karatsuba Multiplication, Strassen’s Matrix Multiplication, and Closest Pair of Points, you’ll gain a deep understanding of how to break down complex problems into manageable parts. Keep practicing, and you’ll be a Divide and Conquer pro in no time! 💪
-
-
-# Quicksort Ko Roman Urdu Mein Samjhein
-
-Quicksort ek bohat efficient aur popular **sorting algorithm** hai jo **divide and conquer** technique use karta hai. Yeh array ko chhote chhote hisson mein divide karta hai, unko sort karta hai, aur phir combine karta hai. Iska concept simple hai, lekin yeh real-world applications mein bohat fast aur effective hai. Chalo, isko step-by-step samajhte hain aur Python code ke sath detail mein dekhte hain.
-
----
-
-## Quicksort Kya Hai?
-
-Quicksort ka basic idea yeh hai ke hum ek array mein se ek element chunte hain, jise **pivot** kehte hain. Phir array ko do hisson mein divide karte hain:
-1. **Chhote elements** jo pivot se chhote hain.
-2. **Bade elements** jo pivot se bade hain.
-
-Yeh process recursively chhote sub-arrays par apply hota hai jab tak pura array sort na ho jaye. Yeh **divide and conquer** isliye hai kyunki:
-- **Divide**: Array ko pivot ke around chhote aur bade elements mein tod do.
-- **Conquer**: Chhote sub-arrays ko recursively sort karo.
-- **Combine**: Sorted sub-arrays ko merge karne ki zarurat nahi hoti kyunki Quicksort **in-place** sorting karta hai.
-
----
-
-## Quicksort Ka Kaam Karne Ka Tareeka
-
-1. **Pivot Select Karo**:
-   - Pivot ek element hai jo array ko divide karne ke liye use hota hai.
-   - Pivot ka selection alag alag tarike se ho sakta hai:
-     - First element
-     - Last element
-     - Random element
-     - Median of first, middle, and last element
-   - Aam tor par last element ko pivot ke tor par use karte hain kyunki yeh simple hai.
-
-2. **Partitioning**:
-   - Array ko rearrange karo taake:
-     - Pivot se chhote elements pivot ke left side par hon.
-     - Pivot se bade elements pivot ke right side par hon.
-   - Pivot apni final sorted position par aa jata hai.
-
-3. **Recursion**:
-   - Left sub-array (pivot se chhote elements) aur right sub-array (pivot se bade elements) ko recursively Quicksort se sort karo.
-
----
-
-## Python Code Example
-
-Chalo, Quicksort ka Python code dekhte hain aur usko line-by-line samajhte hain.
-
-```python
-def quicksort(arr, low, high):
-    if low < high:
-        # Partition index find karo
-        pi = partition(arr, low, high)
-        
-        # Left sub-array sort karo
-        quicksort(arr, low, pi - 1)
-        # Right sub-array sort karo
-        quicksort(arr, pi + 1, high)
-
-def partition(arr, low, high):
-    # Last element ko pivot chuno
-    pivot = arr[high]
-    # Chhote elements ke liye index
-    i = low - 1
-    
-    # Array traverse karo
-    for j in range(low, high):
-        # Agar current element pivot se chhota ya barabar hai
-        if arr[j] <= pivot:
-            i += 1  # Chhote element ka index increment karo
-            arr[i], arr[j] = arr[j], arr[i]  # Swap karo
-    
-    # Pivot ko sahi position par rakho
-    arr[i + 1], arr[high] = arr[high], arr[i + 1]
-    return i + 1  # Partition index return karo
-
-# Test karne ke liye
-arr = [10, 7, 8, 9, 1, 5]
-n = len(arr)
-print("Original array:", arr)
-quicksort(arr, 0, n-1)
-print("Sorted array:", arr)
-```
-
-### Code Explanation in Roman Urdu
-
-- **`quicksort` Function**:
-  - Yeh main function hai jo array ko sort karta hai.
-  - `low` aur `high` array ke starting aur ending indices hain.
-  - Agar `low < high` hai, toh hum partition karte hain aur recursively left aur right sub-arrays ko sort karte hain.
-
-- **`partition` Function**:
-  - Yeh function array ko pivot ke around divide karta hai.
-  - `pivot` ko last element (`arr[high]`) ke tor par chuna gaya hai.
-  - `i` ek index hai jo chhote elements ke liye track rakhta hai.
-  - Loop mein har element ko pivot se compare karte hain:
-    - Agar element pivot se chhota ya barabar hai, toh `i` increment hota hai aur element ko `i` position par swap karte hain.
-  - Loop ke baad, pivot ko uski final position (`i + 1`) par rakhte hain aur `i + 1` return karte hain.
-
-- **Output**:
-  ```
-  Original array: [10, 7, 8, 9, 1, 5]
-  Sorted array: [1, 5, 7, 8, 9, 10]
-  ```
-
----
-
-## Time Complexity
-
-Quicksort ki time complexity pivot ke selection aur data ke arrangement par depend karti hai:
-
-| Case              | Time Complexity | Description                                                                 |
-|-------------------|-----------------|-----------------------------------------------------------------------------|
-| **Best Case**     | O(n log n)      | Jab pivot har baar array ko balanced halves mein divide karta hai (e.g., median pivot). |
-| **Average Case**  | O(n log n)      | Random pivot selection ke case mein, yeh normally balanced partitions deta hai. |
-| **Worst Case**    | O(n²)           | Jab pivot hamesha smallest ya largest element hota hai (e.g., already sorted array). |
-
-**Space Complexity**:
-- **O(log n)** average case mein recursion stack ke liye.
-- **O(n)** worst case mein recursion stack ke liye.
-
----
-
-## Use Cases of Quicksort
-
-Quicksort ka use wahan hota hai jahan fast sorting ki zarurat ho aur memory kam use karna ho. Kuch examples:
-
-1. **General Sorting**:
-   - Databases mein records ko sort karne ke liye.
-   - File management systems mein files ko alphabetically ya size ke hisaab se arrange karne ke liye.
-
-2. **In-Memory Sorting**:
-   - Jab data RAM mein hai aur in-place sorting chahiye (extra memory nahi chahiye).
-
-3. **Libraries aur Frameworks**:
-   - Python ka `sorted()` function aur `.sort()` method internally Quicksort ka hybrid version use karte hain (TimSort ke sath).
-
-4. **Real-Time Applications**:
-   - Game development mein objects ko distance ya priority ke hisaab se sort karne ke liye.
-   - Network algorithms mein data packets ko prioritize karne ke liye.
-
----
-
-## Advantages aur Disadvantages
-
-### Advantages
-- **Fast**: Average case mein O(n log n) time complexity ke sath bohat efficient.
-- **In-Place**: Extra memory ka use nahi karta (sirf recursion stack ke liye thodi memory).
-- **Versatile**: Alag alag pivot selection strategies ke sath customize kiya ja sakta hai.
-
-### Disadvantages
-- **Worst Case**: O(n²) time complexity ho sakti hai agar pivot selection kharab ho.
-- **Unstable**: Equal elements ki relative order change ho sakti hai.
-- **Recursion**: Deep recursion stack ke liye memory issue ho sakta hai large arrays mein.
-
----
-
-# **Quicksort Algorithm**  🚀
 
 Quicksort is a highly efficient **divide-and-conquer** sorting algorithm that sorts an array by selecting a **pivot** element and partitioning the array around it. It recursively sorts the resulting sub-arrays to produce a fully sorted array. Below, we explore Quicksort in detail, including its implementation in Python, time complexity, use cases, and more. 🌟
 
@@ -686,4 +496,22 @@ Quicksort is widely used due to its efficiency and in-place sorting nature. Some
 - Unstable sorting (relative order of equal elements may change).
 - Recursive nature can lead to stack overflow for very large arrays.
 
-```
+
+---
+
+## Karatsuba Multiplication 🧮
+
+---
+
+## Strassen’s Matrix Multiplication 📊
+
+---
+
+---
+
+## Conclusion 🎉
+
+The Divide and Conquer paradigm is a versatile and powerful approach to problem-solving, enabling efficient solutions for searching, sorting, multiplication, and geometric problems. By mastering algorithms like Binary Search, Merge Sort, Quick Sort, Karatsuba Multiplication, Strassen’s Matrix Multiplication, and Closest Pair of Points, you’ll gain a deep understanding of how to break down complex problems into manageable parts. Keep practicing, and you’ll be a Divide and Conquer pro in no time! 💪
+
+---  
+
