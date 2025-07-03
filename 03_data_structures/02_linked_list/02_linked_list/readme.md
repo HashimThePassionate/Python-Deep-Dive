@@ -127,3 +127,95 @@ Now we have:
 💡 This is a crucial part of linked list design — it allows algorithms to **know when to stop traversing**.
 
 ---
+
+In Python, we will use the special value None to denote nothing. Consider Figure 4.5.
+Node B is the last element in the list, and thus it is pointing to None.
+
+<div align="center">
+  <img src="./images/04.jpg" alt="" width="300px"/>
+</div>
+
+
+## 🐍 Python Representation of a Node
+
+To represent such a structure in Python, we define a class:
+
+```python
+class Node:
+    def __init__(self, data=None):
+        self.data = data      # Stores the actual data
+        self.next = None      # Points to the next node (or None if it's the last)
+```
+
+### 📌 Explanation:
+
+* The `__init__` method is the constructor that initializes:
+
+  * `self.data` with a value (default is `None`)
+  * `self.next` with `None`, meaning it's not linked to any node yet
+
+🧠 By default, any newly created node **acts as an independent node** until it's explicitly linked.
+
+## 🧩 Customizing the Node
+
+If you need to store more than just basic data (e.g., customer information), you can extend the node to contain objects from other classes.
+
+### 🔧 Example:
+
+```python
+class Customer:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+class CustomerNode:
+    def __init__(self, customer_data=None):
+        self.data = customer_data
+        self.next = None
+```
+
+This way, your node can hold **complex data structures**, not just strings or numbers.
+
+
+## 🔄 Types of Linked Lists
+
+There are **three main types** of linked lists:
+
+1. **Singly Linked List** 🔁
+
+   * Each node points to the **next node** only.
+   * Last node points to `None`.
+
+2. **Doubly Linked List** 🔄
+
+   * Each node has **two pointers**: one to the next node and one to the previous node.
+   * Allows **backward and forward traversal**.
+
+3. **Circular Linked List** 🔂
+
+   * The last node does **not point to `None`**, instead, it points back to the **first node**, forming a loop.
+
+
+## ⚙️ Key Operations on Linked Lists
+
+To use linked lists in real-world applications, you must master the following operations:
+
+### 1. **Traversing the list** 🧭
+
+* Move through the list from start to end (usually via a loop)
+
+### 2. **Inserting a node** ➕
+
+* **At the beginning** 📍
+* **At the end** 🔚
+* **In the middle or at a specific position** 🎯
+
+### 3. **Deleting a node** ❌
+
+* **First node** 🥇
+* **Last node** 🏁
+* **Middle or specific position** 🔄
+
+Each of these operations is essential for implementing stacks, queues, graphs, and dynamic memory management.
+
+---
