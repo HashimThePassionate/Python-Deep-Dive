@@ -1,5 +1,29 @@
 # **Introducing to Linked Lists** 🔗
 
+## 📋 Table of Contents
+- [**Introducing to Linked Lists** 🔗](#introducing-to-linked-lists-)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🧠 Key Properties of Linked Lists](#-key-properties-of-linked-lists)
+  - [🔍 Breakdown of a Node](#-breakdown-of-a-node)
+  - [🖼️ Diagram Explanation](#️-diagram-explanation)
+- [**Nodes and Pointers** 📌](#nodes-and-pointers-)
+  - [🔗 Two-Node Linked List](#-two-node-linked-list)
+    - [🖼️ **Figure 4.3**: A sample linked list of two nodes](#️-figure-43-a-sample-linked-list-of-two-nodes)
+  - [➕ Adding a Third Node](#-adding-a-third-node)
+    - [🖼️ **Figure 4.4**: A sample linked list of three nodes](#️-figure-44-a-sample-linked-list-of-three-nodes)
+  - [✅ Final Understanding](#-final-understanding)
+  - [🐍 Python Representation of a Node](#-python-representation-of-a-node)
+    - [📌 Explanation:](#-explanation)
+  - [🧩 Customizing the Node](#-customizing-the-node)
+    - [🔧 Example:](#-example)
+  - [🔄 Types of Linked Lists](#-types-of-linked-lists)
+  - [⚙️ Key Operations on Linked Lists](#️-key-operations-on-linked-lists)
+    - [1. **Traversing the list** 🧭](#1-traversing-the-list-)
+    - [2. **Inserting a node** ➕](#2-inserting-a-node-)
+    - [3. **Deleting a node** ❌](#3-deleting-a-node-)
+
+---
+
 A **linked list** is a fundamental and widely used data structure in computer science. It offers flexibility and efficiency in memory usage and is ideal when dealing with dynamic data.
 
 ## 🧠 Key Properties of Linked Lists
