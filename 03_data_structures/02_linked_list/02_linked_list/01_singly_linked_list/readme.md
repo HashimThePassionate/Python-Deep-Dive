@@ -424,3 +424,266 @@ spam
 * **Scalability**: Ideal for large, dynamic datasets
 
 ---
+
+#  **Inserting at Any Position** 🌟
+
+When you want to insert a new node into a singly-linked list at **any** position, there are five key scenarios to handle. Let’s walk through each, step by step, and then see the complete, clean Python implementation.
+
+<div align="center">
+  <img src="./images/04.jpg" alt="" width="600px"/>
+</div>
+
+## Add this python code to the `SinglyLinkedList` class:
+
+```python
+    def append_at_a_location(self, data, index):
+        if index < 1:
+            print("Index should be 1 or greater. ")
+            return
+        node = Node(data)
+        # Case 1: Insert at the head
+        if index == 1:
+            node.next = self.head
+            self.head = node
+            return
+        # For index > 1, walk the list looking for the insertion point
+        current = self.head
+        prev = None
+        count = 1
+        while current:
+            if count == index:
+                prev.next =node
+                node.next = current
+                return
+            prev = current
+            current = current.next
+            count += 1
+        # If we exit the loop with count < index, list was too short
+        if count < index:
+            print("The list has fewer than {} elements".format(index))
+        else:
+            # count == index here means we fell off exactly at tail,
+            # so append at end:
+            prev.next = node
+```
+
+## The following code snippet uses the append method to add a “new” data element at an indexposition of 2 in the existing linked list:
+
+```python
+words.append_at_a_location('new', 2)
+
+current = words.head
+while current:
+    print(current.data)
+    current = current.next
+```
+
+## Lets break down the `append_at_a_location` method step by step:
+
+## 🛑 1. Invalid Index  
+- **Condition:** `index < 1`  
+- **What happens?** We immediately reject the request.  
+- **Why?** Linked-list positions start at 1 (the head is position 1).  
+
+```python
+if index < 1:
+    print("❌ Index should be 1 or greater")
+    return
+````
+
+---
+
+## 🏁 2. Insert at Head
+
+* **Condition:** `index == 1`
+* **What happens?**
+
+  1. Create new node
+  2. Point its `.next` to the **old** head
+  3. Update `self.head` to the new node
+* **Result:** New node becomes the first element.
+
+```python
+if index == 1:
+    node.next = self.head
+    self.head = node
+    return
+```
+
+---
+
+## 🔄 3. Insert in the Middle
+
+* **Condition:** `1 < index ≤ length`
+* **What happens?**
+
+  1. Walk the list with `current` & `prev` pointers, counting positions.
+  2. When `count == index`, splice the new node between `prev` and `current`.
+
+```python
+current = self.head
+prev = None
+count = 1
+
+while current:
+    if count == index:
+        prev.next    = node
+        node.next    = current
+        return
+
+    prev    = current
+    current = current.next
+    count  += 1
+```
+
+---
+
+## ➕ 4. Insert at Tail
+
+* **Condition:** `index == length + 1`
+* **What happens?**
+
+  * You walk off the list **exactly** when `count == index`, and `current` becomes `None`.
+  * Simply link the last node’s `.next` to your new node.
+
+```python
+# after the loop:
+if count == index:
+    prev.next = node
+    return
+```
+
+---
+
+## ⚠️ 5. Index Too Large
+
+* **Condition:** `index > length + 1`
+* **What happens?**
+
+  * You exit the loop with `count < index` and `current is None`.
+  * The list is too short!
+
+```python
+if count < index:
+    print(f"❌ The list has fewer than {index} elements")
+```
+
+---
+
+#  **Insert before the First Matching Value** 🍳
+
+Sometimes you don’t want to insert by index, but right **before** the first node whose `.data` equals your new value. The `append_with_same_data` method does exactly that. Let’s break it down:
+
+## 🧱 The Method
+
+```python
+def append_with_same_data(self, data):
+    current = self.head
+    prev    = self.head
+    node    = Node(data)
+
+    while current:
+        if current.data == data:
+            node.next  = current
+            prev.next  = node
+        prev    = current
+        current = current.next
+````
+
+## 🔍 Line-by-Line Explanation
+
+1. **Setup pointers & new node**
+
+   ```python
+   current = self.head
+   prev    = self.head
+   node    = Node(data)
+   ```
+
+   * `current` traverses each node.
+   * `prev` “lags behind” `current` by one step.
+   * `node` is the brand-new node containing `data`.
+
+2. **Walk through the list**
+
+   ```python
+   while current:
+       …
+       prev    = current
+       current = current.next
+   ```
+
+   * Repeat until `current` becomes `None` (end of list).
+   * Each iteration you’ll:
+
+     1. Check if **this** is the node you want to insert **before**.
+     2. Advance `prev` and `current`.
+
+3. **Detect a data-match**
+
+   ```python
+   if current.data == data:
+       node.next = current
+       prev.next = node
+   ```
+
+   * **When** you find a node whose `.data` **equals** `data`, you:
+
+     1. Point `node.next` to `current` (so it will come **before** the matched node).
+     2. Point `prev.next` to `node` (splicing your new node into the chain).
+
+---
+
+## 🚶‍♂️ Dry-Run Scenarios
+
+Assume our list is:
+
+```
+HEAD → [‘egg’] → [‘spam’] → [‘ham’] → [‘spam’] → None
+```
+
+We call:
+
+```python
+words.append_with_same_data('spam')
+```
+
+| Step | `current.data` |  `prev.data`  | Action                                                                | List After Action                          |
+| :--: | :------------: | :-----------: | :-------------------------------------------------------------------- | :----------------------------------------- |
+|   1  |     `'egg'`    |    `'egg'`    | No match; advance pointers                                            | `egg → spam → ham → spam`                  |
+|   2  |    `'spam'`    |    `'egg'`    | **Match!**<br>- `node('spam').next = current`<br>- `prev.next = node` | `egg → spam(new) → spam(old) → ham → spam` |
+|   3  |     `'ham'`    | `'spam'(old)` | No match; advance pointers                                            | *no change*                                |
+|   4  |    `'spam'`    |    `'ham'`    | **Match again!**<br>- inserts another `'spam'` before second spam     | `… → ham → spam(new) → spam(old) → None`   |
+
+*Final list ends up with **two** new `spam` nodes inserted, one before each old `spam`.*
+
+---
+
+## ⚠️ Edge-Cases & Gotchas
+
+1. **Inserting before the very first node**
+
+   * Because `prev` starts at `self.head`, if the head matches, you’ll do:
+
+     ```python
+     prev.next = node
+     ```
+
+     which actually links the head **to itself** unless you special-case it.
+   * **Fix:** Initialize `prev = None`, and if you match at head (`prev is None`), you must update `self.head = node`.
+
+2. **Multiple matches**
+
+   * **Current code** will insert **before every** matching node.
+   * If you only want **the first** insertion, add a `return` immediately after splicing in your new node.
+
+3. **No match at all**
+
+   * After the loop, if you never saw `current.data == data`, nothing happens.
+   * You might want to inform the user:
+
+     ```python
+     print(f"No node contains the value {data!r}")
+     ```
+
+---
