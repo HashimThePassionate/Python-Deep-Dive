@@ -29,6 +29,13 @@ class SinglyLinkedList:
         self.head = None
         self.size = 0
 
+    def iter(self):
+        """Yield each data item in the list."""
+        current = self.head
+        while current:
+            yield current.data
+            current = current.next
+
     def append(self, data):
         node = Node(data)
         if self.tail:
@@ -87,32 +94,73 @@ class SinglyLinkedList:
             current = current.next
         return None
 
+    def delete_first_node(self):
+        if self.head is None:
+            print("List is empty. Nothing to delete.")
+            return
+        node_to_delete = self.head
+        deleted_data = node_to_delete.data
+        self.head = self.head.next
+        if self.head is None:
+            self.tail = None
+        self.size -= 1
+        return deleted_data
 
+
+# -------------------------------------------------------------------------
+#  Assuming we have a linked list with the elements 'eggs', 'ham', and 'spam':
 words = SinglyLinkedList()
 words.append('eggs')
 words.append('ham')
 words.append('spam')
 
+
+# -------------------------------------------------------------------------
+# Display the linked list
 # current = words.head
 # while current:
 #     print(current.data)
 #     current = current.next
 
-words.append_at_a_location('new', 2)
 
-current = words.head
-while current:
-    print(current.data)
-    current = current.next
+# -------------------------------------------------------------------------
+# Insert 'new' at index 2
+# This will insert 'new' between 'eggs' and 'ham'
+# words.append_at_a_location('new', 2)
 
-words.append_with_same_data('spam')
+
+# -------------------------------------------------------------------------
+# # Display the linked list after insertion
+# current = words.head
+# while current:
+#     print(current.data)
+#     current = current.next
+
+
+# -------------------------------------------------------------------------
+# Insert 'new' at index 1 (head)
+# words.append_with_same_data('spam')
+# # Display the linked list after insertion
 # current = words.head
 # while current:
 #  print(current.data)
 #  current = current.next
 
-node = words.search('ham')
-if node:
-    print(f"Found node with data: {node.data}")
-else:
-    print("Node not found.")
+
+# -------------------------------------------------------------------------
+# Search for 'ham' in the linked list
+# node = words.search('ham')
+# if node:
+#     print(f"Found node with data: {node.data}")
+# else:
+#     print("Node not found.")
+
+
+
+
+# -------------------------------------------------------------------------
+# Delete the first node
+print("Before deletion:", list(words.iter()))
+deleted = words.delete_first_node()
+print(f"Deleted: {deleted}")
+print("After deletion:", list(words.iter()))

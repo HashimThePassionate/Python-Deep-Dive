@@ -800,3 +800,100 @@ else:
 
 ---
 
+#  **Deleting the First Node in a Singly Linked List** ❌
+To remove the **first node** from a singly linked list, we need to update the `head` pointer to point to the **next node**. This operation is efficient and straightforward, taking O(1) time.
+When you remove the first node from a linked list, you simply **re-point** the `head` to the **second node**, and let the original first node be garbage-collected. Below is the **complete code**, followed by a **step-by-step dry-run** and a **usage example**.
+
+
+## 🧱 New Code in SinglyLinkedList Class
+
+```python
+    def iter(self):
+        current = self.head
+        while current:
+            yield current.data
+            current = current.next
+
+    def delete_first_node(self):
+        if self.head is None:
+            print("List is empty. Nothing to delete.")
+            return
+        node_to_delete = self.head
+        deleted_data = node_to_delete.data
+        self.head = node_to_delete.next
+        if self.head is None:
+            self.tail = None
+        self.size -= 1
+        return deleted_data
+```
+
+## 🖼️ Visual Guide
+
+### **Figure 4.10**: Before Deletion
+
+<div align="center">
+  <img src="./images/05.jpg" alt="" width="500px"/>
+</div>
+
+```
+head → [eggs] → [ham] → [spam] → None
+```
+
+### **Figure 4.11**: After Deletion
+<div align="center">
+  <img src="./images/06.jpg" alt="" width="500px"/>
+</div>
+
+```
+head → [ham] → [spam] → None
+```
+
+## 🚶 Step-by-Step Dry-Run
+
+Starting list:
+
+```
+eggs → ham → spam → None
+```
+
+Call:
+
+```python
+deleted = words.delete_first_node()
+```
+
+| Step | Code                                 | Effect                        |
+| ---- | ------------------------------------ | ----------------------------- |
+| 1️⃣  | `if self.head is None:`              | List is not empty → proceed   |
+| 2️⃣  | `node_to_delete = self.head`         | `node_to_delete` → `[eggs]`   |
+|      | `deleted_data = node_to_delete.data` | `deleted_data` = `"eggs"`     |
+| 3️⃣  | `self.head = node_to_delete.next`    | `head` now → `[ham]`          |
+| 4️⃣  | `if self.head is None:`              | False (there are still nodes) |
+| 5️⃣  | `self.size -= 1`                     | Decrement size                |
+| 6️⃣  | `return deleted_data`                | Returns `"eggs"` to caller    |
+
+Resulting list:
+
+```
+ham → spam → None
+```
+
+## ⚙️ Usage Example
+
+```python
+words = SinglyLinkedList()
+words.append('eggs')
+words.append('ham')
+words.append('spam')
+
+print("Before deletion:", list(words.iter()))
+# → ['eggs', 'ham', 'spam']
+
+deleted = words.delete_first_node()
+print(f"Deleted: {deleted}")
+# → 'eggs'
+
+print("After deletion:", list(words.iter()))
+# → ['ham', 'spam']
+```
+---
