@@ -687,3 +687,116 @@ words.append_with_same_data('spam')
      ```
 
 ---
+
+#  **Searching for an Element in a Singly Linked List** 🔍
+
+To determine whether a **linked list** contains a specific value, we implement a **search** method that walks through each node until it either finds the target or reaches the end. Below is the **complete code**, followed by a **step-by-step dry-run** on an example list.
+
+## 📜 The `search` Method
+
+```python
+class SinglyLinkedList:
+    # … (other methods omitted for brevity)
+
+    def search(self, data):
+        current = self.head          # 1️⃣ Start at the head of the list
+        while current:               # 2️⃣ Continue until no more nodes
+            if current.data == data: # 3️⃣ Compare the node’s data
+                return current       # 4️⃣ Found it → return this node
+            current = current.next   # 5️⃣ Move to the next node
+        return None                  # 6️⃣ Not found → return None
+```
+
+### 🔍 Explanation of Each Step
+
+1. **Initialize Pointer**
+
+   ```python
+   current = self.head
+   ```
+
+   * Begin at the **first node** (`head`).
+   * If the list is empty, `self.head` is `None` and the loop won’t run.
+
+2. **Loop Through the List**
+
+   ```python
+   while current:
+   ```
+
+   * Keep iterating **while** `current` is not `None` (i.e., until end of list).
+
+3. **Compare Node Data**
+
+   ```python
+   if current.data == data:
+       return current
+   ```
+
+   * If the node’s data matches the **search key**, **immediately return** that node.
+
+4. **Advance to Next Node**
+
+   ```python
+   current = current.next
+   ```
+
+   * Move pointer forward by following the `.next` link.
+
+5. **Handle “Not Found”**
+
+   ```python
+   return None
+   ```
+
+   * If we've traversed the entire list with no match, return `None`.
+
+---
+
+## 🚶‍♂️ Dry-Run Example
+
+Let’s **search** for `"ham"` in the list:
+
+```plaintext
+List: eggs → ham → spam → None
+Search key: "ham"
+```
+
+| Iteration | `current` points to | Comparison (`current.data == "ham"`) | Action                                      |
+| --------- | ------------------- | ------------------------------------ | ------------------------------------------- |
+| **Start** | Node("eggs")        | —                                    | Initialize `current = head`                 |
+| **1️⃣**   | `"eggs"`            | `"eggs" == "ham"` → False            | Move `current = current.next` (now `"ham"`) |
+| **2️⃣**   | `"ham"`             | `"ham" == "ham"` → True              | **Return Node("ham")** → stop traversal     |
+
+* We never visit `"spam"` because we found the match at the **second node**.
+* The method returns the **node object** containing `"ham"`.
+
+---
+
+## ⚙️ Client Usage
+
+```python
+node = words.search('ham')
+
+if node:
+    print(f"✅ Found node with data: {node.data}")
+else:
+    print("❌ Node not found.")
+```
+
+**Output:**
+
+```
+✅ Found node with data: ham
+```
+
+---
+
+## 📈 Complexity
+
+* **Best case**: O(1) — match at head
+* **Worst case**: O(n) — end of list or not present
+* **Average case**: O(n)
+
+---
+

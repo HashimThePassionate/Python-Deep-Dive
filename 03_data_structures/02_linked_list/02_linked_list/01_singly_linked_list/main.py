@@ -79,6 +79,14 @@ class SinglyLinkedList:
             prev = current
             current = current.next
 
+    def search(self, data):
+        current = self.head
+        while current:
+            if current.data == data:
+                return current
+            current = current.next
+        return None
+
 
 words = SinglyLinkedList()
 words.append('eggs')
@@ -102,3 +110,9 @@ words.append_with_same_data('spam')
 # while current:
 #  print(current.data)
 #  current = current.next
+
+node = words.search('ham')
+if node:
+    print(f"Found node with data: {node.data}")
+else:
+    print("Node not found.")
