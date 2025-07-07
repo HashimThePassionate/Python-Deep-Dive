@@ -105,14 +105,38 @@ class SinglyLinkedList:
             self.tail = None
         self.size -= 1
         return deleted_data
+    
+    def delete_last_node(self):
+        if self.head is None:
+            print("List is empty. Nothing to delete.")
+            return
+        current = self.head
+        prev = None
+        if current.next is None:
+            deleted_data = current.data
+            self.head = None
+            self.tail = None
+            self.size -= 1
+            return deleted_data
+        
+        while current.next:
+            prev = current
+            current = current.next
+
+        deleted_data = current.data
+        prev.next = None    
+        self.tail = prev     
+        self.size -= 1
+        return deleted_data
+
 
 
 # -------------------------------------------------------------------------
 #  Assuming we have a linked list with the elements 'eggs', 'ham', and 'spam':
-words = SinglyLinkedList()
-words.append('eggs')
-words.append('ham')
-words.append('spam')
+# words = SinglyLinkedList()
+# words.append('eggs')
+# words.append('ham')
+# words.append('spam')
 
 
 # -------------------------------------------------------------------------
@@ -160,7 +184,24 @@ words.append('spam')
 
 # -------------------------------------------------------------------------
 # Delete the first node
-print("Before deletion:", list(words.iter()))
-deleted = words.delete_first_node()
+# print("Before deletion:", list(words.iter()))
+# deleted = words.delete_first_node()
+# print(f"Deleted: {deleted}")
+# print("After deletion:", list(words.iter()))
+
+
+# -------------------------------------------------------------------------
+words = SinglyLinkedList()
+words.append(1)
+words.append(5)
+words.append(2)
+words.append(8)
+
+print("Before:", list(words.iter()))
+# → [1, 5, 2, 8]
+
+deleted = words.delete_last_node()
 print(f"Deleted: {deleted}")
-print("After deletion:", list(words.iter()))
+# → 8
+
+print("After:", list(words.iter()))

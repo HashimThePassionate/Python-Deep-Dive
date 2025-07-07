@@ -897,3 +897,115 @@ print("After deletion:", list(words.iter()))
 # → ['ham', 'spam']
 ```
 ---
+
+#  **Deleting the Last Node in a Singly Linked List** ❌
+
+Removing the **tail** node requires traversing the list to locate both:
+
+* **`current`** → the last node to be deleted
+* **`prev`**    → the node immediately before `current`
+
+
+## 🧱 New Code in SinglyLinkedList Class
+
+```python
+def delete_last_node(self):
+    if self.head is None:
+        print("List is empty. Nothing to delete.")
+        return
+    current = self.head
+    prev = None
+    # Single-node list? (Figure 4.12 step 2)
+    if current.next is None:
+        deleted_data = current.data
+        self.head = None
+        self.tail = None
+        self.size -= 1
+        return deleted_data
+
+    # Traverse to the last node (Figure 4.13)
+    #    Move 'current' forward until .next is None,
+    #    keeping 'prev' one step behind.
+    while current.next:
+        prev = current          # prev follows behind
+        current = current.next  # current moves forward
+
+    # At this point:
+    #    • current → last node  (Figure 4.13 end)
+    #    • prev    → second-last node
+    #
+    #    Delete via:
+    #      prev.next = None
+    #      tail = prev
+    deleted_data = current.data    # Save to return
+    prev.next = None               # Unlink the last node  (Figure 4.14 step 3)
+    self.tail = prev               # Update tail pointer
+    self.size -= 1
+
+    # 5️⃣ Return the deleted data
+    return deleted_data
+```
+## 🖼️ Figure-Referenced Steps
+
+1. **Figure 4.12: Initial Pointers**
+<div align="center">
+  <img src="./images/07.jpg" alt="" width="600px"/>
+</div>
+
+   * **`head`**, **`current`**, and **`prev`** all start at the **first node**.
+   * **Check** if `head` is `None` → empty list error (handled).
+   * **Check** if `current.next is None` → single-node list (handled).
+
+2. **Figure 4.13: Traversal to Tail**
+<div align="center">
+  <img src="./images/08.jpg" alt="" width="600px"/>
+</div>
+
+   * **Loop**:
+
+     * `while current.next:`
+
+       * **`prev = current`**
+       * **`current = current.next`**
+   * **Ends** when `current.next` is `None`, so **`current`** is the **last node**, **`prev`** is the **second-last**.
+
+3. **Figure 4.14: Deletion of Tail**
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="600px"/>
+</div>
+
+   * **Unlink** the last node:
+
+     ```python
+     prev.next = None
+     ```
+   * **Update** tail pointer:
+
+     ```python
+     self.tail = prev
+     ```
+   * **Decrement** `self.size` and **return** the deleted data.
+
+---
+
+## ⚙️ Usage Example
+
+```python
+words = SinglyLinkedList()
+words.append(1)
+words.append(5)
+words.append(2)
+words.append(8)
+
+print("Before:", list(words.iter()))
+# → [1, 5, 2, 8]
+
+deleted = words.delete_last_node()
+print(f"Deleted: {deleted}")
+# → 8
+
+print("After:", list(words.iter()))
+# → [1, 5, 2]
+```
+
+---
