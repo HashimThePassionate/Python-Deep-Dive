@@ -1009,3 +1009,203 @@ print("After:", list(words.iter()))
 ```
 
 ---
+
+#  **Deleting an Intermediate Node in a Singly Linked List** ⚙️
+
+To remove a node **in the middle** of a linked list (neither head nor tail), we must:
+
+1. **Locate** the target node (`current`) and keep track of the **previous** node (`prev`).
+2. **Re-link** `prev.next` to skip over `current` and point to `current.next`.
+3. **Adjust** metadata (`size`, possibly `tail` if you delete the last node).
+
+Below is the **visual walkthrough** (Figures 4.15–4.17), the **Python code**, and a **dry-run** example.
+
+## 🖼️ Visual Guide
+
+### **Figure 4.15**: Initial Pointers
+
+<div align="center">
+  <img src="./images/07.jpg" alt="" width="600px"/>
+</div>
+
+* **`head`**, **`current`**, and **`prev`** all start at the **first node**.
+
+### **Figure 4.16**: Target Node Identified
+
+<div align="center">
+  <img src="./images/08.jpg" alt="" width="600px"/>
+</div>
+
+* We advance until **`current.data == target`**.
+* **`prev`** sits one node behind **`current`**.
+
+### **Figure 4.17**: After Deletion
+
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="600px"/>
+</div>
+
+* We set **`prev.next = current.next`**, effectively **skipping** the deleted node.
+* The list stitches back together without the removed node.
+
+
+## 📝 Code Implementation
+
+```python
+class SinglyLinkedList:
+    # … (append, iter, delete_first/last methods here) …
+
+    def delete_at_a_location(self, data):
+        current = self.head   # 1️⃣ Start at head
+        prev = None
+
+        # 2️⃣ Traverse to find the target node
+        while current:
+            if current.data == data:
+                # 3️⃣ Deleting the head?
+                if prev is None:
+                    self.head = current.next
+                else:
+                    # 4️⃣ Bypass current node
+                    prev.next = current.next
+
+                # 5️⃣ If deleting tail, update tail pointer
+                if current.next is None:
+                    self.tail = prev
+
+                # 6️⃣ Update size and return
+                self.size -= 1
+                return current
+
+            # 7️⃣ Advance pointers
+            prev = current
+            current = current.next
+
+        # 8️⃣ Not found
+        return None
+```
+
+### 🔍 Explanation of Each Section
+
+1. **Initialize**
+
+   ```python
+   current = self.head
+   prev    = None
+   ```
+
+   * `current` scans each node; `prev` lags behind.
+
+2. **Search Loop**
+
+   ```python
+   while current:
+       if current.data == data:
+           …
+       prev, current = current, current.next
+   ```
+
+   * Continue until **match** or end of list.
+
+3. **Delete Head Node**
+
+   ```python
+   if prev is None:
+       self.head = current.next
+   ```
+
+   * If the node to delete **is** the head, simply move `head`.
+
+4. **Delete Middle Node**
+
+   ```python
+   prev.next = current.next
+   ```
+
+   * Skips over `current`.
+
+5. **Update Tail if Needed**
+
+   ```python
+   if current.next is None:
+       self.tail = prev
+   ```
+
+   * If you removed the last node in this method, ensure `tail` remains correct.
+
+6. **Size & Return**
+
+   ```python
+   self.size -= 1
+   return current
+   ```
+
+7. **Advance Pointers**
+
+   ```python
+   prev = current
+   current = current.next
+   ```
+
+8. **Not Found**
+
+   ```python
+   return None
+   ```
+
+   * Signal absence of the target.
+
+
+## 🚶 Dry-Run Example
+
+Starting list:
+
+```
+"eggs" → "ham" → "spam" → None
+```
+
+We call:
+
+```python
+deleted_node = words.delete_at_a_location('ham')
+```
+
+| Step | `prev`         | `current`    | Action / Notes                                                                           |
+| ---- | -------------- | ------------ | ---------------------------------------------------------------------------------------- |
+| 1️⃣  | `None`         | Node("eggs") | Check `"eggs" == "ham"` → **No** → advance                                               |
+|      | → Node("eggs") | Node("ham")  | (after `prev=current`, `current=current.next`)                                           |
+| 2️⃣  | Node("eggs")   | Node("ham")  | Check `"ham" == "ham"` → **Yes** → delete                                                |
+| 3️⃣  | Node("eggs")   | Node("ham")  | Since `prev` is not `None`, do `prev.next = current.next` → Egg’s `.next` points to Spam |
+| 4️⃣  | —              | —            | `current.next` is not `None`, so `tail` stays unchanged                                  |
+| 5️⃣  | —              | —            | Decrement size; return the **deleted node**                                              |
+
+Resulting list:
+
+```
+"eggs" → "spam" → None
+```
+
+* **Deleted data**: `"ham"`
+
+
+## ⚙️ Usage Example
+
+```python
+words = SinglyLinkedList()
+words.append('eggs')
+words.append('ham')
+words.append('spam')
+
+print("Before:", list(words.iter()))
+# → ['eggs', 'ham', 'spam']
+
+deleted = words.delete_at_a_location('ham')
+print("Deleted:", deleted.data if deleted else None)
+# → 'ham'
+
+print("After:", list(words.iter()))
+# → ['eggs', 'spam']
+```
+
+---
+
