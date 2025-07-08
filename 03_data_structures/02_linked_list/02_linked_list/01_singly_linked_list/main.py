@@ -146,6 +146,12 @@ class SinglyLinkedList:
             current = current.next
         return None
 
+    def clear(self):
+        self.head = None
+        self.tail = None
+        self.size = 0
+
+
 
 # -------------------------------------------------------------------------
 #  Assuming we have a linked list with the elements 'eggs', 'ham', and 'spam':
@@ -229,3 +235,5 @@ words.append('spam')
 print("Before deletion:", list(words.iter()))
 words.delete_at_a_location('ham')
 print("After deletion:", list(words.iter()))
+words.clear()
+print("After clearing:", list(words.iter()))

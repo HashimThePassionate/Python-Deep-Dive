@@ -1209,3 +1209,105 @@ print("After:", list(words.iter()))
 
 ---
 
+#  **Clearing the Entire Linked List** 🧹
+
+At times, you may want to **empty** your linked list in one operation. The simplest way is to **drop all references** to its nodes by resetting the **head** and **tail** pointers (and size counter) to `None` or `0`. This allows Python’s garbage collector to reclaim all nodes.
+
+## 🖼️ Visual Before & After
+
+1. **Before Clearing:**
+
+   ```
+   head → [eggs] → [ham] → [spam] → None  
+   tail ────────────────┘
+   size = 3
+   ```
+
+2. **After Clearing:**
+
+   ```
+   head = None  
+   tail = None  
+   size = 0
+   ```
+
+## 📜 Method Implementation
+
+```python
+class SinglyLinkedList:
+    # … (other methods) …
+
+    def clear(self):
+        """
+        Clears the entire list in O(1) time by resetting head, tail, and size.
+        """
+        # 1️⃣ Drop references to all nodes
+        self.head = None
+        self.tail = None
+
+        # 2️⃣ Reset metadata
+        self.size = 0
+```
+
+### 🔍 Explanation of Each Step
+
+1. **Reset Pointers**
+
+   ```python
+   self.head = None
+   self.tail = None
+   ```
+
+   * **`head = None`**: No entry point to any node.
+   * **`tail = None`**: No last node to reference.
+
+2. **Reset Size Counter**
+
+   ```python
+   self.size = 0
+   ```
+
+   * Ensures that `len(list)` or any size checks reflect the empty state.
+
+Because no external references point to the old nodes, they become **eligible for garbage collection**, freeing memory.
+
+## 🚶 Step-by-Step Dry-Run
+
+Assume the list initially contains:
+
+```
+head → [1] → [5] → [2] → [8] → None
+tail → [8]
+size = 4
+```
+
+Call:
+
+```python
+words.clear()
+```
+
+| Step | Action                | Result                                      |
+| ---- | --------------------- | ------------------------------------------- |
+| 1️⃣  | `self.head = None`    | head no longer references any node          |
+| 2️⃣  | `self.tail = None`    | tail no longer references any node          |
+| 3️⃣  | `self.size = 0`       | size counter reset to zero                  |
+| ✅    | **List is now empty** | `head is None`, `tail is None`, `size == 0` |
+
+## ⚙️ Usage Example
+
+```python
+words = SinglyLinkedList()
+words.append('eggs')
+words.append('ham')
+words.append('spam')
+print("Before clear:", list(words.iter()), "| size =", words.size)
+# → Before clear: ['eggs', 'ham', 'spam'] | size = 3
+
+words.clear()
+print("After clear:", list(words.iter()), "| size =", words.size)
+# → After clear: [] | size = 0
+```
+
+---
+
