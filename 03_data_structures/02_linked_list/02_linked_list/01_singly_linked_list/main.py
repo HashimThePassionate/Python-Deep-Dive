@@ -37,43 +37,54 @@ class SinglyLinkedList:
             current = current.next
 
     def append(self, data):
-        node = Node(data)
+        node = Node(data=data)
         if self.tail:
             self.tail.next = node
             self.tail = node
+            self.size += 1
         else:
             self.head = node
             self.tail = node
+            self.size += 1
 
     def append_at_a_location(self, data, index):
         if index < 1:
-            print("Index should be 1 or greater. ")
+            print('Index should be greater than 1')
             return
+
         node = Node(data)
-        # Case 1: Insert at the head
+
+        # Case 1: Insert at head
         if index == 1:
             node.next = self.head
             self.head = node
+            if self.tail is None:  # if list was empty
+                self.tail = node
+            self.size += 1
             return
-        # For index > 1, walk the list looking for the insertion point
+
+        # Case 2: Insert at any middle or end position
         current = self.head
         prev = None
         count = 1
+
         while current:
             if count == index:
                 prev.next = node
                 node.next = current
+                self.size += 1
                 return
             prev = current
             current = current.next
             count += 1
-        # If we exit the loop with count < index, list was too short
-        if count < index:
-            print("The list has fewer than {} elements".format(index))
-        else:
-            # count == index here means we fell off exactly at tail,
-            # so append at end:
+
+        # Case 3: If inserting at the end (index == size + 1)
+        if count == index:
             prev.next = node
+            self.tail = node
+            self.size += 1
+        else:
+            print("The list has fewer than {} elements".format(index))
 
     def append_with_same_data(self, data):
         current = self.head
