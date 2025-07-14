@@ -87,3 +87,28 @@ class Node:
   * A brand-new node has **no predecessor**, so `prev=None`.
 
 ---
+
+---
+
+# ➕ **Doubly Linked List class**
+
+In a **doubly linked list**, each node knows both its **next** and **previous** neighbor. To append (add to the end), we update:
+
+1. The current **tail**’s `.next` → new node
+2. The new node’s `.prev` → old tail
+3. The list’s **tail** pointer → new node
+4. Increase the **count**
+
+---
+
+## 📜 Code for `DoublyLinkedList class`
+
+```python
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None     # First node
+        self.tail = None     # Last node
+        self.count = 0       # Number of nodes
+
+```
+---
