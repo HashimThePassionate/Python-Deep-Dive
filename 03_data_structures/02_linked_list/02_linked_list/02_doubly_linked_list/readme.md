@@ -48,3 +48,42 @@ A **doubly linked list** extends the concept of a singly linked list by allowing
    * You can start at the **tail** and move backward via `.previous`.
 
 ---
+
+# 🛠️ **Creating a Doubly Linked List Node in Python**
+
+To build a **doubly linked list**, each node must know:
+
+1. **Its data**
+2. **Which node comes next**
+3. **Which node came before**
+
+Below is the **Python class** for a single doubly linked-list node, followed by a **detailed breakdown**.
+
+```python
+class Node:
+    def __init__(self, data=None, next=None, prev=None):
+        self.data = data    # 📦 Holds the node’s value
+        self.next = next    # ➡️ Reference to the next node (or None)
+        self.prev = prev    # ⬅️ Reference to the previous node (or None)
+```
+
+---
+
+## 🔍 Detailed Explanation
+
+* **`data`**
+
+  * Stores **any value** you want to keep in this node (e.g., an integer, string, object).
+  * **Default**: `None` (empty) if no data is provided.
+
+* **`next`**
+
+  * Points to the **next node** in the list (the one to the right in diagrams).
+  * When you **create** a standalone node, it has **no successor**, so `next=None`.
+
+* **`prev`**
+
+  * Points to the **previous node** in the list (the one to the left in diagrams).
+  * A brand-new node has **no predecessor**, so `prev=None`.
+
+---
