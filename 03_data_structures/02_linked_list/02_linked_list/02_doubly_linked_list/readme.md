@@ -111,276 +111,218 @@ class DoublyLinkedList:
         self.count = 0       # Number of nodes
 
 ```
+
 ---
 
-#  **Inserting a Node at the Beginning of a Doubly Linked List** ➕
+#  **Inserting a Node at the Beginning of a Doubly Linked List** 📌
 
-In a **doubly linked list**, each node holds:
+When working with doubly linked lists, adding a new node at the start requires careful handling of pointers to maintain list integrity. This topic covers both scenarios—when the list is empty and when it already contains nodes—along with detailed, step-by-step explanations, illustrative figures, and a line-by-line code walkthrough. Enjoy the deep dive! 
 
-* **`data`**
-* **`next`** pointer → next node
-* **`prev`** pointer → previous node
+## 📝 1. Overview
 
-We maintain two pointers in the list object:
+A **doubly linked list** consists of nodes where each node has:
 
-* **`head`** → first node
-* **`tail`** → last node
-* **`count`** → number of nodes
+* `data` — holds the value.
+* `next` — pointer to the next node.
+* `prev` — pointer to the previous node.
 
-Below, we’ll walk through **three key figures** illustrating insertion into an **empty list** and **non-empty list**, then present and explain the Python code, and finally show a usage example with output.
+When inserting at the **beginning**, we must:
 
-## 🖼️ Figures & Their Explanations
+1. Handle the **empty list** case (no existing nodes).
+2. Handle the **non-empty list** case (updating three pointers).
+3. Update the **head** reference and increment the **node count**.
 
-*(Carousel: Figures 4.20, 4.21, and 4.22)*
+## 🔹 2. Insertion into an Empty List
 
-1. **Figure 4.20: Inserting into an *Empty* List**
+> **Check**: Is `head` `None`?
+> If **yes**, the list is empty.
+
+* Create the new node.
+* Point **both** `head` and `tail` to this node.
+* No other pointers need updating.
+
+## 🔹 3. Insertion into a Non-Empty List
+
+> **Else** (`head` is not `None`): list has ≥ 1 node.
+
+We must update **three links** (shown as dotted in Figure 4.22):
+
+1. **New node’s `next` → old head**
+2. **Old head’s `prev` → new node**
+3. **Update `head` → new node**
+
+
+## 🖼️ Figure 4.20: Inserting into an **Empty** Doubly Linked List
 
 <div align="center">
   <img src="./images/03.jpg" alt="" width="400px"/>
 </div>
 
-   * Both **`head`** and **`tail`** are `None` → list is empty.
-   * When we create a single `new_node`, we set:
+1. **Single Node Structure**
 
-     ```plaintext
-     head → new_node ← tail
-     new_node.next = None
-     new_node.prev = None
-     ```
-   * Now both pointers reference the same sole node.
+   * **Data box** holds the payload.
+   * **Next pointer** is `None` (→ no successor).
+   * **Prev pointer** is `None` (← no predecessor).
 
-1. **Figure 4.21: Inserting into a *Non-Empty* List**
+2. **Head & Tail Arrows**
+
+   * **Head →** The arrow from `Head` points at the new node.
+   * **Tail →** The arrow from `Tail` also points at the same node.
+   * This dual pointing shows the list has **one** element; it’s both start and end.
+
+3. **Why Both Pointers?**
+
+   * In a doubly linked list, `head` tracks the first element; `tail` tracks the last.
+   * With only one node, “first” = “last,” so both references coincide.
+
+---
+
+## 🖼️ Figure 4.21: Inserting into a **Non-Empty** Doubly Linked List
 
 <div align="center">
   <img src="./images/04.jpg" alt="" width="500px"/>
 </div>
 
-   * Initial list: A ⇄ B ⇄ C
+1. **Pre-Insertion State**
 
-     ```plaintext
-     head → A ⇄ B ⇄ C ← tail
-     ```
-   * We’ll insert `new_node` before A (at the start).
+   * Three nodes are already linked:
 
-1. **Figure 4.22: Step-by-Step Link Updates**
-   The three dotted arrows show the order of pointer updates when inserting at the front:
+     * Leftmost’s `prev` = `None` (it’s head).
+     * Rightmost’s `next` = `None` (it’s tail).
+
+2. **Visual Clues**
+
+   * **Grey shading** on each node: shows existing list.
+   * **New node** (unshaded in 4.22) not yet part of the list.
+
+3. **Conceptual Action**
+
+   * We plan to insert a brand-new node **in front** of that leftmost head.
+   * We’ll update pointers so that this new node becomes the new head.
+
+---
+
+## 🖼️ Figure 4.22: Step-By-Step Insertion at the Beginning
+
 
 <div align="center">
   <img src="./images/05.jpg" alt="" width="500px"/>
 </div>
 
-   1. **`new_node.next = head`**
+1. **Step ① – Link New → Old**
 
-      * Link the new node **forward** to the old head.
-   2. **`head.prev = new_node`**
+   * **Dotted arrow** from new node’s `next` box → old head.
+   * This connects the new node **forward** into the list.
 
-      * Link the old head **backward** to the new node.
-   3. **`head = new_node`**
+2. **Step ② – Link Old ← New**
 
-      * Update the list’s head pointer to the new node.
+   * **Dotted arrow** from old head’s `prev` box → new node.
+   * This connects the old head **backward** to the new node.
 
-## 📝 Python Code: `append at end or append_at_start`
+3. **Step ③ – Update Head Reference**
 
-```python
-class DoublyLinkedList:
-    def __init__(self):
-        self.head = None    # First node
-        self.tail = None    # Last node
-        self.count = 0      # Number of nodes
+   * **Solid arrow** labeled “Head” moves to point at the new node.
+   * This officially makes the new node the list’s starting point.
 
-     def append(self, data):
-        # Append an item at the end of the list.
-        new_node = Node(data, None, None)
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            new_node.prev = self.tail
-            self.tail.next = new_node
-            self.tail = new_node
-        self.count += 1
+4. **Why This Order?**
+
+   * **First**, establish internal links (① & ②) so no pointer is left dangling.
+   * **Then**, move the `head` reference (③) to finalize the new structure.
+   * Ensures the list is never in an inconsistent state. ✅
 
 
-    def append_at_start(self, data):
-        """
-        Insert a new node containing `data` at the beginning of the list.
-        Runs in O(1) time.
-        """
-        # 1️⃣ Create the new standalone node
-        new_node = Node(data, next=None, prev=None)
+## 💡 4. Step-by-Step Pointer Updates
 
-        # 2️⃣ Empty list? Initialize both head and tail.
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
+| Step | Action                                                          |
+| :--: | :-------------------------------------------------------------- |
+|   ①  | `new_node.next = head` — link new node forward to the old head  |
+|   ②  | `head.prev = new_node` — link old head backward to the new node |
+|   ③  | `head = new_node` — make the new node the new head of the list  |
 
-        # 3️⃣ Non-empty list? Insert before current head.
-        else:
-            new_node.next = self.head       # ➡️ Link forward to old head
-            self.head.prev = new_node       # ⬅️ Link old head backward to new_node
-            self.head = new_node            # 🔄 Update head to new_node
+---
 
-        # 4️⃣ Maintain node count
-        self.count += 1
-```
-
-# Doubly Linked List Operations
-
-This document provides an in-depth guide to building and manipulating a **Doubly Linked List** in Python. We cover:
-
-1. **Node Definition**
-2. **Figures** illustrating insertion scenarios
-3. **Append at Start** (Insert at Head) — detailed breakdown
-4. **Append at End** (Insert at Tail) — detailed breakdown
-5. **Usage Example**
-
-## 1. Node Definition
-
-Each node in a doubly linked list must store:
-
-* **`data`**: The payload or value.
-* **`next`**: A reference to the **next** node in the list (or `None`).
-* **`prev`**: A reference to the **previous** node in the list (or `None`).
+## 📚 5. Code Implementation
 
 ```python
 class Node:
-    def __init__(self, data=None, next=None, prev=None):
-        self.data = data      # 🎁 Node’s stored value
-        self.next = next      # ➡️ Pointer to the next node
-        self.prev = prev      # ⬅️ Pointer to the previous node
-```
+    def __init__(self, data, prev=None, next=None):
+        self.data = data    # Value stored in the node
+        self.prev = prev    # Pointer to the previous node
+        self.next = next    # Pointer to the next node
 
-When a node is created in isolation:
-
-* `next` and `prev` both default to `None`, indicating no connections yet.
-
-
-## 3. Append at Start (Insert at Head)
-
-### Code
-
-```python
 class DoublyLinkedList:
     def __init__(self):
-        self.head = None   # First node in the list
-        self.tail = None   # Last node in the list
-        self.count = 0     # Number of nodes
+        self.head = None    # Start of the list
+        self.tail = None    # End of the list
+        self.count = 0      # Number of nodes
 
     def append_at_start(self, data):
-        """
-        Inserts a new node containing `data` at the beginning (head) of the list.
-        Operates in O(1) time.
-        """
-        # 1️⃣ Create the new node with no connections
-        new_node = Node(data)
-
-        # 2️⃣ If the list is empty, both head and tail become new_node
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            # 3️⃣ Link new_node → old head
-            new_node.next = self.head      # Forward link
-            # 4️⃣ Link old head ← new_node
-            self.head.prev = new_node      # Backward link
-            # 5️⃣ Update head to the new node
-            self.head = new_node
-
-        # 6️⃣ Update node count
-        self.count += 1
+        """Append an item at the beginning of the list."""
+        new_node = Node(data)             # 🔹 Create new node with data
+        if self.head is None:             # 🔍 Case 1: Empty list?
+            self.head = new_node          # 📌 Head → new node
+            self.tail = new_node          # 📌 Tail → new node
+        else:                             # 🔍 Case 2: Non-empty list
+            new_node.next = self.head     # ① Link new_node.next → old head
+            self.head.prev = new_node     # ② Link old head.prev → new_node
+            self.head = new_node          # ③ Update head → new_node
+        self.count += 1                   # 🧮 Increment list size
 ```
 
-### Detailed Explanation
+---
 
-1. **Node Creation**: `new_node = Node(data)` sets up a new node whose `.next` and `.prev` are `None`.
-2. **Empty-List Case**:
+## 🔍 6. Line-by-Line Explanation
 
-   * If `self.head` is `None`, the list has no elements. Both `head` and `tail` are assigned to `new_node`.
-3. **Non-Empty Case**:
+1. **`new_node = Node(data)`**
 
-   * **Forward Link**: `new_node.next = self.head` points the new node to the former head.
-   * **Backward Link**: `self.head.prev = new_node` sets the old head’s previous pointer to the new node.
-   * **Reassign Head**: `self.head = new_node` makes the new node the entry point of the list.
-4. **Count Update**: Increments `self.count` to reflect the addition.
+   * Instantiates a `Node` object holding `data`.
+   * By default, `prev` and `next` are `None`.
 
-This method runs in **constant time** (O(1)) and ensures the list remains fully bidirectional.
+2. **`if self.head is None:`**
 
-## 4. Append at End (Insert at Tail)
+   * **Checks** if the list is empty.
 
-### Code
+3. **`self.head = new_node`**
+
+   * Points `head` to the newly created node.
+
+4. **`self.tail = new_node`**
+
+   * Since it’s the only node, `tail` must also reference it.
+
+5. **`else:`**
+
+   * Handles the non-empty list scenario.
+
+6. **`new_node.next = self.head`**
+
+   * **Step ①**: New node’s `next` pointer → old head node.
+
+7. **`self.head.prev = new_node`**
+
+   * **Step ②**: Old head’s `prev` pointer → new node.
+
+8. **`self.head = new_node`**
+
+   * **Step ③**: Update `head` to the new node.
+
+9. **`self.count += 1`**
+
+   * **Increments** the total node count in the list.
+
+---
+
+## 🎯 7. Example Usage
 
 ```python
-    def append(self, data):
-        """
-        Appends a new node containing `data` at the end (tail) of the list.
-        Operates in O(1) time using the tail pointer.
-        """
-        # 1️⃣ Create the new node
-        new_node = Node(data)
-
-        # 2️⃣ If the list is empty, initialize head and tail
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            # 3️⃣ Backward link: new_node.prev → old tail
-            new_node.prev = self.tail
-            # 4️⃣ Forward link: old tail.next → new_node
-            self.tail.next = new_node
-            # 5️⃣ Move tail pointer to new_node
-            self.tail = new_node
-
-        # 6️⃣ Update node count
-        self.count += 1
+words = DoublyLinkedList()
+words.append_at_start('book')
+print(words.head.data)  # Output: 'book'
+print(words.tail.data)  # Output: 'book'
+print(words.count)      # Output: 1
 ```
 
-### Detailed Explanation
+* **First call:** list was empty → both `head` & `tail` = `'book'`.
+* **Count** correctly reflects the single-node list.
 
-1. **Node Creation**: `new_node = Node(data)`.
-2. **Empty-List Case**:
-
-   * Both `head` and `tail` are assigned to `new_node` when the list was empty.
-3. **Non-Empty Case**:
-
-   * **Backward Link**: `new_node.prev = self.tail` attaches the new node back to the old tail.
-   * **Forward Link**: `self.tail.next = new_node` links the old tail to the new node.
-   * **Reassign Tail**: `self.tail = new_node` updates the tail to the newly added node.
-4. **Count Update**: `self.count += 1`.
-
-Again, this method is **O(1)**, thanks to direct access via `self.tail`.
-
-## 5. Usage Example
-
-```python
-# Initialize list and append elements
-dll = DoublyLinkedList()
-dll.append('egg')
-dll.append('ham')
-dll.append('spam')
-
-# Before insertion at head
-enumeration = []
-node = dll.head
-while node:
-    enumeration.append(node.data)
-    node = node.next
-print("Before append_at_start:", enumeration)
-
-# Insert at head
-dll.append_at_start('book')
-
-# After insertion at head
-enumeration = []
-node = dll.head
-while node:
-    enumeration.append(node.data)
-    node = node.next
-print("After append_at_start:", enumeration)
-```
-
-**Expected Output:**
-
-```
-Before append_at_start: ['egg', 'ham', 'spam']
-After append_at_start: ['book', 'egg', 'ham', 'spam']
-```
+---
