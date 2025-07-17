@@ -326,3 +326,135 @@ print(words.count)      # Output: 1
 * **Count** correctly reflects the single-node list.
 
 ---
+
+#  **Appending a Node at the End of a Doubly Linked List** 🚀
+
+Append (insert) a new node at the **end** of a doubly linked list in Python! We’ll cover:
+
+## 🖼️ Figure 4.23 Explanation
+
+Below is a detailed walkthrough of the visual steps shown in **Figure 4.23**:
+
+<div align="center">
+  <img src="./images/06.jpg" alt="" width="600px"/>
+</div>
+
+1. **🕹️ Current Tail (`1`)**  
+   - The pointer labelled **Previous** (at node B) is our current **tail**.  
+2. **🔀 Link Updates (`2`)**  
+   - Two arrows show how:  
+     - `new_node.prev` → old tail  
+     - `old_tail.next` → new_node  
+3. **🏷️ New Tail (`3`)**  
+   - Finally, the **tail** pointer (at the bottom) is moved to reference the **new node**, whose `next` is `None`.  
+
+
+## 📋 Step-by-Step Algorithm
+
+To append a node containing `data`:
+
+1. **Create** a new node with `data`, and both `next` and `prev` set to `None`.  
+2. **Check** if the list is empty (`head is None`):  
+   - If **yes**, make both `head` and `tail` point to the new node.  
+3. **Otherwise** (list not empty):  
+   1. Link the new node’s `prev` to the old `tail`.  
+   2. Link the old `tail`’s `next` to the new node.  
+   3. Update the `tail` pointer to the new node.  
+4. **Increment** the node counter (`count += 1`).  
+
+## 🛠️ Code Listing
+
+```python
+class Node:
+    def __init__(self, data, next=None, prev=None):
+        self.data = data
+        self.next = next
+        self.prev = prev
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.count = 0
+
+    def append(self, data):
+        # 1️⃣ Create the new node
+        new_node = Node(data, None, None)
+
+        # 2️⃣ If list is empty, initialize head & tail
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            # 3️⃣ Link new_node.prev to old tail
+            new_node.prev = self.tail
+            # 4️⃣ Link old tail.next to new_node
+            self.tail.next = new_node
+            # 5️⃣ Update tail pointer
+            self.tail = new_node
+
+        # 6️⃣ Increase node count
+        self.count += 1
+```
+
+## 🔍 Line-by-Line Explanation & Dry Run
+
+### Line-by-Line Breakdown
+
+| Line | Code                                | Explanation                                                                   |
+| :--: | ----------------------------------- | ----------------------------------------------------------------------------- |
+|   1  | `new_node = Node(data, None, None)` | ✅ Allocate a node with `data`; both `next` & `prev` pointers start as `None`. |
+|   2  | `if self.head is None:`             | 📝 Check if the list is empty.                                                |
+|   3  |   `self.head = new_node`            | ➕ First element: make `head` point to `new_node`.                             |
+|   4  |   `self.tail = new_node`            | ➕ Also make `tail` point to `new_node`.                                       |
+|   5  | `else:`                             | 🔄 List has ≥1 node; we’ll link at the end.                                   |
+|   6  |   `new_node.prev = self.tail`       | 🔗 Set `new_node.prev` → old tail node.                                       |
+|   7  |   `self.tail.next = new_node`       | 🔗 Set old tail’s `next` → `new_node`.                                        |
+|   8  |   `self.tail = new_node`            | 🏷️ Move the `tail` pointer to the new last node.                             |
+|   9  | `self.count += 1`                   | 📈 Update the size counter.                                                   |
+
+### 📊 Dry Run Example
+
+```python
+words = DouplyLinkedList()
+words.append_at_start('book')
+words.append('egg')
+
+current = words.head
+while current:
+ print(current.data)
+ current = current.next
+```
+
+We’ll append four strings in sequence: `"egg"`, `"ham"`, `"spam"`, `"book"`.
+
+| Operation         | Head   | Tail    | Count | List Contents             |
+| ----------------- | ------ | ------- | :---: | ------------------------- |
+| **Initial state** | `None` | `None`  |   0   | *empty*                   |
+| `append('egg')`   | `egg`✅ | `egg`✅  |   1   | `egg`                     |
+| `append('ham')`   | `egg`  | `ham`✅  |   2   | `egg ↔ ham`               |
+| `append('spam')`  | `egg`  | `spam`✅ |   3   | `egg ↔ ham ↔ spam`        |
+| `append('book')`  | `egg`  | `book`✅ |   4   | `egg ↔ ham ↔ spam ↔ book` |
+
+> **List notation:**
+>
+> * `↔` shows the two-way links between `prev` and `next`.
+> * `head` always = `"egg"`; `tail` moves to each new item.
+
+**Printed Output**:
+
+```
+Items in doubly linked list after adding element at end.
+egg
+ham
+spam
+book
+```
+
+## ⌛ Time Complexity
+
+* **Append** with a maintained `tail` pointer is **O(1)** ✅.
+  No traversal is needed—direct link updates suffice.
+
+---
+
