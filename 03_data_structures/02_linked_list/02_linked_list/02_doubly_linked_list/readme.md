@@ -621,12 +621,108 @@ ham
 spam
 ```
 
----
-
 ## ⌛ Time Complexity
 
 * **Intermediate insertion** (with traversal): **O(n)** in the worst case.
 * **Start/end insertion** (with `head`/`tail` pointers): **O(1)**.
+
+---
+
+#  **Querying a Doubly Linked List** 🔍
+
+**search** for an item in a doubly linked list by leveraging an iterator and a `contains()` method.
+
+## 📋 Overview
+
+- We traverse the list from **head** to **tail** using an `iter()` generator.  
+- At each step, we **yield** the node’s data.  
+- The `contains(data)` method loops through all yielded values:  
+  - If a match is found → prints ✅ “Data item is present in the list.”  
+  - Otherwise → prints ❌ “Data item is not present in the list.”  
+
+## 🛠️ Code Listing
+
+```python
+class DoublyLinkedList:
+    # … existing __init__, Node class, append, etc. …
+
+    def iter(self):
+        """
+        Generator: Yield each node’s .data from head→tail.
+        """
+        current = self.head          # 🏁 Start at the head
+        while current:               # 🔄 Until we run out of nodes
+            val = current.data       # 📦 Grab this node’s data
+            current = current.next   # ⏩ Move to the next node
+            yield val                # 📨 Yield the data to caller
+
+    def contains(self, data):
+        """
+        Search for `data` in the list.
+        Prints presence/absence and returns None.
+        """
+        for node_data in self.iter():    # 🔍 Loop through all node values
+            if data == node_data:        # ✅ Match found?
+                print("Data item is present in the list.")
+                return
+        # ❌ If loop finishes without return
+        print("Data item is not present in the list.")
+```
+
+## 🔍 Line-by-Line Explanation
+
+| Line | Code                                 | Explanation                                               |
+| :--: | ------------------------------------ | --------------------------------------------------------- |
+|   1  | `current = self.head`                | 🏁 Initialize traversal at the list’s head.               |
+|   2  | `while current:`                     | 🔄 Continue until `current` becomes `None`.               |
+|   3  | `val = current.data`                 | 📦 Store the data from the current node.                  |
+|   4  | `current = current.next`             | ⏩ Advance `current` to the next node.                     |
+|   5  | `yield val`                          | 📨 Yield the node’s data back to the caller.              |
+|   6  | `for node_data in self.iter():`      | 🔍 Iterate through each value yielded by `iter()`.        |
+|   7  | `if data == node_data:`              | ✅ Check if the passed-in `data` matches this node’s data. |
+|   8  | `print("Data item is present…")`     | 🎉 Print confirmation of a successful search.             |
+|   9  | `return`                             | 🛑 Exit early once the item is found.                     |
+|  10  | `print("Data item is not present…")` | ❌ Print absence after exhausting the list.                |
+
+## 📊 Dry Run Example
+
+1. **Setup**
+
+   ```python
+   words = DoublyLinkedList()
+   words.append('egg')
+   words.append('ham')
+   words.append('spam')
+   ```
+
+2. **Search Present Item**
+
+   ```python
+   words.contains("ham")
+   ```
+
+   * `iter()` yields: `"egg"`, `"ham"`, …
+   * At `"ham"`, match → prints:
+
+     ```
+     Data item is present in the list.
+     ```
+
+3. **Search Absent Item**
+
+   ```python
+   words.contains("ham2")
+   ```
+
+   * `iter()` yields all items, no match → prints:
+
+     ```
+     Data item is not present in the list.
+     ```
+
+## ⌛ Time Complexity
+
+* **Search** in a doubly linked list requires traversing up to **n** nodes → **O(n)** in the worst case.
 
 ---
 

@@ -46,6 +46,20 @@ class DouplyLinkedList:
             prev = current
             current = current.next
 
+    def iter(self):
+        current = self.head
+        while current:
+            val = current.data
+            current = current.next 
+            yield val
+    
+    def contains(self, data):
+        for node_data in self.iter():
+            if data == node_data:
+                print(f"Data item is present in the list. i.e {data}")
+                return
+        print(f"Data item is not present in the list. i.e {data}")
+
 
 # words = DouplyLinkedList()
 # Insert a at start
@@ -63,16 +77,25 @@ class DouplyLinkedList:
 
 
 # Insert at intermediate
+# words = DouplyLinkedList()
+# words.append('egg')
+# words.append('ham') 
+# words.append('spam')
+
+# words.append_at_a_location('ham')
+
+# print("Doubly linked list after adding an element after word \"ham\" inthe list.")
+
+# current = words.head
+# while current:
+#  print(current.data)
+#  current = current.next
+
+
+# Searching Element
 words = DouplyLinkedList()
 words.append('egg')
 words.append('ham') 
 words.append('spam')
-
-words.append_at_a_location('ham')
-
-print("Doubly linked list after adding an element after word \"ham\" inthe list.")
-
-current = words.head
-while current:
- print(current.data)
- current = current.next
+words.contains("ham")
+words.contains("ham2")
