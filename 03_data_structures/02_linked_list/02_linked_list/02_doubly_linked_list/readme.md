@@ -458,3 +458,175 @@ book
 
 ---
 
+
+#  **Inserting a Node at an Intermediate Position in a Doubly Linked List** 🔄
+
+In this topic, we’ll learn how to insert a new node **before** a target node anywhere in a doubly linked list.
+
+
+## 🖼️ Figure 4.24: Pointer Setup Before Insertion
+
+<div align="center">
+  <img src="./images/07.jpg" alt="" width="500px"/>
+</div>
+
+- **head** → points to the first node.  
+- **prev** → points to the node just **before** where we’ll insert.  
+- **current** → points to the **target** node (whose data matches our search).  
+
+## 🖼️ Figure 4.25: Links to Update for Insertion
+
+<div align="center">
+  <img src="./images/08.jpg" alt="" width="600px"/>
+</div>
+
+We must perform **four** pointer updates in this order:
+
+1. **New → Current**  
+```python
+   new_node.next = current
+```
+
+2. **New ← Previous**
+
+```python
+   new_node.prev = prev
+```
+3. **Previous → New**
+
+```python
+   prev.next = new_node
+ ```
+4. **Current ← New**
+
+```python
+   current.prev = new_node
+```
+
+## 📋 Step-by-Step Algorithm
+
+1. **Initialize Pointers**
+
+   ```python
+   current = self.head
+   prev    = self.head
+   new_node = Node(data, None, None)
+   ```
+2. **Traverse** the list:
+
+   ```python
+   while current:
+       if current.data == data:
+           # Found target!
+           ...  # (perform insertion)
+       prev    = current
+       current = current.next
+   ```
+3. **Insert** when you find the match:
+
+   1. `new_node.prev = prev`
+   2. `new_node.next = current`
+   3. `prev.next      = new_node`
+   4. `current.prev   = new_node`
+   5. `self.count   += 1`
+
+---
+
+## 🛠️ Code Listing
+
+```python
+class DoublyLinkedList:
+    # … existing __init__ and Node class …
+
+    def append_at_a_location(self, data):
+        current  = self.head
+        prev     = self.head
+        new_node = Node(data, None, None)
+        # Traverse until we find the matching data
+        while current:
+            if current.data == data:
+                # 1️⃣ Link new_node.prev → prev
+                new_node.prev = prev
+                # 2️⃣ Link new_node.next → current
+                new_node.next = current
+                # 3️⃣ Link prev.next → new_node
+                prev.next = new_node
+                # 4️⃣ Link current.prev → new_node
+                current.prev = new_node
+                # 5️⃣ Increment node count
+                self.count += 1
+            # Advance pointers
+            prev    = current
+            current = current.next
+```
+
+## 🔍 Line-by-Line Explanation
+
+| Line | Code                                | Explanation                                                             |
+| :--: | ----------------------------------- | ----------------------------------------------------------------------- |
+|   1  | `current = self.head`               | 🏁 Start at the list’s head.                                            |
+|   2  | `prev = self.head`                  | 🔄 Initialize `prev` to also point at head.                             |
+|   3  | `new_node = Node(data, None, None)` | ✨ Create a new node with given `data`; `next` & `prev` start as `None`. |
+|   4  | `while current:`                    | 🔄 Loop until we run out of nodes.                                      |
+|   5  | `if current.data == data:`          | 🔍 Check if this node’s data matches our target.                        |
+|   6  | `new_node.prev = prev`              | 🔗 Link new node’s `prev` → the previous node.                          |
+|   7  | `new_node.next = current`           | 🔗 Link new node’s `next` → the current (target) node.                  |
+|   8  | `prev.next = new_node`              | 🔗 Update the previous node’s `next` to point to our new node.          |
+|   9  | `current.prev = new_node`           | 🔗 Update the current node’s `prev` to point back at our new node.      |
+|  10  | `self.count += 1`                   | 📈 Increase the size counter of the list.                               |
+|  11  | `prev = current`                    | ⏩ Move `prev` forward for the next iteration.                           |
+|  12  | `current = current.next`            | ⏩ Move `current` forward in the list.                                   |
+
+
+## 📊 Dry Run Example
+
+We start with:
+
+```
+egg ↔ ham ↔ spam
+```
+
+And call:
+
+```python
+words = DoublyLinkedList()
+words.append('egg')
+words.append('ham') 
+words.append('spam')
+
+words.append_at_a_location('ham')
+
+print("Doubly linked list after adding an element after word \"ham\" inthe list.")
+
+current = words.head
+while current:
+ print(current.data)
+ current = current.next
+
+```
+
+This **duplicates** `"ham"` before the first `"ham"`, resulting in:
+
+| Step                          | List Before        | Operation             | List After               |
+| ----------------------------- | ------------------ | --------------------- | ------------------------ |
+| **Initial**                   | `egg ↔ ham ↔ spam` |                       |                          |
+| Insert `"ham"` before `"ham"` |                    | splice in new `"ham"` | `egg ↔ ham ↔ ham ↔ spam` |
+
+**Printed Output**:
+
+```
+egg
+ham
+ham
+spam
+```
+
+---
+
+## ⌛ Time Complexity
+
+* **Intermediate insertion** (with traversal): **O(n)** in the worst case.
+* **Start/end insertion** (with `head`/`tail` pointers): **O(1)**.
+
+---
+

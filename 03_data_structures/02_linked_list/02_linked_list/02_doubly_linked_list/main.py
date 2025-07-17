@@ -32,13 +32,46 @@ class DouplyLinkedList:
             self.tail = new_node
         self.count += 1
 
+    def append_at_a_location(self, data):
+        current = self.head
+        prev = self.head
+        new_node = Node(data, None, None)
+        while current:
+            if current.data == data:
+                new_node.prev = prev
+                new_node.next = current
+                prev.next = new_node
+                current.prev = new_node
+                self.count += 1
+            prev = current
+            current = current.next
 
+
+# words = DouplyLinkedList()
+# Insert a at start
+# words.append_at_start('book')
+# # print(words.head.data)  # Output: 'book'
+# # print(words.tail.data)  # Output: 'book'
+# # print(words.count)
+
+# Insert at end
+# words.append('egg')
+# current = words.head
+# while current:
+#     print(current.data)
+#     current = current.next
+
+
+# Insert at intermediate
 words = DouplyLinkedList()
-words.append_at_start('book')
-# print(words.head.data)  # Output: 'book'
-# print(words.tail.data)  # Output: 'book'
-# print(words.count)
 words.append('egg')
+words.append('ham') 
+words.append('spam')
+
+words.append_at_a_location('ham')
+
+print("Doubly linked list after adding an element after word \"ham\" inthe list.")
+
 current = words.head
 while current:
  print(current.data)
