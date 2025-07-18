@@ -5,7 +5,7 @@ class Node:
         self.prev = prev
 
 
-class DouplyLinkedList:
+class DoublyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
@@ -59,7 +59,33 @@ class DouplyLinkedList:
                 print(f"Data item is present in the list. i.e {data}")
                 return
         print(f"Data item is not present in the list. i.e {data}")
+    
+    def delete(self, data):
+        current = self.head
+        node_deleted = False
+        if current is None:
+            print("List is empty. Nothing to delete.")
+            return
+        elif current.data == data:
+            self.head.prev = None
+            node_deleted = True
+            self.head = current.next
+        elif self.tail.data == data:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            node_deleted = True
+        else:
+            while current:
+                if current.data == data:
+                    current.prev.next = current.next
+                    current.next.prev = current.prev
+                    node_deleted = True
+                    break
+                current = current.next
 
+        if node_deleted:
+            print(f"Node with data {data} deleted successfully.")
+            self.count -= 1
 
 # words = DouplyLinkedList()
 # Insert a at start
@@ -93,9 +119,33 @@ class DouplyLinkedList:
 
 
 # Searching Element
-words = DouplyLinkedList()
-words.append('egg')
-words.append('ham') 
-words.append('spam')
-words.contains("ham")
-words.contains("ham2")
+# words = DouplyLinkedList()
+# words.append('egg')
+# words.append('ham') 
+# words.append('spam')
+# words.contains("ham")
+# words.contains("ham2")
+
+
+
+#   Deleting Element
+words = DoublyLinkedList()
+words.append('egg')   # List: egg
+words.append('ham')   # List: egg <-> ham
+words.append('spam')  # List: egg <-> ham <-> spam
+
+# before deletion
+current = words.head
+print("Doubly linked list before deletion:")
+while current:
+ print(current.data)
+ current = current.next
+
+words.delete('ham')
+
+# after deletion
+current = words.head
+print("Doubly linked list after deletion:")
+while current:
+ print(current.data)
+ current = current.next

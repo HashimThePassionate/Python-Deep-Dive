@@ -726,3 +726,216 @@ class DoublyLinkedList:
 
 ---
 
+# **Doubly Linked List Deletion** 🗑️
+
+## 📖 Overview
+
+A **doubly linked list** allows efficient traversal in both directions because each node holds pointers to its **next** and **previous** neighbors. Deletion in a doubly linked list is simpler than in a singly linked list since we don’t need extra pointers to remember the predecessor—each node already knows its previous node.
+
+- Deletion scenarios  (start, end, intermediate, not found) 🔍
+
+## 🚀 Deletion Scenarios
+
+A node to be deleted is identified by matching its `data` field with the target value. There are **four** possible scenarios:
+
+1. **At the start** (head) of the list
+2. **At the end** (tail) of the list
+3. **Somewhere in the middle** of the list
+4. **Not found** in the list
+
+## 🖼️ Figures Explained
+
+### 1. Deletion at the Start  (Figure 4.26)
+
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="600px"/>
+</div>
+
+* The **crossed-out** node is the original head. ⚠️
+* We update `head` to point to **its next** node. ➡️
+* We then set the new head’s `.prev` to `None` (no predecessor). 🔗❌
+* The list remains intact forward from the new head.
+
+### 2. Deletion at the End  (Figure 4.27)
+
+<div align="center">
+  <img src="./images/10.jpg" alt="" width="600px"/>
+</div>
+
+* The **crossed-out** node is the original tail. ⚠️
+* We update `tail` to its `.prev` node (second-last). ⬅️
+* We then set the new tail’s `.next` to `None` (no successor). 🔗❌
+* The list remains intact backward from the new tail.
+
+### 3. Deletion in the Middle  (Figure 4.28)
+
+<div align="center">
+  <img src="./images/11.jpg" alt="" width="600px"/>
+</div>
+
+* Nodes **A**, **B**, **C** are consecutive.
+* We want to delete **B** (crossed out). 🗑️
+* Set `A.next` to point to `C`. 🔀
+* Set `C.prev` to point to `A`. 🔄
+* Node **B** is now isolated and removed.
+
+
+## 💻 Python Implementation
+
+```python
+class DoublyLinkedList:
+    # ... (other methods) ...
+
+    def delete(self, data):
+        """
+        Delete a node whose .data matches the given value.
+        """
+        current = self.head         # Start at head ➡️
+        node_deleted = False       # Flag to track deletion ✅
+
+        # 1. Empty list? 🚫
+        if current is None:
+            print("List is empty")
+
+        # 2. Delete at head 🔝
+        elif current.data == data:
+            self.head.prev = None
+            node_deleted = True
+            self.head = current.next
+
+        # 3. Delete at tail 🔚
+        elif self.tail.data == data:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            node_deleted = True
+
+        # 4. Delete in middle or report not found 🔍
+        else:
+            while current:
+                if current.data == data:
+                    current.prev.next = current.next
+                    current.next.prev = current.prev
+                    node_deleted = True
+                    break         # Stop after deletion
+                current = current.next
+
+            if not node_deleted:
+                print("Item not found")
+
+        # 5. Update count if deleted ➖
+        if node_deleted:
+            self.count -= 1
+```
+
+
+## 🔍 Line-by-Line Explanation
+
+1. `current = self.head`
+
+   * Start searching from the front of the list. 🌅
+
+2. `node_deleted = False`
+
+   * Initialize a flag to record if deletion occurs. 🎯
+
+3. **Empty List Check**
+
+   ```python
+   if current is None:
+       print("List is empty")
+   ```
+
+   * If `head` is `None`, the list has no nodes. 🚫
+   * We notify the user and exit.
+
+4. **Delete at Head**
+
+   ```python
+   elif current.data == data:
+       self.head.prev = None
+       node_deleted = True
+       self.head = current.next
+   ```
+
+   * Match found at the first node.
+   * Clear the new head’s `.prev` pointer.
+   * Move `head` to the next node. 🎉
+
+5. **Delete at Tail**
+
+   ```python
+   elif self.tail.data == data:
+       self.tail = self.tail.prev
+       self.tail.next = None
+       node_deleted = True
+   ```
+
+   * Match found at the last node.
+   * Move `tail` backward one node.
+   * Clear its `.next` pointer. 🏁
+
+6. **Delete in the Middle**
+
+   ```python
+   else:
+       while current:
+           if current.data == data:
+               current.prev.next = current.next
+               current.next.prev = current.prev
+               node_deleted = True
+               break
+           current = current.next
+
+       if not node_deleted:
+           print("Item not found")
+   ```
+
+   * Traverse until you find the node.
+   * Re-link surrounding nodes around the target.
+   * If no match, inform the user. 📢
+
+7. **Update Count**
+
+   ```python
+   if node_deleted:
+       self.count -= 1
+   ```
+
+   * Decrement total node count only if deletion happened. 🔢➖
+
+## 🏃 Dry Run Example
+
+Consider the following scenario:
+
+```python
+words = DoublyLinkedList()
+words.append('egg')   # List: egg
+words.append('ham')   # List: egg <-> ham
+words.append('spam')  # List: egg <-> ham <-> spam
+words.delete('ham')   # Remove middle node
+```
+
+**Step-by-step:**
+
+1. **Initial**: `head` → 'egg' ↔︎ 'ham' ↔︎ 'spam' ← `tail`
+2. **Search** finds `'ham'` in the middle.
+3. Execute:
+
+   * `'egg'.next` = `'spam'` ➡️
+   * `'spam'.prev` = `'egg'` ⬅️
+4. `'ham'` is removed. List becomes:
+
+   ```
+   head → egg <-> spam ← tail
+   ```
+5. `count` decremented by 1.
+
+**Final Output when traversing:**
+
+```
+egg
+spam
+```
+
+---
+
