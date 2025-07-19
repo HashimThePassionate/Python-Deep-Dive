@@ -663,26 +663,26 @@ Sometimes you don’t want to insert by index, but right **before** the first no
 ```python
 def append_with_same_data(self, data):
     current = self.head
-    prev    = self.head
-    node    = Node(data)
+    prev = self.head
+    node = Node(data)
 
     while current:
         if current.data == data:
             node.next  = current
             prev.next  = node
-        prev    = current
+        prev = current
         current = current.next
-````
+```
 
 ## 🔍 Line-by-Line Explanation
 
 1. **Setup pointers & new node**
 
-   ```python
+```python
    current = self.head
-   prev    = self.head
-   node    = Node(data)
-   ```
+   prev = self.head
+   node = Node(data)
+```
 
    * `current` traverses each node.
    * `prev` “lags behind” `current` by one step.
@@ -690,12 +690,12 @@ def append_with_same_data(self, data):
 
 2. **Walk through the list**
 
-   ```python
+```python
    while current:
        …
        prev    = current
        current = current.next
-   ```
+```
 
    * Repeat until `current` becomes `None` (end of list).
    * Each iteration you’ll:
@@ -705,11 +705,11 @@ def append_with_same_data(self, data):
 
 3. **Detect a data-match**
 
-   ```python
+```python
    if current.data == data:
        node.next = current
        prev.next = node
-   ```
+```
 
    * **When** you find a node whose `.data` **equals** `data`, you:
 
