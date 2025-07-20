@@ -45,6 +45,46 @@ class DoublyLinkedList:
                 self.count += 1
             prev = current
             current = current.next
+    def append_at_index(self, index, data):
+        # 1. Bounds check
+        if index < 1:
+            print("❌ Index should be 1 or greater.")
+            return
+
+        new_node = Node(data, None, None)
+
+        # 2. Insert at head
+        if index == 1:
+            if not self.head:  # empty list
+                self.head = self.tail = new_node
+            else:
+                new_node.next = self.head
+                self.head.prev = new_node
+                self.head = new_node
+
+        # 3. Insert at tail
+        elif index == self.count:
+            new_node.prev = self.tail
+            if self.tail:
+                self.tail.next = new_node
+            self.tail = new_node
+
+        # 4. Insert in the middle
+        else:
+            # traverse to the node currently at position `index`
+            current = self.head
+            for _ in range(index):
+                current = current.next
+            # now `current` is the node that will come after new_node
+            prev_node = current.prev
+
+            prev_node.next = new_node
+            new_node.prev = prev_node
+
+            new_node.next = current
+            current.prev = new_node
+
+        self.count += 1
 
     def iter(self):
         current = self.head
