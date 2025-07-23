@@ -147,5 +147,204 @@ b
 done
 ```
 
+#  **Stack Implementation Using Arrays** 📦
+
+A **stack** stores data in sequential order (like arrays and linked lists) with a key rule:
+**Data can only be added or removed from one end** of the stack, always following the **Last In, First Out (LIFO)** principle.
+
+### 📋 Two Main Stack Implementations:
+
+* **Arrays:** Fixed length stack
+* **Linked Lists:** Stack of variable length
+
+**Array-based stacks** need careful checks:
+
+* If you try to add to a full stack ➡️ **Overflow error**
+* If you try to remove from an empty stack ➡️ **Underflow error**
+
+## 🖼️ Figure 5.4: Push Operations in an Array-Based Stack
+
+<div align="center">
+  <img src="./images/04.jpg" alt="" width="600px"/>
+</div>
+
+<div align="center">
+
+*Figure 5.4: Sequence of push operations in a stack implementation using an array*
+
+</div>
+
+
+### Step-by-Step Push Operation:
+
+1. **Initial Stack:**
+
+   * All positions are empty.
+   * `top = -1` (Stack is empty)
+
+2. **Push "egg":**
+
+   * `top` is incremented to `0`
+   * `"egg"` is placed at position 0
+
+3. **Push "ham":**
+
+   * `top` is incremented to `1`
+   * `"ham"` is placed at position 1
+
+4. **Push "spam":**
+
+   * `top` is incremented to `2`
+   * `"spam"` is placed at position 2
+
+5. **Push (Stack Overflow):**
+
+   * Attempt to push another element.
+   * **Error:** Stack is full, cannot add more elements!
+   * **Stack Overflow** occurs.
+
+## 🐍 Python Code for Stack Push Operation
+
+```python
+size = 3
+data = [0] * size   # Initialize the stack
+
+top = -1
+def push(x):
+    global top
+    if top >= size - 1:
+        print("Stack Overflow")
+    else:
+        top = top + 1
+        data[top] = x
+```
+
+* **Initialize:** `top = -1` means the stack is empty.
+* **Check overflow:** If `top` is at the last index, cannot add new elements.
+* **Push:** Increment `top` and add new value.
+
+### 🧑‍💻 Example Usage
+
+```python
+push('egg')
+push('ham')
+push('spam')
+print(data[0:top+1])   # Output: ['egg', 'ham', 'spam']
+push('new')            # Stack Overflow
+push('new2')           # Stack Overflow
+```
+
+**Output:**
+
+```
+['egg', 'ham', 'spam']
+Stack Overflow
+Stack Overflow
+```
+
+## 🖼️ Figure 5.5: Pop Operations in an Array-Based Stack
+
+<div align="center">
+  <img src="./images/05.jpg" alt="" width="600px"/>
+</div>
+
+<div align="center">
+
+*Figure 5.5: Sequence of the pop operation in a stack implementation using an array*
+
+</div>
+
+### Step-by-Step Pop Operation:
+
+1. **Initial Stack:**
+
+   * Stack contains `["egg", "ham", "spam"]`
+   * `top = 2`
+
+2. **Pop "spam":**
+
+   * Remove `"spam"` from position 2
+   * `top` is decremented to `1`
+
+3. **Pop "ham":**
+
+   * Remove `"ham"` from position 1
+   * `top` is decremented to `0`
+
+4. **Pop "egg":**
+
+   * Remove `"egg"` from position 0
+   * `top` is decremented to `-1`
+   * Stack is now empty
+
+5. **Pop (Stack Underflow):**
+
+   * Attempt to pop from empty stack
+   * **Error:** Stack is empty, cannot remove elements!
+   * **Stack Underflow** occurs
+
+---
+
+## 🐍 Python Code for Stack Pop Operation
+
+```python
+def pop():
+    global top
+    if top == -1:
+        print("Stack Underflow")
+        return None
+    else:
+        value = data[top]
+        data[top] = None
+        top -= 1
+        return value
+```
+
+* **Check underflow:** If `top == -1`, stack is empty.
+* **Pop:** Return the value at `top` and decrement `top`.
+
+### 🧑‍💻 Example Usage
+
+```python
+print(pop())          # 'spam'
+print(data[0:top+1])  # ['egg', 'ham']
+
+print(pop())          # 'ham'
+print(data[0:top+1])  # ['egg']
+
+print(pop())          # 'egg'
+print(data[0:top+1])  # []
+
+print(pop())          # Stack Underflow
+print(data[0:top+1])  # []
+```
+
+**Output:**
+
+```
+spam
+['egg', 'ham']
+ham
+['egg']
+egg
+[]
+Stack Underflow
+[]
+```
+
+## 👀 Python Code for Stack Peek Operation
+
+```python
+def peek():
+    global top
+    if top == -1:
+        print("Stack is empty")
+    else:
+        print(data[top])
+```
+
+* **Check if empty:** If `top == -1`, stack is empty.
+* **Peek:** Print the value at the `top` position.
+
 ---
 
