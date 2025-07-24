@@ -1,6 +1,67 @@
-#  **Stacks** 🥞
+#  **All About Stack Data structure** 🥞
 
-## 📚 Introduction
+## � Table of Contents
+
+- [**All About Stack Data structure** 🥞](#all-about-stack-data-structure-)
+  - [� Table of Contents](#-table-of-contents)
+  - [�📚 Introduction](#-introduction)
+  - [🖼️ Figure 5.1: Example of a Stack](#️-figure-51-example-of-a-stack)
+  - [🔍 How Stack Works](#-how-stack-works)
+  - [🚦 Stack Constraints](#-stack-constraints)
+  - [🛠️ Stack Operations](#️-stack-operations)
+  - [🖼️ Figure 5.2: Demonstration of Push and Pop Operations](#️-figure-52-demonstration-of-push-and-pop-operations)
+  - [📝 Table 5.1: Stack Operations Example](#-table-51-stack-operations-example)
+  - [🎯 Where Are Stacks Used?](#-where-are-stacks-used)
+  - [🧑‍💻 Function Call Example](#-function-call-example)
+    - [👣 What Happens When We Run This?](#-what-happens-when-we-run-this)
+  - [🖼️ Figure 5.3: Steps for a Sequence of Events During Function Calls](#️-figure-53-steps-for-a-sequence-of-events-during-function-calls)
+    - [Step-by-Step Explanation:](#step-by-step-explanation)
+    - [🖨️ Program Output](#️-program-output)
+- [**Stack Implementation Using Arrays** 📦](#stack-implementation-using-arrays-)
+    - [📋 Two Main Stack Implementations:](#-two-main-stack-implementations)
+  - [🖼️ Figure 5.4: Push Operations in an Array-Based Stack](#️-figure-54-push-operations-in-an-array-based-stack)
+    - [Step-by-Step Push Operation:](#step-by-step-push-operation)
+  - [🐍 Python Code for Stack Push Operation](#-python-code-for-stack-push-operation)
+    - [🧑‍💻 Example Usage](#-example-usage)
+  - [🖼️ Figure 5.5: Pop Operations in an Array-Based Stack](#️-figure-55-pop-operations-in-an-array-based-stack)
+    - [Step-by-Step Pop Operation:](#step-by-step-pop-operation)
+  - [🐍 Python Code for Stack Pop Operation](#-python-code-for-stack-pop-operation)
+    - [🧑‍💻 Example Usage](#-example-usage-1)
+  - [👀 Python Code for Stack Peek Operation](#-python-code-for-stack-peek-operation)
+- [**Stack Implementation Using Linked Lists** 🔗](#stack-implementation-using-linked-lists-)
+  - [📚 Introduction](#-introduction-1)
+  - [🖼️ Figure 5.6: Stack Representation Using a Linked List](#️-figure-56-stack-representation-using-a-linked-list)
+    - [Figure Explanation:](#figure-explanation)
+  - [🏗️ Node Class Implementation](#️-node-class-implementation)
+  - [🏢 Stack Class Implementation](#-stack-class-implementation)
+  - [💡 Key Points for Stack Using Linked List](#-key-points-for-stack-using-linked-list)
+  - [**Stack Push Operation** 📝](#stack-push-operation-)
+  - [🖼️ Figure 5.7: Workings of the Push Operation on the Stack](#️-figure-57-workings-of-the-push-operation-on-the-stack)
+    - [Step-by-Step Explanation:](#step-by-step-explanation-1)
+  - [🖼️ Figure 5.8: Inserting First Node into an Empty Stack](#️-figure-58-inserting-first-node-into-an-empty-stack)
+  - [🔥 How the Push Operation Works](#-how-the-push-operation-works)
+    - [If the stack **already has elements**:](#if-the-stack-already-has-elements)
+    - [If the stack is **empty**:](#if-the-stack-is-empty)
+  - [🐍 Python Code: Push Operation for Stack (Linked List)](#-python-code-push-operation-for-stack-linked-list)
+  - [🧑‍💻 Example: Creating a Stack and Pushing Elements](#-example-creating-a-stack-and-pushing-elements)
+  - [**Stack Pop Operation**  🔄](#stack-pop-operation--)
+  - [🖼️ Figure 5.9: Workings of the Pop Operation on the Stack](#️-figure-59-workings-of-the-pop-operation-on-the-stack)
+    - [Step-by-Step Explanation:](#step-by-step-explanation-2)
+  - [🖼️ Figure 5.10: Pop on a Stack with One Element](#️-figure-510-pop-on-a-stack-with-one-element)
+  - [🐍 Python Code: Pop Operation for Stack (Linked List)](#-python-code-pop-operation-for-stack-linked-list)
+  - [🧑‍💻 Example: Popping from a Stack](#-example-popping-from-a-stack)
+  - [after popping, the new stack is `"ham"`, `"egg"`.](#after-popping-the-new-stack-is-ham-egg)
+  - [**Peek Operation in Stacks** 👀](#peek-operation-in-stacks-)
+  - [📚 What is the Peek Operation?](#-what-is-the-peek-operation)
+  - [🛠️ How Does Peek Work?](#️-how-does-peek-work)
+  - [🐍 Python Code: Peek Operation (Stack Using Linked List)](#-python-code-peek-operation-stack-using-linked-list)
+  - [🧑‍💻 Example Usage](#-example-usage-2)
+  - [🚦 Key Point](#-key-point)
+  - [🌍 Real-World Note](#-real-world-note)
+
+---
+
+## �📚 Introduction
 
 A **stack** is a data structure that stores data, just like a stack of plates in a kitchen.
 You can put a plate **on the top** of the stack, and when you need a plate, you always **take it from the top**.
