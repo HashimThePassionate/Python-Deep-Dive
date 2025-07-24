@@ -534,5 +534,111 @@ egg
 * We pushed `"egg"`, `"ham"`, and `"spam"` to the stack.
 * The last item pushed (`"spam"`) appears at the top, showing the **LIFO** nature.
 
----
+
+##  **Stack Pop Operation**  🔄
+
+The **pop operation** is used to **remove (and return) the top element of the stack**.
+If the stack is empty, the pop operation returns `None` or prints an error message.
+
+
+## 🖼️ Figure 5.9: Workings of the Pop Operation on the Stack
+
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="400px"/>
+</div>
+
+<div align="center">
+
+*Figure 5.9: Workings of the pop operation on the stack*
+
+</div>
+
+
+### Step-by-Step Explanation:
+
+Suppose the stack contains `"spam"`, `"ham"`, and `"egg"`.
+
+1. **Check if Stack is Empty:**
+
+   * If not, continue. Otherwise, print an error.
+
+2. **Pop Operation:**
+
+   * The top node (`"spam"`) is removed (popped).
+   * The stack’s `top` pointer now points to the next node (`"ham"`).
+
+**Result:**
+
+* `"ham"` is now at the top.
+* The stack from top to bottom: `ham → egg → None`
+
+## 🖼️ Figure 5.10: Pop on a Stack with One Element
+
+<div align="center">
+  <img src="./images/10.jpg" alt="" width="400px"/>
+</div>
+
+<div align="center">
+
+*Figure 5.10: The pop operation on a stack with one element*
+
+</div>
+
+
+**Explanation:**
+
+* When there’s only one element in the stack (e.g., `"egg"`):
+
+  * The pop operation removes that node.
+  * The `top` pointer is set to `None`.
+  * The stack becomes **empty** after this operation.
+
+## 🐍 Python Code: Pop Operation for Stack (Linked List)
+
+```python
+def pop(self):
+    if self.top:
+        data = self.top.data
+        self.size -= 1
+        if self.top.next:  # Check if there's more than one node
+            self.top = self.top.next
+        else:
+            self.top = None
+        return data
+    else:
+        print("Stack is empty")
+```
+
+* **If the stack is not empty:**
+
+  * Save the top node’s data to return later.
+  * Decrease the size by 1.
+  * If there’s more than one node, update `top` to point to the next node.
+  * If only one node, set `top` to `None` (stack becomes empty).
+* **If the stack is empty:**
+
+  * Print an error message.
+
+## 🧑‍💻 Example: Popping from a Stack
+
+```python
+words.pop()
+current = words.top
+while current:
+    print(current.data)
+    current = current.next
+```
+
+**Output:**
+
+```
+ham
+egg
+```
+
+**Explanation:**
+
+* If the stack originally contained `"spam"`, `"ham"`, `"egg"`,
+  after popping, the new stack is `"ham"`, `"egg"`.
+
 
