@@ -640,5 +640,64 @@ egg
 
 * If the stack originally contained `"spam"`, `"ham"`, `"egg"`,
   after popping, the new stack is `"ham"`, `"egg"`.
+-
 
+##  **Peek Operation in Stacks** 👀
+
+## 📚 What is the Peek Operation?
+
+The **peek operation** returns the **top element** from the stack **without deleting it**.
+
+* **Peek**: Just looks at the top element.
+* **Pop**: Looks at **and removes** the top element.
+
+> **Peek allows you to check what's on top without changing the stack!**
+
+## 🛠️ How Does Peek Work?
+
+* If there **is** a top element, return its value.
+* If the stack is **empty**, print `"Stack is empty"`.
+
+## 🐍 Python Code: Peek Operation (Stack Using Linked List)
+
+```python
+def peek(self):
+    if self.top:
+        return self.top.data
+    else:
+        print("Stack is empty")
+```
+
+* **Check if the stack is empty:**
+  If `self.top` is `None`, print an error message.
+* **If not empty:**
+  Return the `data` value from the top node.
+
+
+## 🧑‍💻 Example Usage
+
+```python
+words.peek()
+```
+
+**Output:**
+
+```
+spam
+```
+
+*If your stack contained "egg", "ham", and "spam" (with "spam" at the top), peek will return "spam".*
+
+
+## 🚦 Key Point
+
+* **peek** only shows the top element, **without changing** the stack’s contents.
+
+## 🌍 Real-World Note
+
+> **Stacks** are a crucial data structure with many real-world applications, such as:
+>
+> * Undo operations in text editors
+> * Tracking function calls
+> * Balancing symbols in code (parentheses, brackets, etc.)
 
