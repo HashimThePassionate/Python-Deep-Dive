@@ -346,5 +346,74 @@ def peek():
 * **Check if empty:** If `top == -1`, stack is empty.
 * **Peek:** Print the value at the `top` position.
 
----
+
+#  **Stack Implementation Using Linked Lists** 🔗
+
+## 📚 Introduction
+
+A **stack** can also be implemented using a **linked list**.
+This approach is flexible and can grow or shrink as needed (unlike fixed-size array stacks).
+
+## 🖼️ Figure 5.6: Stack Representation Using a Linked List
+
+<div align="center">
+  <img src="./images/06.jpg" alt="" width="600px"/>
+</div>
+
+<div align="center">
+
+*Figure 5.6: Representation of the stack using a linked list*
+
+</div>
+
+
+### Figure Explanation:
+
+* Each **node** contains two parts:
+
+  1. **Data:** The value stored in the node
+  2. **Next:** A reference to the next node
+* The **top** points to the first node (the top of the stack)
+* **Push:** Insert a new node at the top
+* **Pop:** Remove the node from the top
+* The stack ends when the `next` pointer of a node is `None`
+
+## 🏗️ Node Class Implementation
+
+To build a stack using a linked list, first define a **Node** class:
+
+```python
+class Node:
+    def __init__(self, data=None):
+        self.data = data      # Holds the value
+        self.next = None      # Reference to the next node
+```
+
+* Each node holds data and a reference to the next node.
+
+## 🏢 Stack Class Implementation
+
+Next, define a **Stack** class.
+This is similar to a singly linked list but with stack-specific constraints:
+
+```python
+class Stack:
+    def __init__(self):
+        self.top = None      # Pointer to the top node
+        self.size = 0        # Number of elements in the stack
+```
+
+* **`top`:** Points to the node at the top of the stack (where push and pop happen)
+* **`size`:** Tracks the current number of elements
+
+## 💡 Key Points for Stack Using Linked List
+
+1. **Track the Top Node:**
+   To push or pop, always use the node pointed to by `top`.
+
+2. **Maintain Stack Size:**
+   Keep a variable (`size`) to quickly know how many elements are in the stack.
+
+3. **Dynamic Size:**
+   Unlike array-based stacks, linked list stacks can grow or shrink without a fixed limit.
 
