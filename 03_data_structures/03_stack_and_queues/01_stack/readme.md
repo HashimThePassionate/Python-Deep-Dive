@@ -417,3 +417,122 @@ class Stack:
 3. **Dynamic Size:**
    Unlike array-based stacks, linked list stacks can grow or shrink without a fixed limit.
 
+
+##  **Stack Push Operation** 📝
+
+The **push operation** is used to **add a new element to the top of the stack**.
+For linked list-based stacks, there’s **no fixed size**—so you don’t need to check for overflow.
+
+
+## 🖼️ Figure 5.7: Workings of the Push Operation on the Stack
+
+<div align="center">
+  <img src="./images/07.jpg" alt="" width="400px"/>
+</div>
+
+<div align="center">
+
+*Figure 5.7: Workings of the push operation on the stack*
+
+</div>
+
+
+### Step-by-Step Explanation:
+
+Suppose the stack contains `"egg"` and `"ham"`.
+
+1. **Create a new node:**
+
+   * New node contains data `"spam"`
+2. **Update pointers:**
+
+   * The `next` of the new node points to the current `top` (which is `"ham"`)
+   * The stack’s `top` pointer now points to the new node (`"spam"`)
+
+**Result:**
+
+* The new node `"spam"` is now at the top.
+* The stack from top to bottom is: `spam → ham → egg → None`
+
+
+## 🖼️ Figure 5.8: Inserting First Node into an Empty Stack
+
+<div align="center">
+  <img src="./images/08.jpg" alt="" width="400px"/>
+</div>
+
+<div align="center">
+
+*Figure 5.8: Insertion of the data element “egg” into an empty stack*
+
+</div>
+
+
+**Explanation:**
+
+* If the stack is empty, just point `top` to the new node (`"egg"`), whose `next` is `None`.
+
+## 🔥 How the Push Operation Works
+
+### If the stack **already has elements**:
+
+1. The new node’s `next` points to the node that was previously at the top.
+2. The stack’s `top` pointer is updated to point to the new node.
+
+### If the stack is **empty**:
+
+* The new node becomes the top node (`top` points to this new node).
+
+## 🐍 Python Code: Push Operation for Stack (Linked List)
+
+```python
+def push(self, data):
+    # Create a new node
+    node = Node(data)
+    if self.top:
+        node.next = self.top
+        self.top = node
+    else:
+        self.top = node
+    self.size += 1
+```
+
+* **Create a new node** with the given data.
+* **If the stack is not empty:**
+
+  * New node’s `next` points to the current `top`
+  * Update `top` to the new node
+* **If the stack is empty:**
+
+  * `top` simply points to the new node
+* **Increase stack size** by 1
+
+## 🧑‍💻 Example: Creating a Stack and Pushing Elements
+
+```python
+words = Stack()
+words.push('egg')
+words.push('ham')
+words.push('spam')
+# Print the stack elements
+current = words.top
+while current:
+    print(current.data)
+    current = current.next
+```
+
+**Output:**
+
+```
+spam
+ham
+egg
+```
+
+**Explanation:**
+
+* We pushed `"egg"`, `"ham"`, and `"spam"` to the stack.
+* The last item pushed (`"spam"`) appears at the top, showing the **LIFO** nature.
+
+---
+
