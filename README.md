@@ -32,7 +32,7 @@ This repository is divided into sections for every stage of your Python journey:
 |--------|-------------|
 | [**01_python_fundamentals** 📝](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/01_python_fundamentals) | Basics of Python – variables, loops, data types, functions, etc. |
 | [**02_object_oriented_programming** 🧱](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/02_object_oriented_programming) | Understand OOP – classes, inheritance, encapsulation, and more. |
-| [**03_data_structures** 📊](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/03_data_structures) _(In Progress)_ | Lists, dictionaries, sets, tuples, and advanced structures like trees, graphs. |
+| [**03_data_structures** 📊](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/03_data_structures) _(In Progress)_ | linkedlist, stack, queue and more |
 | [**04_algorithms** 🔍](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/04_algorithms) _(In Progress)_ | Sorting, searching, recursion, dynamic programming, etc. |
 | [**05_design_patterns** 🏗️](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/05_design_patterns) _(In Progress)_ | Learn patterns like Singleton, Factory, Observer, and more. |
 | [**06_python_projects_for_beginners** 🛠️](https://github.com/HashimThePassionate/Python-Deep-Dive/tree/main/06_python_projects_for_beginners) _(In Progress)_ | Build mini-projects to practice Python hands-on. |
