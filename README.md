@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./assests/python-logo-white-bg.png" alt="" width="400"/>
+<img src="./assests/python-logo-white-bg.svg" alt="" width="400"/>
 </p>
 
 <p align="center">
