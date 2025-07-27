@@ -1,11 +1,14 @@
 <p align="center">
-<img src="./assests/python-logo.png" alt="" width="400"/>
+<img src="./assests/python-logo-white-bg.png" alt="" width="400"/>
 </p>
 
-![License](https://img.shields.io/github/license/HashimThePassionate/Python-Deep-Dive)
-![Repo Size](https://img.shields.io/github/repo-size/HashimThePassionate/Python-Deep-Dive)
-![Last Commit](https://img.shields.io/github/last-commit/HashimThePassionate/Python-Deep-Dive)
-![Stars](https://img.shields.io/github/stars/HashimThePassionate/Python-Deep-Dive?style=social)
+<p align="center">
+  <img src="https://img.shields.io/github/license/HashimThePassionate/Python-Deep-Dive" />
+  <img src="https://img.shields.io/github/repo-size/HashimThePassionate/Python-Deep-Dive" />
+  <img src="https://img.shields.io/github/last-commit/HashimThePassionate/Python-Deep-Dive" />
+  <img src="https://img.shields.io/github/stars/HashimThePassionate/Python-Deep-Dive?style=social" />
+</p>
+
 
 > **Python Deep Dive** Welcome to the Python Deep Dive repository! This project is designed to provide a comprehensive guide to Python programming, covering fundamental to advanced topics. Whether you're a beginner or an experienced developer looking to dive deeper into Python, this repository has something for you!
 
