@@ -242,3 +242,146 @@ print(q.items)
 
 ---
 
+#  **Linked List-Based Queues (DLL)** 🔗
+
+## 📚 Introduction
+
+A **queue** can also be implemented using a **singly or doubly linked list**.
+This approach naturally supports the **FIFO** property (First-In, First-Out) of queues.
+
+## 🖼️ Figure 5.15: Enqueuing in an Empty Queue
+
+<div align="center">
+  <img src="./images/05.jpg" alt="" width="200px"/>
+
+*Figure 5.15: Illustration of enqueuing a new node in an empty queue*
+
+</div>
+
+**Explanation:**
+
+* When the queue is empty and a new node (e.g., `"egg"`) is added:
+
+  * The new node becomes **both the head (front) and tail (rear) of the queue**.
+  * Its `next` and `previous` pointers are set to `None`.
+
+## 🖼️ Figure 5.16: Enqueue Operation (Adding to Rear)
+
+<div align="center">
+  <img src="./images/06.jpg" alt="" width="600px"/>
+
+*Figure 5.16: Illustration of links to be updated for an enqueue operation in a queue*
+
+</div>
+
+
+**Explanation:**
+
+* When the queue is **not empty**, adding a new node involves **3 steps**:
+
+  1. The **`previous`** pointer of the new node should point to the current tail.
+  2. The **`next`** pointer of the current tail node should point to the new node.
+  3. The **tail pointer** should be updated to the new node.
+
+* After these steps, the new node is at the **rear (tail)** of the queue.
+
+
+## 🖼️ Figure 5.17: Dequeue Operation (Removing from Front)
+
+<div align="center">
+  <img src="./images/07.jpg" alt="" width="600px"/>
+
+*Figure 5.17: Illustration of the dequeue operation on a queue*
+</div>
+
+**Explanation:**
+
+* **Remove the head (front) node** (`"egg"`) from the queue:
+
+  1. Move the `head` pointer to the next node (`"ham"`).
+  2. Set the `previous` pointer of the new head to `None`.
+* If there was only **one node** (like `"egg"` alone), after dequeuing, both `head` and `tail` become `None` (queue becomes empty).
+
+## 🏗️ Implementation: Node and Queue Classes
+
+### Node Class
+
+```python
+class Node(object):
+    def __init__(self, data=None, next=None, prev=None):
+        self.data = data
+        self.next = next
+        self.prev = prev
+```
+
+* Each node holds data and links to both the next and previous nodes.
+
+### Queue Class
+
+```python
+class Queue:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.count = 0
+```
+
+* `head`: Points to the **front** of the queue.
+* `tail`: Points to the **rear** of the queue.
+* `count`: Tracks the number of nodes.
+
+## ➕ Enqueue Operation (Adding to Rear)
+
+```python
+def enqueue(self, data):
+    new_node = Node(data, None, None)
+    if self.head == None:  # If queue is empty
+        self.head = new_node
+        self.tail = self.head
+    else:  # If queue is not empty
+        new_node.prev = self.tail
+        self.tail.next = new_node
+        self.tail = new_node
+    self.count += 1
+```
+
+* **If empty:** The new node is both head and tail.
+* **If not empty:**
+
+  * Update pointers as shown in Figure 5.16.
+  * Tail is moved to the new node.
+* **Time Complexity:** O(1)
+
+## ➖ Dequeue Operation (Removing from Front)
+
+```python
+def dequeue(self):
+    if self.count == 1:
+        self.count -= 1
+        self.head = None
+        self.tail = None
+    elif self.count > 1:
+        self.head = self.head.next
+        self.head.prev = None
+        self.count -= 1
+    elif self.count < 1:
+        print("Queue is empty")
+```
+
+* **If only one node:** Set head and tail to `None`.
+* **If more than one node:**
+
+  * Move head to the next node.
+  * Set new head's `prev` to `None`.
+  * Decrement count.
+* **If empty:** Print `"Queue is empty"`.
+* **Time Complexity:** O(1)
+
+
+## 📝 Key points
+
+* **Linked list-based queues** allow for efficient enqueuing at the rear and dequeuing from the front, both in constant time.
+* **Pointers must be updated carefully** to keep the structure intact.
+* The code above supports **all standard queue operations**.
+
+---
