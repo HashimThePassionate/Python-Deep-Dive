@@ -385,3 +385,163 @@ def dequeue(self):
 * The code above supports **all standard queue operations**.
 
 ---
+
+#  **Stack-Based Queues** 🔄
+
+## 📚 Introduction
+
+A **queue** is a linear data structure where:
+
+* **Enqueue** (add) happens from one end.
+* **Dequeue** (remove) happens from the other end.
+* Follows **FIFO** (First In, First Out).
+
+Queues can be **implemented using two stacks** (Python lists as stacks).
+
+There are **two main approaches**:
+
+1. When the **dequeue** operation is costly
+2. When the **enqueue** operation is costly
+
+## 1️⃣ Approach 1: Costly Dequeue Operation
+
+### 🧩 Enqueue Operation
+
+* **Simple:** Push the new element onto **Stack-1**.
+
+#### 🖼️ Figure 5.18: Enqueue Example
+
+<div align="center">
+  <img src="./images/08.jpg" alt="" width="600px"/>
+
+*Elements {23, 13, 11} are enqueued to the queue via Stack-1.*
+
+</div>
+
+### 🧩 Dequeue Operation
+
+**Steps:**
+
+1. Move all elements from **Stack-1** to **Stack-2**.
+2. Pop the top of **Stack-2** and return it as output (this was the first enqueued).
+3. Move all remaining items back to **Stack-1**.
+
+#### 🖼️ Figure 5.19: Dequeue Example
+
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="600px"/>
+
+</div>
+
+### ⏱️ Time Complexity
+
+* **Enqueue:** O(1)
+* **Dequeue:** O(n) (because all elements must be moved)
+
+## 2️⃣ Approach 2: Costly Enqueue Operation
+
+### 🧩 Enqueue Operation
+
+**Steps:**
+
+1. Move all elements from **Stack-1** to **Stack-2**.
+2. Push the new element onto **Stack-2**.
+3. Move all elements back to **Stack-1**.
+
+#### 🖼️ Figure 5.20: Enqueue element 23 to empty queue
+
+<div align="center">
+  <img src="./images/10.jpg" alt="" width="600px"/>
+</div>
+
+#### 🖼️ Figure 5.21: Enqueue element 13
+
+<div align="center">
+  <img src="./images/11.jpg" alt="" width="600px"/>
+</div>
+
+#### 🖼️ Figure 5.22: Enqueue element 11
+
+<div align="center">
+  <img src="./images/12.jpg" alt="" width="600px"/>
+</div>
+
+### 🧩 Dequeue Operation
+
+* Simply pop from the top of **Stack-1**.
+
+#### 🖼️ Figure 5.23: Dequeue Example
+
+<div align="center">
+  <img src="./images/13.jpg" alt="" width="600px"/>
+</div>
+
+### ⏱️ Time Complexity
+
+* **Enqueue:** O(n)
+* **Dequeue:** O(1)
+
+## 🏗️ Python Implementation (Approach 1)
+
+```python
+class Queue:
+    def __init__(self):
+        self.Stack1 = []
+        self.Stack2 = []
+
+    def enqueue(self, data):
+        self.Stack1.append(data)
+
+    def dequeue(self):
+        if not self.Stack2:
+            while self.Stack1:
+                self.Stack2.append(self.Stack1.pop())
+        if not self.Stack2:
+            print("No element to dequeue")
+            return
+        return self.Stack2.pop()
+```
+
+---
+
+## 🧑‍💻 Example Usage
+
+```python
+queue = Queue()
+queue.enqueue(23)
+queue.enqueue(13)
+queue.enqueue(11)
+print(queue.Stack1)      # Output: [23, 13, 11]
+queue.dequeue()
+print(queue.Stack2)      # Output: [13, 11]
+```
+
+---
+
+## 🖼️ Stack Transfer Demo
+
+#### 🖼️ Figure 5.24: Example Stack-1 in a queue
+
+<div align="center">
+  <img src="./images/14.jpg" alt="" width="100px"/>
+</div>
+
+#### 🖼️ Figure 5.25: Stack-1 and Stack-2 Transfer
+
+<div align="center">
+  <img src="./images/15.jpg" alt="" width="600px"/>
+</div>
+
+## ⚡ Comparison: Linked List vs Stack-Based Queues
+
+* **Linked List Queue:** Both enqueue and dequeue are O(1). No size limitation.
+* **Stack-Based Queue:** One operation (enqueue or dequeue) is always O(n).
+
+##  key points 📝
+
+* **Two stacks** can be used to implement a queue, but one operation becomes costly.
+* **Costly dequeue (Approach 1):** Fast enqueue, slow dequeue.
+* **Costly enqueue (Approach 2):** Slow enqueue, fast dequeue.
+* **Linked list** is the most efficient for both enqueue and dequeue (both O(1)).
+
+---
