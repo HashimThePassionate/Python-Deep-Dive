@@ -253,6 +253,11 @@ left grandchild node
 
 ## 📝 Step-by-Step Example (Based on Figure 6.10)
 
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="200px"/>
+</div>
+
+
 1. Start at root node **A**.
 2. Recursively traverse the **left subtree** of A (which has root B):
 
