@@ -1,6 +1,13 @@
 #  **Tree Terminology** 🌳
 
-## 🖼️ Figure 6.1: Example Tree Data Structure
+## � Table of Contents
+- [**Tree Terminology** 🌳](#tree-terminology-)
+  - [� Table of Contents](#-table-of-contents)
+  - [�🖼️ Figure 6.1: Example Tree Data Structure](#️-figure-61-example-tree-data-structure)
+  - [📚 Key Terms in Trees](#-key-terms-in-trees)
+  - [📝 Notes on Trees vs Linear Data Structures](#-notes-on-trees-vs-linear-data-structures)
+
+## �🖼️ Figure 6.1: Example Tree Data Structure
 
 <div align="center">
   <img src="./images/01.jpg" alt="" width="400px"/>
