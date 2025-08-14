@@ -425,4 +425,99 @@ A
 
 ---
 
+Got it ✅
+Here’s your **beautifully formatted Markdown README** for **Level-Order Traversal** (Breadth-First Search) based on **Figure 6.13** from your notes. 🌳📊
+
+---
+
+# **Level-Order Traversal** 📖 
+
+**Definition:**
+Level-order traversal visits nodes **level by level**, starting from the root, then all nodes on the next level, and so on.
+
+It is **identical** to the **Breadth-First Search (BFS)** approach in graphs.
+
+## 🔄 Level-Order Algorithm (Step-by-Step)
+
+1. **Visit** the root node.
+2. **Enqueue** the root node.
+3. While the queue is not empty:
+
+   * **Dequeue** the front node.
+   * **Process** (visit) it.
+   * **Enqueue** its left child (if exists).
+   * **Enqueue** its right child (if exists).
+4. Repeat until the queue is empty.
+
+## 🧩 Step-by-Step Example (Figure 6.13)
+
+<div align="center">
+  <img src="./images/11.jpg" alt="" width="400px"/>
+</div>
+
+### **Tree Structure**
+
+```
+        4          <- Level 0
+       / \
+      2   8        <- Level 1
+     / \  / \
+    1  3 5  10     <- Level 2
+```
+
+**Traversal Process:**
+
+1. **Visit** `4` → enqueue (2, 8)
+2. **Visit** `2` → enqueue (1, 3)
+3. **Visit** `8` → enqueue (5, 10)
+4. **Visit** `1` → no children
+5. **Visit** `3` → no children
+6. **Visit** `5` → no children
+7. **Visit** `10` → no children
+
+## 📌 Final Level-Order Output:
+
+```
+4 2 8 1 3 5 10
+```
+
+## 🧑‍💻 Python Implementation
+
+```python
+from collections import deque
+
+def level_order_traversal(root_node):
+    list_of_nodes = []
+    traversal_queue = deque([root_node])
+    
+    while len(traversal_queue) > 0:
+        node = traversal_queue.popleft()  # Dequeue front node
+        list_of_nodes.append(node.data)   # Visit node
+        
+        if node.left_child:               # Enqueue left child
+            traversal_queue.append(node.left_child)
+        if node.right_child:              # Enqueue right child
+            traversal_queue.append(node.right_child)
+    
+    return list_of_nodes
+
+print(level_order_traversal(n1))
+```
+
+## 📤 Example Output:
+
+```
+Level-order Traversal:
+['4', '2', '8', '1', '3', '5', '10']
+```
+
+## 🎯 Applications of Binary Trees
+
+1. **Expression Trees** – used in compilers.
+2. **Huffman Coding** – for data compression.
+3. **Binary Search Trees (BST)** – for efficient searching, insertion, deletion.
+4. **Priority Queues** – for retrieving min/max efficiently.
+
+---
+
 

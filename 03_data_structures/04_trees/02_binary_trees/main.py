@@ -54,7 +54,22 @@ print("Post-order Traversal:")
 post_order(A)
 print('-'*30)
 
+def level_order_traversal(rode_node):
+    list_of_nodes = []
+    traversal_queue = deque([rode_node])
+    while len(traversal_queue) > 0:
+        node = traversal_queue.popleft()
+        list_of_nodes.append(node.data)
+        if node.left_child:
+            traversal_queue.append(node.left_child)
+            if node.right_child:
+                traversal_queue.append(node.right_child)
+    return list_of_nodes
 
+
+print("Level-order Traversal:")
+print(level_order_traversal(A))
+print('-'*30)
 
 #     print(current.data)
 #     current = current.left_child
