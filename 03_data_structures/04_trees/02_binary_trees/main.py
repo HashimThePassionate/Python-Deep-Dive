@@ -1,3 +1,4 @@
+from collections import deque
 class Node:
     def __init__(self, data):
         self.data = data
@@ -35,11 +36,25 @@ def inorder(root_node):
     print(current.data)
     inorder(current.right_child)
 
-
+print('-'*30)
+print("In-order Traversal:")
 inorder(A)
+print('-'*30)
+
+def post_order(root_node):
+    current = root_node
+    if current is None:
+        return
+    post_order(current.left_child)
+    post_order(current.right_child)
+    print(current.data)
 
 
-# current = n1
-# while current:
+print("Post-order Traversal:")
+post_order(A)
+print('-'*30)
+
+
+
 #     print(current.data)
 #     current = current.left_child

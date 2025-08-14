@@ -333,3 +333,96 @@ F
 ```
 
 ---
+
+#  **Post-Order Traversal** 📖
+
+**Definition:**
+In **post-order traversal**, the visiting order is:
+
+1. **Left subtree** →
+2. **Right subtree** →
+3. **Root node**
+
+This means **root nodes are visited last** after exploring both subtrees.
+
+# 🔄 Post-Order Algorithm (Step-by-Step)
+
+1. Traverse the **left subtree** recursively.
+2. Traverse the **right subtree** recursively.
+3. Visit (process) the **root node**.
+
+## 🧩 Step-by-Step Example (Figure 6.12)
+
+<div align="center">
+  <img src="./images/10.jpg" alt="" width="400px"/>
+</div>
+
+### **Tree Structure Recap**
+
+```
+        A
+       / \
+      B   C
+     / \    \
+    D   E    F
+   / \
+  G   H
+```
+
+**Traversal Order:**
+
+1. Start at **A** → go to **left subtree** (B)
+2. From **B**, go to **left subtree** (D)
+3. From **D**, go to **left subtree** (**G**) → visit **G**
+4. From **D**, go to **right subtree** (**H**) → visit **H**
+5. Visit **D**
+6. From **B**, go to **right subtree** (**E**) → visit **E**
+7. Visit **B**
+8. From **A**, go to **right subtree** (C)
+9. From **C**, left subtree is empty → go to right subtree (**F**) → visit **F**
+10. Visit **C**
+11. Visit **A**
+
+---
+
+## 📌 Final Post-Order Output:
+
+```
+G H D E B F C A
+```
+
+---
+
+## 🧑‍💻 Python Implementation
+
+```python
+def postorder(root_node):
+    current = root_node
+    if current is None:
+        return
+    postorder(current.left_child)   # Visit left subtree
+    postorder(current.right_child)  # Visit right subtree
+    print(current.data)             # Visit root
+
+# Example usage
+postorder(n1)
+```
+
+---
+
+## 📤 Example Output for Figure 6.12
+
+```
+G
+H
+D
+E
+B
+F
+C
+A
+```
+
+---
+
+
