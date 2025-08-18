@@ -41,6 +41,20 @@ print("In-order Traversal:")
 inorder(A)
 print('-'*30)
 
+def pre_order(root_node):
+    current = root_node
+    if current is None:
+        return
+    print(current.data)
+    pre_order(current.left_child)
+    pre_order(current.right_child)
+
+print('-'*30)
+print("Pre-order Traversal:")
+pre_order(A)
+print('-'*30)
+
+
 def post_order(root_node):
     current = root_node
     if current is None:
