@@ -331,6 +331,111 @@ A
 C
 F
 ```
+---
+
+#  **Pre-order Traversal** 🌲
+**Definition:**
+Pre-order traversal means **visit the root first**, then traverse the **left subtree**, and finally the **right subtree**.
+
+## 📊 Figure 6.11 – Example Tree for Pre-order Traversal
+
+<div align="center">
+  <img src="./images/10.jpg" alt="" width="400px"/>
+
+*An example binary tree to understand pre-order traversal*
+</div>
+
+
+---
+
+## 🔄 Pre-order Algorithm (Step-by-Step)
+
+1. **Visit** the root node.
+2. Recursively **traverse the left subtree**.
+3. Recursively **traverse the right subtree**.
+
+---
+
+## 🧩 Step-by-Step Example (Figure 6.11)
+
+### **Tree Structure**
+
+```
+        A
+       / \
+      B   C
+     / \    \
+    D   E    F
+   / \
+  G   H
+```
+
+**Traversal Process:**
+
+1. Visit `A` (root)
+2. Go to left subtree → Visit `B`
+
+   * Visit `D`
+
+     * Visit `G`
+     * Visit `H`
+   * Visit `E`
+3. Go to right subtree → Visit `C`
+
+   * Left child is `null`
+   * Visit `F`
+
+---
+
+## 📌 Final Pre-order Output:
+
+```
+A B D G H E C F
+```
+
+---
+
+## 🧑‍💻 Python Implementation
+
+```python
+def preorder(root_node):
+    current = root_node
+    if current is None:
+        return
+    print(current.data)                # Visit root
+    preorder(current.left_child)       # Traverse left
+    preorder(current.right_child)      # Traverse right
+
+preorder(n1)
+```
+
+---
+
+## 📤 Example Output:
+
+```
+Pre-order Traversal:
+A
+B
+D
+G
+H
+E
+C
+F
+```
+
+---
+
+## 🧠 Key Points
+
+* **Time Complexity:** `O(n)` → each node visited once.
+* **Space Complexity:** `O(h)` where `h` = height of tree (due to recursion stack).
+* Visits **root first** → useful for:
+
+  * **Expression Trees** (to reconstruct prefix notation).
+  * **Copying trees** (since root-first ensures order).
+  * **Serialization of Trees** (root-first representation).
 
 ---
 
