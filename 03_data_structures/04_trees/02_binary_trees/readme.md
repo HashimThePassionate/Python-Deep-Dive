@@ -10,7 +10,7 @@ A **binary tree** is a collection of nodes where:
 ### 🖼️ Figure 6.2: Example of a Binary Tree
 
 <div align="center">
-  <img src="./images/01.jpg" alt="" width="200px"/>
+  <img src="./images/01.jpg" alt="" width="350px"/>
 
 *Each node has at most two children: left and right.*
 
@@ -24,7 +24,7 @@ For example:
 ### 🖼️ Figure 6.3: An Example Binary Tree of Five Nodes
 
 <div align="center">
-  <img src="./images/02.jpg" alt="" width="200px"/>
+  <img src="./images/02.jpg" alt="" width="350px"/>
 
 *Root node, with two subtrees T1 (left) and T2 (right).*
 
@@ -40,7 +40,7 @@ A binary tree is **full** if **every node** has either 0 or 2 children (never ex
 
 
 <div align="center">
-  <img src="./images/03.jpg" alt="" width="200px"/>
+  <img src="./images/03.jpg" alt="" width="300px"/>
 
 *All nodes have 0 or 2 children.*
 
@@ -57,7 +57,7 @@ A binary tree is **perfect** if:
 
 
 <div align="center">
-  <img src="./images/04.jpg" alt="" width="200px"/>
+  <img src="./images/04.jpg" alt="" width="300px"/>
 
 
 *All levels are completely filled.*
@@ -74,7 +74,7 @@ A binary tree is **complete** if:
 
 
 <div align="center">
-  <img src="./images/05.jpg" alt="" width="200px"/>
+  <img src="./images/05.jpg" alt="" width="300px"/>
 
 </div>
 
@@ -88,7 +88,7 @@ A binary tree is **balanced** if:
 
 
 <div align="center">
-  <img src="./images/06.jpg" alt="" width="200px"/>
+  <img src="./images/06.jpg" alt="" width="350px"/>
 
 
 *Both left and right subtrees' heights are almost equal at every node.*
@@ -104,7 +104,7 @@ A tree is **unbalanced** if:
 
 
 <div align="center">
-  <img src="./images/07.jpg" alt="" width="200px"/>
+  <img src="./images/07.jpg" alt="" width="350px"/>
 
 
 *One subtree is much deeper than the other.*
@@ -117,7 +117,7 @@ A tree is **unbalanced** if:
 ## 🖼️ Figure 6.9: Example Binary Tree of Four Nodes
 
 <div align="center">
-  <img src="./images/08.jpg" alt="" width="200px"/>
+  <img src="./images/08.jpg" alt="" width="350px"/>
 
 *Figure 6.9: An example binary tree with nodes n1, n2, n3, and n4.*
 
@@ -196,7 +196,7 @@ Here is your detailed, beautifully formatted **Markdown README** covering **Tree
 ## 📊 Figure 6.10: An Example Binary Tree for In-Order Traversal
 
 <div align="center">
-  <img src="./images/08.jpg" alt="" width="200px"/>
+  <img src="./images/08.jpg" alt="" width="350px"/>
 
  *Figure 6.10: An example binary tree for in-order tree traversal*
 
@@ -254,7 +254,7 @@ left grandchild node
 ## 📝 Step-by-Step Example (Based on Figure 6.10)
 
 <div align="center">
-  <img src="./images/09.jpg" alt="" width="200px"/>
+  <img src="./images/09.jpg" alt="" width="350px"/>
 </div>
 
 
@@ -340,7 +340,7 @@ Pre-order traversal means **visit the root first**, then traverse the **left sub
 ## 📊 Figure 6.11 – Example Tree for Pre-order Traversal
 
 <div align="center">
-  <img src="./images/10.jpg" alt="" width="400px"/>
+  <img src="./images/10.jpg" alt="" width="350px"/>
 
 *An example binary tree to understand pre-order traversal*
 </div>
@@ -459,7 +459,7 @@ This means **root nodes are visited last** after exploring both subtrees.
 ## 🧩 Step-by-Step Example (Figure 6.12)
 
 <div align="center">
-  <img src="./images/10.jpg" alt="" width="400px"/>
+  <img src="./images/10.jpg" alt="" width="350px"/>
 </div>
 
 ### **Tree Structure Recap**
