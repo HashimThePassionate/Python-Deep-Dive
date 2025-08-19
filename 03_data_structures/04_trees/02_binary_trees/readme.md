@@ -1,4 +1,34 @@
-#  **Binary Trees** 🌳
+#  **🌳 Binary Trees - Complete Guide** 🌳
+
+<div align="left">
+
+## 📑 **Table of Contents** 📚
+
+</div>
+
+- [📘 What is a Binary Tree?](#-what-is-a-binary-tree)
+- [🏗️ Binary Tree Structure Example](#️-binary-tree-structure-example)
+- [🔄 Types Overview](#️-types-of-binary-trees)
+  - [🟢 1. Full Binary Tree](#1-full-binary-tree)
+  - [🔷 2. Perfect Binary Tree](#2-perfect-binary-tree)
+  - [🟡 3. Complete Binary Tree](#3-complete-binary-tree)
+  - [⚖️ 4. Balanced Binary Tree](#4-balanced-binary-tree)
+  - [⚠️ 5. Unbalanced Binary Tree](#5-unbalanced-binary-tree)
+- [🧱 Binary Tree Nodes](#-implementation-of-binary-tree-nodes)
+  - [📦 What is a Node?](#-what-is-a-node)
+  - [🐍 Python Node Class](#-python-code-node-class-for-binary-trees)
+  - [🔨 Building Example Trees](#️-building-the-example-tree-as-shown-in-figure-69)
+- [🌳 Tree Traversal Overview](#-tree-traversal)
+  - [❓ What is Tree Traversal?](#-what-is-tree-traversal)
+  - [👣 Simple Traversal Example](#-simple-left-subtree-traversal-example)
+  - [🛣️ Traversal Approaches](#️-tree-traversal-approaches)
+  - [🔄 In-Order Traversal](#-in-order-traversal)
+- [⬇️ Pre-order Traversal](#-pre-order-traversal)
+- [⬆️ Post-Order Traversal](#-post-order-traversal)
+- [📊 Level-Order Traversal](#level-order-traversal)
+- [🌳 Expression Trees Overview](#-expression-trees)
+- [📜 Parsing Reverse Polish Notation](#-parsing-a-reverse-polish-expression-into-an-expression-tree)
+
 
 ## 📘 What is a Binary Tree?
 
@@ -112,7 +142,7 @@ A tree is **unbalanced** if:
 
 ---
 
-#  **Implementation of Binary Tree Nodes** 🌳
+#  🌳 **Implementation of Binary Tree Nodes** 
 
 ## 🖼️ Figure 6.9: Example Binary Tree of Four Nodes
 
@@ -333,7 +363,7 @@ F
 ```
 ---
 
-#  **Pre-order Traversal** 🌲
+# 🌲 **Pre-order Traversal** 
 **Definition:**
 Pre-order traversal means **visit the root first**, then traverse the **left subtree**, and finally the **right subtree**.
 
@@ -439,7 +469,7 @@ F
 
 ---
 
-#  **Post-Order Traversal** 📖
+#  📖 **Post-Order Traversal** 
 
 **Definition:**
 In **post-order traversal**, the visiting order is:
@@ -530,12 +560,7 @@ A
 
 ---
 
-Got it ✅
-Here’s your **beautifully formatted Markdown README** for **Level-Order Traversal** (Breadth-First Search) based on **Figure 6.13** from your notes. 🌳📊
-
----
-
-# **Level-Order Traversal** 📖 
+# 📖 **Level-Order Traversal**  
 
 **Definition:**
 Level-order traversal visits nodes **level by level**, starting from the root, then all nodes on the next level, and so on.
@@ -625,4 +650,268 @@ Level-order Traversal:
 
 ---
 
+#  🌳 **Expression Trees** 
+
+* **Leaf nodes** → operands (numbers like `3`, `4`, `5`).
+* **Non-leaf nodes** → operators (`+`, `-`, `*`, `/`).
+* Expression trees can represent arithmetic expressions in **three notations**:
+
+  1. **Infix (Normal math style)** → Operators between operands (`3 + 4`).
+  2. **Prefix (Polish Notation)** → Operators before operands (`+ 3 4`).
+  3. **Postfix (Reverse Polish Notation, RPN)** → Operators after operands (`3 4 +`).
+
+### 📌 Example 1: Expression `3 + 4`
+
+<div align="center">
+  <img src="./images/12.jpg" alt="" width="250px"/>
+</div>
+
+Tree:
+
+```
+    +
+   / \
+  3   4
+```
+
+* **Infix** → `3 + 4`
+* **Prefix** → `+ 3 4`
+* **Postfix** → `3 4 +`
+
+### 📌 Example 2: Expression `(4 + 5) * (5 - 3)`
+
+<div align="center">
+  <img src="./images/13.jpg" alt="" width="350px"/>
+</div>
+
+Tree:
+
+```
+        *
+       / \
+      +   -
+     / \ / \
+    4  5 5  3
+```
+
+* **Infix** → `(4 + 5) * (5 - 3)`
+* **Prefix** → `* + 4 5 - 5 3`
+* **Postfix** → `4 5 + 5 3 - *`
+
+### 📌 Example 3: Expression Tree for `(+ ((- 8 3) 3))` (Figure 6.16)
+
+<div align="center">
+  <img src="./images/14.jpg" alt="" width="300px"/>
+</div>
+
+Tree:
+
+```
+       +
+      / \
+     -   3
+    / \
+   8   3
+```
+
+* **Pre-order (Prefix)** → `+ - 8 3 3`
+* **Post-order (Postfix)** → `8 3 - 3 +`
+* **Infix** → `(8 - 3) + 3`
+
+### 🧠 How Traversals Relate to Notation:
+
+1. **In-order traversal** → Infix expression (normal math style).
+2. **Pre-order traversal** → Prefix expression (Polish notation).
+3. **Post-order traversal** → Postfix expression (RPN).
+
+✅ This is why compilers use **expression trees** → they can easily switch between **notations**, simplify expressions, or evaluate them directly.
+
+---
+
+#  📘 **Parsing a Reverse Polish Expression into an Expression Tree**
+
+Expression trees are a powerful way to represent and evaluate postfix (Reverse Polish) expressions using a stack.
+
+## 🧠 Core Concept
+
+* Process the postfix expression **one symbol at a time**.
+* If the symbol is an **operand** → create a **TreeNode** and **push it onto the stack**.
+* If the symbol is an **operator** →
+
+  * **Pop two references** from the stack.
+  * The **first pop** becomes the **right child**.
+  * The **second pop** becomes the **left child**.
+  * Form a new subtree with the operator as the root.
+  * **Push the subtree back** onto the stack.
+* After all tokens are processed, the **stack contains one reference** → the **root of the expression tree**.
+* 
+## ✍️ Example Expression:
+
+```
+4 5 + 5 3 - *
+```
+
+### 🔹 Step 1: Push operands `4` and `5`
+
+* Both `4` and `5` are **operands**, so we create nodes for them and push them onto the stack.
+
+<div align="center">
+  <img src="./images/16.jpg" alt="" width="350px"/>
+
+**Figure 6.18:** Operands **4** and **5** are pushed onto the stack.
+</div>
+
+
+### 🔹 Step 2: Process operator `+`
+
+* Operator `+` is read.
+* We **pop two references**:
+
+  * First pop → `5` → becomes the **right child**.
+  * Second pop → `4` → becomes the **left child**.
+* Create a new subtree with `+` as the root and push it onto the stack.
+
+<div align="center">
+  <img src="./images/17.jpg" alt="" width="350px"/>
+
+**Figure 6.19:** Subtree created with `+` as root, left = `4`, right = `5`.
+</div>
+
+### 🔹 Step 3: Push operands `5` and `3`, then process operator `-`
+
+* Push operands `5` and `3` onto the stack.
+* Operator `-` is read.
+* We **pop two references**:
+
+  * First pop → `3` → becomes the **right child**.
+  * Second pop → `5` → becomes the **left child**.
+* Create a new subtree with `-` as the root and push it back.
+
+<div align="center">
+  <img src="./images/18.jpg" alt="" width="450px"/>
+
+**Figure 6. 20:** Subtree created with `-` as root, left = `5`, right = `3`.
+</div>
+
+### 🔹 Step 4: Process final operator `*`
+
+* Operator `*` is read.
+* We **pop two references**:
+
+  * First pop → subtree rooted at `-` → becomes **right child**.
+  * Second pop → subtree rooted at `+` → becomes **left child**.
+* Create a new subtree with `*` as the root → **Final Expression Tree**.
+
+<div align="center">
+  <img src="./images/19.jpg" alt="" width="400px"/>
+
+**Figure 6.21:** Final expression tree:
+</div>
+
+```
+        *
+      /   \
+     +     -
+    / \   / \
+   4   5 5   3
+```
+
+---
+
+## ⚙️ Python Implementation
+
+### TreeNode and Stack Classes
+
+```python
+# Node for expression tree
+class TreeNode:
+    def __init__(self, data=None):
+        self.data = data
+        self.right = None
+        self.left = None
+
+# Simple stack implementation
+class Stack:
+    def __init__(self):
+        self.elements = []
+
+    def push(self, item):
+        self.elements.append(item)
+
+    def pop(self):
+        return self.elements.pop()
+```
+
+---
+
+### Build the Expression Tree
+
+```python
+expr = "4 5 + 5 3 - *".split()   # ['4','5','+','5','3','-','*']
+stack = Stack()
+
+for term in expr:
+    if term in "+-*/":              # If operator
+        node = TreeNode(term)
+        node.right = stack.pop()    # first pop → right child
+        node.left  = stack.pop()    # second pop → left child
+        stack.push(node)
+    else:                           # If operand
+        node = TreeNode(int(term))  # convert to int
+        stack.push(node)
+
+root = stack.pop()  # final tree root
+```
+
+---
+
+### Evaluate the Expression
+
+```python
+def calc(node):
+    if node.data == "+":
+        return calc(node.left) + calc(node.right)
+    elif node.data == "-":
+        return calc(node.left) - calc(node.right)
+    elif node.data == "*":
+        return calc(node.left) * calc(node.right)
+    elif node.data == "/":
+        return calc(node.left) / calc(node.right)
+    else:
+        return node.data  # operand
+
+result = calc(root)
+print(result)  # -> 18
+```
+
+---
+
+## 🔍 Dry Run (Stack Trace)
+
+| Token | Action               | Stack State     |
+| ----- | -------------------- | --------------- |
+| `4`   | push operand         | \[4]            |
+| `5`   | push operand         | \[4, 5]         |
+| `+`   | pop → (4+5)          | \[(4+5)]        |
+| `5`   | push operand         | \[(4+5), 5]     |
+| `3`   | push operand         | \[(4+5), 5, 3]  |
+| `-`   | pop → (5-3)          | \[(4+5), (5-3)] |
+| `*`   | pop → ((4+5)\*(5-3)) | \[root]         |
+
+**Final Result:**
+
+```
+(4 + 5) * (5 - 3) = 18
+```
+
+---
+
+## ✅ Key Takeaways
+
+* **Operands** → pushed as nodes.
+* **Operators** → pop two references, create subtree, push subtree.
+* **Final stack** → contains only one root → full expression tree.
+* Recursive evaluation produces the result **18**.
+
+---
 
