@@ -22,7 +22,7 @@
   - [❓ What is Tree Traversal?](#-what-is-tree-traversal)
   - [👣 Simple Traversal Example](#-simple-left-subtree-traversal-example)
   - [🛣️ Traversal Approaches](#️-tree-traversal-approaches)
-  - [🔄 In-Order Traversal](#-in-order-traversal)
+- [🔄 In-Order Traversal](#-in-order-traversal)
 - [⬇️ Pre-order Traversal](#-pre-order-traversal)
 - [⬆️ Post-Order Traversal](#-post-order-traversal)
 - [📊 Level-Order Traversal](#level-order-traversal)
