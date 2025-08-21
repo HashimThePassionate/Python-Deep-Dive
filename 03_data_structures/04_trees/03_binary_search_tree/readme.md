@@ -696,7 +696,7 @@ Here’s your text beautifully converted into a **Markdown README style file** w
 ---
 
 # 🌳 **Minimum and Maximum Nodes in BST** 
-
+ 
 In a **Binary Search Tree (BST)**, the structure itself makes it very easy to find the **minimum** or **maximum** node.
 
 ---
