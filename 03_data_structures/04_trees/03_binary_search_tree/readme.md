@@ -286,6 +286,99 @@ tree.inorder(r)
 
 ---
 
-✨ And that’s how insertion in a **Binary Search Tree** works step by step! 🌳💡
+# 🌳 **BST Searching the Tree**
+
+## 📌 Introduction
+
+A **Binary Search Tree (BST)** is a tree data structure in which:
+
+* All the nodes in the **left subtree** of a node have **lower key values**.
+* All the nodes in the **right subtree** have **greater key values**.
+
+This property makes **searching for an element very efficient** ⚡.
 
 ---
+
+## 📖 Example BST
+
+Below is an example binary search tree containing **seven nodes**:
+
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="400px"/>
+
+**Figure 6.30:** An example binary search tree with nodes **1, 2, 3, 4, 5, 8, 10**.
+</div>
+
+
+---
+
+## 🔍 Searching in BST
+
+➡️ Suppose we want to search for a node with the value **5**:
+
+1. Start from the **root node** → `4`.
+2. Compare `5` with `4`: since **5 > 4**, move to the **right subtree**.
+3. In the right subtree, root is `8`. Compare `5` with `8`: since **5 < 8**, move to the **left subtree**.
+4. The left child of `8` is `5`. Compare with required value `5`: ✅ **match found**.
+
+📢 Output: `"Item found"` 🎉
+
+---
+
+## 💻 Implementation in Python
+
+Here’s how searching can be implemented in the **Tree class**:
+
+```python
+def search(self, data):
+    current = self.root_node
+    while True:
+        if current is None:
+            print("Item not found")
+            return None
+        elif current.data is data:
+            print("Item found", data)
+            return data
+        elif current.data > data:
+            current = current.left_child
+        else:
+            current = current.right_child
+```
+
+### ⚙️ Working of the Algorithm:
+
+* Start searching from the **root node**.
+* If the data item **doesn’t exist**, return `None`.
+* If found, return the **data value**.
+* If `data < current node`, move **left**.
+* If `data > current node`, move **right**.
+
+---
+
+## 🌱 Example Code — Insert & Search
+
+```python
+tree = Tree()
+tree.insert(5)
+tree.insert(2)
+tree.insert(7)
+tree.insert(9)
+tree.insert(1)
+
+tree.search(9)
+```
+
+---
+
+## 🖥️ Output
+
+```
+Item found 9
+```
+
+✅ The program successfully finds items present in the tree.
+❌ Values not present in the BST (within range `1–10`) return `"Item not found"`.
+
+---
+
+
