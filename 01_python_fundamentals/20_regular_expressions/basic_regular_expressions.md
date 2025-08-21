@@ -291,3 +291,115 @@ print(m.group('year'), m.group('month'), m.group('day'))  # 2024 09 12
 
 ---
 
+# 📝 Regex Example: Find and Replace Emails in Text
+
+This example shows how to use **Python’s `re` module** to search for email addresses inside a multi-line string and replace them with `[EMAIL]`.
+
+---
+
+## 📌 Code
+
+```python
+import re
+
+# Multiple strings (could also come from a file or list)
+text = """
+Hello John, contact me at john.doe@example.com.
+Our support email is support@my-site.org.
+Another one is admin123@test.co.uk for urgent queries.
+"""
+print('Before regex')
+print(text)
+
+# Regex pattern for emails
+pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+
+# Replace all matches with [EMAIL]
+print('After regex')
+result = re.sub(pattern, "[EMAIL]", text)
+
+print(result)
+```
+
+---
+
+## 🔍 Explanation
+
+1. **Import the `re` module**
+
+   ```python
+   import re
+   ```
+
+   The `re` module in Python allows us to work with **regular expressions**.
+
+2. **Define the text**
+
+   ```python
+   text = """
+   Hello John, contact me at john.doe@example.com.
+   Our support email is support@my-site.org.
+   Another one is admin123@test.co.uk for urgent queries.
+   """
+   ```
+
+   Here we use a **multi-line string** that contains several email addresses.
+
+3. **Regex pattern for emails**
+
+   ```python
+   pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+   ```
+
+   Breakdown of this regex:
+
+   * `[A-Za-z0-9._%+-]+` → matches the username part (`john.doe`, `support`, `admin123`).
+   * `@` → literal `@` symbol.
+   * `[A-Za-z0-9.-]+` → matches the domain name (`example`, `my-site`, `test`).
+   * `\.` → literal dot `.`.
+   * `[A-Za-z]{2,}` → matches the domain extension (`com`, `org`, `co.uk`).
+
+4. **Replace with `[EMAIL]`**
+
+   ```python
+   result = re.sub(pattern, "[EMAIL]", text)
+   ```
+
+   * `re.sub(pattern, replacement, text)` → finds all matches and replaces them with `[EMAIL]`.
+
+5. **Print before and after**
+
+   * Before regex:
+
+     ```
+     Hello John, contact me at john.doe@example.com.
+     Our support email is support@my-site.org.
+     Another one is admin123@test.co.uk for urgent queries.
+     ```
+   * After regex:
+
+     ```
+     Hello John, contact me at [EMAIL].
+     Our support email is [EMAIL].
+     Another one is [EMAIL] for urgent queries.
+     ```
+
+---
+
+## ✅ Output
+
+```
+Before regex
+Hello John, contact me at john.doe@example.com.
+Our support email is support@my-site.org.
+Another one is admin123@test.co.uk for urgent queries.
+
+After regex
+Hello John, contact me at [EMAIL].
+Our support email is [EMAIL].
+Another one is [EMAIL] for urgent queries.
+```
+
+---
+
+
