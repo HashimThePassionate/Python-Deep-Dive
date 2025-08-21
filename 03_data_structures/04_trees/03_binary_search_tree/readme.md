@@ -381,4 +381,313 @@ Item found 9
 
 ---
 
+# 🌳 **Deleting Nodes in BST**
+
+## 📌 Introduction
+
+Another important operation in a Binary Search Tree (BST) is **deletion (removal) of nodes**.
+There are **three possible scenarios** when deleting a node:
+
+1. **Node with no children** 👶 → Directly remove it.
+2. **Node with one child** 👨‍👧 → Replace the node with its child.
+3. **Node with two children** 👨‍👩‍👧 → Replace the node with its in-order successor or predecessor.
+
+---
+
+## 🟢 Case 1: Node with No Children (Leaf Node)
+
+If the node to be removed is a **leaf node**, we can directly delete it from its parent.
+
+📊 Example:
+
+<div align="center">
+  <img src="./images/10.jpg" alt="" width="500px"/>
+
+**Figure 6.31:** Deletion operation when deleting a node with no children.
+</div>
+
+Here, node **A** is deleted directly from parent **Z**.
+
+---
+
+## 🟡 Case 2: Node with One Child
+
+If the node to be removed has **one child**, we make the parent of that node point directly to the child.
+
+📊 Example:
+
+<div align="center">
+  <img src="./images/11.jpg" alt="" width="350px"/>
+
+**Figure 6.32:** Deletion operation when deleting a node with one child.
+</div>
+
+* Node **6** has only one child → **5**.
+* To delete node `6`, we connect parent node `9` directly to child `5`.
+
+✅ This keeps BST properties intact.
+
+---
+
+## 🔴 Case 3: Node with Two Children
+
+If the node has **two children**, we must:
+
+1. Find the **in-order successor** (smallest node in the right subtree) OR predecessor.
+2. Replace the node’s value with that successor/predecessor.
+3. Delete the successor/predecessor node.
+
+📊 Example:
+
+<div align="center">
+  <img src="./images/12.jpg" alt="" width="500px"/>
+
+**Figure 6.33:** Deletion operation when deleting a node with two children.
+</div>
+
+* Suppose we delete node **9**.
+* The **smallest node in its right subtree** = `12`.
+* Replace `9` with `12` → then remove node `12`.
+* Since `12` has no children, we apply **Case 1** to delete it.
+
+---
+
+## 💻 Python Implementation
+
+### 🔎 Helper Method — Get Node with Parent
+
+```python
+def get_node_with_parent(self, data):
+    parent = None
+    current = self.root_node
+    while current is not None:
+        if current.data == data:
+            return (parent, current)
+        parent = current
+        if data < current.data:
+            current = current.left_child
+        else:
+            current = current.right_child
+    return (parent, None)
+```
+
+### 🧠 What this does
+
+* Finds the **target node** and its **parent**.
+* Needed because in our `Node` class we don’t keep a reference to the parent.
+* Without knowing the parent, we can’t update pointers when deleting.
+
+### Step by step
+
+* `parent = None`: Initially, there’s no parent (root has no parent).
+* Start from the root.
+* While `current` is not `None`:
+
+  * If `current.data == data`: return `(parent, current)` → target found.
+  * Else, before moving further, update `parent = current`.
+  * If `data < current.data`: go left.
+  * Else: go right.
+* If not found → `(parent, None)`.
+
+👉 This method returns both the **node** and its **parent**.
+
+---
+
+### 🗑️ Remove Method — Handling All 3 Cases
+
+```python
+def remove(self, data):
+    parent, node = self.get_node_with_parent(data)
+    if node is None:
+        print("Not found:", data)
+        return False
+
+    # Count children
+    left = node.left_child
+    right = node.right_child
+    if left and right:
+        children_count = 2
+    elif left is None and right is None:
+        children_count = 0
+    else:
+        children_count = 1
+
+    # Case 0: Leaf Node
+    if children_count == 0:
+        if parent is None:
+            self.root_node = None
+        else:
+            if parent.left_child is node:
+                parent.left_child = None
+            else:
+                parent.right_child = None
+        return True
+
+    # Case 1: One Child
+    if children_count == 1:
+        next_node = left if left else right
+        if parent is None:
+            self.root_node = next_node
+        else:
+            if parent.left_child is node:
+                parent.left_child = next_node
+            else:
+                parent.right_child = next_node
+        return True
+
+    # Case 2: Two Children
+    parent_of_leftmost = node
+    leftmost = node.right_child
+    while leftmost.left_child:
+        parent_of_leftmost = leftmost
+        leftmost = leftmost.left_child
+
+    # Copy value into node
+    node.data = leftmost.data
+
+    # Remove the leftmost from its original place
+    if parent_of_leftmost.left_child is leftmost:
+        parent_of_leftmost.left_child = leftmost.right_child
+    else:
+        parent_of_leftmost.right_child = leftmost.right_child
+
+    return True
+```
+### 🧠 What this does
+
+* First, it finds the **node to delete** and its **parent**.
+* Then, it checks how many children the node has (0, 1, or 2).
+* Based on that, it applies different deletion rules.
+
+---
+
+### Step by step breakdown
+
+#### A) 🎯 Find target
+
+* `parent, node = self.get_node_with_parent(data)` → get both references.
+* If `node is None`: the element doesn’t exist → return `False`.
+
+#### B) 👶 Count children
+
+* Store `left` and `right`.
+* If both exist → `children_count = 2`.
+* If none → `children_count = 0`.
+* Otherwise → `children_count = 1`.
+
+#### C) ✅ Case 0 — Leaf node (no children)
+
+* If node has **no children**:
+
+  * If node is the root → `root = None`.
+  * Otherwise, update the parent’s left or right pointer to `None`.
+
+#### D) ✅ Case 1 — Node with one child
+
+* Find the child → `next_node = left if left else right`.
+* If node is root → root = that child.
+* Else, update the parent’s left or right pointer to this child.
+
+#### E) ✅ Case 2 — Node with two children
+
+* Find the **in-order successor** (smallest value in the right subtree).
+
+  * Start from `node.right_child`.
+  * Keep moving left until no left child exists.
+* Copy the successor’s value into the current node (`node.data = leftmost.data`).
+* Now remove the original successor node:
+
+  * It can only have a right child (not a left, since it’s leftmost).
+  * Update the parent pointer (`parent_of_leftmost.left_child` or `.right_child`) to successor’s right child.
+
+---
+
+## 🧪 Dry Run — Deleting `9` (Two Children)
+
+Initial tree:
+
+```
+      5
+     / \
+    3   9
+       / \
+      6   13
+         /
+        12
+```
+
+1. Target = `9`. Parent = `5`.
+2. Node `9` has two children (`6` and `13`).
+3. Find successor → go right (`13`), then left → `12`.
+4. Copy successor value into node `9`:
+
+   ```
+       5
+      / \
+     3   12
+        /  \
+       6    13
+            /
+           12  (temporary duplicate)
+   ```
+5. Remove original `12` from under `13`.
+6. Final tree:
+
+   ```
+       5
+      / \
+     3   12
+        /  \
+       6    13
+   ```
+
+✅ BST property preserved.
+
+---
+
+## ⏱️ Complexity
+
+* Worst case: **O(h)** where `h` is the height of the tree.
+* Balanced BST → `O(log n)`.
+* Skewed BST → `O(n)`.
+
+
+---
+
+## 🌱 Example Code — Inserting & Deleting
+
+```python
+tree = Tree()
+tree.insert(5)
+tree.insert(2)
+tree.insert(7)
+tree.insert(9)
+tree.insert(1)
+
+tree.search(9)    # Before deletion
+tree.remove(9)    # Delete node 9
+tree.search(9)    # After deletion
+```
+
+---
+
+## 🖥️ Output
+
+```
+Item found 9
+Item not found
+```
+
+✅ Before deletion, node `9` is found.
+❌ After deletion, node `9` no longer exists.
+
+---
+
+## 🎯 Complexity
+
+* The worst-case complexity of **remove operation** is **O(h)**,
+  where `h` = height of the tree.
+
+---
+
 
