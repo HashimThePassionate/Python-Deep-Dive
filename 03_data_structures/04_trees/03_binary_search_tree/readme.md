@@ -690,4 +690,113 @@ Item not found
 
 ---
 
+Got it ✅
+Here’s your text beautifully converted into a **Markdown README style file** with full explanation, figures, code blocks, and emojis:
+
+---
+
+# 🌳 **Minimum and Maximum Nodes in BST**
+
+In a **Binary Search Tree (BST)**, the structure itself makes it very easy to find the **minimum** or **maximum** node.
+
+---
+
+## 🔍 Concept
+
+* 👉 To find the **minimum value node**, we always move **left** from the root until we reach the **last left node**.
+* 👉 To find the **maximum value node**, we always move **right** from the root until we reach the **last right node**.
+
+---
+
+## 📊 Example Visualization
+
+<div align="center">
+  <img src="./images/13.jpg" alt="" width="600px"/>
+
+**Figure 6 .34**: *Finding the minimum and maximum nodes in a binary search tree*
+</div>
+
+* **Path to Minimum Node**: `6 → 3 → 1`
+* **Path to Maximum Node**: `6 → 8 → 10`
+
+---
+
+## 📝 Step-by-Step Example
+
+1. **Finding Minimum**
+   Start at root `6` → move left to `3` → move left to `1` → ✅ Found **minimum = 1**
+
+2. **Finding Maximum**
+   Start at root `6` → move right to `8` → move right to `10` → ✅ Found **maximum = 10**
+
+---
+
+## 💻 Python Implementation
+
+### 🔹 Find Minimum Node
+
+```python
+def find_min(self):
+    current = self.root_node
+    while current.left_child:
+        current = current.left_child
+    return current.data
+```
+
+👉 This method keeps moving left until it reaches the last left node (`None`).
+
+---
+
+### 🔹 Find Maximum Node
+
+```python
+def find_max(self):
+    current = self.root_node
+    while current.right_child:
+        current = current.right_child
+    return current.data
+```
+
+👉 This method keeps moving right until it reaches the last right node (`None`).
+
+---
+
+## ⚡ Usage Example
+
+```python
+tree = Tree()
+tree.insert(5)
+tree.insert(2)
+tree.insert(7)
+tree.insert(9)
+tree.insert(1)
+
+print(tree.find_min())  # Output: 1
+print(tree.find_max())  # Output: 9
+```
+
+---
+
+## 🖥️ Output
+
+```
+1
+9
+```
+
+* ✅ Minimum Value = **1**
+* ✅ Maximum Value = **9**
+
+---
+
+## ⏱️ Time Complexity
+
+* **Finding Minimum** → O(h)
+* **Finding Maximum** → O(h)
+
+where **h = height of the tree**.
+
+---
+
+
 

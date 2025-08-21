@@ -8,7 +8,7 @@ class Node:
 class Tree:
     def __init__(self):
         self.root_node = None
-    
+
     def insert(self, data):
         node = Node(data)
         if self.root_node is None:
@@ -29,8 +29,8 @@ class Tree:
                     if current is None:
                         parent.right_child = node
                         return self.root_node
-    
-    def search(self,data):
+
+    def search(self, data):
         current = self.root_node
         while True:
             if current is None:
@@ -43,7 +43,7 @@ class Tree:
                 current = current.left_child
             else:
                 current = current.right_child
-    
+
     def get_node_with_parent(self, data):
         parent = None
         current = self.root_node
@@ -55,9 +55,8 @@ class Tree:
                 current = current.left_child
             else:
                 current = current.right_child
-        return (parent, None) 
+        return (parent, None)
 
-    
     def remove(self, data):
         parent, node = self.get_node_with_parent(data)
         if node is None:
@@ -115,8 +114,18 @@ class Tree:
 
         return True
 
+    def find_min(self):
+        current = self.root_node
+        while current.left_child:
+            current = current.left_child
+        return current.data
 
-    
+    def find_max(self):
+        current = self.root_node
+        while current.right_child:
+            current = current.right_child
+        return current.data
+
     def in_order_traversal(self, root_node):
         current = root_node
         if current is None:
@@ -142,16 +151,27 @@ class Tree:
 # tree.insert(9)
 # tree.insert(1)
 
-# print(tree.search(9))  
+# print(tree.search(9))
 
 
 # Deleting data
+# tree = Tree()
+# tree.insert(5)
+# tree.insert(2)
+# tree.insert(7)
+# tree.insert(9)
+# tree.insert(1)
+# tree.search(9)
+# print(tree.remove(9))
+# tree.search(9)
+
+
+#  Find min
 tree = Tree()
 tree.insert(5)
 tree.insert(2)
 tree.insert(7)
 tree.insert(9)
 tree.insert(1)
-tree.search(9)
-print(tree.remove(9))
-tree.search(9)
+print(tree.find_min())
+print(tree.find_max())
