@@ -1,5 +1,35 @@
 # Basic Regular Expressions — Practical Guide 🚀
 
+## Table of Contents
+
+- [Basic Regular Expressions — Practical Guide 🚀](#basic-regular-expressions--practical-guide-)
+  - [Table of Contents](#table-of-contents)
+  - [1) Match Exact Text (and escape the tricky characters) ✍️](#1-match-exact-text-and-escape-the-tricky-characters-️)
+  - [2) Match Nonprintable / Control Characters 🔔↩️](#2-match-nonprintable--control-characters-️)
+  - [3) Character Classes 🔤](#3-character-classes-)
+    - [Example 3.1: catch misspellings of *calendar*](#example-31-catch-misspellings-of-calendar)
+    - [Example 3.2: match one **hex digit**](#example-32-match-one-hex-digit)
+    - [Example 3.3: match one **non-hex** character](#example-33-match-one-non-hex-character)
+  - [4) The Dot `.` 🟦](#4-the-dot--)
+  - [5) Anchors (Start / End) 📍](#5-anchors-start--end-)
+  - [6) Word Boundaries 🐱](#6-word-boundaries-)
+  - [7) Alternation (OR) 🔀](#7-alternation-or-)
+  - [8) Backreferences 🔁](#8-backreferences-)
+  - [9) Quantifiers 🔢](#9-quantifiers-)
+  - [10) Minimal vs Greedy 🔄](#10-minimal-vs-greedy-)
+  - [11) Lookarounds 👀](#11-lookarounds-)
+  - [12) Substitution / Replacement 🔄](#12-substitution--replacement-)
+    - [Wrap entire match with HTML](#wrap-entire-match-with-html)
+    - [Format phone numbers](#format-phone-numbers)
+  - [13) Named Groups 🏷️](#13-named-groups-️)
+  - [Cheatsheet 🧠](#cheatsheet-)
+- [📝 Regex Example: Find and Replace Emails in Text](#-regex-example-find-and-replace-emails-in-text)
+  - [📌 Code](#-code)
+  - [🔍 Explanation](#-explanation)
+  - [✅ Output](#-output)
+
+Regular Expressions — Practical Guide 🚀
+
 > Learn regex with **use cases + explanations + Python examples**.
 > Regex is not just syntax — it’s about solving real search-and-match problems.
 
