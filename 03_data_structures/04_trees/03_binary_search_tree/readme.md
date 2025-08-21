@@ -2,6 +2,76 @@
 
 A **Binary Search Tree (BST)** is a special type of binary tree that stores data in a structured way for **fast searching, insertion, and deletion**.
 
+## 📋 **Table of Contents**
+
+- [🌳 **Binary Search Trees (BST)**](#-binary-search-trees-bst)
+  - [📋 **Table of Contents**](#-table-of-contents)
+  - [🧠 Definition](#-definition)
+  - [📍 Example 1 — Basic BST Condition](#-example-1--basic-bst-condition)
+  - [📍 Example 2 — Valid BST with Six Nodes](#-example-2--valid-bst-with-six-nodes)
+  - [📍 Example 3 — Not a BST ❌](#-example-3--not-a-bst-)
+  - [🔑 **Binary Search Tree Operations**](#-binary-search-tree-operations)
+  - [🌱 Inserting Nodes](#-inserting-nodes)
+  - [🛠 Example: Insert `5, 3, 7, 1`](#-example-insert-5-3-7-1)
+    - [Step 1: Insert `5`](#step-1-insert-5)
+    - [Step 2: Insert `3`](#step-2-insert-3)
+    - [Step 3: Insert `7`](#step-3-insert-7)
+    - [Step 4: Insert `1` (First Comparison)](#step-4-insert-1-first-comparison)
+    - [Step 5: Insert `1` (Second Comparison)](#step-5-insert-1-second-comparison)
+  - [✅ Final Tree](#-final-tree)
+  - [💻 Python Implementation](#-python-implementation)
+  - [🔄 In-Order Traversal (to view inserted elements)](#-in-order-traversal-to-view-inserted-elements)
+  - [🧪 Example Usage](#-example-usage)
+  - [⏱ Time Complexity](#-time-complexity)
+- [🌳 **BST Searching the Tree**](#-bst-searching-the-tree)
+  - [📌 Introduction](#-introduction)
+  - [📖 Example BST](#-example-bst)
+  - [🔍 Searching in BST](#-searching-in-bst)
+  - [💻 Implementation in Python](#-implementation-in-python)
+    - [⚙️ Working of the Algorithm:](#️-working-of-the-algorithm)
+  - [🌱 Example Code — Insert \& Search](#-example-code--insert--search)
+  - [🖥️ Output](#️-output)
+- [🌳 **Deleting Nodes in BST**](#-deleting-nodes-in-bst)
+  - [📌 Introduction](#-introduction-1)
+  - [🟢 Case 1: Node with No Children (Leaf Node)](#-case-1-node-with-no-children-leaf-node)
+  - [🟡 Case 2: Node with One Child](#-case-2-node-with-one-child)
+  - [🔴 Case 3: Node with Two Children](#-case-3-node-with-two-children)
+  - [💻 Python Implementation](#-python-implementation-1)
+    - [🔎 Helper Method — Get Node with Parent](#-helper-method--get-node-with-parent)
+    - [🧠 What this does](#-what-this-does)
+    - [Step by step](#step-by-step)
+    - [🗑️ Remove Method — Handling All 3 Cases](#️-remove-method--handling-all-3-cases)
+    - [🧠 What this does](#-what-this-does-1)
+    - [Step by step breakdown](#step-by-step-breakdown)
+      - [A) 🎯 Find target](#a--find-target)
+      - [B) 👶 Count children](#b--count-children)
+      - [C) ✅ Case 0 — Leaf node (no children)](#c--case-0--leaf-node-no-children)
+      - [D) ✅ Case 1 — Node with one child](#d--case-1--node-with-one-child)
+      - [E) ✅ Case 2 — Node with two children](#e--case-2--node-with-two-children)
+  - [🧪 Dry Run — Deleting `9` (Two Children)](#-dry-run--deleting-9-two-children)
+  - [⏱️ Complexity](#️-complexity)
+  - [🌱 Example Code — Inserting \& Deleting](#-example-code--inserting--deleting)
+  - [🖥️ Output](#️-output-1)
+  - [🎯 Complexity](#-complexity)
+- [🌳 **Minimum and Maximum Nodes in BST**](#-minimum-and-maximum-nodes-in-bst)
+  - [🔍 Concept](#-concept)
+  - [📊 Example Visualization](#-example-visualization)
+  - [📝 Step-by-Step Example](#-step-by-step-example)
+  - [💻 Python Implementation](#-python-implementation-2)
+    - [🔹 Find Minimum Node](#-find-minimum-node)
+    - [🔹 Find Maximum Node](#-find-maximum-node)
+  - [⚡ Usage Example](#-usage-example)
+  - [🖥️ Output](#️-output-2)
+  - [⏱️ Time Complexity](#️-time-complexity)
+- [🌲 **Benefits of a Binary Search Tree BST**](#-benefits-of-a-binary-search-tree-bst)
+  - [📊 Time Complexity of Search](#-time-complexity-of-search)
+  - [🖼️ Visual Examples](#️-visual-examples)
+    - [🔹 Using a List (Sequential Search)](#-using-a-list-sequential-search)
+    - [🔹 Using a BST (Efficient Search)](#-using-a-bst-efficient-search)
+    - [🔹 Poorly Constructed BST (Unbalanced)](#-poorly-constructed-bst-unbalanced)
+  - [⚖️ Key Point: Balanced vs Unbalanced Trees](#️-key-point-balanced-vs-unbalanced-trees)
+  - [📑 Comparison Table](#-comparison-table)
+
 ---
 
 ## 🧠 Definition
@@ -190,7 +260,7 @@ We keep comparing until we reach a `None` position, where the node is inserted.
 
 ---
 
-### ✅ Final Tree
+## ✅ Final Tree
 
 Now we have the complete BST:
 
@@ -798,5 +868,90 @@ where **h = height of the tree**.
 
 ---
 
+# 🌲 **Benefits of a Binary Search Tree BST**
+
+A **Binary Search Tree (BST)** is generally a **better choice** compared to arrays and linked lists when we are mostly interested in **frequent access to elements**.
+
+* ✅ **BST Advantages**: Fast for searching, insertion, and deletion.
+* ⚡ **Arrays**: Provide fast searching, but are slow for insertion and deletion.
+* ⚡ **Linked Lists**: Fast for insertion and deletion, but slow for searching.
+
+---
+
+## 📊 Time Complexity of Search
+
+* **Binary Search Tree (BST)**
+
+  * Best-case: **O(log n)**
+  * Worst-case: **O(n)** (when the tree is unbalanced)
+
+* **Arrays & Linked Lists**
+
+  * Both best-case and worst-case: **O(n)**
+
+---
+
+## 🖼️ Visual Examples
+
+### 🔹 Using a List (Sequential Search)
+
+<div align="center">
+  <img src="./images/14.jpg" alt="" width="500px"/>
+
+**Figure 6.35**: An example list of seven elements requires **six comparisons** if stored in a list.
+</div>
 
 
+👉 To find item **9**, we must check:
+`5 → 3 → 7 → 1 → 4 → 6 → 9` (6 comparisons)
+
+---
+
+### 🔹 Using a BST (Efficient Search)
+
+<div align="center">
+  <img src="./images/15.jpg" alt="" width="500px"/>
+
+**Figure 6 .36**: An example list of seven elements requires only **three comparisons** if stored in a binary search tree.
+</div>
+
+
+👉 To find item **9**, we check:
+`5 → 7 → 9` (3 comparisons ✅)
+
+---
+
+### 🔹 Poorly Constructed BST (Unbalanced)
+
+<div align="center">
+  <img src="./images/16.jpg" alt="" width="500px"/>
+
+**Figure 6.37**: A binary search tree constructed with elements in order `1, 3, 4, 5, 6, 7, 9`.
+</div>
+
+
+👉 This creates a **linear chain** (like a linked list), requiring **6 comparisons** again to find `9`.
+This is **inefficient**, just like a list ❌.
+
+---
+
+## ⚖️ Key Point: Balanced vs Unbalanced Trees
+
+* A **balanced BST** ensures fast searching with average complexity **O(log n)**.
+* An **unbalanced BST** may degrade performance to **O(n)**, same as a list.
+* 🔑 Therefore, techniques such as **self-balancing trees** (e.g., AVL Tree, Red-Black Tree) are used to improve efficiency.
+
+---
+
+## 📑 Comparison Table
+
+| 🔹 Property           | 📦 Array                            | 🔗 Linked List                      | 🌲 BST                                       |
+| --------------------- | ----------------------------------- | ----------------------------------- | -------------------------------------------- |
+| **Data Structure**    | Linear                              | Linear                              | Non-linear                                   |
+| **Ease of Use**       | Easy to create, avg complexity O(n) | Insert/Delete fast (esp. doubly LL) | Insert/Delete/Search avg complexity O(log n) |
+| **Access Complexity** | O(1), direct access                 | Only sequential → O(n)              | Fast (O(log n)), slow if unbalanced O(n)     |
+| **Search Complexity** | O(n) (avg & worst)                  | O(n) (sequential search)            | Avg: O(log n), Worst: O(n)                   |
+| **Insertion**         | Slow → O(n)                         | Fast → O(1)                         | Avg: O(log n), Worst: O(n)                   |
+| **Deletion**          | Slow → O(n)                         | Fast → O(1)                         | Avg: O(log n), Worst: O(n)                   |
+
+---
