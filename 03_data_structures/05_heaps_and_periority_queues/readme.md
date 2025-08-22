@@ -6,7 +6,7 @@ Depending on how nodes are arranged, heaps can be of two main types:
 
 * 🔽 **Min Heap** → The smallest element is always at the root.
 * 🔼 **Max Heap** → The largest element is always at the root.
-
+ 
 ---
 
 ## 🛠️ Priority Queue
