@@ -2,6 +2,18 @@
 
 In this section, we'll discuss **operators** in Python, which are symbols or combinations of symbols that perform operations on variables and values. Understanding operators is crucial for working with expressions and performing calculations in Python.
 
+## Table of Contents 📋
+
+- [Operators in Python ➕➖✖️➗](#operators-in-python-️)
+  - [Table of Contents 📋](#table-of-contents-)
+  - [What are Operators? ⚙️](#what-are-operators-️)
+  - [List of Common Operators in Python 🔢](#list-of-common-operators-in-python-)
+    - [Arithmetic Operators ➕➖✖️➗](#arithmetic-operators-️)
+    - [Example:](#example)
+    - [Comparison Operators 🔍](#comparison-operators-)
+    - [Example:](#example-1)
+  - [Summary 📝](#summary-)
+
 ## What are Operators? ⚙️
 
 - **Operators** are non-alphanumeric characters and combinations of characters that Python uses to perform operations on data.
