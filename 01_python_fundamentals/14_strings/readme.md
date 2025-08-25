@@ -1,5 +1,32 @@
 # ✨ Using Python to Manipulate Strings
 
+## 📋 Table of Contents
+
+- [✨ Using Python to Manipulate Strings](#-using-python-to-manipulate-strings)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🌟 **Creating Strings in Python**](#-creating-strings-in-python)
+    - [📝 **Examples:**](#-examples)
+    - [🌟 **Strings Indexing and Splitting**](#-strings-indexing-and-splitting)
+      - [📝 **Examples:**](#-examples-1)
+    - [🌟 **String Methods**](#-string-methods)
+      - [🛠️ **Common String Methods:**](#️-common-string-methods)
+      - [📝 **Examples:**](#-examples-2)
+    - [🌟 **String Indexing and Slicing**](#-string-indexing-and-slicing)
+      - [📝 **Examples:**](#-examples-3)
+    - [🌟 **String Operators**](#-string-operators)
+      - [📝 **Examples:**](#-examples-4)
+    - [🌟 **String Formatting**](#-string-formatting)
+      - [🛠️ **Using `format()` Method:**](#️-using-format-method)
+      - [🛠️ **Using `%` Operator:**](#️-using--operator)
+    - [🌟 **Escape Sequences in Strings**](#-escape-sequences-in-strings)
+      - [🛠️ **Common Escape Sequences:**](#️-common-escape-sequences)
+    - [🌟 **Escape Sequences in Strings**](#-escape-sequences-in-strings-1)
+      - [🛠️ **Common Escape Sequences Examples:**](#️-common-escape-sequences-examples)
+    - [🌟 **Raw Strings**](#-raw-strings)
+      - [📝 **Example:**](#-example)
+
+---
+
 Python provides powerful ways to manipulate strings, allowing us to perform a variety of operations on them. Let's explore how strings work in Python, including their creation, indexing, methods, and formatting.
 
 ---
