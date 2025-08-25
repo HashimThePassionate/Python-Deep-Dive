@@ -2,6 +2,16 @@
 
 In this section, we'll explore **delimiters** in Python. Delimiters are characters or combinations of characters that Python uses for various purposes, such as in expressions, list, dictionary, and set literals, as well as in different statements.
 
+## Table of Contents 📖
+
+- [Delimiters in Python 🔢](#delimiters-in-python-)
+  - [Table of Contents 📖](#table-of-contents-)
+  - [Common Delimiters in Python ✂️](#common-delimiters-in-python-️)
+  - [Augmented Assignment Operators 🔄](#augmented-assignment-operators-)
+  - [Special Characters and Their Uses 🛠️](#special-characters-and-their-uses-️)
+    - [Example:](#example)
+  - [Restrictions on Certain Characters ❌](#restrictions-on-certain-characters-)
+
 ## Common Delimiters in Python ✂️
 
 Python uses the following characters as delimiters:
