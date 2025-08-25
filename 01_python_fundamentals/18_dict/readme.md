@@ -1,6 +1,36 @@
 # 🐍 Python Dictionaries 
 
-## 📚 What is a Dictionary?
+## � Table of Contents
+- [� Python Dictionaries](#-python-dictionaries)
+  - [� Table of Contents](#-table-of-contents)
+  - [�📚 What is a Dictionary?](#-what-is-a-dictionary)
+    - [🔑 Key Points About Dictionaries:](#-key-points-about-dictionaries)
+    - [🔍 A Simple Dictionary Example](#-a-simple-dictionary-example)
+  - [🛠️ Working with Dictionaries](#️-working-with-dictionaries)
+    - [🔧 Adding New Key-Value Pairs](#-adding-new-key-value-pairs)
+    - [🖊️ Modifying Values in a Dictionary](#️-modifying-values-in-a-dictionary)
+    - [❌ Removing Key-Value Pairs](#-removing-key-value-pairs)
+    - [🔍 Using `get()` to Access Values](#-using-get-to-access-values)
+  - [🔄 Looping Through a Dictionary](#-looping-through-a-dictionary)
+    - [🔑 Looping Through All Key-Value Pairs](#-looping-through-all-key-value-pairs)
+    - [🔑 Looping Through All Keys](#-looping-through-all-keys)
+    - [🔑 Looping Through All Values](#-looping-through-all-values)
+    - [🔄 Using `sorted()` to Loop in Order](#-using-sorted-to-loop-in-order)
+  - [🛠️ Dictionary Unpacking in Python](#️-dictionary-unpacking-in-python)
+    - [🔍 What is Dictionary Unpacking?](#-what-is-dictionary-unpacking)
+      - [🎯 Example: Function Call with Unpacked Dictionary](#-example-function-call-with-unpacked-dictionary)
+    - [🛠️ Merging Dictionaries Using `**`](#️-merging-dictionaries-using-)
+    - [🚀 Example: Creating New Dictionaries with Modified Values](#-example-creating-new-dictionaries-with-modified-values)
+  - [🌟 Dictionary Comprehensions](#-dictionary-comprehensions)
+    - [🔍 What are Dictionary Comprehensions?](#-what-are-dictionary-comprehensions)
+    - [📚 Basic Syntax of Dictionary Comprehensions](#-basic-syntax-of-dictionary-comprehensions)
+    - [🛠️ Example: Creating a Dictionary from a List](#️-example-creating-a-dictionary-from-a-list)
+    - [🚀 Example: Filtering with Dictionary Comprehensions](#-example-filtering-with-dictionary-comprehensions)
+    - [🛠️ Example: Inverting a Dictionary](#️-example-inverting-a-dictionary)
+    - [📖 Combining Multiple Dictionaries](#-combining-multiple-dictionaries)
+  - [Conclusion](#conclusion)
+
+## �📚 What is a Dictionary?
 
 A **dictionary** in Python is a collection of **key-value pairs**. Each key is connected to a value, and you can use a key to access the value associated with that key.
 
