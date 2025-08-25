@@ -1,5 +1,22 @@
 # Keywords in Python 🔑
 
+## Table of Contents 📖
+
+- [Keywords in Python 🔑](#keywords-in-python-)
+  - [Table of Contents 📖](#table-of-contents-)
+  - [What are Keywords? 🔍](#what-are-keywords-)
+    - [Python v2 vs. Python v3 🧩](#python-v2-vs-python-v3-)
+    - [Example:](#example)
+  - [Categories of Keywords 📚](#categories-of-keywords-)
+    - [1. **Simple Statements and Clauses** 📝](#1-simple-statements-and-clauses-)
+    - [2. **Operators** ➗](#2-operators-)
+  - [Python v2 Keywords 🔡](#python-v2-keywords-)
+    - [Notable Points in Python v3 🆕](#notable-points-in-python-v3-)
+    - [Python v3 Keywords 🔡](#python-v3-keywords-)
+  - [Common Keywords and Their Uses 📋](#common-keywords-and-their-uses-)
+
+---
+
 In this section, we will discuss **keywords** in Python—special identifiers reserved for specific syntactic purposes. Understanding keywords is essential as they form the foundation of Python's syntax and structure.
 
 ## What are Keywords? 🔍
