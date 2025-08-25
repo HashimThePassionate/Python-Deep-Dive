@@ -1,6 +1,19 @@
 # 📚 **Understanding Functions in Python**
 
-## 🛠 **What are Functions?**
+## � **Table of Contents**
+- [📚 **Understanding Functions in Python**](#-understanding-functions-in-python)
+  - [� **Table of Contents**](#-table-of-contents)
+  - [�🛠 **What are Functions?**](#-what-are-functions)
+    - [💡 **Why Use Functions?**](#-why-use-functions)
+  - [📝 **How to Call a Function?**](#-how-to-call-a-function)
+  - [🎯 **Passing Information to Functions**](#-passing-information-to-functions)
+  - [📤 **Returning Values from Functions**](#-returning-values-from-functions)
+  - [🗂 **Organizing Code with Modules**](#-organizing-code-with-modules)
+    - [🔑 **Key Points**:](#-key-points)
+
+---
+
+## �🛠 **What are Functions?**
 
 Functions are named blocks of code designed to do one specific job! 🎯 Whenever you need to perform a particular task, instead of writing the same code multiple times, you can **create a function** and just call it whenever needed.
 
