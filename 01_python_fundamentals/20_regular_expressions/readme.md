@@ -9,7 +9,19 @@
 
 > 🤕 **Beware**: Regex can be tricky! If not used carefully, they can make your code confusing and difficult to debug!
 
-## 📜 History of "Regular Expressions"
+## � Table of Contents
+
+- [🌟 Understanding Regular Expressions](#-understanding-regular-expressions)
+  - [� Table of Contents](#-table-of-contents)
+  - [�📜 History of "Regular Expressions"](#-history-of-regular-expressions)
+  - [💡 Why Use Regular Expressions?](#-why-use-regular-expressions)
+  - [🎨 The Many Flavors of Regular Expressions](#-the-many-flavors-of-regular-expressions)
+  - [🛠️ How to Use the `re` Module](#️-how-to-use-the-re-module)
+  - [📋 Table Regular Expression Pattern Syntax](#-table-regular-expression-pattern-syntax)
+
+---
+
+## �📜 History of "Regular Expressions"
 
 The term **"regular expression"** comes from the fields of **mathematics** and **computer science**. It originally referred to expressions with a specific property called **regularity**. Here’s a brief history:
 
