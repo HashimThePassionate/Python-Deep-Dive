@@ -2,6 +2,20 @@
 
 In this section, we'll explore **literals** in Python. A **literal** is a direct way to represent a data value (such as numbers, strings, or containers) in your code. Literals are essential for initializing variables and working with data in Python.
 
+## Table of Contents 📋
+
+- [Literals in Python 🔢📜](#literals-in-python-)
+  - [Table of Contents 📋](#table-of-contents-)
+  - [Number and String Literals 🔢📄](#number-and-string-literals-)
+    - [Number Literals](#number-literals)
+    - [Example:](#example)
+    - [String Literals](#string-literals)
+    - [Example:](#example-1)
+  - [Container Literals 📦](#container-literals-)
+    - [Example:](#example-2)
+    - [Important Note 📝](#important-note-)
+    - [Example:](#example-3)
+
 ## Number and String Literals 🔢📄
 
 ### Number Literals
