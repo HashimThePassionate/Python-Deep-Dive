@@ -1,11 +1,11 @@
-# Modules in Python 3.12 📦🐍
+# Modules in Python 📦🐍
 
-Welcome to your comprehensive guide on Python modules! This README will delve into the essentials and advanced concepts of modules in Python 3.12. Modules are the highest-level program organization units, packaging code and data for reuse while minimizing variable name clashes across your programs. Let's get started! 🚀
+Welcome to your comprehensive guide on Python modules! This README will delve into the essentials and advanced concepts of modules in Python. Modules are the highest-level program organization units, packaging code and data for reuse while minimizing variable name clashes across your programs. Let's get started! 🚀
 
 
 ## Sections 📚
 
-- [Modules in Python 3.12 📦🐍](#modules-in-python-312-)
+- [Modules in Python 📦🐍](#modules-in-python-)
   - [Sections 📚](#sections-)
   - [Why Use Modules? 🤔](#why-use-modules-)
   - [Understanding Modules 🧩](#understanding-modules-)
