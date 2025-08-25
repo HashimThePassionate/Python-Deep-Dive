@@ -1,6 +1,6 @@
 # 🧪 Testing Your Code with pytest 🐍✨
 
-Welcome to your **comprehensive guide** on testing your Python code using **pytest**! 🎉 Whether you're a beginner or looking to sharpen your testing skills, this README will walk you through everything you need to know to ensure your code works flawlessly. Let's dive in! 🚀
+Welcome to your **comprehensive guide** on testing your Python code using **pytest**! 🎉 Whether you're a beginner or looking to sharpen your testing skills, this README will walk you through everything you need to know to ensure your code works flawlessly. Let's dive in! 
 
 ---
 
