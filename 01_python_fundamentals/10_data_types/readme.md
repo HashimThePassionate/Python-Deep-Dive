@@ -2,6 +2,42 @@
 
 Understanding **data types** is fundamental to programming in Python, as they define the types of values that can be manipulated and the operations that can be performed on them. In Python, all data is represented as **objects**, and each object has a specific **type**.
 
+## Table of Contents 📚
+
+- [Python Primitive Data Types 🧮📊](#python-primitive-data-types-)
+  - [Table of Contents 📚](#table-of-contents-)
+  - [What is an Object in Python? 🧱](#what-is-an-object-in-python-)
+    - [Key Points:](#key-points)
+    - [Example: 🖥️](#example-️)
+  - [Introduction to Data Types 🔍](#introduction-to-data-types-)
+    - [How are Objects Immutable? 🤔](#how-are-objects-immutable-)
+    - [Example: 📘](#example-)
+    - [Type Checking in Python 🔍](#type-checking-in-python-)
+    - [Example: 🕵️‍♂️](#example-️️)
+  - [Accessing Previous Object Values 🕵️‍♂️](#accessing-previous-object-values-️️)
+    - [How to Preserve the Original Object Value? 🤔](#how-to-preserve-the-original-object-value-)
+    - [Example: 📘](#example--1)
+    - [How Does This Work?](#how-does-this-work)
+    - [Key Takeaway 📝](#key-takeaway-)
+  - [Numeric Data Types 🔢](#numeric-data-types-)
+    - [Integer Numbers 🔡](#integer-numbers-)
+    - [Key Points:](#key-points-1)
+    - [Example: 🧮](#example--2)
+    - [Floating-Point Numbers 🌊](#floating-point-numbers-)
+    - [Key Points:](#key-points-2)
+    - [Example: 🔢](#example--3)
+    - [Complex Numbers 🔮](#complex-numbers-)
+    - [Key Points:](#key-points-3)
+    - [Example: 🔍](#example--4)
+  - [New in Python 3.6: Underscores in Numeric Literals 🆕](#new-in-python-36-underscores-in-numeric-literals-)
+    - [Example: 📝](#example--5)
+  - [String Data Types 📝](#string-data-types-)
+    - [Key Points:](#key-points-4)
+    - [Example: 💬](#example--6)
+  - [Boolean Data Type 🟢🔴](#boolean-data-type-)
+    - [Example: 🤔](#example--7)
+  - [Primitive Data Types in Python 🧱](#primitive-data-types-in-python-)
+
 ## What is an Object in Python? 🧱
 
 An **object** is a core concept in Python. It is an instance of a data type that contains both data (attributes) and methods (functions) that operate on the data. In Python, everything is treated as an object, which makes Python an **object-oriented programming (OOP)** language.
