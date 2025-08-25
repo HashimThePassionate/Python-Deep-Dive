@@ -1,5 +1,20 @@
 # Identifiers in Python 🆔
 
+## Table of Contents 📋
+- [Identifiers in Python 🆔](#identifiers-in-python-)
+  - [Table of Contents 📋](#table-of-contents-)
+  - [What is an Identifier? 🔍](#what-is-an-identifier-)
+  - [Rules for Creating Identifiers 📏](#rules-for-creating-identifiers-)
+    - [Example:](#example)
+  - [Naming Conventions 📚](#naming-conventions-)
+    - [Example:](#example-1)
+    - [Private Identifiers 🔒](#private-identifiers-)
+    - [Example:](#example-2)
+  - [Special Use of Underscore in Interactive Sessions 🖥️](#special-use-of-underscore-in-interactive-sessions-️)
+    - [Example:](#example-3)
+
+---
+
 In this section, we'll explore what **identifiers** are in Python and how to use them correctly. Identifiers are fundamental in Python as they represent variables, functions, classes, and other objects.
 
 ## What is an Identifier? 🔍
