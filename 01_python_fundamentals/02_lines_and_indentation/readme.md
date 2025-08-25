@@ -2,6 +2,25 @@
 
 In this section, we will explore how Python handles lines and indentation. Python's approach to indentation is unique and critical to understand as it directly impacts the structure and readability of your code.
 
+## Table of Contents 📚
+
+- [Lines and Indentation in Python 🐍](#lines-and-indentation-in-python-)
+  - [Table of Contents 📚](#table-of-contents-)
+  - [Logical and Physical Lines 📏](#logical-and-physical-lines-)
+    - [Example:](#example)
+    - [Blank Lines ✏️](#blank-lines-️)
+    - [Statement Termination 🚧](#statement-termination-)
+    - [Example:](#example-1)
+  - [Triple-Quoted Strings 📜](#triple-quoted-strings-)
+    - [Example:](#example-2)
+  - [Continuation Lines ➡️](#continuation-lines-️)
+  - [Indentation and Block Structure 📚](#indentation-and-block-structure-)
+    - [Example:](#example-3)
+    - [Important Rules 📝](#important-rules-)
+  - [Indentation Best Practices 🌟](#indentation-best-practices-)
+    - [Pro Tip 💡](#pro-tip-)
+    - [Example:](#example-4)
+
 ## Logical and Physical Lines 📏
 
 - A **Python program** consists of **logical lines**, each made up of one or more **physical lines**.
@@ -94,6 +113,3 @@ def greet(name):
 
 ```
 
----
-
-This section covered the importance of lines and indentation in Python. Proper indentation ensures that your code is not only correct but also readable and maintainable. 🛠️
