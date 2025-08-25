@@ -2,6 +2,20 @@
 
 In this section, we'll explore how Python programs access and manipulate data values through **references**. Understanding how variables and references work in Python is essential for effective programming.
 
+## Table of Contents 📋
+
+- [Variables and Other References in Python 🔗](#variables-and-other-references-in-python-)
+  - [Table of Contents 📋](#table-of-contents-)
+  - [References in Python 🔍](#references-in-python-)
+    - [Example:](#example)
+  - [Variables in Python 📝](#variables-in-python-)
+    - [Binding and Rebinding](#binding-and-rebinding)
+    - [Example:](#example-1)
+    - [Example:](#example-2)
+    - [Example:](#example-3)
+  - [Naming Variables 🏷️](#naming-variables-️)
+    - [Example:](#example-4)
+
 ## References in Python 🔍
 
 - A **reference** is essentially a "name" that refers to a value (object) in Python.
