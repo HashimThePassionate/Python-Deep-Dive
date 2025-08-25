@@ -1,5 +1,35 @@
 # 📘 Control Flows - Loops
 
+## 📋 Table of Contents
+
+- [📘 Control Flows - Loops](#-control-flows---loops)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🌟 What are Iterations or Loops?](#-what-are-iterations-or-loops)
+    - [🔍 Why Do We Need Iterations with Loops?](#-why-do-we-need-iterations-with-loops)
+    - [📝 Use Case and Benefits](#-use-case-and-benefits)
+  - [🔄 Types of Loops in Python](#-types-of-loops-in-python)
+  - [🔧 Loop Control Statements](#-loop-control-statements)
+  - [🔢 The `range()` Function](#-the-range-function)
+    - [Example:](#example)
+  - [🌀 For Loops](#-for-loops)
+    - [Example: Printing a Multiplication Table](#example-printing-a-multiplication-table)
+    - [Example: Iterating Over a List](#example-iterating-over-a-list)
+    - [Example: Using `range()` to Loop Over Indices](#example-using-range-to-loop-over-indices)
+  - [🔁 Introducing While Loops](#-introducing-while-loops)
+    - [Example: Printing a Multiplication Table Using `while` Loop](#example-printing-a-multiplication-table-using-while-loop)
+    - [Example: User Input with While Loop](#example-user-input-with-while-loop)
+    - [Example: Using `continue` in a `while` Loop](#example-using-continue-in-a-while-loop)
+    - [⚠️ Avoiding Infinite Loops](#️-avoiding-infinite-loops)
+    - [🌟 Example: Nested Loop with User Input Control](#-example-nested-loop-with-user-input-control)
+    - [💡 Explanation:](#-explanation)
+    - [📝 Output Example:](#-output-example)
+    - [🌟 Example: Pyramid Pattern with User Input Control](#-example-pyramid-pattern-with-user-input-control)
+    - [💡 Explanation:](#-explanation-1)
+    - [📝 Output Example:](#-output-example-1)
+  - [📊 Conclusion](#-conclusion)
+
+---
+
 ## 🌟 What are Iterations or Loops?
 
 **Iterations** or **loops** are fundamental concepts in programming that allow you to execute a block of code multiple times. The use of loops makes it possible to perform repetitive tasks efficiently. Instead of writing the same code multiple times, loops allow you to write it once and execute it as many times as needed.
