@@ -1,5 +1,20 @@
 # Character Sets in Python 🅰️🅱️🔤
 
+## Table of Contents 📚
+- [Character Sets in Python 🅰️🅱️🔤](#character-sets-in-python-️️)
+  - [Table of Contents 📚](#table-of-contents-)
+  - [Unicode and ASCII in Python 🌐](#unicode-and-ascii-in-python-)
+    - [Python v3](#python-v3)
+    - [Python v2](#python-v2)
+  - [Specifying a Different Encoding 🎨](#specifying-a-different-encoding-)
+    - [Example:](#example)
+  - [Using Non-ASCII Characters ✒️](#using-non-ascii-characters-️)
+    - [Example:](#example-1)
+  - [Best Practices for Encoding 🚀](#best-practices-for-encoding-)
+    - [Example:](#example-2)
+
+---
+
 In this section, we will explore how Python handles different character sets in source files. Understanding character encoding is crucial for writing Python code that works across different languages and platforms.
 
 ## Unicode and ASCII in Python 🌐
