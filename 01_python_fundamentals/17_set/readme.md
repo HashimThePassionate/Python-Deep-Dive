@@ -1,4 +1,36 @@
 # 📚 What is a Set Data Structure?
+
+## 📑 Table of Contents
+- [📚 What is a Set Data Structure?](#-what-is-a-set-data-structure)
+  - [📑 Table of Contents](#-table-of-contents)
+  - [Key Characteristics of a Set:](#key-characteristics-of-a-set)
+  - [🧰 Where Do We Use Sets in Python?](#-where-do-we-use-sets-in-python)
+  - [🔍 Why Do We Need Data Structures Like Sets?](#-why-do-we-need-data-structures-like-sets)
+  - [🔧 Set Initialization Examples](#-set-initialization-examples)
+    - [Example 1: Creating a Set Using Curly Braces](#example-1-creating-a-set-using-curly-braces)
+    - [Example 2: Creating a Set Using the `set()` Constructor](#example-2-creating-a-set-using-the-set-constructor)
+    - [Example 3: Creating an Empty Set](#example-3-creating-an-empty-set)
+  - [🛠️ Set Methods with Examples](#️-set-methods-with-examples)
+    - [1. **`add()`**: Adds an element to the set.](#1-add-adds-an-element-to-the-set)
+    - [2. **`clear()`**: Removes all elements from the set.](#2-clear-removes-all-elements-from-the-set)
+    - [3. **`copy()`**: Returns a shallow copy of the set.](#3-copy-returns-a-shallow-copy-of-the-set)
+      - [What is a Shallow Copy?](#what-is-a-shallow-copy)
+    - [4. **`difference()`**: Returns a set containing the difference between two or more sets.](#4-difference-returns-a-set-containing-the-difference-between-two-or-more-sets)
+    - [5. **`difference_update()`**: Removes the items in this set that are also included in another specified set.](#5-difference_update-removes-the-items-in-this-set-that-are-also-included-in-another-specified-set)
+    - [6. **`discard()`**: Removes the specified item. If the item is not found, it does not raise an error.](#6-discard-removes-the-specified-item-if-the-item-is-not-found-it-does-not-raise-an-error)
+    - [7. **`intersection()`**: Returns a set that is the intersection of two or more sets.](#7-intersection-returns-a-set-that-is-the-intersection-of-two-or-more-sets)
+    - [8. **`intersection_update()`**: Updates the set with the intersection of itself and another.](#8-intersection_update-updates-the-set-with-the-intersection-of-itself-and-another)
+    - [9. **`isdisjoint()`**: Returns `True` if two sets have a null intersection.](#9-isdisjoint-returns-true-if-two-sets-have-a-null-intersection)
+    - [10. **`issubset()`**: Returns `True` if all elements of a set are present in another set.](#10-issubset-returns-true-if-all-elements-of-a-set-are-present-in-another-set)
+    - [11. **`issuperset()`**: Returns `True` if all elements of another set are present in this set.](#11-issuperset-returns-true-if-all-elements-of-another-set-are-present-in-this-set)
+    - [12. **`pop()`**: Removes and returns an arbitrary element from the set.](#12-pop-removes-and-returns-an-arbitrary-element-from-the-set)
+    - [13. **`remove()`**: Removes the specified element from the set. If the element is not found, it raises a `KeyError`.](#13-remove-removes-the-specified-element-from-the-set-if-the-element-is-not-found-it-raises-a-keyerror)
+    - [14. **`symmetric_difference()`**: Returns a set with elements in either the set or the specified set, but not in both.](#14-symmetric_difference-returns-a-set-with-elements-in-either-the-set-or-the-specified-set-but-not-in-both)
+    - [15. **`symmetric_difference_update()`**: Updates the set with the symmetric difference of itself and another.](#15-symmetric_difference_update-updates-the-set-with-the-symmetric-difference-of-itself-and-another)
+    - [16. **`union()`**: Returns a set that contains all items from the original set and all items from the specified sets.](#16-union-returns-a-set-that-contains-all-items-from-the-original-set-and-all-items-from-the-specified-sets)
+    - [17. **`update()`**: Updates the set with the union of itself and others.](#17-update-updates-the-set-with-the-union-of-itself-and-others)
+  - [🧑‍💻 Conclusion](#-conclusion)
+
 A **set** is an unordered collection of unique and immutable elements in Python. It is defined by placing elements within curly braces `{}` or by using the built-in `set()` function.
 
 ## Key Characteristics of a Set:
