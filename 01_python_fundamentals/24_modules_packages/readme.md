@@ -1,6 +1,6 @@
 # 📦 **Module Packages**
 
-Python's module system extends beyond individual `.py` files. By using **packages**, you can organize multiple modules into a hierarchical structure, making it easier to manage large projects. This section will guide you through the basics of packages, how to use them, and when to apply more advanced features like **relative imports** and **namespace packages**. 🚀
+Python's module system extends beyond individual `.py` files. By using **packages**, you can organize multiple modules into a hierarchical structure, making it easier to manage large projects. This section will guide you through the basics of packages, how to use them, and when to apply more advanced features like **relative imports** and **namespace packages**.
 
 ## 📖 **Table of Contents**
 - [📦 **Module Packages**](#-module-packages)
