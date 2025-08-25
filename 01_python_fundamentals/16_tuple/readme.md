@@ -1,5 +1,28 @@
 ## 📘 Understanding Tuples in Python
 
+## 📑 Table of Contents
+
+- [📘 Understanding Tuples in Python](#-understanding-tuples-in-python)
+- [📑 Table of Contents](#-table-of-contents)
+  - [📍 What is a Tuple?](#-what-is-a-tuple)
+  - [💡 Why Do We Need Tuples?](#-why-do-we-need-tuples)
+  - [🔍 Where are Tuples Used?](#-where-are-tuples-used)
+  - [⚖️ Difference Between Lists and Tuples](#️-difference-between-lists-and-tuples)
+  - [🎯 Use Cases of Tuples](#-use-cases-of-tuples)
+- [🔧 Manipulating Tuples in Python](#-manipulating-tuples-in-python)
+  - [Basics - Tuple Packing and Unpacking](#basics---tuple-packing-and-unpacking)
+  - [🔹 Creating Tuples](#-creating-tuples)
+  - [🔄 Looping Through Tuples](#-looping-through-tuples)
+  - [🚫 Modifying Tuples](#-modifying-tuples)
+  - [📝 Tuple Indexing and Slicing](#-tuple-indexing-and-slicing)
+  - [🗑️ Deleting Tuples](#️-deleting-tuples)
+- [📚 Built-in Tuple Methods](#-built-in-tuple-methods)
+  - [Example: Using Tuple Methods](#example-using-tuple-methods)
+- [📂 Use Cases of Tuples](#-use-cases-of-tuples-1)
+  - [Example: Returning Multiple Values from a Function](#example-returning-multiple-values-from-a-function)
+
+---
+
 ### 📍 What is a Tuple?
 
 A **tuple** is a built-in data type in Python used to store a sequence of **immutable** Python objects. Tuples are defined by enclosing the elements in parentheses `()` and separating them with commas. Unlike lists, which are mutable, tuples cannot be modified after they are created.
