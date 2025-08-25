@@ -1,5 +1,16 @@
 # Tokens in Python 🔠🔍
 
+## Table of Contents 📋
+
+- [Tokens in Python 🔠🔍](#tokens-in-python-)
+  - [Table of Contents 📋](#table-of-contents-)
+  - [What Are Tokens? 🧩](#what-are-tokens-)
+    - [Types of Tokens 🏷️](#types-of-tokens-️)
+  - [The Role of Whitespace 🧩](#the-role-of-whitespace-)
+    - [Example:](#example)
+
+---
+
 In this section, we'll delve into how Python processes each line of code by breaking it down into basic components known as **tokens**. Understanding tokens is essential for grasping how Python interprets your code.
 
 ## What Are Tokens? 🧩
