@@ -2,6 +2,46 @@
 
 Programming often involves examining a set of conditions and deciding which action to take based on those conditions. In Python, conditional tests allow you to check the current state of a program and respond appropriately. This section provides an in-depth explanation of conditional tests and the various types of decision statements in Python, including `if`, `if-else`, `if-elif-else`, and nested `if` statements.
 
+## 📋 Table of Contents
+
+- [🌟Understanding Decision Statements in Python](#understanding-decision-statements-in-python)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🔍 Understanding Conditional Tests](#-understanding-conditional-tests)
+    - [🟢 What is a Conditional Test?](#-what-is-a-conditional-test)
+    - [💡 Types of Conditional Tests](#-types-of-conditional-tests)
+    - [✨ Ignoring Case in Conditional Tests](#-ignoring-case-in-conditional-tests)
+    - [📝 Examples of Conditional Tests](#-examples-of-conditional-tests)
+      - [Example 1: Equality and Inequality](#example-1-equality-and-inequality)
+      - [Example 2: Numerical Comparisons](#example-2-numerical-comparisons)
+      - [Example 3: Combining Conditions](#example-3-combining-conditions)
+    - [📌 Real-World Use Cases](#-real-world-use-cases)
+  - [🌿 Simple `if` Statements](#-simple-if-statements)
+    - [Example: Checking Age for Voting Eligibility](#example-checking-age-for-voting-eligibility)
+    - [📝 Use Case:](#-use-case)
+  - [🟨 `if-else` Statements](#-if-else-statements)
+    - [Example: Voting Eligibility with Feedback](#example-voting-eligibility-with-feedback)
+    - [📝 Use Case:](#-use-case-1)
+  - [🟠 `if-elif-else` Chains](#-if-elif-else-chains)
+    - [Example: Amusement Park Ticket Pricing](#example-amusement-park-ticket-pricing)
+    - [📝 Use Case:](#-use-case-2)
+  - [🔄 Nested `if` Statements](#-nested-if-statements)
+    - [Example: Admission Eligibility and Ticket Pricing](#example-admission-eligibility-and-ticket-pricing)
+    - [📝 Use Case:](#-use-case-3)
+    - [Example: `if-else` Statement - Number Parity](#example-if-else-statement---number-parity)
+    - [📝 Use Case:](#-use-case-4)
+    - [Example: `if-elif-else` Statement - Grade Classification with Proper Ranges](#example-if-elif-else-statement---grade-classification-with-proper-ranges)
+    - [📝 Use Case:](#-use-case-5)
+    - [🔍 Explanation:](#-explanation)
+    - [Example: Nested `if` Statements - Health Check](#example-nested-if-statements---health-check)
+    - [📝 Use Case:](#-use-case-6)
+  - [🎉 Fun Examples with `if` Statements](#-fun-examples-with-if-statements)
+    - [🍦 Example: Ice Cream Flavor Picker](#-example-ice-cream-flavor-picker)
+    - [📝 Use Case:](#-use-case-7)
+    - [🦄 Example: Magical Creature Finder](#-example-magical-creature-finder)
+    - [📝 Use Case:](#-use-case-8)
+    - [🎸 Example: Music Recommendation System](#-example-music-recommendation-system)
+    - [📝 Use Case:](#-use-case-9)
+
 ## 🔍 Understanding Conditional Tests
 
 At the core of every decision-making process in Python lies a **conditional test**. These tests evaluate expressions to `True` or `False` and determine the flow of the program.
