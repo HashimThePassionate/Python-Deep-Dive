@@ -8,7 +8,22 @@ Python is:
 - **Object-oriented**: Supports objects and classes. 🎭🧱
 - **Cross-platform**: Runs on all major hardware platforms and operating systems. 🌐🖥️
 
-## 🚀 Key Benefits of Python
+## � Table of Contents
+
+- [🐍✨ Introduction to Python](#-introduction-to-python)
+  - [� Table of Contents](#-table-of-contents)
+  - [�🚀 Key Benefits of Python](#-key-benefits-of-python)
+    - [⚡ Productivity](#-productivity)
+    - [💖 Popularity](#-popularity)
+    - [🎈 Ease of Learning](#-ease-of-learning)
+  - [🌈 Python Language Features](#-python-language-features)
+    - [🌱 Simplicity and Elegance](#-simplicity-and-elegance)
+    - [🌐 General-purpose](#-general-purpose)
+    - [🔮 Very High-Level Language (VHLL)](#-very-high-level-language-vhll)
+    - [🎭 Object-oriented](#-object-oriented)
+  - [🎉 Conclusion](#-conclusion)
+
+## �🚀 Key Benefits of Python
 
 ### ⚡ Productivity
 
