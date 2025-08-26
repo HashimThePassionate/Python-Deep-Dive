@@ -37,6 +37,15 @@ class MinHeap:
         self.heap.pop()
         self.sink(1)
         return item
+    
+    def delete_at_location(self,location):
+        item = self.heap[location]
+        self.heap[location] = self.heap[self.size]
+        self.size -= 1
+        self.heap.pop()
+        self.sink(location)
+        return item
+
 
 
 h = MinHeap()
@@ -45,6 +54,12 @@ for i in (4, 8, 7, 2, 9, 10, 5, 1, 3, 6):
 
 print(h.heap) 
 
-n = h.delete_at_root()
+# delete last node
+# n = h.delete_at_root()
+# print(n)
+# print(h.heap)
+
+# delete at location
+n = h.delete_at_location(3)
 print(n)
 print(h.heap)
