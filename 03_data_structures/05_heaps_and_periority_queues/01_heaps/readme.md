@@ -525,3 +525,117 @@ print(h.heap)                # After deletion
 
 ---
 
+# 📚 **Heap Sort Algorithm**
+
+Heap is an important **data structure** for sorting a list of elements since it is very suitable for handling **large datasets**.
+
+If we want to sort a list of elements in **ascending order**, we can use a **Min-Heap** for this purpose.
+
+✨ **Key idea:**
+
+* A Min-Heap always stores the **smallest element at the root**.
+* By repeatedly removing the root and reorganizing the heap, we can easily sort the entire list.
+
+---
+
+## ⚡ Process of Heap Sort
+
+1️⃣ **Create a Min-Heap** using all the given data elements.
+2️⃣ **Read & Delete the root element** (minimum value).
+
+* Copy the last element of the tree to the new root.
+* Reorganize the tree to maintain the heap property.
+  3️⃣ **Repeat Step 2** until all elements are deleted.
+  4️⃣ **Final Result →** A sorted list of elements in ascending order.
+
+---
+
+## 🛠️ Maintaining Heap Property
+
+* When a new element is **added**, the heap property is maintained using the **`arrange()`** method.
+* When an element is **deleted**, the heap property is restored using the **`sink()`** method.
+
+---
+
+## 💻 Implementation Example
+
+Suppose we have the following data items:
+
+```python
+h = MinHeap()
+unsorted_list = [4, 8, 7, 2, 9, 10, 5, 1, 3, 6]
+
+for i in unsorted_list:
+    h.insert(i)
+
+print("Unsorted list: {}".format(unsorted_list))
+```
+
+✅ Here:
+
+* A **Min-Heap `h`** is created.
+* Each element from `unsorted_list` is inserted into the heap.
+* After every `insert()`, the **heap order property** is restored by the **sink method**.
+
+---
+
+## 🧹 Sorting Phase
+
+We now delete elements from the heap one by one to get the **sorted list**.
+
+### 🔹 Heap Sort Method
+
+```python
+def heap_sort(self):
+    sorted_list = []
+    for node in range(self.size):
+        n = self.delete_at_root()
+        sorted_list.append(n)
+    return sorted_list
+```
+
+📌 Explanation:
+
+* **`sorted_list`** → An empty list to store elements in sorted order.
+* Loop runs for the **number of items** in the heap.
+* In each iteration:
+
+  * **`delete_at_root()`** → Removes the minimum value (root).
+  * Append it to **`sorted_list`**.
+* Return the **sorted list** at the end.
+
+---
+
+## 🚀 Running Heap Sort
+
+```python
+print("Unsorted list: {}".format(unsorted_list))
+print("Sorted list: {}".format(h.heap_sort()))
+```
+
+### ✅ Output
+
+```
+Unsorted list: [4, 8, 7, 2, 9, 10, 5, 1, 3, 6]
+Sorted list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+---
+
+## 📊 Time Complexity Analysis
+
+* **Heap creation (Insert method):** `O(n)`
+* **Reorganizing after deletion (Sink operation):** `O(log n)`
+* **Total complexity:** `O(n log n)`
+
+⏱️ Complexity in all cases:
+
+* **Worst-case:** `O(n log n)`
+* **Average-case:** `O(n log n)`
+* **Best-case:** `O(n log n)`
+
+✨ Hence, **Heap Sort** is a very **efficient and reliable sorting algorithm**.
+
+---
+
+
