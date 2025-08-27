@@ -430,3 +430,98 @@ Initial array (before delete):
 * **Space**: **O(1)** extra (in-place within the heap array).
 
 ---
+
+# 📚 **Deletion of an Element at a Specific Location**
+
+Generally, we delete an element at the **root** of a heap. However, an element can also be deleted at a **specific location** from the heap.
+
+Let’s understand this step by step with an example.
+
+---
+
+## 🖼 Step 1: Deleting Node 3
+
+We want to delete **node 3** (at index `2`).
+👉 After deleting node `3`, the **last node** (value `15`) is moved to the deleted node's position.
+
+<div align="center">
+  <img src="./images/17.jpg"/>
+
+*Figure 7.16: The deletion of node 3 from the heap*
+</div>
+
+---
+
+## 🖼 Step 2: Comparing and Swapping
+
+* The moved node `15` is compared with its parent and children.
+* Since `15` is already greater than the root `1`, no swap is needed there.
+* Next, compare with children → the left child `5` is **smaller**, so **swap `15` with `5`**.
+
+<div align="center">
+  <img src="./images/18.jpg"/>
+
+*Figure 7.17: A comparison of node 15 with 5 and 11, and swapping node 15 with node 5*
+</div>
+
+---
+
+## 🖼 Step 3: Final Heap Adjustment
+
+* Now `15` is compared again with its new child, node `8`.
+* Since `8` is smaller, **swap `15` with `8`**.
+* The final heap now satisfies the **min-heap property**. ✅
+
+<div align="center">
+  <img src="./images/19.jpg"/>
+
+*Figure 7.18: The final heap after swapping node 8 and node 15*
+</div>
+
+---
+
+## ⚙️ Implementation in Python
+
+The deletion operation for removing a data item at any **given index location** can be implemented as follows inside the `MinHeap` class:
+
+```python
+def delete_at_location(self, location):
+    item = self.heap[location]
+    self.heap[location] = self.heap[self.size]
+    self.size -= 1
+    self.heap.pop()
+    self.sink(location)
+    return item
+```
+
+👉 This implementation is very similar to deleting the **root element**, except here we specify the **index location** that has to be deleted.
+
+---
+
+## 📝 Example Code
+
+```python
+h = MinHeap()
+for i in (4, 8, 7, 2, 9, 10, 5, 1, 3, 6):
+    h.insert(i)
+
+print(h.heap)                # Before deletion
+n = h.delete_at_location(2)  # Delete element at index 2
+print(n)                     # Print deleted element
+print(h.heap)                # After deletion
+```
+
+---
+
+## 💻 Output
+
+```text
+[0, 1, 2, 5, 3, 6, 10, 7, 8, 4, 9]
+2
+[0, 1, 3, 5, 4, 6, 10, 7, 8, 9]
+```
+
+✅ Before and after deletion, heap nodes remain arranged according to their **index positions**.
+
+---
+
