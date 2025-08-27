@@ -45,14 +45,21 @@ class MinHeap:
         self.heap.pop()
         self.sink(location)
         return item
+    
+    def heap_sort(self):
+        sorted_list = []
+        for node in range(self.size):
+            n = self.delete_at_root()
+            sorted_list.append(n)
+        return sorted_list
 
 
 
-h = MinHeap()
-for i in (4, 8, 7, 2, 9, 10, 5, 1, 3, 6):
-    h.insert(i)
+# h = MinHeap()
+# for i in (4, 8, 7, 2, 9, 10, 5, 1, 3, 6):
+#     h.insert(i)
 
-print(h.heap) 
+# print(h.heap) 
 
 # delete last node
 # n = h.delete_at_root()
@@ -60,6 +67,15 @@ print(h.heap)
 # print(h.heap)
 
 # delete at location
-n = h.delete_at_location(3)
-print(n)
-print(h.heap)
+# n = h.delete_at_location(3)
+# print(n)
+# print(h.heap)
+
+
+# heap sort
+h = MinHeap()
+unsorted_list = [4, 8, 7, 2, 9, 10, 5, 1, 3, 6]
+for i in unsorted_list:
+    h.insert(i)
+print("Unsorted list: {}".format(unsorted_list))
+print("Sorted list: {}".format(h.heap_sort()))
