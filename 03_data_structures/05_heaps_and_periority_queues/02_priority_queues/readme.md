@@ -1,4 +1,37 @@
-# ➡️ **Priority Queues**
+<div align="left">
+    <h1>➡️ <b>Priority Queues</b></h1>
+</div>
+
+<details>
+<summary><strong>📑 Table of Contents</strong></summary>
+
+| # | Section | Link |
+|---|---|---|
+| 1 | 🔑 Key Points | [Key Points](#-key-points) |
+| 2 | 📖 Figure 7.19 – Demonstration | [Figure 7.19 – Demonstration of a Priority Queue](#-figure-719--demonstration-of-a-priority-queue) |
+| 3 | 📖 Figure 7.20 – Step-by-Step | [Figure 7.20 – Step-by-Step Procedure to Create a Priority Queue](#-figure-720--step-by-step-procedure-to-create-a-priority-queue) |
+| 4 | ⚙️ Python Implementation | [Python Implementation of Priority Queue](#-python-implementation-of-priority-queue) |
+| 5 | 🧩 Node Class | [Node Class](#-node-class) |
+| 6 | 🏗 Priority Queue Class | [Priority Queue Class](#-priority-queue-class) |
+| 7 | ➕ Insert Operation | [Insert Operation](#-insert-operation) |
+| 8 | ❌ Delete Operation | [Delete Operation](#-delete-operation) |
+| 9 | 👀 Show Method | [Show Method](#-show-method) |
+| 10 | 🐍 Example Usage | [Example Usage](#-example-usage) |
+| 11 | ⚡ Priority Queue using Heap | [Priority Queue using Heap](#-priority-queue-using-heap) |
+| 12 | 🏗 PriorityQueueHeap Class | [PriorityQueueHeap Class](#-priorityqueueheap-class) |
+| 13 | 🔹 arrange() – Heapify Up | [arrange() – Heapify Up (Percolate Up)](#-arrange--heapify-up-percolate-up) |
+| 14 | 🔹 insert() – Add New Element | [insert() – Add New Element](#-insert--add-new-element) |
+| 15 | 🔹 sink() – Heapify Down | [sink() – Heapify Down (Percolate Down)](#-sink--heapify-down-percolate-down) |
+| 16 | 🔹 minchild() – Get Index | [minchild() – Get Index of Smaller Child](#-minchild--get-index-of-smaller-child) |
+| 17 | 🔹 delete_at_root() | [delete_at_root() – Remove Highest Priority Element](#-delete_at_root--remove-highest-priority-element) |
+| 18 | 🐍 Heap Example Usage | [Example Usage](#-example-usage-1) |
+| 19 | 🔄 Deletion Example | [Deletion Example](#-deletion-example) |
+
+</details>
+
+<br/>
+
+## Priority Queue
 
 A **priority queue** is a data structure similar to a normal queue in which data is retrieved based on the **First In, First Out (FIFO)** policy.
 👉 However, in a **priority queue**, **priority** is attached with each data element.
