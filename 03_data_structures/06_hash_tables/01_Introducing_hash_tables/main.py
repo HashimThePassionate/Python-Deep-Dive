@@ -19,3 +19,5 @@ def my_hash(s):
 for item in ('hello world', 'world hello', 'gello xorld'): 
     print(f'{item}: {my_hash(item)}')
 
+for item in ('ad', 'ga'):
+    print("{}: {}".format(item, my_hash(item)))
