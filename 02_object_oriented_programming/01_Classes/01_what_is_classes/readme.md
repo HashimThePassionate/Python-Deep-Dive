@@ -70,7 +70,6 @@ classDiagram
         + getSize(): int
     }
 ```
-```
 
 #### 📋 Properties
 
