@@ -283,3 +283,76 @@ ga: 297
 
 ---
 
+# 🔑 **Resolving Collisions** in Hash Tables
+
+A **hash table** is a data structure where each position is called a **slot** or **bucket** that can store an element.
+Each data item is stored as a **(key, value)** pair at a position determined by the **hash value of the key**.
+
+---
+
+## 📝 Example Hash Function
+
+1. First, compute the hash value by summing up the **ordinal values of all characters**.
+2. Then, compute the **final hash value (index position)** by taking the total ordinal values **mod 256**.
+3. Here, we assume **256 slots/buckets** for the hash table.
+
+   * The number of slots can vary depending on how many records we want to store.
+
+---
+
+## 📊 Sample Hash Table (Figure 8.5)
+
+<div align="center">
+  <img src="./images/05.jpg"/>
+
+**Figure 8.5: A sample hash table**
+</div>
+
+👉 In this figure:
+
+* Key `"eggs"` maps to the value **123456789**.
+* Key `"data"` maps to the value **234567890**.
+* Key `"hello world"` maps to the value **345678901**.
+
+For example:
+
+* `"hello world"` → Hash value **92** → Slot **92**.
+* `"eggs"` → Hash value **51** → Slot **51**.
+* `"data"` → Hash value **6** → Slot **6**.
+
+---
+
+## 🚨 Collision Example (Figure 8.6)
+
+Once we know the hash value of the key, it is used to find the slot where the element should be stored.
+
+* If the slot is **empty** → Insert the item there.
+* If the slot is **not empty** → A **collision** occurs.
+
+  * This means the **hash value** is the same as another item already stored.
+  * We need a strategy to handle this conflict.
+
+<div align="center">
+  <img src="./images/06.jpg"/>
+
+**Figure 8.6: Hash values of two strings are the same**
+</div>
+
+👉 In this figure:
+
+* `"hello world"` already exists at slot **92**.
+* A new key `"world hello"` also maps to the hash value **92**.
+* This results in a **collision**.
+
+---
+
+## ⚒️ Collision Resolution Strategy
+
+One way of resolving collisions is **Open Addressing**:
+
+* Start at the slot of the collision.
+* Search for another **free slot** to place the new item.
+* Continue until an empty position is found.
+
+---
+
