@@ -494,3 +494,88 @@ def _hash(self, key):
 
 ---
 
+## 📦 Storing Elements in a Hash Table
+
+To **store elements** in a hash table:
+
+* We use the **`put()`** function to **add** a key-value pair.
+* We use the **`get()`** function to **retrieve** values.
+
+---
+
+## 🔑 Step 1: Updating `HashItem` Class
+
+The `HashItem` class already holds a **key** and a **value**.
+When storing new elements, these will be wrapped inside a `HashItem` object.
+
+---
+
+## 🔑 Step 2: Implementing `put()` Function
+
+The **`put()`** function goes inside the `HashTable` class.
+
+```python
+def put(self, key, value):
+    item = HashItem(key, value)   # Create a new item
+    h = self._hash(key)           # Compute hash value for key
+    
+    # Step 1: Collision check using linear probing
+    while self.slots[h] != None:
+        if self.slots[h].key == key:  
+            # If key already exists, update value (overwrite)
+            break
+        h = (h + 1) % self.size   # Move to the next slot (linear probing)
+    
+    # Step 2: Insert item in free slot
+    if self.slots[h] == None:
+        self.count += 1           # Increase count of elements
+        self.slots[h] = item      # Place item in slot
+    
+    # Step 3: Check table growth
+    self.check_growth()
+```
+
+---
+
+## 🌀 Step-by-Step Explanation
+
+1. **Compute Hash Value**
+
+   * Generate the hash index using `_hash(key)`.
+   * Example: `"egg"` → `307 % 256 = 51`.
+
+2. **Check for Collisions**
+
+   * If the slot is already occupied, use **linear probing**:
+
+     ```python
+     while self.slots[h] != None:
+         if self.slots[h].key == key:
+             break
+         h = (h + 1) % self.size
+     ```
+   * Move sequentially until a **free slot** is found.
+
+3. **Insert New Element**
+
+   * If the slot is empty (`None`), increase `count` and insert the new item:
+
+     ```python
+     if self.slots[h] == None:
+         self.count += 1
+         self.slots[h] = item
+     ```
+
+4. **Growth Check**
+
+   * Finally, call **`self.check_growth()`** to see if the table needs resizing.
+
+---
+
+## 📌 Key Notes
+
+* The **linear probing technique** ensures that even if collisions happen, data is placed in the **next available free slot**.
+* **`count`** tracks how many slots are filled.
+* **`check_growth()`** is a method to **expand the table** when it becomes nearly full (to maintain efficiency).
+
+---
