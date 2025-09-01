@@ -579,3 +579,190 @@ def put(self, key, value):
 * **`check_growth()`** is a method to **expand the table** when it becomes nearly full (to maintain efficiency).
 
 ---
+
+## 📈 **Growing a Hash Table**
+
+In our earlier example, the hash table size was fixed at **256 slots**.
+
+⚠️ **Problem**:
+
+* As more elements are inserted, the table fills up.
+* At some point, all slots are occupied → table becomes full.
+* In such a case, inserting a new element is **impossible without growth**.
+
+👉 **Solution**:
+We **dynamically grow the table** when it starts to get full.
+
+---
+
+## 📊 Load Factor (How Full the Table Is)
+
+The **load factor** gives us a measure of how many slots are in use compared to the total capacity:
+
+$$
+\text{Load Factor} = \frac{n}{k}
+$$
+
+* **n** → Number of used slots (occupied positions).
+* **k** → Total number of slots (size of the table).
+
+### 🔎 Observations:
+
+* As the load factor → **1.0**, the table is nearly full.
+* Searching and inserting will take longer because of more collisions.
+* To avoid performance loss, we **grow the table before it is too full**.
+
+📌 A commonly used threshold is `0.75`.
+📌 In this implementation, we use `0.65` (65%).
+
+---
+
+## 🌀 Why Grow the Table?
+
+1. **Collisions increase** as the table fills up.
+2. **Linear probing slows down** since it has to check multiple slots before finding an empty one.
+3. The hash table can form **clusters** (continuous filled slots), making searching slower.
+4. To reduce collisions, we expand the table size → **fewer elements per slot density**.
+
+👉 The usual strategy: **double the size** of the table when the load factor passes the threshold.
+
+---
+
+## 🛠 Implementation Details
+
+### Step 1: Extend the `HashTable` Class
+
+We introduce a new variable **`MAXLOADFACTOR`** to store the threshold limit:
+
+```python
+class HashTable:
+    def __init__(self):
+        self.size = 256
+        self.slots = [None for i in range(self.size)]
+        self.count = 0
+        self.MAXLOADFACTOR = 0.65
+```
+
+* **`size`** → total slots available (capacity).
+* **`slots`** → list initialized with `None`, representing empty slots.
+* **`count`** → how many slots are currently filled.
+* **`MAXLOADFACTOR`** → threshold value to trigger growth (here 0.65).
+
+---
+
+### Step 2: `check_growth()` Method
+
+We calculate the load factor every time a new element is inserted.
+
+```python
+def check_growth(self):
+    loadfactor = self.count / self.size
+    if loadfactor > self.MAXLOADFACTOR:
+        print("Load factor before growing the hash table", self.count / self.size)
+        self.growth()
+        print("Load factor after growing the hash table", self.count / self.size)
+```
+
+* **Step 1:** Compute `loadfactor = count / size`.
+* **Step 2:** If the load factor exceeds `MAXLOADFACTOR`:
+
+  * Print the load factor before growing.
+  * Call `growth()` method to resize.
+  * Print the new load factor after growth.
+
+👉 This ensures the table grows **just before performance drops**.
+
+---
+
+### Step 3: `growth()` Method
+
+This method **doubles the table size** and rehashes all existing elements.
+
+```python
+def growth(self):
+    New_Hash_Table = HashTable()
+    New_Hash_Table.size = 2 * self.size
+    New_Hash_Table.slots = [None for i in range(New_Hash_Table.size)]
+
+    # Rehash all existing elements
+    for i in range(self.size):
+        if self.slots[i] != None:
+            New_Hash_Table.put(self.slots[i].key, self.slots[i].value)
+
+    # Replace old table with new one
+    self.size = New_Hash_Table.size
+    self.slots = New_Hash_Table.slots
+```
+
+### 🖥 Step-by-Step Explanation:
+
+1. **Create new table** → Double the size of the current one.
+
+   ```python
+   New_Hash_Table.size = 2 * self.size
+   ```
+
+2. **Initialize slots** → Fill with `None` (empty).
+
+   ```python
+   New_Hash_Table.slots = [None for i in range(New_Hash_Table.size)]
+   ```
+
+3. **Rehash all existing elements**:
+
+   * Loop through all old slots.
+   * If a slot has data, re-insert it into the new table using `put()`.
+   * This ensures elements are distributed according to the new size.
+
+4. **Replace old table with new one**:
+
+   * Update `self.size` and `self.slots` to point to the new expanded table.
+
+---
+
+## 📌 Example: Growing the Hash Table
+
+Let’s create a small hash table with **10 slots** and a **65% threshold**.
+
+```python
+ht = HashTable()
+ht.size = 10     # Overriding default size for demo
+ht.MAXLOADFACTOR = 0.65
+
+ht.put("good", "eggs")
+ht.put("better", "ham")
+ht.put("best", "spam")
+ht.put("ad", "do not")
+ht.put("ga", "collide")
+ht.put("awd", "do not")
+ht.put("add", "do not")   # 7th record triggers growth
+
+ht.check_growth()
+```
+
+---
+
+## 🖥 Output
+
+```
+Load factor before growing the hash table 0.7
+Load factor after growing the hash table 0.35
+```
+
+### 🔎 Explanation:
+
+1. Table size = 10, after inserting 7 records:
+
+   * `7 / 10 = 0.7` → greater than 0.65 (threshold).
+
+2. Growth triggered → New size = 20.
+
+3. Reinserted 7 elements into new table:
+
+   * `7 / 20 = 0.35`.
+
+✅ The load factor dropped, improving efficiency.
+
+---
+
+
