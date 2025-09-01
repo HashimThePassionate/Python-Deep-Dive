@@ -356,3 +356,141 @@ One way of resolving collisions is **Open Addressing**:
 
 ---
 
+Here’s your provided text beautifully formatted into a **README.md** file with full detail, emojis, code, and figures exactly included 👇
+
+---
+
+# 🔑 Open Addressing in Hash Tables
+
+**Open addressing** is a **collision resolution technique** used in hash tables.
+
+* In this method, **key values are stored directly** in the hash table.
+* If a collision occurs, it is resolved using the **probing technique**.
+* **Probing** = searching for an alternate position until a free slot is found.
+
+---
+
+## ⚒️ Approaches of Open Addressing
+
+There are three popular approaches to open addressing:
+
+1. 🔹 **Linear Probing**
+2. 🔹 **Quadratic Probing**
+3. 🔹 **Double Hashing**
+
+---
+
+## 📌 Linear Probing
+
+* A systematic way of visiting slots to resolve collisions.
+* If the target slot is **occupied**, look for the **next free slot** by **adding 1** to the previous hash value.
+* Formula:
+
+  ```math
+  New_Hash = (Old_Hash + 1) % Table_Size
+  ```
+
+---
+
+### 🖼 Example of Linear Probing
+
+<div align="center">
+  <img src="./images/06.jpg"/>
+
+**Figure 8.7: An example of collision resolution**
+</div>
+
+
+👉 Steps:
+
+1. Compute the hash of key `"egg"`:
+
+   ```
+   307 % 256 = 51
+   ```
+2. Slot **51** is already occupied with `"data"`.
+3. Apply **linear probing**:
+
+   ```
+   (307 + 1) % 256 = 52
+   ```
+4. Store `"egg"` at slot **52** (which is free). ✅
+
+---
+
+## ⚠️ Drawback of Linear Probing
+
+* Since the increment is **fixed**, all new items go to the **next available slot**.
+* This creates **clusters of consecutive occupied slots**.
+* Result:
+
+  * One part of the hash table becomes dense.
+  * Another part may remain empty.
+
+👉 To solve this, other strategies like **quadratic probing** or **double hashing** are preferred.
+
+---
+
+# 🛠 Implementing Hash Tables in Python
+
+To implement a hash table:
+
+---
+
+## 📦 Step 1: Hash Item Class
+
+Each item stores a **key-value pair**:
+
+```python
+class HashItem:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+```
+
+---
+
+## 📦 Step 2: Hash Table Class
+
+Initialize hash table with **256 slots**:
+
+```python
+class HashTable:
+    def __init__(self):
+        self.size = 256
+        self.slots = [None for i in range(self.size)]
+        self.count = 0
+```
+
+* **size** → total number of slots (capacity).
+* **count** → number of filled slots (actual key-value pairs).
+* **slots** → stores the items.
+
+---
+
+## 📦 Step 3: Hash Function
+
+We use a **custom hash function** that:
+
+1. Computes the sum of **ordinal values** of characters.
+2. Uses multiplication weight for each character.
+3. Returns the value **modulo table size** (0–255).
+
+```python
+def _hash(self, key): 
+    mult = 1
+    hv = 0
+    for ch in key:
+        hv += mult * ord(ch)
+        mult += 1
+    return hv % self.size
+```
+
+👉 Notes:
+
+* The function is **internal** (hence `_hash`).
+* Keys assumed as **strings**.
+* Returns an integer between `0` and `255`.
+
+---
+
