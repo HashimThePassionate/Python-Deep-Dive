@@ -50,14 +50,37 @@ class HashTable:
                 New_Hash_Table.put(self.slots[i].key, self.slots[i].value)
         self.size = New_Hash_Table.size
         self.slots = New_Hash_Table.slots
+    
+    def get(self,key):
+        h = self._hash(key)
+        while self.slots[h] != None:
+            if self.slots[h].key == key:
+                return self.slots[h].value
+            h = (h + 1) % self.size
+        return None
 
 
+# ht = HashTable()
+# ht.put("good", "eggs")
+# ht.put("better", "ham")
+# ht.put("best", "spam")
+# ht.put("ad", "do not")
+# ht.put("ga", "collide")
+# ht.put("awd", "do not")
+# ht.put("add", "do not")
+# ht.check_growth()
+
+
+# get key 
 ht = HashTable()
 ht.put("good", "eggs")
 ht.put("better", "ham")
 ht.put("best", "spam")
 ht.put("ad", "do not")
 ht.put("ga", "collide")
-ht.put("awd", "do not")
-ht.put("add", "do not")
-ht.check_growth()
+
+for key in ("good", "better", "best", "worst", "ad", "ga"):
+    v = ht.get(key)
+    if v == None:
+        print(f"{key}: Not found")
+    print(f'"{key}": "{v}"')
