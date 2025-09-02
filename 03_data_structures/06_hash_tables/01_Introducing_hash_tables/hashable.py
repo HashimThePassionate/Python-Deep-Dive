@@ -91,6 +91,6 @@ ht["ad"] = "do not"
 ht["ga"] = "collide"
 
 for key in ("good", "better", "best", "worst", "ad", "ga"):
-    v = ht.get(key)
+    v = v = ht[key]
     print(f'"{key}": "{v}"')
 print("The number of elements is: {}".format(ht.count))
