@@ -1060,6 +1060,11 @@ Where:
 
 ## 🖼️ Visual Example
 
+<div align="center">
+  <img src="./images/08.jpg" alt="" width="500px"/>
+</div>
+
+
 We have a hash table of **7 slots** with hash function:
 
 ```
