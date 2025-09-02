@@ -853,8 +853,6 @@ ht.put("ga", "collide")
 
 for key in ("good", "better", "best", "worst", "ad", "ga"):
     v = ht.get(key)
-    if v == None:
-        print(f"{key}: Not found")
     print(f'"{key}": "{v}"')
 ```
 
@@ -866,7 +864,6 @@ for key in ("good", "better", "best", "worst", "ad", "ga"):
 "good": "eggs"
 "better": "ham"
 "best": "spam"
-worst: Not found
 "worst": "None"
 "ad": "do not"
 "ga": "collide"
@@ -874,5 +871,160 @@ worst: Not found
 
 ✔️ Keys `"good"`, `"better"`, `"best"`, `"ad"`, and `"ga"` were found.
 ❌ Key `"worst"` was not found in the hash table.
+
+---
+
+# 📚 Implementing a Hash Table as a Dictionary
+
+Using the `put()` and `get()` methods to store and retrieve elements in a hash table may feel a little **inconvenient**.
+
+👉 For example:
+
+* To get a value, we would normally call:
+
+  ```python
+  ht.get("good")
+  ```
+* But it would be **easier and more natural** if we could write:
+
+  ```python
+  ht["good"]
+  ```
+
+This style makes the hash table behave like a **Python dictionary** 🗂️
+
+---
+
+## ⚡ Special Methods in Python
+
+Python allows us to override special methods to change how objects behave with operators like `[]`.
+
+* `__setitem__(self, key, value)` → Used when we assign a value to a key (e.g., `ht["key"] = value`)
+* `__getitem__(self, key)` → Used when we retrieve a value by key (e.g., `ht["key"]`)
+
+By defining these two methods inside our `HashTable` class, we can directly use the **dictionary-like syntax**.
+
+---
+
+## 📝 Code Implementation
+
+```python
+def __setitem__(self, key, value):
+    self.put(key, value)
+
+def __getitem__(self, key):
+    return self.get(key)
+```
+
+### 🔎 Explanation (line by line)
+
+1. **`def __setitem__(self, key, value):`**
+
+   * This special method is called when you assign something like:
+
+     ```python
+     ht["good"] = "eggs"
+     ```
+   * Here, `key = "good"` and `value = "eggs"`.
+
+2. **`self.put(key, value)`**
+
+   * Instead of directly storing, we reuse the already written `put()` method of our `HashTable` class.
+
+3. **`def __getitem__(self, key):`**
+
+   * This special method is called when you retrieve something like:
+
+     ```python
+     v = ht["good"]
+     ```
+
+4. **`return self.get(key)`**
+
+   * We reuse the `get()` method of our `HashTable` to fetch the value of the given key.
+
+---
+
+## 🧪 Test Code
+
+```python
+ht = HashTable()
+
+ht["good"] = "eggs"
+ht["better"] = "ham"
+ht["best"] = "spam"
+ht["ad"] = "do not"
+ht["ga"] = "collide"
+
+for key in ("good", "better", "best", "worst", "ad", "ga"):
+    v = ht[key]
+    print(v)
+
+print("The number of elements is: {}".format(ht.count))
+```
+
+---
+
+## 🔎 Step-by-Step Execution
+
+1. **Creating the HashTable instance**
+
+   ```python
+   ht = HashTable()
+   ```
+
+   * A new hash table object is created.
+
+2. **Adding items using dictionary-style syntax**
+
+   ```python
+   ht["good"] = "eggs"
+   ht["better"] = "ham"
+   ht["best"] = "spam"
+   ht["ad"] = "do not"
+   ht["ga"] = "collide"
+   ```
+
+   * Each assignment internally calls `__setitem__()` which then calls the `put()` method.
+
+3. **Iterating through keys**
+
+   ```python
+   for key in ("good", "better", "best", "worst", "ad", "ga"):
+       v = ht[key]
+       print(v)
+   ```
+
+   * Each `ht[key]` internally calls `__getitem__()`, which then uses `get()` to fetch the value.
+   * Note: `"worst"` is not in the table, so it returns `None`.
+
+4. **Printing the number of elements**
+
+   ```python
+   print("The number of elements is: {}".format(ht.count))
+   ```
+
+   * `ht.count` gives the total number of **stored elements** in the hash table.
+
+---
+
+## 📤 Output
+
+```
+eggs
+ham
+spam
+none
+do not
+collide
+The number of elements is: 5
+```
+
+---
+
+## 🌟 Key Takeaway
+
+* With `__getitem__()` and `__setitem__()`, our **HashTable class behaves like a dictionary** 🗝️
+* It’s just a more **convenient and Pythonic way** of interacting with the hash table.
 
 ---
