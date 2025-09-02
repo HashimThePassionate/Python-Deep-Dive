@@ -1028,3 +1028,204 @@ The number of elements is: 5
 * It’s just a more **convenient and Pythonic way** of interacting with the hash table.
 
 ---
+
+# 🔄 **Quadratic Probing in Hash Tables**
+
+Quadratic probing is an **open addressing scheme** used for **resolving collisions** in hash tables.
+
+👉 Instead of moving linearly to the next slot (as in linear probing), it uses a **quadratic polynomial** to calculate the next available slot.
+
+---
+
+## 🧮 Formula
+
+If a collision occurs, the next slots are checked at positions:
+
+```
+h + 1², h + 2², h + 3², h + 4² ...
+```
+
+So,
+
+```
+new-hash(key) = (old-hash-value + i²) % table_size
+```
+
+Where:
+
+* `old-hash-value = key mod table_size`
+* `i` is the step number (1, 2, 3 …).
+
+---
+
+## 🖼️ Visual Example
+
+We have a hash table of **7 slots** with hash function:
+
+```
+h(key) = key mod 7
+```
+
+### Step 1️⃣ – Insert 15
+
+* Compute: `15 mod 7 = 1`
+* Index = `1` (slot is free ✅)
+* Store `15` at index 1.
+
+---
+
+### Step 2️⃣ – Insert 22
+
+* Compute: `22 mod 7 = 1`
+* Index = `1` (collision ❌ because 15 is already there).
+* Apply quadratic probing:
+
+  * New position = `1 + 1² = 2`
+* Index = `2` (slot is free ✅)
+* Store `22` at index 2.
+
+---
+
+### Step 3️⃣ – Insert 29
+
+* Compute: `29 mod 7 = 1`
+* Index = `1` (collision ❌).
+* Quadratic probing:
+
+  * First attempt → `1 + 1² = 2` (collision again ❌ because 22 is already there).
+  * Second attempt → `1 + 2² = 5` (slot is free ✅).
+* Store `29` at index 5.
+
+---
+
+### 📊 Final Hash Table
+
+| Index | Value |
+| ----- | ----- |
+| 0     | -     |
+| 1     | 15    |
+| 2     | 22    |
+| 3     | -     |
+| 4     | -     |
+| 5     | 29    |
+| 6     | -     |
+
+---
+
+## 📝 Python Implementation
+
+```python
+def get_quadratic(self, key):
+    h = self._hash(key)      # Compute initial hash
+    j = 1
+    while self.slots[h] != None:   # Keep checking until empty
+        if self.slots[h].key == key:
+            return self.slots[h].value
+        h = (h + j*j) % self.size  # Quadratic probing formula
+        j = j + 1
+    return None
+
+def put_quadratic(self, key, value):
+    item = HashItem(key, value)
+    h = self._hash(key)
+    j = 1
+    while self.slots[h] != None:   # Find free slot
+        if self.slots[h].key == key:
+            break
+        h = (h + j*j) % self.size  # Quadratic probing formula
+        j = j+1
+    if self.slots[h] == None:
+        self.count += 1
+        self.slots[h] = item
+        self.check_growth()
+```
+
+---
+
+## 🔎 Code Explanation (line by line)
+
+### `get_quadratic(self, key)`
+
+1. **`h = self._hash(key)`**
+
+   * Compute the base hash value using the hash function.
+
+2. **`while self.slots[h] != None:`**
+
+   * As long as the slot is not empty, keep checking.
+
+3. **`if self.slots[h].key == key:`**
+
+   * If the key matches, return its value.
+
+4. **`h = (h + j*j) % self.size`**
+
+   * Collision? → Move to the next index using quadratic probing.
+
+5. **`j = j + 1`**
+
+   * Increase step counter for the next quadratic jump.
+
+6. **Return `None`** if the key is not found.
+
+---
+
+### `put_quadratic(self, key, value)`
+
+1. **`item = HashItem(key, value)`**
+
+   * Wrap key-value pair into a hash item.
+
+2. **`h = self._hash(key)`**
+
+   * Compute initial hash value.
+
+3. **`while self.slots[h] != None:`**
+
+   * Keep checking until an empty slot is found.
+
+4. **`if self.slots[h].key == key:`**
+
+   * If the key already exists, update/replace it.
+
+5. **`h = (h + j*j) % self.size`**
+
+   * If collision, use quadratic probing to find next free slot.
+
+6. **Insert the item and increment count.**
+
+---
+
+## 🧪 Test Code
+
+```python
+ht = HashTable()
+
+ht.put_quadratic("good", "eggs")
+ht.put_quadratic("ad", "packt")
+ht.put_quadratic("ga", "books")
+
+v = ht.get_quadratic("ga")
+print(v)
+```
+
+---
+
+## 📤 Output
+
+```
+books
+```
+
+👉 This confirms that key `"ga"` correctly maps to `"books"`.
+
+---
+
+## 🌟 Key Insight
+
+* **Quadratic probing** reduces clustering compared to linear probing 🚀
+* Helps spread out elements across the hash table ⚡
+* Still efficient and works with both string-based and numeric keys 🔑
+
+---
+
