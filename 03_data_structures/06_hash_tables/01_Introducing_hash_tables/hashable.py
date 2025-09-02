@@ -58,6 +58,12 @@ class HashTable:
                 return self.slots[h].value
             h = (h + 1) % self.size
         return None
+    
+    def __setitem__(self, key, value):
+        self.put(key, value)
+    
+    def __getitem__(self, key):
+        return self.get(key)
 
 
 # ht = HashTable()
@@ -73,14 +79,18 @@ class HashTable:
 
 # get key 
 ht = HashTable()
-ht.put("good", "eggs")
-ht.put("better", "ham")
-ht.put("best", "spam")
-ht.put("ad", "do not")
-ht.put("ga", "collide")
+# ht.put("good", "eggs")
+# ht.put("better", "ham")
+# ht.put("best", "spam")
+# ht.put("ad", "do not")
+# ht.put("ga", "collide")
+ht["good"] = "eggs"
+ht["better"] = "ham"
+ht["best"] = "spam"
+ht["ad"] = "do not"
+ht["ga"] = "collide"
 
 for key in ("good", "better", "best", "worst", "ad", "ga"):
     v = ht.get(key)
-    if v == None:
-        print(f"{key}: Not found")
     print(f'"{key}": "{v}"')
+print("The number of elements is: {}".format(ht.count))
