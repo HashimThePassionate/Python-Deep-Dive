@@ -765,4 +765,114 @@ Load factor after growing the hash table 0.35
 
 ---
 
+# 📦 **Retrieving Elements from the Hash Table**
 
+To **retrieve elements** from a hash table, the value stored corresponding to the key is returned.
+The retrieval method is implemented using the **`get()`** method.
+
+---
+
+## 🔑 How Retrieval Works
+
+1. **Compute the hash** of the given key.
+2. **Check the slot** at that hash position.
+
+   * If the key matches → return the value.
+   * If the key does not match → compute a new hash (using the same collision resolution technique as insertion).
+3. **Repeat searching** until:
+
+   * The key element is found ✅
+   * OR all slots have been checked ❌
+
+> ℹ️ Note: The **same collision resolution technique** used for storing (linear probing, quadratic probing, or double hashing) must be used during retrieval.
+
+---
+
+## 📊 Example (Figure 8.8)
+
+<div align="center">
+  <img src="./images/07.jpg" alt="" width="500px"/>
+</div>
+
+**Steps for retrieving the key `"egg"`:**
+
+1️⃣ Compute the hash value of `"egg"` → `307 % 256 = 51`
+👉 Start searching at **slot 51**.
+
+2️⃣ Slot 51 contains `"data"` ❌ (key does not match).
+
+3️⃣ Apply **linear probing**:
+$(307 + 1) % 256 = 52$
+👉 Move to **slot 52**.
+
+4️⃣ Slot 52 contains `"egg"` ✅ (key matches).
+👉 Return the value stored with `"egg"`.
+
+---
+
+## 🖥️ Code Implementation – `get()` Method
+
+```python
+def get(self, key):
+    h = self._hash(key)  # computed hash for the given key
+    while self.slots[h] != None:
+        if self.slots[h].key == key:
+            return self.slots[h].value
+        h = (h + 1) % self.size
+    return None
+```
+
+### 🔎 Step-by-Step Explanation
+
+* **`h = self._hash(key)`**
+  Computes the hash value of the given key.
+
+* **`while self.slots[h] != None:`**
+  Keep checking until we find an empty slot.
+
+* **`if self.slots[h].key == key:`**
+  If the key matches the stored key → return its value.
+
+* **`h = (h + 1) % self.size`**
+  Linear probing: move to the next slot if no match.
+
+* **`return None`**
+  If no key is found after searching all slots, return `None`.
+
+---
+
+## 🧪 Testing the Hash Table
+
+```python
+ht = HashTable()
+ht.put("good", "eggs")
+ht.put("better", "ham")
+ht.put("best", "spam")
+ht.put("ad", "do not")
+ht.put("ga", "collide")
+
+for key in ("good", "better", "best", "worst", "ad", "ga"):
+    v = ht.get(key)
+    if v == None:
+        print(f"{key}: Not found")
+    print(f'"{key}": "{v}"')
+```
+
+---
+
+## 📤 Output
+
+```
+"good": "eggs"
+"better": "ham"
+"best": "spam"
+worst: Not found
+"worst": "None"
+"ad": "do not"
+"ga": "collide"
+```
+
+✔️ Keys `"good"`, `"better"`, `"best"`, `"ad"`, and `"ga"` were found.
+❌ Key `"worst"` was not found in the hash table.
+
+---
