@@ -1247,8 +1247,9 @@ books
 👉 Formula for probing sequence:
 
 $$
-(h1(key) + i * h2(key)) \mod \text{table_size}
+(h_1(key) + i \times h_2(key)) \bmod \text{table\_size}
 $$
+
 
 Where:
 
