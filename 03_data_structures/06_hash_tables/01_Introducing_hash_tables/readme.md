@@ -1234,3 +1234,247 @@ books
 
 ---
 
+# 🔐 **Double Hashing in Hash Tables**
+
+## 📖 Introduction
+
+**Double Hashing** is a **collision resolution technique** in hash tables where **two hashing functions** are used.
+
+* First, the **primary hash function** computes the initial index.
+* If a **collision** occurs (slot already filled), the **secondary hash function** determines the next index.
+* Unlike linear or quadratic probing, double hashing **avoids clustering** because the probing interval depends on the **key data itself**.
+
+👉 Formula for probing sequence:
+
+$$
+(h1(key) + i * h2(key)) \mod \text{table_size}
+$$
+
+Where:
+
+* **h1(key) = key mod table\_size**
+* **h2(key) = prime\_number - (key mod prime\_number)**
+
+⚡ Note:
+
+* `prime_number` should be **less than the table size**.
+* `h2(key)` should never evaluate to **0** and must differ from `h1`.
+
+---
+
+## 🖼 Visual Example (Figure 8.10)
+
+We have a hash table with **7 slots** and elements `{15, 22, 29}`.
+
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="500px"/>
+</div>
+
+### 1️⃣ Empty Table
+
+```
+[ 0 | 1 | 2 | 3 | 4 | 5 | 6 ]
+```
+
+✔️ Initially, all slots are empty.
+
+---
+
+### 2️⃣ Insert Element → 15
+
+* **h1(15) = 15 mod 7 = 1**
+* Slot `1` is empty → insert **15** there.
+
+```
+Index: 0  1   2   3   4   5   6
+Value: -  15  -   -   -   -   -
+```
+
+---
+
+### 3️⃣ Insert Element → 22
+
+* **h1(22) = 22 mod 7 = 1**
+* Collision! Slot `1` already contains **15**.
+* Use **secondary hash function**:
+
+  $$
+  h2(22) = 5 - (22 \mod 5) = 5 - 2 = 3
+  $$
+* New index:
+
+  $$
+  (1 + 1 * 3) \mod 7 = 4
+  $$
+* Insert **22** at index `4`.
+
+```
+Index: 0  1   2   3   4   5   6
+Value: -  15  -   -   22  -   -
+```
+
+---
+
+### 4️⃣ Insert Element → 29
+
+* **h1(29) = 29 mod 7 = 1**
+* Collision! Slot `1` already contains **15**.
+* Use **secondary hash function**:
+
+  $$
+  h2(29) = 5 - (29 \mod 5) = 5 - 4 = 1
+  $$
+* New index:
+
+  $$
+  (1 + 1 * 1) \mod 7 = 2
+  $$
+* Insert **29** at index `2`.
+
+```
+Index: 0  1   2   3   4   5   6
+Value: -  15  29  -   22  -   -
+```
+
+✔️ All elements placed without forming clusters! 🎉
+
+---
+
+## ⚙️ Implementation in Python
+
+### 🔑 Secondary Hash Function
+
+```python
+def h2(self, key):
+    mult = 1
+    hv = 0
+    for ch in key:
+        hv += mult * ord(ch)
+        mult += 1
+    return hv
+```
+
+📝 **Explanation**:
+
+* `ord(ch)` → converts each character into its ASCII code.
+* `mult` increases step by step (1, 2, 3…) → ensures weighted sum.
+* This produces a **unique secondary hash value**.
+
+---
+
+### 🏗 HashTable Class (with Double Hashing)
+
+```python
+class HashTable:
+    def __init__(self):
+        self.size = 256
+        self.slots = [None for i in range(self.size)]
+        self.count = 0
+        self.MAXLOADFACTOR = 0.65
+        self.prime_num = 5
+```
+
+📝 **Explanation**:
+
+* `size = 256` → total slots in table.
+* `slots = [None...]` → initializes empty table.
+* `prime_num = 5` → used in secondary hash function.
+
+---
+
+### 🚀 Insert with Double Hashing
+
+```python
+def put_double_hashing(self, key, value):
+    item = HashItem(key, value)
+    h = self._hash(key)
+    j = 1
+    while self.slots[h] != None:
+        if self.slots[h].key == key:
+            break
+        h = (h + j * (self.prime_num - (self.h2(key) % self.prime_num))) % self.size
+        j = j + 1
+    if self.slots[h] == None:
+        self.count += 1
+        self.slots[h] = item
+        self.check_growth()
+```
+
+📝 **Explanation (Step by Step)**:
+
+1. Compute **primary hash** `h`.
+2. If slot is occupied → check if same key (update case).
+3. If collision → calculate new index using **double hashing formula**.
+4. Repeat until empty slot found.
+5. Insert element and update count.
+
+---
+
+### 🔍 Search with Double Hashing
+
+```python
+def get_double_hashing(self, key):
+    h = self._hash(key)
+    j = 1
+    while self.slots[h] != None:
+        if self.slots[h].key == key:
+            return self.slots[h].value
+        h = (h + j * (self.prime_num - (self.h2(key) % self.prime_num))) % self.size
+        j = j + 1
+    return None
+```
+
+📝 **Explanation**:
+
+* Start at primary hash index.
+* If key not found → move using double hashing step.
+* If empty slot encountered → key not present (return `None`).
+
+---
+
+### 🧪 Example Run
+
+```python
+ht = HashTable()
+ht.put_doubleHashing("good", "eggs")
+ht.put_doubleHashing("better", "spam")
+ht.put_doubleHashing("best", "cool")
+ht.put_doubleHashing("ad", "donot")
+ht.put_doubleHashing("ga", "collide")
+ht.put_doubleHashing("awd", "hello")
+ht.put_doubleHashing("addition", "ok")
+
+for key in ("good", "better", "best", "worst", "ad", "ga"):
+    v = ht.get_doubleHashing(key)
+    print(v)
+
+print("The number of elements is: {}".format(ht.count))
+```
+
+### 🖨 Output
+
+```
+eggs
+spam
+cool
+None
+donot
+collide
+The number of elements is: 7
+```
+
+✔️ **Observation**:
+
+* `"worst"` not present → returns `None`.
+* Total **7 elements** inserted successfully.
+
+---
+
+## 📊 Comparison with Other Techniques
+
+* **Linear Probing** → causes **primary clustering**.
+* **Quadratic Probing** → reduces primary clustering but can cause **secondary clustering**.
+* **Double Hashing** ✅ → avoids both, gives **uniform distribution**.
+
+---
+
