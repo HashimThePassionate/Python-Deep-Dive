@@ -1478,3 +1478,251 @@ The number of elements is: 7
 
 ---
 
+# 📚 **Separate Chaining in Hash Tables**  
+
+## 🔑 What is Separate Chaining?  
+Separate chaining is a method to handle the **problem of collision** in hash tables.  
+👉 It allows each slot in the hash table to store **multiple items** at the position of a collision.  
+👉 Each slot is initialized with an **empty list**, and whenever a new element is inserted, it is **appended to the list** corresponding to that element’s hash value.  
+
+This way, collisions don’t overwrite values but store them in a chain (linked list or other structure).  
+
+---
+
+## 📊 Example of Collision Resolution using Chaining  
+
+<div align="center">
+  <img src="./images/10.jpg" width="600px"/>
+
+**Figure 8.11:** Example of collision resolution using chaining.  
+</div>  
+
+
+➡️ Here, keys `"hello world"` and `"world hello"` both map to index `92`.  
+➡️ Instead of overwriting, they are **chained together** using a list (or linked structure).  
+
+---
+
+## 🪣 Multiple Elements in a Single Bucket  
+
+<div align="center">
+  <img src="./images/11.jpg" width="600px"/>
+
+**Figure 8.12:** More than one element having the same hash value stored in a list.  
+</div>
+
+
+➡️ Example: If many data elements have a hash value of **51**, all are stored in the **same bucket (slot 51)**.  
+
+---
+
+## 🔎 Searching in Chaining (Linear Search)  
+
+<div align="center">
+  <img src="./images/12.jpg" width="600px"/>
+
+**Figure 8.13:** Demonstration of a linear search for hash value `51`.  
+</div>
+
+➡️ If a bucket has multiple elements, we **traverse linearly** until we find the correct key.  
+➡️ This can become slow (worst-case **O(n)** time complexity).  
+
+---
+
+## 🌳 Optimizing Chaining with BSTs  
+
+<div align="center">
+  <img src="./images/13.jpg" width="600px"/>
+
+**Figure 8.14:** BST for a bucket for the hash value of `51`.  
+</div>  
+
+
+➡️ Instead of using a **list**, each bucket can use a **Binary Search Tree (BST)** for faster searching.  
+➡️ However, BSTs can also degrade into linked lists if unbalanced.  
+➡️ To solve this, a **self-balancing BST** (like AVL or Red-Black Tree) can be used.  
+
+---
+
+## ⚡ Code Implementation – Separate Chaining  
+
+We can implement separate chaining using a **Linked List** for each bucket.
+
+### 🧱 Step 1: Node Class  
+```python
+class Node:
+    def __init__(self, key=None, value=None):
+        self.key = key
+        self.value = value
+        self.next = None
+```
+
+🔎 **Explanation:**
+
+* `key`: Stores the element’s key.
+* `value`: Stores the data associated with the key.
+* `next`: Pointer to the next node (for chaining).
+
+---
+
+### 🧱 Step 2: Singly Linked List Class
+
+```python
+class SinglyLinkedList:
+    def __init__(self):
+        self.tail = None
+        self.head = None
+
+    def append(self, key, value):
+        node = Node(key, value)
+        if self.tail:
+            self.tail.next = node
+            self.tail = node
+        else:
+            self.head = node
+            self.tail = node
+```
+
+🔎 **Explanation:**
+
+* `head`: First node in the chain.
+* `tail`: Last node in the chain.
+* `append()`: Adds a new key-value pair at the **end of the list**.
+
+---
+
+### 🧱 Step 3: Traverse Method
+
+```python
+def traverse(self):
+    current = self.head
+    while current:
+        print("\"", current.key, "--", current.value, "\"")
+        current = current.next
+```
+
+🔎 **Explanation:**
+
+* Starts from `head` and moves forward using `.next`.
+* Prints all key-value pairs in the chain.
+
+---
+
+### 🧱 Step 4: Search Method
+
+```python
+def search(self, key):
+    current = self.head
+    while current:
+        if current.key == key:
+            print("\"Record found:", current.key, "-", current.value, "\"")
+            return True
+        current = current.next
+    return False
+```
+
+🔎 **Explanation:**
+
+* Loops through the chain.
+* If `key` matches, prints and returns `True`.
+* If not found, returns `False`.
+
+---
+
+### 🧱 Step 5: Hash Table with Separate Chaining
+
+```python
+class HashTableChaining:
+    def __init__(self):
+        self.size = 6
+        self.slots = [None for i in range(self.size)]
+        for x in range(self.size):
+            self.slots[x] = SinglyLinkedList()
+```
+
+🔎 **Explanation:**
+
+* `size`: Number of slots in the table.
+* `slots`: Each slot stores a **linked list** (initially empty).
+
+---
+
+### 🧱 Step 6: Hash Function
+
+```python
+def _hash(self, key):
+    mult = 1
+    hv = 0
+    for ch in key:
+        hv += mult * ord(ch)
+        mult += 1
+    return hv % self.size
+```
+
+🔎 **Explanation:**
+
+* Uses ASCII values of characters.
+* Applies modulus (`% self.size`) to fit values inside slots.
+
+---
+
+### 🧱 Step 7: Insert Method
+
+```python
+def put(self, key, value):
+    node = Node(key, value)
+    h = self._hash(key)
+    self.slots[h].append(key, value)
+```
+
+🔎 **Explanation:**
+
+* Computes index `h` using hash function.
+* Appends `(key, value)` into the linked list at slot `h`.
+
+---
+
+### 🧱 Step 8: Get/Search Method
+
+```python
+def get(self, key):
+    h = self._hash(key)
+    v = self.slots[h].search(key)
+```
+
+🔎 **Explanation:**
+
+* Finds slot using `_hash(key)`.
+* Searches the chain at that slot.
+
+---
+
+### 🧱 Step 9: Print Hash Table
+
+```python
+def printHashTable(self):
+    print("Hash table is :- \n")
+    print("Index \t\tValues\n")
+    for x in range(self.size):
+        print(x, end="\t\n")
+        self.slots[x].traverse()
+```
+
+🔎 **Explanation:**
+
+* Iterates over all slots.
+* Prints index and all records stored in the chain.
+
+---
+
+## ⏱️ Complexity Analysis
+
+* **Average Case Search/Insert/Delete:** `O(1)` (if chains are short)
+* **Worst Case Search/Insert/Delete:** `O(n)` (if all items go to one slot)
+
+✅ **Advantage:** No clustering problem like open addressing.<br/>
+⚠️ **Disadvantage:** If many elements go into one bucket, performance drops.
+
+---
+
+
