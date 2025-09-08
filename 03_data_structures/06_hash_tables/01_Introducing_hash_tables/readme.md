@@ -1725,4 +1725,90 @@ def printHashTable(self):
 
 ---
 
+# 📘 **Symbol Tables in Compilers & Interpreters**
+
+Symbol tables are used by **compilers** and **interpreters** to keep track of the symbols and different entities, such as:
+
+* 📦 Objects
+* 🏷️ Classes
+* 🔑 Variables
+* ⚙️ Function names
+
+These are the identifiers that have been declared in a program.
+Since retrieving these symbols quickly is very important, **symbol tables are often implemented using hash tables**.
+
+---
+
+## 🔍 Example in Python
+
+Let’s look at an example. Suppose we have the following Python code inside `symb.py`:
+
+```python
+name = "Joe"
+age = 27
+```
+
+### 📝 Explanation:
+
+* Here, we have **two symbols**: `name` and `age`.
+* Each symbol has a value:
+
+  * `name` → `"Joe"`
+  * `age` → `27`
+
+A **symbol table** allows the compiler or interpreter to **look up these values** efficiently.
+Thus:
+
+* `name` and `age` act as **keys**.
+* Their corresponding values (`"Joe"` and `27`) are stored as **entries** in the table.
+
+---
+
+## 🛠️ Symbols Beyond Variables
+
+In compilers, symbol tables can also contain:
+
+* Functions 🛑
+* Class names 🏫
+* Other identifiers
+
+For example:
+
+```python
+def greet():
+    print("Hello")
+
+name = "John"
+age = 33
+```
+
+Here, the **function `greet()`** and the **variables** `name` and `age` are stored in the **symbol table**.
+
+---
+
+## 📊 Figure 8.15 – Example of a Symbol Table
+
+<div align="center">
+  <img src="./images/14.jpg" width="500px"/>
+</div>
+
+### Explanation of the Figure:
+
+The symbol table maintains three entries:
+
+| **Symbol** | **Type** | **Value**    |
+| ---------- | -------- | ------------ |
+| greet      | function | `<function>` |
+| name       | str      | `"John"`     |
+| age        | int      | `33`         |
+
+🔎 As shown:
+
+* `greet` is stored as a **function reference**.
+* `name` is stored as a **string (`str`)** with value `"John"`.
+* `age` is stored as an **integer (`int`)** with value `33`.
+
+The arrows in the diagram indicate how identifiers in the code are mapped to their entries in the symbol table.
+
+---
 
