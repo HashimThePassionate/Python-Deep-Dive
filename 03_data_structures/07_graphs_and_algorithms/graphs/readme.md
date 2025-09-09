@@ -187,3 +187,122 @@ A vertex with **outdegree = 0**.<br/>
 
 ---
 
+# 🎯 Directed Acyclic Graphs (DAGs)
+
+A **Directed Acyclic Graph (DAG)** is a **directed graph** that contains **no cycles**.
+
+* All edges are directed from one node to another.
+* The sequence of edges never forms a **closed loop**.
+* A **cycle** in a graph is formed when the starting node of the first edge is equal to the ending node of the last edge.
+
+🖼️ Example:
+
+<div align="center">
+  <img src="./images/04.jpg" width="350px"/>
+
+*Figure 9.4: An example of a directed acyclic graph*
+</div>
+
+👉 In this DAG:
+
+* All edges are directed.
+* There is **no cycle** (no path that starts and ends at the same node).
+
+📌 **Key property:**
+If we start on any path from a given node, we will **never end up on the same node again**.
+
+✨ **Applications of DAGs:**
+
+* Job scheduling 🗓️
+* Citation graphs 📚
+* Data compression 📦
+
+---
+
+# ⚖️ Weighted Graphs
+
+A **Weighted Graph** is a graph in which each edge has a **numeric weight** associated with it.
+
+* Can be **directed** or **undirected**.
+* Weight may represent **distance**, **cost**, or **any metric** depending on the problem.
+
+🖼️ Example:
+
+<div align="center">
+  <img src="./images/05.jpg" width="350px"/>
+
+*Figure 9.5: An example of a weighted graph*
+</div>
+
+👉 In this weighted graph:
+
+* **Edge weights** represent distances between nodes.
+* We want to travel from **A → D**.
+
+### 🔹 Possible Paths:
+
+1. **Direct path:**
+
+   * $A \to D$
+   * Cost = **40**
+
+2. **Via B and C:**
+
+   * $A \to B \to C \to D$
+   * Cost = $5 + 10 + 10 = 25$
+
+### ✅ Best Path:
+
+* Path **A → B → C → D** is **better**, since **25 < 40**.
+* Hence, the shortest path is chosen using weights.
+
+---
+
+# 🔗 Bipartite Graphs
+
+A **Bipartite Graph** (also called a **Bigraph**) is a **special type of graph** in which:
+
+* All the nodes can be divided into **two disjoint sets**.
+* Every edge **always connects a node from one set to a node in the other set**.
+* No edge exists **between nodes of the same set**.
+
+🖼️ Example:
+
+<div align="center">
+  <img src="./images/06.jpg" width="400px"/>
+  
+*Figure 9.6: An example of a bipartite graph*
+</div>
+
+👉 In this graph:
+
+* The vertices are divided into **two sets**:
+
+  * **Set U = {A, B, C, D}**
+  * **Set V = {E, F, G, H}**
+* Each edge has **one vertex in U** and **the other vertex in V**.
+
+---
+
+## 📘 Key Property of Bipartite Graphs
+
+* **No edge** connects vertices **within the same set**.
+* All edges **must connect across the two sets**.
+
+---
+
+## 🏗️ Applications of Bipartite Graphs
+
+1. **Applicants and Jobs** 💼
+
+   * One set = Applicants
+   * Other set = Jobs
+   * An edge shows which applicant is eligible for which job.
+
+2. **Football Players and Clubs** ⚽
+
+   * One set = Players
+   * Other set = Clubs
+   * An edge shows if a player has played for a particular club.
+
+---
