@@ -97,3 +97,93 @@ A **vertex with degree = 1**.<br/>
 👉 Example: If a vertex has only one edge connected, it is a **leaf vertex**.
 
 ---
+
+# 🔄 **Directed and Undirected Graphs**
+
+Graphs are represented by the **edges** between the **nodes**.
+👉 These connecting edges can be either **directed** or **undirected**.
+
+---
+
+## 📍 Undirected Graph
+
+* If the connecting edges are **undirected**, then the graph is called an **undirected graph**.
+* An **undirected graph** simply represents edges as **lines between the nodes**.
+* There is no extra information about the relationship between nodes other than the fact that they are connected.
+
+🖼️ Example:
+
+<div align="center">
+  <img src="./images/02.jpg" width="300px"/>
+
+*Figure 9.2: An example of an undirected graph*
+</div>
+
+👉 In Figure 9.2, we demonstrate an undirected graph of four nodes:
+
+```
+V = {A, B, C, D}
+```
+
+These nodes are connected using undirected edges.
+
+---
+
+## 📍 Directed Graph
+
+* If the connecting edges are **directed**, then the graph is called a **directed graph**.
+* In a **directed graph**, edges provide information about the **direction** of connection.
+* An edge **(A, B)** is **not equal** to edge **(B, A)**.
+* Directed edges are drawn as **lines with arrows**, showing the direction of flow.
+
+🖼️ Example:
+
+<div align="center">
+  <img src="./images/03.jpg" width="300px"/>
+
+*Figure 9.3: An example of a directed graph*
+</div>
+
+👉 In Figure 9.3, many nodes are connected using **directed edges**.
+
+* For instance, you can move from **A → B**, but not from **B → A**.
+
+---
+
+## 📘 Important Terms in Directed Graphs
+
+### 🔹 Indegree
+
+The total number of **edges that come into a vertex**.<br/>
+👉 Example: Node **E** has **indegree = 1**, due to edge **C → E**.
+
+---
+
+### 🔹 Outdegree
+
+The total number of **edges that go out from a vertex**.<br/>
+👉 Example: Node **E** has **outdegree = 2**, because of edges **E → F** and **E → D**.
+
+---
+
+### 🔹 Isolated Vertex
+
+A vertex with **degree = 0** (no incoming or outgoing edges).<br/>
+👉 Example: Node **G** in Figure 9.3.
+
+---
+
+### 🔹 Source Vertex
+
+A vertex with **indegree = 0**.<br/>
+👉 Example: Node **A** in Figure 9.3.
+
+---
+
+### 🔹 Sink Vertex
+
+A vertex with **outdegree = 0**.<br/>
+👉 Example: Node **F** in Figure 9.3.
+
+---
+
