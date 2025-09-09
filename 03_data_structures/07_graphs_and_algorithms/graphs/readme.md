@@ -6,9 +6,9 @@ Each edge in a graph connects two distinct nodes.
 In mathematics, a graph is a formal representation of a **network**.
 Formally:
 
-$$
+<pre align="center">
 G = (V, E)
-$$
+</pre>
 
 where:
 
@@ -29,21 +29,21 @@ The graph $G = (V, E)$ in **Figure 9.1** can be described as:
 
 * **Vertices (V):**
 
-$$
-V = \{A, B, C, D, E\}
-$$
+<pre align="center">
+V = {A, B, C, D, E}
+</pre>
 
 * **Edges (E):**
 
-$$
-E = \{\{A, B\}, \{A, C\}, \{B, C\}, \{B, D\}, \{C, D\}, \{D, D\}, \{B, E\}, \{D, E\}\}
-$$
+<pre align="center">
+E = {{A, B}, {A, C}, {B, C}, {B, D}, {C, D}, {D, D}, {B, E}, {D, E}}
+</pre>
 
 So,
 
-$$
+<pre align="center">
 G = (V, E)
-$$
+</pre>
 
 ---
 
