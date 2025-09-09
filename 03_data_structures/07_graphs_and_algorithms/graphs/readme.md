@@ -29,15 +29,15 @@ The graph $G = (V, E)$ in **Figure 9.1** can be described as:
 
 * **Vertices (V):**
 
-  $$
-  V = \{A, B, C, D, E\}
-  $$
+$$
+V = \{A, B, C, D, E\}
+$$
 
 * **Edges (E):**
 
-  $$
-  E = \{\{A, B\}, \{A, C\}, \{B, C\}, \{B, D\}, \{C, D\}, \{D, D\}, \{B, E\}, \{D, E\}\}
-  $$
+$$
+E = \{\{A, B\}, \{A, C\}, \{B, C\}, \{B, D\}, \{C, D\}, \{D, D\}, \{B, E\}, \{D, E\}\}
+$$
 
 So,
 
