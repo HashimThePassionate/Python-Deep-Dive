@@ -306,3 +306,58 @@ A **Bipartite Graph** (also called a **Bigraph**) is a **special type of graph**
    * An edge shows if a player has played for a particular club.
 
 ---
+
+# 🗂️ **Graph Representations**
+
+Graph representation techniques define **how we store a graph in memory**.
+This includes storing:
+
+* **Vertices (nodes)** 🟢
+* **Edges (connections)** 🔗
+* **Weights (if weighted graph)** ⚖️
+
+There are **two common methods** to represent a graph:
+
+1. **Adjacency List** 📋
+2. **Adjacency Matrix** 🧮
+
+---
+
+## 📋 Adjacency List Representation
+
+* Based on a **linked list**.
+* For every vertex, we maintain a **list of its neighbors** (adjacent nodes).
+* Efficient when the graph is **sparse** (few edges compared to vertices).
+
+👉 Example:
+
+* If a graph has **200 nodes** but only **100 edges**, then adjacency list is best.
+* Saves space because we only store existing edges, not unnecessary zeros.
+
+---
+
+## 🧮 Adjacency Matrix Representation
+
+* Based on a **matrix (2D array)**.
+* Each **row and column** represent vertices.
+* A cell value indicates whether an edge exists between two nodes.
+
+👉 Example:
+
+* For a graph with **200 nodes**, the matrix will be **200 × 200**.
+* Most cells may be **0** if the graph is sparse.
+
+✅ **Best used when graph is dense** (many edges).
+✅ **Faster lookups** – checking if an edge exists between two vertices is **O(1)**.
+
+---
+
+## ⚖️ Choosing Between Them
+
+| Representation       | Best For 🏆               | Space Usage 📦                         | Lookup Speed ⏱️ |
+| -------------------- | ------------------------- | -------------------------------------- | --------------- |
+| **Adjacency List**   | Sparse graphs (few edges) | Less space (only store existing edges) | Slower lookup   |
+| **Adjacency Matrix** | Dense graphs (many edges) | More space (matrix always stored)      | Fast lookup     |
+
+---
+
