@@ -361,3 +361,100 @@ There are **two common methods** to represent a graph:
 
 ---
 
+# 📋 **Adjacency Lists**
+
+In an **Adjacency List representation**:
+
+* All the nodes **directly connected** to a node $x$ are listed in its adjacency list.
+* The graph is represented by showing the **adjacent list of every vertex**.
+
+👉 Example Graph:
+
+<div align="center">
+  <img src="./images/07.jpg" alt="" width="350px"/>
+
+*Figure 9.7: A sample graph of five nodes*
+</div>
+
+Here:
+
+* **A** is adjacent to **B** and **C**.
+* **B** is adjacent to **E, C, A**, etc.
+
+---
+
+## 🔗 Adjacency List Representation
+
+A **linked list** can be used to implement adjacency lists.
+
+* We need as many **linked lists** as there are **nodes**.
+* At each index, we store the **adjacent vertices** of that node.
+
+👉 Example Adjacency List for Figure 9.7:
+
+<div align="center">
+  <img src="./images/08.jpg" alt="" width="350px"/>
+  
+*Figure 9.8 : Adjacency list for the graph shown in Figure 9.7*
+</div>
+
+---
+
+### 🖥️ Python Dictionary Implementation
+
+In Python, instead of linked lists, we often use **dictionaries** to represent adjacency lists (since they allow easy key–value storage).
+
+```python
+# Graph represented as adjacency list using dictionary
+graph = dict()
+
+graph['A'] = ['B', 'C']
+graph['B'] = ['E', 'C', 'A']
+graph['C'] = ['A', 'B', 'E', 'F']
+graph['E'] = ['B', 'C']
+graph['F'] = ['C']
+```
+
+---
+
+### 🔎 Explanation (Line by Line)
+
+1. `graph = dict()`
+
+   * Creates an empty dictionary called **graph**.
+   * Each key will represent a **vertex**.
+   * Each value will be a **list of adjacent vertices**.
+
+2. `graph['A'] = ['B', 'C']`
+
+   * Vertex **A** has neighbors **B** and **C**.
+
+3. `graph['B'] = ['E', 'C', 'A']`
+
+   * Vertex **B** has neighbors **E, C, and A**.
+
+4. `graph['C'] = ['A', 'B', 'E', 'F']`
+
+   * Vertex **C** has neighbors **A, B, E, and F**.
+
+5. `graph['E'] = ['B', 'C']`
+
+   * Vertex **E** has neighbors **B and C**.
+
+6. `graph['F'] = ['C']`
+
+   * Vertex **F** has only one neighbor: **C**.
+
+---
+
+## ✅ Advantages of Adjacency List
+
+* Saves space when the graph is **sparse**.
+* Easy to **add or delete nodes/edges**.
+
+## ⚠️ Disadvantage
+
+* Checking if a particular edge exists can be **slow** compared to adjacency matrix.
+
+---
+
