@@ -394,7 +394,7 @@ A **linked list** can be used to implement adjacency lists.
 
 <div align="center">
   <img src="./images/08.jpg" alt="" width="350px"/>
-  
+
 *Figure 9.8 : Adjacency list for the graph shown in Figure 9.7*
 </div>
 
@@ -458,3 +458,161 @@ graph['F'] = ['C']
 
 ---
 
+# 🧮 **Adjacency Matrix**
+
+Another approach to represent a graph is by using an **Adjacency Matrix**.
+
+* The graph is represented using a **matrix (V × V)**, where **V = number of vertices**.
+* Each cell in the matrix shows whether there is an **edge** between two vertices:
+
+  * `1` → edge exists
+  * `0` → edge does not exist
+* The adjacency matrix is essentially a **2D array**.
+
+---
+
+## 📍 Example
+<div align="center">
+  <img src="./images/09.jpg" alt="" width="400px"/>
+
+*Figure 9.9: A sample graph and its adjacency matrix*
+</div>
+
+👉 The graph has **vertices**: A, B, C, E, F
+
+👉 The corresponding adjacency matrix is:
+
+|       | A | B | C | E | F |
+| ----- | - | - | - | - | - |
+| **A** | 0 | 1 | 1 | 0 | 0 |
+| **B** | 1 | 0 | 0 | 1 | 0 |
+| **C** | 1 | 1 | 0 | 1 | 1 |
+| **E** | 0 | 1 | 1 | 0 | 0 |
+| **F** | 0 | 0 | 1 | 0 | 0 |
+
+---
+
+## 🖥️ Python Implementation
+
+We will now implement the adjacency matrix step by step using Python.
+
+### 1️⃣ Step 1: Graph Representation (Adjacency List in Dictionary Form)
+
+```python
+# Graph represented as adjacency list
+graph = dict()
+graph['A'] = ['B', 'C']
+graph['B'] = ['E', 'C', 'A']
+graph['C'] = ['A', 'B', 'E', 'F']
+graph['E'] = ['B', 'C']
+graph['F'] = ['C']
+```
+
+✔️ Here, the **keys** represent vertices (A, B, C, E, F).<br/>
+✔️ The **values** are lists of adjacent vertices.
+
+---
+
+### 2️⃣ Step 2: Extract Vertices
+
+```python
+# Extract vertices and sort them
+matrix_elements = sorted(graph.keys())
+cols = rows = len(matrix_elements)
+```
+
+✔️ `matrix_elements` = `['A', 'B', 'C', 'E', 'F']`<br/>
+✔️ Number of rows = columns = `5` (since 5 vertices).
+
+---
+
+### 3️⃣ Step 3: Initialize Empty Matrix
+
+```python
+# Create empty adjacency matrix (filled with 0s)
+adjacency_matrix = [[0 for x in range(rows)] for y in range(cols)]
+edges_list = []
+```
+
+✔️ `adjacency_matrix` will be a 5×5 matrix filled with zeros initially.<br/>
+✔️ Example:
+
+```
+[0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0]
+```
+
+✔️ `edges_list` will store edges like `('A', 'B')`.
+
+---
+
+### 4️⃣ Step 4: Build Edge List
+
+```python
+for key in matrix_elements:
+    for neighbor in graph[key]:
+        edges_list.append((key, neighbor))
+print(edges_list)
+```
+
+✔️ This creates a list of all edges.<br/>
+✔️ Output:
+
+```
+[('A', 'B'), ('A', 'C'), 
+ ('B', 'E'), ('B', 'C'), ('B', 'A'), 
+ ('C', 'A'), ('C', 'B'), ('C', 'E'), ('C', 'F'), 
+ ('E', 'B'), ('E', 'C'), 
+ ('F', 'C')]
+```
+
+---
+
+### 5️⃣ Step 5: Fill the Adjacency Matrix
+
+```python
+for edge in edges_list:
+    index_of_first_vertex = matrix_elements.index(edge[0])
+    index_of_second_vertex = matrix_elements.index(edge[1])
+    adjacency_matrix[index_of_first_vertex][index_of_second_vertex] = 1
+```
+
+✔️ For each edge `(u, v)`, we find their **indices** in `matrix_elements` and set the matrix cell to `1`.
+
+---
+
+### 6️⃣ Final Output Matrix
+
+```python
+print(adjacency_matrix)
+```
+
+✔️ Output:
+
+```
+[0, 1, 1, 0, 0]
+[1, 0, 0, 1, 0]
+[1, 1, 0, 1, 1]
+[0, 1, 1, 0, 0]
+[0, 0, 1, 0, 0]
+```
+
+This corresponds exactly to the adjacency matrix shown in Figure 9.9 ✅
+
+---
+
+## ✅ Advantages of Adjacency Matrix
+
+* Very **fast lookup** for checking if an edge exists (`O(1)` time).
+* Useful in **dense graphs** (many edges).
+* Widely used in **routing tables, navigation systems, transport networks**.
+
+## ⚠️ Disadvantages
+
+* **Consumes more space** (O(V²)), even if graph is sparse.
+* **Adding/deleting vertices** is difficult compared to adjacency list.
+
+---
