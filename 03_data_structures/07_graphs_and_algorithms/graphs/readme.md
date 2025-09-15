@@ -799,7 +799,7 @@ Breadth-First Search (BFS) works very similarly to a **level-order traversal alg
 
 <div align="center">
   <img src="./images/15.jpg" width="500px"/>
-  
+
 **Figure 9.15: Node D is visited in BFS**
 </div>
 
@@ -825,3 +825,299 @@ In this example, we used **alphabetical order**.
 
 ---
 
+
+# 🌐 Breadth-First Search Example (BFS) 
+
+## 🖼️ Figure 9.16 — Undirected Sample Graph
+
+<div align="center">
+  <img src="./images/17.jpg" width="500px"/>
+</div>
+
+* Vertices: **A, B, C, D, E, F, G, H**
+* Undirected edges (from the drawing):
+
+  * A connects to **B, D, G**
+  * B connects to **A, F, E**
+  * C connects to **F, H**
+  * D connects to **F, A**
+  * E connects to **B, G**
+  * F connects to **B, D, C**
+  * G connects to **A, E**
+  * H connects to **C**
+
+This matches the **adjacency list** you provided (shown next).
+
+---
+
+## 🗂️ Adjacency List (as given)
+
+```python
+graph = dict()
+graph['A'] = ['B', 'G', 'D']
+
+graph['B'] = ['A', 'F', 'E']
+graph['C'] = ['F', 'H']
+graph['D'] = ['F', 'A']
+graph['E'] = ['B', 'G']
+graph['F'] = ['B', 'D', 'C']
+graph['G'] = ['A', 'E']
+graph['H'] = ['C']
+```
+
+* This stores the undirected graph in a **dictionary of lists** where each key is a vertex and the list contains its neighbors.
+
+---
+
+## 🔁 BFS Algorithm (as given)
+
+```python
+from collections import deque
+def breadth_first_search(graph, root):
+    visited_vertices = list()
+    graph_queue = deque([root])
+    visited_vertices.append(root)
+    node = root
+    while len(graph_queue) > 0:
+        node = graph_queue.popleft()
+        adj_nodes = graph[node]
+        remaining_elements = set(adj_nodes).difference(set(visited_vertices))
+        if len(remaining_elements) > 0:
+            for elem in sorted(remaining_elements):
+                visited_vertices.append(elem)
+                graph_queue.append(elem)
+    return visited_vertices
+```
+---
+
+## 🧠 Line-by-Line Explanation (with concepts)
+
+* `from collections import deque`
+  Imports **deque**, a double-ended queue with **O(1)** appends and pops from either end (perfect for BFS queue).
+
+* `def breadth_first_search(graph, root):`
+  Defines BFS function that takes a graph (adjacency list) and a **start/root** node.
+
+* `visited_vertices = []`
+  Keeps the **order** of visited nodes. Using a list allows us to return the traversal sequence.
+
+* `graph_queue = deque([root])`
+  Initializes the BFS **queue** with the starting node. Queue enforces **FIFO** behavior.
+
+* `visited_vertices.append(root)`
+  Marks the root as **visited** immediately (so we don’t re-enqueue it later).
+
+* `while len(graph_queue) > 0:`
+  Process nodes **until the queue empties** (i.e., no frontier left).
+
+* `node = graph_queue.popleft()`
+  **Dequeue** the next node to visit (FIFO). This is the current node being expanded.
+
+* `adj_nodes = graph[node]`
+  Get all **neighbors** (adjacent vertices) of the current node.
+
+* `remaining_elements = set(adj_nodes).difference(set(visited_vertices))`
+  Compute **unvisited neighbors only**.
+
+  * `set(adj_nodes)` = candidates to consider
+  * `set(visited_vertices)` = already seen
+  * **difference** = neighbors we haven’t visited yet
+
+* `if len(remaining_elements) > 0:`
+  Only act if there is at least one unvisited neighbor.
+
+* `for elem in sorted(remaining_elements):`
+  Enqueue neighbors in **alphabetical order** (your text explicitly chooses this to keep a consistent traversal).
+
+* `visited_vertices.append(elem)`
+  Mark neighbor as visited **at enqueue time** (this version does it here to avoid enqueuing duplicates later).
+
+* `graph_queue.append(elem)`
+  Put neighbor into the queue for future expansion.
+
+* `return visited_vertices`
+  Return the **BFS traversal order**.
+
+> 💡 This strategy guarantees each node is **enqueued once** and **dequeued once**, avoiding duplicates and cycles.
+
+---
+
+## ▶️ Dry Run (exactly as described) from **A**
+
+We’ll follow your rule to add neighbors in **alphabetical order**.
+
+### 🟦 Initial state (enqueue A, mark A visited)
+
+* **Visited:** `[A]`
+* **Queue:** `deque([A])`
+
+---
+
+### 🖼️ Figure 9.17 — Visit A; enqueue B, D, G (alphabetical order)
+
+<div align="center">
+  <img src="./images/18.jpg" width="500px"/>
+</div>
+
+* Dequeue **A**
+* A’s neighbors: **B, G, D** → unvisited → sort → **B, D, G**
+* Enqueue **B, D, G** and mark them visited
+
+**Visited:** `[A, B, D, G]`
+**Queue:** `deque([B, D, G])`
+
+---
+
+### 🖼️ Figure 9.18 — Visit B; enqueue E, F
+
+<div align="center">
+  <img src="./images/19.jpg" width="500px"/>
+</div>
+
+* Dequeue **B**
+* B’s neighbors: **A, F, E**
+
+  * A already visited
+  * **E, F** are unvisited → alphabetical → **E, F**
+* Enqueue **E, F** and mark them visited
+
+**Visited:** `[A, B, D, G, E, F]`
+**Queue:** `deque([D, G, E, F])`
+
+---
+
+### 🧭 Process D, G (no new nodes), then…
+
+* **Dequeue D** → neighbors **F, A** (both already visited) → nothing new
+  **Queue:** `deque([G, E, F])`
+* **Dequeue G** → neighbors **A, E** (A visited, E already in visited) → nothing new
+  **Queue:** `deque([E, F])`
+
+---
+
+### 🖼️ Figure 9.19 — Visit E (no new nodes)
+
+<div align="center">
+  <img src="./images/20.jpg" width="500px"/>
+</div>
+
+* **Dequeue E** → neighbors **B, G** (both already visited) → nothing new
+
+**Visited:** `[A, B, D, G, E, F]`
+**Queue:** `deque([F])`
+
+---
+
+### 🖼️ Figure 9.20 — Visit F; enqueue C
+
+<div align="center">
+  <img src="./images/21.jpg" width="500px"/>
+</div>
+
+* **Dequeue F** → neighbors **B, D, C**
+
+  * B and D visited
+  * **C** unvisited → enqueue **C**, mark visited
+
+**Visited:** `[A, B, D, G, E, F, C]`
+**Queue:** `deque([C])`
+
+---
+
+### 🖼️ Figure 9.21 — Visit C; enqueue H; then visit H (done)
+
+<div align="center">
+  <img src="./images/22.jpg" width="500px"/>
+</div>
+
+* **Dequeue C** → neighbors **F, H**
+
+  * F visited
+  * **H** unvisited → enqueue **H**, mark visited
+    **Queue:** `deque([H])`
+* **Dequeue H** → neighbor **C** (already visited) → nothing new
+  **Queue:** `deque([])` → **empty ⇒ traversal complete**
+
+---
+
+## ✅ Output Sequence (as you stated)
+
+When we run:
+
+```python
+print(breadth_first_search(graph, 'A'))
+```
+
+We get:
+
+```python
+['A', 'B', 'D', 'G', 'E', 'F', 'C', 'H']
+```
+
+This exactly matches the order illustrated across Figures **9.17 → 9.21**.
+
+---
+
+## 🧩 Why the Order Can Differ
+
+BFS guarantees **level-by-level** visitation, but **within the same level**, the order depends on **how neighbors are enqueued**.
+
+* Here, we purposely **sort** neighbors (alphabetical) to keep the order deterministic.
+* If you changed the neighbor ordering (e.g., inserted as they appear in the adjacency list), the order might differ but would **still be a valid BFS**.
+
+---
+
+## ⏱️ Time Complexity (as given, with reasoning)
+
+* Every vertex is **enqueued once** and **dequeued once** → total queue operations cost **O(|V|)** because each enqueue/dequeue is **O(1)** with `deque`.
+* For each vertex, we **scan its adjacency list** exactly once overall → total is **O(|E|)** across all vertices.
+* **Total time:** **O(|V| + |E|)**
+* **Space:** O(|V|) for `visited_vertices` and up to O(|V|) for the queue in the worst case.
+
+---
+
+## 🌍 Real-World Applications of BFS (as provided)
+
+* **Shortest path in unweighted graphs**: Finds minimal number of edges from a source to any node.
+* **Web crawling**: Crawl pages **level by level** from a seed page, maintaining **indexed layers** and a **closed list** of visited URLs.
+* **Navigation systems**: Quickly fetch **neighboring locations** from a graph of places/roads to explore reachable areas level-wise.
+
+---
+
+## 🧪 Minimal Reproducible Script (complete)
+
+> This is a single, runnable snippet that includes your graph, the BFS, and the print call—using the corrected identifier `visited_vertices`:
+
+```python
+from collections import deque
+
+graph = dict()
+graph['A'] = ['B', 'G', 'D']
+
+graph['B'] = ['A', 'F', 'E']
+graph['C'] = ['F', 'H']
+graph['D'] = ['F', 'A']
+graph['E'] = ['B', 'G']
+graph['F'] = ['B', 'D', 'C']
+graph['G'] = ['A', 'E']
+graph['H'] = ['C']
+
+def breadth_first_search(graph, root):
+    visited_vertices = []
+    graph_queue = deque([root])
+    visited_vertices.append(root)
+    while len(graph_queue) > 0:
+        node = graph_queue.popleft()
+        adj_nodes = graph[node]
+        remaining_elements = set(adj_nodes).difference(set(visited_vertices))
+        if len(remaining_elements) > 0:
+            for elem in sorted(remaining_elements):
+                visited_vertices.append(elem)
+                graph_queue.append(elem)
+    return visited_vertices
+
+print(breadth_first_search(graph, 'A'))
+# Expected: ['A', 'B', 'D', 'G', 'E', 'F', 'C', 'H']
+```
+
+---
