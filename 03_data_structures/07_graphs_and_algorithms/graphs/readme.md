@@ -684,3 +684,144 @@ There are **two important graph traversal algorithms**:
 
 ---
 
+# 🌐 **Breadth-First Traversal (BFS)**
+
+## 📌 Introduction
+
+Breadth-First Search (BFS) works very similarly to a **level-order traversal algorithm** in a tree data structure.
+
+* 🔹 It visits **level by level**
+* 🔹 Starts at the **root node** (level 0)
+* 🔹 Then visits all nodes at **level 1** (directly connected to root)
+* 🔹 Moves to **level 2** and so on
+
+👉 This ensures traversal of the graph **breadthwise**.
+
+📌 To manage the traversal order, BFS uses a **Queue (FIFO structure)**.
+
+---
+
+## 🏗️ How BFS Works
+
+1. Begin with the **starting node**
+2. Visit the node and mark it as **visited**
+3. Look at all its **neighbors** (adjacent vertices)
+4. Add these neighbors into the **queue**
+5. Repeatedly visit the **next node from the queue**
+6. Add its unvisited neighbors into the queue
+7. Continue until all nodes are visited
+
+✅ Each node is visited **only once**.
+
+---
+
+## 🖼️ Example Graph
+
+<div align="center">
+  <img src="./images/10.jpg" width="500"/>
+
+**Figure 9.10: A sample graph with Queue & Visited array**
+</div>
+
+* Graph has **5 nodes**: `A, B, C, D, E`
+* On the right side, we have:
+
+  * **Visited Array** → keeps track of visited nodes
+  * **Queue** → helps manage BFS order
+
+---
+
+## 🔵 Step 1: Start with Node A
+
+<div align="center">
+  <img src="./images/11.jpg" width="500px"/>
+
+**Figure 9.11: Node A is visited in BFS**
+</div>
+
+* Start at **A**
+* Mark **A** as visited → `Visited = [A]`
+* Add all adjacent nodes of A → `B, C, E` into the **Queue**
+
+👉 Queue = `[B, C, E]`
+
+---
+
+## 🔵 Step 2: Visit Node B
+
+<div align="center">
+  <img src="./images/12.jpg" width="500px"/>
+
+**Figure 9.12: Node B is visited in BFS**
+</div>
+
+* Dequeue first element → **B**
+* Mark **B** as visited → `Visited = [A, B]`
+* Add B’s unvisited neighbor → **D**
+
+👉 Queue = `[C, E, D]`
+
+---
+
+## 🔵 Step 3: Visit Node C
+
+<div align="center">
+  <img src="./images/13.jpg" width="500px"/>
+
+**Figure 9.13: Node C is visited in BFS**
+</div>
+
+* Dequeue → **C**
+* Mark **C** as visited → `Visited = [A, B, C]`
+* Neighbors of C are already visited or in queue → nothing new added
+
+👉 Queue = `[E, D]`
+
+---
+
+## 🔵 Step 4: Visit Node E
+
+<div align="center">
+  <img src="./images/14.jpg" width="500px"/>
+
+**Figure 9.14: Node E is visited in BFS**
+</div>
+
+* Dequeue → **E**
+* Mark **E** as visited → `Visited = [A, B, C, E]`
+* Neighbors of E are already in visited list → nothing added
+
+👉 Queue = `[D]`
+
+---
+
+## 🔵 Step 5: Visit Node D
+
+<div align="center">
+  <img src="./images/15.jpg" width="500px"/>
+  
+**Figure 9.15: Node D is visited in BFS**
+</div>
+
+* Dequeue → **D**
+* Mark **D** as visited → `Visited = [A, B, C, E, D]`
+* No new neighbors left
+
+👉 Queue = `[]` (empty → traversal complete ✅)
+
+---
+
+## 📍 Final BFS Traversal Order
+
+👉 The BFS visits nodes in the order:
+
+```
+A → B → C → E → D
+```
+
+⚠️ Note: The order can vary depending on **how neighbors are enqueued**.
+For example: BCE, CEB, CBE, BEC, or ECB are all valid.
+In this example, we used **alphabetical order**.
+
+---
+
