@@ -616,3 +616,71 @@ This corresponds exactly to the adjacency matrix shown in Figure 9.9 ✅
 * **Adding/deleting vertices** is difficult compared to adjacency list.
 
 ---
+
+# 📊 **Graph Traversals**
+
+## 🔎 What is Graph Traversal?
+
+A **graph traversal** means to **visit all the vertices (nodes)** of the graph while keeping track of:
+
+* ✅ Which vertices have already been **visited**
+* ❌ Which vertices have **not been visited yet**
+
+👉 A graph traversal algorithm is considered **efficient** if it can traverse all the nodes of the graph in the **minimum possible time**.
+
+---
+
+## 🌳 Graph Traversal vs Tree Traversal
+
+Graph traversal is also called a **graph search algorithm**. It is quite similar to **tree traversal algorithms** such as:
+
+* Preorder traversal
+* Inorder traversal
+* Postorder traversal
+* Level order traversal
+
+📌 Just like tree traversal, in a graph traversal we:
+
+1. Start from a **specific node**
+2. Traverse through **edges** to reach all other nodes
+
+---
+
+## 🛤️ Common Strategy of Graph Traversal
+
+The main strategy is:
+
+1. **Follow a path** until a **dead end** is reached
+2. **Backtrack** (move back) until we find an **alternative path**
+3. Continue the process until all nodes are visited
+
+Alternatively, we can **iteratively move** from one node to another until the **whole graph (or part of it)** is traversed.
+
+---
+
+## 🎯 Importance of Graph Traversal Algorithms
+
+Graph traversal algorithms are very important for solving **fundamental problems** such as:
+
+* 🚶 Determining how to get from **one vertex to another**
+* 📍 Comparing **different paths** from **Node A to Node B**
+* 🛣️ Finding the **shortest route** from one city to another in a **network of cities**
+
+---
+
+## 🧮 Types of Graph Traversal Algorithms
+
+There are **two important graph traversal algorithms**:
+
+1. **Breadth-First Search (BFS)** 🔄
+
+   * Traverses the graph **level by level**
+   * Uses a **queue** data structure
+
+2. **Depth-First Search (DFS)** 🔂
+
+   * Traverses the graph by going **deep into one path first**
+   * Uses a **stack** (or recursion)
+
+---
+
