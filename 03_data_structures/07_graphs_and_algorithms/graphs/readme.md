@@ -1121,3 +1121,276 @@ print(breadth_first_search(graph, 'A'))
 ```
 
 ---
+
+
+# 🌊 **Depth-First Search (DFS)**
+
+## 🔎 What is DFS?
+
+**Depth-First Search (DFS)** (also called depth-first traversal) traverses a graph similar to **preorder traversal** in trees:
+
+* **Child nodes are visited before sibling nodes.**
+* We **start with the root node** → visit it → then explore its **adjacent neighbors**.
+* If the neighbor is **unvisited**, go deeper along that path.
+* If the neighbor is **already visited**, **backtrack** to the previous node using a stack.
+* Once all neighbors are visited and the stack is empty, the traversal ends.
+
+---
+
+## 🧩 Example Graph (Figure 9.22)
+
+<div align="center">
+  <img src="./images/22.jpg" width="500"/>
+
+**Figure 9.22:** *An example graph for understanding the DFS algorithm.*
+</div>
+
+We start from **A** and explore neighbors in **alphabetical order**.
+
+---
+
+## 🐾 Step-by-Step Traversal (Figures 9.23 → 9.27)
+
+> Notation: **Visited** = nodes visited so far; **Stack (top ↑)** = current backtracking helper.
+
+---
+
+### ▶️ Figure 9.23 — Visit **A**, then **B**
+
+<div align="center">
+  <img src="./images/23.jpg" width="500px"/>
+</div>
+
+
+* Start at **A** → mark it visited.
+
+  * **Visited:** `A`
+  * **Stack (top ↑):** `B` (first neighbor of A is chosen → **B**)
+
+* Visit **B**. Its only neighbor is **A**, which is already visited → backtrack.
+
+  * Back at **A**, the next unvisited neighbor is **S**.
+
+---
+
+### ▶️ Figure 9.24 — Visit **S**, then **C**
+
+<div align="center">
+  <img src="./images/24.jpg" width="500px"/>
+</div>
+
+* Visit **S**. Neighbors of S: **C, G** → choose **C** (alphabetical).
+* Visit **C**.
+
+  * **Visited:** `A, B, S, C`
+  * **Stack top:** `D` (next deeper path).
+
+---
+
+### ▶️ Figure 9.25 — Visit **D**, then **E**
+
+<div align="center">
+  <img src="./images/25.jpg" width="500px"/>
+</div>
+
+* Visit **D**. It has no new unvisited neighbors → backtrack to **C**.
+* Visit **E** next from C’s neighbors.
+
+  * **Visited:** `A, B, S, C, D, E`
+  * **Stack top:** `H`.
+
+---
+
+### ▶️ Figure 9.26 — Visit **H**, then **G**
+
+<div align="center">
+  <img src="./images/26.jpg" width="500px"/>
+</div>
+
+* From **E**, visit **H**.
+* From **H**, visit **G**.
+
+  * **Visited:** `A, B, S, C, D, E, H, G`
+  * **Stack top:** `F`.
+
+---
+
+### ▶️ Figure 9.27 — Finally visit **F**
+
+<div align="center">
+  <img src="./images/27.jpg" width="500px"/>
+</div>
+
+* From **G**, visit **F**.
+* All neighbors are visited now.
+* Stack becomes empty → traversal ends.
+
+**✅ Final Traversal Order:** `A-B-S-C-D-E-H-G-F`
+
+---
+
+## 🧭 Adjacency List (Graph Representation)
+
+```python
+graph = dict()
+graph['A'] = ['B', 'S']
+graph['B'] = ['A']
+graph['S'] = ['A','G','C']
+graph['D'] = ['C']
+graph['G'] = ['S','F','H']
+graph['H'] = ['G','E']
+graph['E'] = ['C','H']
+graph['F'] = ['C','G']
+graph['C'] = ['D','S','E','F']
+```
+
+---
+
+## 🧑‍💻 DFS Implementation in Python
+
+```python
+def depth_first_search(graph, root):
+    visited_vertices = list()
+    graph_stack = list()
+    graph_stack.append(root)
+    node = root
+    while graph_stack:
+        if node not in visited_vertices:
+            visited_vertices.append(node)
+        adj_nodes = graph[node]
+        if set(adj_nodes).issubset(set(visited_vertices)):
+            graph_stack.pop()
+            if len(graph_stack) > 0:
+                node = graph_stack[-1]
+            continue
+        else:
+            remaining_elements = set(adj_nodes).difference(set(visited_vertices))
+            first_adj_node = sorted(remaining_elements)[0]
+            graph_stack.append(first_adj_node)
+            node = first_adj_node
+    return visited_vertices
+```
+
+---
+
+## 🧠 Line-by-Line Explanation
+
+1. **Function Definition**
+
+   ```python
+   def depth_first_search(graph, root):
+   ```
+
+   Define DFS function with an adjacency list `graph` and a starting node `root`.
+
+2. **Visited List & Stack Initialization**
+
+   ```python
+   visited_vertices = list()
+   graph_stack = list()
+   graph_stack.append(root)
+   node = root
+   ```
+
+   * `visited_vertices`: stores visited nodes in order.
+   * `graph_stack`: simulates the call stack.
+   * Push `root` to stack.
+   * Set current `node` to root.
+
+3. **Traversal Loop**
+
+   ```python
+   while graph_stack:
+   ```
+
+   Continue while stack is not empty.
+
+4. **Visit Node if New**
+
+   ```python
+   if node not in visited_vertices:
+       visited_vertices.append(node)
+   ```
+
+   If the node is not already visited → mark it visited.
+
+5. **Check Neighbors**
+
+   ```python
+   adj_nodes = graph[node]
+   if set(adj_nodes).issubset(set(visited_vertices)):
+   ```
+
+   If **all neighbors** are already visited → dead end.
+
+6. **Backtrack**
+
+   ```python
+   graph_stack.pop()
+   if len(graph_stack) > 0:
+       node = graph_stack[-1]
+   continue
+   ```
+
+   Pop the stack and move back to the previous node.
+
+7. **Otherwise Go Deeper**
+
+   ```python
+   remaining_elements = set(adj_nodes).difference(set(visited_vertices))
+   first_adj_node = sorted(remaining_elements)[0]
+   graph_stack.append(first_adj_node)
+   node = first_adj_node
+   ```
+
+   * Compute unvisited neighbors.
+   * Pick the alphabetically smallest one.
+   * Push it onto the stack and make it the new current node.
+
+8. **End**
+
+   ```python
+   return visited_vertices
+   ```
+
+   When stack empties, return the complete traversal order.
+
+---
+
+## 🧪 Dry-Run of the Code (Alphabetical Neighbors)
+
+| Step | Action                          | Visited                   | Stack               |
+| ---- | ------------------------------- | ------------------------- | ------------------- |
+| 1    | Start at **A**                  | A                         | A                   |
+| 2    | Visit **B**                     | A, B                      | A, B                |
+| 3    | Backtrack to **A**, go to **S** | A, B, S                   | A, S                |
+| 4    | Visit **C**                     | A, B, S, C                | A, S, C             |
+| 5    | Visit **D**                     | A, B, S, C, D             | A, S, C, D          |
+| 6    | Backtrack to C → Visit **E**    | A, B, S, C, D, E          | A, S, C, E          |
+| 7    | Visit **H**                     | A, B, S, C, D, E, H       | A, S, C, E, H       |
+| 8    | Visit **G**                     | A, B, S, C, D, E, H, G    | A, S, C, E, H, G    |
+| 9    | Visit **F**                     | A, B, S, C, D, E, H, G, F | A, S, C, E, H, G, F |
+| 10   | Backtrack until stack is empty  | Done                      | ∅                   |
+
+**Final Output:** `A-B-S-C-D-E-H-G-F`
+
+---
+
+## ⏱️ Time Complexity
+
+* **Adjacency List:** `O(V + E)`
+  Each vertex and edge is processed once.
+* **Adjacency Matrix:** `O(V²)`
+  Neighbor lookups are slower since the entire row must be scanned.
+
+---
+
+## 🧰 Applications of DFS
+
+* 🧩 Solving **mazes**
+* 🔗 Finding **connected components** in graphs
+* ♻️ Detecting **cycles** in graphs
+* 🌉 Identifying **bridges** (critical connections)
+* 📊 Advanced algorithms (topological order, discovery times)
+
+---
