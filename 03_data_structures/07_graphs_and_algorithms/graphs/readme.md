@@ -1394,3 +1394,127 @@ def depth_first_search(graph, root):
 * 📊 Advanced algorithms (topological order, discovery times)
 
 ---
+
+# 🌳 **Minimum Spanning Tree (MST) and Graph Methods**
+
+## 📌 Other Useful Graph Methods
+
+Graphs are widely used when we need to **find paths between two nodes**. Depending on the situation:
+
+* 🔹 Sometimes we need to find **all possible paths**.
+* 🔹 Sometimes we only need the **shortest path**.
+* 🔹 In **routing applications**, we usually determine the shortest path between source and destination.
+<br/>
+
+👉 For **unweighted graphs**, the shortest path = the path with the **least number of edges**.<br/>
+👉 For **weighted graphs**, the shortest path = the path with the **lowest total weight**.
+
+In some cases, we may also need to find the **longest path** or the **shortest path** using different algorithms such as the **Minimum Spanning Tree (MST)**.
+
+---
+
+## 🌳 Minimum Spanning Tree (MST)
+
+### 📖 Definition
+
+A **Minimum Spanning Tree (MST)** is:
+
+* A **subset of edges** from a connected weighted graph.
+* Connects **all nodes** of the graph.
+* Has the **lowest possible total edge weight**.
+* ❌ No cycle is allowed.
+
+Formally:
+Given a connected graph **G = (V, E)** with real-valued edge weights,
+an MST is a subgraph with a subset of edges **T** such that:
+
+* The **sum of edge weights** is minimum.
+* The graph has **no cycles**.
+
+🔹 There may be multiple spanning trees, but the **Minimum Spanning Tree** has the **least total cost**.
+
+---
+
+<div align="center">
+  <img src="./images/28.jpg" width="600px"/>
+
+*Figure 9.28: A sample graph with the corresponding Minimum Spanning Tree*
+</div>
+
+
+## 🖼️ Example (Figure 9.28)
+
+On the **left side**, we have a weighted graph.
+On the **right side**, we see its MST.
+
+* All nodes are connected.
+* Only a subset of edges are chosen.
+* The **total weight = 1 + 4 + 2 + 4 + 5 = 16** (minimum possible).
+
+---
+
+## ⚙️ Algorithm Used: Kruskal’s Algorithm
+
+Kruskal’s Algorithm is one of the most common ways to construct an MST.
+
+### 🔑 Rules
+
+1. Start with the edge with the **smallest weight**.
+2. If adding it does **not create a cycle**, include it.
+3. Repeat until **all nodes are connected**.
+
+---
+
+## 📊 Left Side Graph Details
+
+* **Nodes**: A, B, C, E, F, H
+* **Edge Weights**:
+
+  * B–F = 1
+  * A–F = 2
+  * B–A = 3
+  * B–E = 4
+  * E–A = 4
+  * A–C = 4
+  * C–H = 5
+  * A–H = 7
+
+---
+
+## 🪜 Steps to Build MST (Using Kruskal’s Algorithm)
+
+1. **Smallest edge**: B–F = 1 → ✅ Take it (no cycle).
+2. Next: A–F = 2 → ✅ Take it (B–F–A are now connected).
+3. Next: B–A = 3 → ❌ Skip (forms cycle B–F–A–B).
+4. Next: B–E = 4 → ✅ Take it (E is now connected).
+5. Next: E–A = 4 → ❌ Skip (forms cycle B–E–A–F–B).
+6. Next: A–C = 4 → ✅ Take it (C is now connected).
+7. Next: C–H = 5 → ✅ Take it (H is now connected).
+8. Last: A–H = 7 → ❌ Skip (all nodes are already connected).
+
+---
+
+## ✅ Final MST Edges
+
+* B–F (1)
+* A–F (2)
+* B–E (4)
+* A–C (4)
+* C–H (5)
+
+👉 These exactly match the edges shown in the right-side MST diagram.
+
+---
+
+## 🌍 Real-World Applications of MST
+
+MST is widely used in:
+
+* 🛣️ Road network design (minimizing road congestion)
+* ⚡ Electric cable distribution networks
+* 💧 Water/hydraulic pipe networks
+* 📡 Communication networks
+* 📊 Cluster analysis in data science
+
+---
+
