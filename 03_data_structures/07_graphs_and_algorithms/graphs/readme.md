@@ -1518,3 +1518,107 @@ MST is widely used in:
 
 ---
 
+# 🌉 **Kruskal’s Minimum Spanning Tree (MST)**
+
+## 📖 Introduction
+Kruskal’s algorithm is a **greedy approach** for finding a **Minimum Spanning Tree (MST)** in a **connected, weighted, undirected graph**.  
+
+- It starts with **all vertices separate** (like each one is its own small tree).  
+- Then, it repeatedly adds the **smallest edge** that **does not form a cycle**.  
+- The process continues until **all vertices are connected** into one tree with the minimum total weight.  
+
+⏱️ **Time Complexity**: `O(E log E)` (or equivalently `O(E log V)`), because sorting the edges dominates the runtime.
+
+---
+
+## 🖼️ Visual Walkthrough of Example
+
+### **Step 1 → Figure 9.29**
+<div align="center">
+  <img src="./images/29.jpg" width="600px"/>
+
+  **Figure 9.29**
+</div>
+ 
+We begin by selecting the **smallest edge** in the graph.  
+- Smallest edge weight = **1**.  
+- This edge is included in MST ✅ (no cycle possible).  
+
+---
+
+### **Step 2 → Figure 9.30**
+<div align="center">
+  <img src="./images/30.jpg" width="600px"/>
+
+  **Figure 9.30**
+</div>
+
+Next smallest edges are **2** and **3**.  
+- Edge (weight 2) → added ✅ (no cycle).  
+- Edge (weight 3) → added ✅ (no cycle).  
+
+Now MST has edges {1, 2, 3}.  
+
+---
+
+### **Step 3 → Figure 9.31**
+<div align="center">
+  <img src="./images/31.jpg" width="600px"/>
+
+  **Figure 9.31**
+</div>
+ 
+Next smallest edges are **4** and **5**.  
+- Edge (weight 4) → added ✅.  
+- Edge (weight 5) → added ✅.  
+
+MST now contains {1, 2, 3, 4, 5}.  
+
+---
+
+### **Step 4 → Figure 9.32**
+<div align="center">
+  <img src="./images/32.jpg" width="600px"/>
+
+  **Figure 9.32**
+</div>
+
+Next smallest edge is **6**.  
+- Adding weight 6 → ✅ valid (no cycle).  
+
+Now MST = {1, 2, 3, 4, 5, 6}.  
+
+👉 The next edges are **7, 8, 9**, but all would **form a cycle**, so ❌ we skip them.  
+
+- Finally, we add edge **10** → ✅ valid.  
+
+Now MST = {1, 2, 3, 4, 5, 6, 10}.  
+
+---
+
+### **Step 5 → Figure 9.33**
+<div align="center">
+  <img src="./images/33.jpg" width="400px"/>
+
+  **Figure 9.33**
+</div>
+
+This is the **final MST** created by Kruskal’s algorithm.  
+
+✅ MST edges: {1, 2, 3, 4, 5, 6, 10}  
+✅ MST weight = 1 + 2 + 3 + 4 + 5 + 6 + 10 = **31**  
+
+---
+
+## 🪜 Algorithm Steps (Formal)
+
+1. Initialize an empty MST **M = ∅**.  
+2. Sort all edges by weight.  
+3. For each edge `(u,v,w)` in sorted order:  
+   - If `u` and `v` are in **different sets**, add `(u,v,w)` to MST.  
+   - If they’re in the **same set**, skip (to avoid cycles).  
+4. Stop when MST has **V−1 edges** (where V = number of vertices).  
+
+---
+
+
