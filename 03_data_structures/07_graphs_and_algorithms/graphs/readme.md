@@ -1843,3 +1843,129 @@ So, when should you use Prim's algorithm versus Kruskal's algorithm? It generall
 
       * Prim’s algorithm is generally faster for **dense graphs** (graphs with many edges).
       * Kruskal’s algorithm is often better for **sparse graphs** (graphs with fewer edges).
+
+---
+
+### 💻 **Python Implementation of Prim's Algorithm**
+
+This code finds the Minimum Spanning Tree (MST) using a **priority queue** (min-heap) to efficiently select the next cheapest edge.
+
+```python
+import heapq
+
+def prims_algorithm(graph, start_node):
+    """
+    Finds the Minimum Spanning Tree (MST) using Prim's algorithm.
+    
+    Args:
+        graph (dict): A dictionary representing the graph's adjacency list.
+                      Example: {'A': [('B', 5), ('C', 1)], ...}
+        start_node (str): The node to start the algorithm from.
+
+    Returns:
+        tuple: A tuple containing the total cost of the MST and a list of its edges.
+    """
+    # Priority queue to store edges to visit: (weight, from_node, to_node)
+    min_heap = []
+    
+    # Set to keep track of vertices already in the MST
+    visited = set()
+    
+    # List to store the edges of the final MST
+    mst_edges = []
+    
+    # Total cost of the MST
+    total_cost = 0
+
+    # Function to add all edges from a node to the priority queue
+    def add_edges(node):
+        visited.add(node)
+        for neighbor, weight in graph.get(node, []):
+            if neighbor not in visited:
+                heapq.heappush(min_heap, (weight, node, neighbor))
+
+    # Start the algorithm from the given start_node
+    add_edges(start_node)
+
+    # Loop until the heap is empty or we've visited all nodes
+    while min_heap and len(visited) < len(graph):
+        # Get the edge with the smallest weight
+        weight, from_node, to_node = heapq.heappop(min_heap)
+
+        # If the destination node is already visited, this edge would form a cycle.
+        # So, we skip it.
+        if to_node not in visited:
+            # Add the new node and its edges to our MST
+            total_cost += weight
+            mst_edges.append((from_node, to_node, weight))
+            add_edges(to_node)
+            
+    return total_cost, mst_edges
+
+# --- Example Usage ---
+# Let's use the same graph from the previous example
+example_graph = {
+    'A': [('B', 5), ('C', 1)],
+    'B': [('A', 5), ('C', 5), ('D', 3)],
+    'C': [('A', 1), ('B', 5), ('D', 7), ('E', 9), ('F', 2)],
+    'D': [('B', 3), ('C', 7), ('G', 4)],
+    'E': [('C', 9), ('F', 6)],
+    'F': [('C', 2), ('E', 6), ('G', 8)],
+    'G': [('D', 4), ('F', 8), ('H', 10)],
+    'H': [('B', 12), ('G', 10)]
+}
+
+# Run the algorithm starting from node 'A'
+cost, edges = prims_algorithm(example_graph, 'A')
+
+# Print the results
+print(f"Total cost of the Minimum Spanning Tree: {cost} 💰")
+print("Edges in the MST:")
+for edge in edges:
+    print(f"  {edge[0]} --({edge[2]})-- {edge[1]}")
+
+```
+
+### Code Explanation 🧑‍🏫
+
+1.  **`import heapq`**
+
+      * We import the `heapq` library, which provides an efficient implementation of a **min-heap** (also known as a priority queue) in Python. This is perfect for always keeping track of the edge with the minimum weight.
+
+2.  **`prims_algorithm(graph, start_node)` function**
+
+      * This function takes two arguments: `graph` (represented as an adjacency list dictionary) and `start_node` (the vertex where we begin building the tree).
+
+3.  **Initialization**
+
+      * `min_heap = []`: An empty list that will be used as our priority queue to store potential edges. `heapq` will treat this list as a min-heap.
+      * `visited = set()`: A set to keep track of the vertices that are already included in our MST. Using a set gives us very fast (average O(1)) checks to see if a vertex has been visited.
+      * `mst_edges = []`: A list to store the edges `(from, to, weight)` that form our final tree.
+      * `total_cost = 0`: A variable to sum up the weights of the edges in the MST.
+
+4.  **`add_edges(node)` helper function**
+
+      * This small, nested function helps keep the code clean. Its job is to take a `node`, mark it as visited, and then add all of its outgoing edges to the `min_heap`.
+      * `visited.add(node)`: Adds the current node to the `visited` set.
+      * `for neighbor, weight in graph.get(node, []):`: It iterates through all neighbors of the given `node`.
+      * `if neighbor not in visited:`: This is a crucial check. We only add an edge to the heap if its destination `neighbor` is **not** already in our tree. This prevents cycles.
+      * `heapq.heappush(min_heap, (weight, node, neighbor))`: This adds the edge to our `min_heap`. The tuple is structured as `(weight, from_node, to_node)`. Since the weight is the first item, `heapq` will automatically sort the edges by their weight.
+
+5.  **Main Loop**
+
+      * `add_edges(start_node)`: We kick off the algorithm by adding the edges from our chosen `start_node`.
+      * `while min_heap and len(visited) < len(graph):`: The loop continues as long as there are edges in our priority queue and we haven't yet connected all the vertices in the graph.
+      * `weight, from_node, to_node = heapq.heappop(min_heap)`: This line retrieves and removes the edge with the **smallest weight** from the heap.
+      * `if to_node not in visited:`: This is the main greedy decision. If the destination node of this cheapest edge is not yet in our tree, we add it\! If it's already visited, we do nothing and the loop continues to the next cheapest edge.
+      * `total_cost += weight`: We add the edge's weight to our total cost.
+      * `mst_edges.append(...)`: We record this edge as being part of our final MST.
+      * `add_edges(to_node)`: We now add all the outgoing edges from our newly added node (`to_node`) to the priority queue so they can be considered in future steps.
+
+6.  **Return Value**
+
+      * `return total_cost, mst_edges`: The function returns the final calculated cost and the list of edges that make up the tree.
+
+7.  **Example Usage**
+
+      * `example_graph`: We define the graph from your images as a Python dictionary. The keys are the nodes, and the values are lists of `(neighbor, weight)` tuples.
+      * The rest of the code calls the function and prints the results in a readable format.
