@@ -1754,3 +1754,92 @@ A -- C == 4
 C -- H == 5
 ```
 
+---
+
+# 🌳 **Prim’s Minimum Spanning Tree Algorithm**
+
+Prim’s algorithm uses a **greedy approach** to find the minimum cost spanning tree for a weighted, undirected graph. It's quite similar to Dijkstra's algorithm for finding the shortest path.
+
+The main idea is to start from an arbitrary node and "grow" the tree. At each step, you add the cheapest edge that connects a vertex in the growing tree to a vertex outside the tree, ensuring no cycles are formed. The terms **cost** and **weight** are used interchangeably to refer to the value of an edge.
+
+### Algorithm Steps 📝
+
+1.  Create a dictionary that stores all the edges and their corresponding weights.
+2.  Start with a single vertex and progressively add the cheapest edges from the dictionary to grow the tree, making sure that no cycles are created.
+3.  Repeat step 2 until all the vertices have been visited and are part of the spanning tree.
+
+-----
+
+### Example Walkthrough 🚶‍♂️
+
+Let's walk through an example to see how Prim's algorithm works. We'll arbitrarily select node **A** as our starting point.
+
+First, we look at all the outgoing edges from node A. We have two choices: edge **AB** (weight 5) and edge **AC** (weight 1). Since **AC** has the lower weight, we select it.
+
+<div align="center">
+  <img src="./images/34.jpg" width="500px"/>
+</div>
+
+> **Figure 9.34:** This figure shows the first step. The graph on the left is the original graph. The graph on the right shows the edge **AC** being selected (represented by a solid line), as it's the cheapest edge connected to our starting node **A**. The dashed line for AC indicates it has been considered and chosen.
+
+-----
+
+Next, from the current tree (which consists of nodes A and C), we look for the cheapest edge connecting it to a node not yet in the tree. The available edges are AB (5), CD (7), CE (9), and CF (2). The edge **CF** has the lowest weight (2), so we select it. Following that, we continue to grow the tree and select the next lowest weighted edge, which is **AB** (weight 5).
+
+<div align="center">
+  <img src="./images/35.jpg" width="500px"/>
+</div>
+
+> **Figure 9.35:** This figure illustrates the selection of edge **AB**. The graph on the left shows the state after adding AC and CF (indicated by dashed lines). The graph on the right shows the edge **AB** now being considered and added to the tree (indicated by a solid line). The dashed lines for AC, CF, and AB show the edges that have been included in our spanning tree so far.
+
+-----
+
+Afterward, we select edge **BD**, which has a weight of 3. Then, the next lowest weight edge connecting our tree to a new node is **DG**, which has a weight of 4.
+
+<div align="center">
+  <img src="./images/36.jpg" width="500px"/>
+</div>
+
+> **Figure 9.36:** This figure depicts two more edges being added. The graph on the left shows the selection of edge **BD** (solid line). The graph on the right shows the subsequent selection of edge **DG** (solid line). The dashed lines represent all the edges that have been selected for the tree up to this point.
+
+-----
+
+Next, we select edges **FE** with a weight of 6 and **GH** with a weight of 10, respectively.
+
+<div align="center">
+  <img src="./images/37.jpg" width="500px"/>
+</div>
+
+> **Figure 9.37:** This figure shows the final two edges being selected. The left graph highlights the addition of edge **FE**. The right graph highlights the addition of edge **GH**. At this stage, all vertices are now connected.
+
+-----
+
+### The Final Spanning Tree ✨
+
+At this point, if we try to add any more edges, it would create a cycle (for example, adding edge CD would create the cycle C-A-B-D-C). Therefore, we stop. The resulting minimum spanning tree is shown below.
+
+<div align="center">
+  <img src="./images/38.jpg" width="350px"/>
+</div>
+
+> **Figure 9.38:** This is the final minimum spanning tree constructed using Prim's algorithm. It connects all the vertices (A, B, C, D, E, F, G, H) with the minimum possible total edge weight, which is 31 (1+5+3+4+2+6+10).
+
+-----
+
+### Applications and Comparison 🌐
+
+Prim's algorithm has many real-world applications. It can be used for any problem that can be modeled as finding a minimum spanning tree, such as designing networks (like roads, cables, or pipes) and in game development. 🎮
+
+#### Kruskal’s vs. Prim’s Algorithm
+
+So, when should you use Prim's algorithm versus Kruskal's algorithm? It generally depends on the structure of the graph.
+
+  * **Time Complexity:** For a graph with `V` vertices and `E` edges:
+
+      * Kruskal’s algorithm has a worst-case time complexity of $O(E \log V)$.
+      * Prim’s algorithm has a time complexity of $O(E + V \log V)$.
+
+  * **Conclusion:**
+
+      * Prim’s algorithm is generally faster for **dense graphs** (graphs with many edges).
+      * Kruskal’s algorithm is often better for **sparse graphs** (graphs with fewer edges).
