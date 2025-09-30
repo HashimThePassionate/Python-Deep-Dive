@@ -155,3 +155,103 @@ If a list has `n` items, you will have to make `n` comparisons in the worst case
 
 
 ---
+
+## 📈 **Ordered Linear Search**
+
+If the data elements in a list are already sorted, we can make the linear search algorithm more efficient.
+
+The improved linear search algorithm for a **sorted list** has the following steps:
+
+1.  Move through the list sequentially, one item at a time.
+2.  If the search item's value is **less than** the item you are currently looking at, you can stop the search and return `None`.
+
+The key idea is this: in a sorted list, if you pass the point where your search term *should* be, you know it's not in the list, so there's no need to check the rest of the elements.
+
+Let's see how this works with an example. Imagine we have a sorted list `{2, 3, 4, 6, 7}` and we want to search for the number **5**.
+
+<div align="center">
+  <img src="./images/03.jpg" width="400px"/>
+</div>
+
+> **Figure 10.3: Example of ordered linear search**
+> This figure shows the step-by-step process of searching for **5**:
+>
+> 1.  **Step 1:** The search item `5` is compared with `2`. No match.
+> 2.  **Step 2:** `5` is compared with `3`. No match.
+> 3.  **Step 3:** `5` is compared with `4`. No match.
+> 4.  **Step 4:** `5` is compared with `6`. Since the list is sorted and **5 is less than 6**, we know that 5 cannot appear anywhere later in the list. The search stops immediately.
+
+The search operation begins by comparing our desired item `5` with the first element, `2`. No match. We continue to `3`, then `4`, and still find no match. When we get to the fourth element, `6`, we see that our search term `5` is less than `6`. Because the list is sorted in ascending order, this tells us that `5` cannot possibly be found in any later position. We can stop searching right away.
+
+-----
+
+### 🐍 Python Implementation
+
+Here's the Python implementation of a linear search for an already sorted list:
+
+```python
+def search_ordered(ordered_list, term):
+  ordered_list_size = len(ordered_list)
+  for i in range(ordered_list_size):
+    # If we find the item, return its index
+    if term == ordered_list[i]:
+      return i
+    # If the current item is greater than our term, stop searching
+    elif ordered_list[i] > term:
+      return None
+  # If the loop finishes, the item was not found
+  return None
+```
+
+#### Code Explanation 🧑‍🏫
+
+  * **`if term == ordered_list[i]:`**: This is the standard check. If the current item is a match, we return its index `i`.
+  * **`elif ordered_list[i] > term:`**: This is our optimization\! If the current item in the list is **greater than** our search term, we know the term can't be in the rest of the list, so we stop and return `None`.
+  * **`return None`**: The final `return None` at the end handles the case where the loop finishes. This happens if the search term is larger than all the elements in the list.
+
+-----
+
+### Example Usage 🚀
+
+Here is a code snippet that uses our `search_ordered` algorithm:
+
+```python
+# Example 1: Searching for a number that isn't there
+list1 = [2, 3, 4, 6, 7]
+search_term = 5
+index_position1 = search_ordered(list1, search_term)
+
+if index_position1 is None:
+    print(f"{search_term} not found")
+else:
+    print(f"{search_term} found at position {index_position1}")
+
+# Example 2: Searching for a string that is there
+list2 = ['book','data','packt', 'structure']
+search_term2 = 'structure'
+index_position2 = search_ordered(list2, search_term2)
+
+if index_position2 is None:
+    print(f"{search_term2} not found")
+else:
+    print(f"{search_term2} found at position {index_position2}")
+```
+
+#### Output
+
+```
+5 not found
+structure found at position 3
+```
+
+In the first example, the item `5` is not found, and the search stops early (after checking `6`). In the second example, the string `structure` is found at index position `3`. This shows that the algorithm works perfectly for sorted lists of non-numeric data, just like a contact list on your phone. 📱
+
+-----
+
+### Performance ⏱️
+
+In the **worst-case scenario**, the item you're looking for is either at the very last position or it's not in the list at all (and is larger than every element). In this situation, you still have to check the entire list of `n` elements.
+
+Therefore, even with the optimization, the worst-case time complexity of an ordered linear search is still **O(n)**.
+
+---
