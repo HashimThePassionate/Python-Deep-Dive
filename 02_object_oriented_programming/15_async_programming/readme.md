@@ -162,7 +162,7 @@ asyncio.run(greet("Hashim"))
 
 ## 6. Practical Examples 🌐
 
-### 🍽️ Example 1: The Restaurant Analogy 🍽️
+### 🍽️ Example 1: The Restaurant Analogy Asynchronous 🍽️
 
 Imagine a restaurant where a single waiter handles multiple tables efficiently by not waiting idly but attending to other tables when one table is busy deciding their order.
 
@@ -255,6 +255,53 @@ asyncio.run(main())
   - The waiter attends to all five tables almost simultaneously.
   - After 2 seconds, starts taking orders from all tables.
   - After an additional second, serves food to all tables.
+
+
+### Synchrous Version code:
+```python
+import time
+
+def handle_table_sync(table_number):
+    """
+    Handles a single table in a synchronous, blocking manner.
+    The program will pause at each time.sleep() call.
+    """
+    print(f"Attending to table {table_number} 🍽️")
+    time.sleep(2)  # Simulate waiting, the program is blocked here
+    print(f"Taking order from table {table_number} 📝")
+    time.sleep(1)  # The program is blocked here again
+    print(f"Serving food to table {table_number} 🍲")
+
+def main():
+    """
+    The main function that runs all tasks sequentially.
+    """
+    # Loop through each table one by one
+    for i in range(1, 6):
+        handle_table_sync(i)
+
+if __name__ == "__main__":
+    main()
+```
+
+### Output:
+```python
+Attending to table 1 🍽️
+Taking order from table 1 📝
+Serving food to table 1 🍲
+Attending to table 2 🍽️
+Taking order from table 2 📝
+Serving food to table 2 🍲
+Attending to table 3 🍽️
+Taking order from table 3 📝
+Serving food to table 3 🍲
+Attending to table 4 🍽️
+Taking order from table 4 📝
+Serving food to table 4 🍲
+Attending to table 5 🍽️
+Taking order from table 5 📝
+Serving food to table 5 🍲
+```
 
 
 ### 🌐 Example 2: Concurrent HTTP Requests 🌐
