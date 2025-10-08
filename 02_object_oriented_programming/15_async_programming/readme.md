@@ -257,7 +257,7 @@ asyncio.run(main())
   - After an additional second, serves food to all tables.
 
 
-### Synchrous Version code:
+### 🍽️ Synchronous Version Code: 🍽️
 ```python
 import time
 
@@ -284,8 +284,64 @@ if __name__ == "__main__":
     main()
 ```
 
+#### **Detailed Code Explanation 📝**
+
+- **Import Time Module:**
+  ```python
+  import time
+  ```
+  - 📥 **Imports** the `time` module for synchronous delay operations.
+
+- **Define `handle_table_sync` Function:**
+  ```python
+  def handle_table_sync(table_number):
+      """
+      Handles a single table in a synchronous, blocking manner.
+      The program will pause at each time.sleep() call.
+      """
+      print(f"Attending to table {table_number} 🍽️")
+      time.sleep(2)  # Simulate waiting, the program is blocked here
+      print(f"Taking order from table {table_number} 📝")
+      time.sleep(1)  # The program is blocked here again
+      print(f"Serving food to table {table_number} 🍲")
+  ```
+  - **Parameters:**
+    - `table_number`: Identifier for the table being handled.
+  - **Process Flow:**
+    1. **Attend to Table:**
+       - Prints a message indicating the waiter is attending to the table.
+       - `time.sleep(2)`: **Blocks** the entire program for 2 seconds, simulating the customer deciding their order. During this time, no other tables can be attended to.
+    2. **Take Order:**
+       - Prints a message indicating the waiter is taking the order.
+       - `time.sleep(1)`: **Blocks** the program again for 1 second, simulating order processing. The program remains idle during this wait.
+    3. **Serve Food:**
+       - Prints a message indicating the waiter is serving food to the table.
+
+- **Define `main` Function:**
+  ```python
+  def main():
+      """
+      The main function that runs all tasks sequentially.
+      """
+      # Loop through each table one by one
+      for i in range(1, 6):
+          handle_table_sync(i)
+  ```
+  - **Sequential Execution:**
+    - Loops through tables 1 to 5 **one by one**.
+    - Each table must be completely served before moving to the next table.
+    - The waiter cannot multitask; they must wait for each `time.sleep()` call to complete before continuing.
+
+- **Run the Program:**
+  ```python
+  if __name__ == "__main__":
+      main()
+  ```
+  - 🏃 **Executes** the `main()` function when the script is run directly.
+  - This ensures the code inside only runs when the file is executed as a script, not when imported as a module.
+
 ### Output:
-```python
+```
 Attending to table 1 🍽️
 Taking order from table 1 📝
 Serving food to table 1 🍲
@@ -302,6 +358,12 @@ Attending to table 5 🍽️
 Taking order from table 5 📝
 Serving food to table 5 🍲
 ```
+
+- **Explanation of Output Flow:**
+  - The waiter attends to table 1 and **completely finishes** serving it (attend → take order → serve) before moving to table 2.
+  - This process repeats for each table sequentially: table 2, then 3, then 4, and finally table 5.
+  - **Total time**: Approximately **15 seconds** (5 tables × 3 seconds per table).
+  - **Key Difference from Async Version**: Unlike the asynchronous version where all tables are attended to simultaneously, here each table must wait for the previous one to be completely served. This demonstrates **blocking behavior** where the program waits idly during `time.sleep()` calls instead of doing useful work.
 
 
 ### 🌐 Example 2: Concurrent HTTP Requests 🌐
