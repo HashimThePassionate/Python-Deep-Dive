@@ -150,7 +150,7 @@ def append(self, data):
     else:
         self.head = node
         self.tail = node
-        self.tail.next = self.tail
+        self.tail.next = self.head
     self.size += 1
 ```
 
